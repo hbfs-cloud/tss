@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Suivi des Signaux de Trading</title>
+    <link href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta19/dist/css/tabler.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta19/dist/js/tabler.min.js"></script>
+
+    <style>
+        :root {
+            --tblr-font-sans-serif: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --tblr-primary: #3b82f6;
+            --tblr-primary-rgb: 59, 130, 246;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            color: #333;
+            padding-top: 20px;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(120deg, #1c64f2, #3b82f6);
+            color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .dashboard-card {
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: white;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            padding: 16px 20px;
+            font-weight: 600;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .signal-tag {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .signal-strong-buy {
+            background-color: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+        }
+
+        .signal-buy {
+            background-color: rgba(59, 130, 246, 0.15);
+            color: #3b82f6;
+        }
+
+        .signal-sell {
+            background-color: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+        }
+
+        .signal-strong-sell {
+            background-color: rgba(220, 38, 38, 0.15);
+            color: #dc2626;
+        }
+
+        .signal-hold {
+            background-color: rgba(156, 163, 175, 0.15);
+            color: #6b7280;
+        }
+
+        .confidence-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #e9ecef;
+            overflow: hidden;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #3b82f6);
+        }
+
+        .ticker-detail {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: #1e293b;
+            font-weight: 600;
+        }
+
+        .indicator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .indicator-card {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 15px;
+            border-left: 3px solid #3b82f6;
+        }
+
+        .detail-table th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+        }
+
+        .correlation-card {
+            background: linear-gradient(120deg, #f8fafc, #e0f2fe);
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .search-container {
+            max-width: 400px;
+        }
+
+        .ticker-card {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .ticker-card:hover {
+            background-color: #f1f5f9;
+        }
+
+        .view-container {
+            display: none;
+        }
+
+        .active-view {
+            display: block;
+        }
+
+        .back-button {
+            background: #e0f2fe;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 15px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .back-button:hover {
+            background: #d0e8ff;
+        }
+
+        .page-content {
+            min-height: 500px;
+        }
+
+        .sort-icon {
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        .sort-icon.active {
+            color: var(--tblr-primary);
+        }
+
+        @media (max-width: 768px) {
+            .indicator-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .pagination-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding: 10px 0;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .page-size-selector {
+            display: flex;
+            align-items: center;
+        }
+
+        .page-size-selector label {
+            margin-right: 10px;
+            font-weight: 500;
+        }
+
+        .page-size-selector select {
+            width: 80px;
+            padding: 5px 10px;
+            border-radius: 6px;
+            border: 1px solid #ced4da;
+        }
+
+        .pagination-controls {
+            display: flex;
+            align-items: center;
+        }
+
+        .pagination-info {
+            margin: 0 15px;
+            font-weight: 500;
+        }
+
+        .page-btn {
+            padding: 5px 12px;
+            margin: 0 3px;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .page-btn:hover {
+            background-color: #f1f5f9;
+            border-color: #ced4da;
+        }
+
+        .page-btn.active {
+            background-color: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+    <script>
+        // Variables pour la pagination
+        let currentPage = 1;
+        let itemsPerPage = 10; // Valeur par défaut
+    </script>
+</head>
+<body>
+<div class="page">
+    <div class="container-xl">
+        <div class="header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h1 class="h2 mb-1">Signals Tracker</h1>
+                    <p class="mb-0">Track Trading Signals</p>
+                </div>
+                <div class="col-auto">
+                    <div class="btn-list">
+                        <a href="#" class="btn btn-white" id="refresh-btn">
+                            <i class="fas fa-sync-alt me-2"></i>Refresh
+                        </a>
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-cog me-2"></i>Parameter
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vue principale - Tableau des signaux -->
+        <div id="main-view" class="view-container active-view">
+            <div class="dashboard-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Rechercher un ticker</span>
+                    <div class="d-flex">
+                        <div class="dropdown me-2">
+                            <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="filterSignal" data-bs-toggle="dropdown">
+                                <i class="fas fa-filter me-1"></i> Signal
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="filterSignal">
+                                <li><a class="dropdown-item filter-signal" href="#" data-value="all">All</a></li>
+                                <li><a class="dropdown-item filter-signal" href="#" data-value="Strong Buy">Strong Buy</a></li>
+                                <li><a class="dropdown-item filter-signal" href="#" data-value="Buy">Buy</a></li>
+                                <li><a class="dropdown-item filter-signal" href="#" data-value="Hold">Hold</a></li>
+                                <li><a class="dropdown-item filter-signal" href="#" data-value="Sell">Sell</a></li>
+                                <li><a class="dropdown-item filter-signal" href="#" data-value="Strong Sell">Strong Sell</a></li>
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="filterConfidence" data-bs-toggle="dropdown">
+                                <i class="fas fa-chart-line me-1"></i> Confidence
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="filterConfidence">
+                                <li><a class="dropdown-item filter-confidence" href="#" data-value="all">All</a></li>
+                                <li><a class="dropdown-item filter-confidence" href="#" data-value="High">High</a></li>
+                                <li><a class="dropdown-item filter-confidence" href="#" data-value="Medium">Medium</a></li>
+                                <li><a class="dropdown-item filter-confidence" href="#" data-value="Low">Low</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3 search-container">
+                        <div class="input-icon">
+                            <input type="text" class="form-control" placeholder="Search Ticker..." id="search-input">
+                            <span class="input-icon-addon">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table card-table table-vcenter text-nowrap datatable">
+                            <thead>
+                            <tr>
+                                <th class="w-1 sortable" data-sort="Ticker">Ticker <i class="fas fa-sort ms-1 sort-icon"></i></th>
+                                <th class="sortable" data-sort="Signal">Signal <i class="fas fa-sort ms-1 sort-icon"></i></th>
+                                <th class="sortable" data-sort="Confidence">Confidence <i class="fas fa-sort ms-1 sort-icon"></i></th>
+                                <th class="sortable" data-sort="Age">Signal Age <i class="fas fa-sort ms-1 sort-icon"></i></th>
+                                <th class="sortable" data-sort="ClosePrice">Close Price <i class="fas fa-sort ms-1 sort-icon"></i></th>
+                                <th class="sortable" data-sort="TargetPrice">Target Variation <i class="fas fa-sort ms-1 sort-icon"></i></th>
+                                <th class="text-end">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tickers-container">
+                            <!-- Les données seront injectées ici par JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vue détaillée - Page du ticker -->
+        <div id="detail-view" class="view-container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <button class="back-button" id="back-button">
+                    <i class="fas fa-arrow-left me-2"></i> Back to table
+                </button>
+            </div>
+
+            <div class="ticker-detail">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Données de démonstration
+    const signalsData = loadJSONSync("data/signals-1d.json");;
+
+    // Variables pour le tri et le filtrage
+    let currentSort = { column: 'ticker', direction: 'asc' };
+    let currentSignalFilter = 'all';
+    let currentConfidenceFilter = 'all';
+
+    // Fonction pour formater la date
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('fr-FR', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    }
+
+    // Fonction pour calculer l'âge du signal
+    function calculateSignalAge(lastUpdate) {
+        const now = new Date();
+        const updateDate = new Date(lastUpdate);
+        const diffMs = now - updateDate;
+        const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+
+        if (diffHours < 1) {
+            return "Less than 1 hour";
+        } else if (diffHours < 24) {
+            return `${diffHours} hours`;
+        } else {
+            const diffDays = Math.floor(diffHours / 24);
+            return `${diffDays} days`;
+        }
+    }
+
+    // Fonction pour obtenir la valeur numérique pour le tri
+    function getSortValue(ticker, data, column) {
+        switch(column) {
+            case 'Ticker':
+                return data.Ticker;
+            case 'Signal':
+                // Ordre des signaux pour le tri
+                const signalOrder = {
+                    'Strong Buy': 0,
+                    'Buy': 1,
+                    'Hold': 2,
+                    'Sell': 3,
+                    'Strong Sell': 4
+                };
+                return signalOrder[data.Signal] || 5;
+            case 'Confidence':
+                const confidenceOrder = {
+                    'High': 0,
+                    'Medium': 1,
+                    'Low': 2,
+                };
+                return confidenceOrder[data.Confidence.slice(2)];
+            case 'Age':
+                return new Date(data.EventDate).getTime();
+            case 'ClosePrice':
+                return data.ClosePrice;
+            case 'TargetPrice':
+                return data.TargetPrice;
+            default:
+                return ticker;
+        }
+    }
+
+    // Fonction pour trier les données
+    function sortData(data) {
+        const sortedTickers = Object.keys(data).sort((a, b) => {
+            const aValue = getSortValue(a, data[a], currentSort.column);
+            const bValue = getSortValue(b, data[b], currentSort.column);
+
+            if (aValue < bValue) {
+                return currentSort.direction === 'asc' ? -1 : 1;
+            }
+            if (aValue > bValue) {
+                return currentSort.direction === 'asc' ? 1 : -1;
+            }
+            return 0;
+        });
+
+        const sortedData = {};
+        sortedTickers.forEach(ticker => {
+            sortedData[ticker] = data[ticker];
+        });
+
+        return sortedData;
+    }
+
+    function loadJSONSync(url) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", url, false); // false makes the request synchronous
+        xhr.send(null);
+
+        if (xhr.status === 200) {
+            return JSON.parse(xhr.responseText);
+        } else {
+            throw new Error("Failed to load JSON: " + xhr.status);
+        }
+    }
+
+    // Fonction pour filtrer les données
+    function filterData(data) {
+        let filteredData = {...data};
+
+        // Filtre par signal
+        if (currentSignalFilter !== 'all') {
+            Object.keys(filteredData).forEach(ticker => {
+                if (filteredData[ticker].Signal !== currentSignalFilter) {
+                    delete filteredData[ticker];
+                }
+            });
+        }
+
+        // Filtre par confiance
+        if (currentConfidenceFilter !== 'all') {
+            console.log("currentConfidenceFilter", currentConfidenceFilter);
+            Object.keys(filteredData).forEach(ticker => {
+                if (filteredData[ticker].Confidence.slice(2) !== currentConfidenceFilter) {
+                    delete filteredData[ticker];
+                }
+            });
+        }
+
+        return filteredData;
+    }
+
+    // Fonction pour mettre à jour les icônes de tri
+    function updateSortIcons() {
+        document.querySelectorAll('.sort-icon').forEach(icon => {
+            icon.classList.remove('active', 'fa-sort-up', 'fa-sort-down');
+            icon.className = 'fas fa-sort ms-1 sort-icon';
+        });
+
+        const activeIcon = document.querySelector(`th[data-sort="${currentSort.column}"] .sort-icon`);
+        if (activeIcon) {
+            activeIcon.classList.add('active');
+            activeIcon.classList.add(currentSort.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down');
+        }
+    }
+
+    // Fonction pour afficher les tickers dans le tableau principal
+    function renderTickers() {
+        const container = document.getElementById('tickers-container');
+        container.innerHTML = '';
+
+        // Trier et filtrer les données
+        let processedData = sortData(signalsData);
+        processedData = filterData(processedData);
+        const tickers = Object.keys(processedData);
+        const totalItems = tickers.length;
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+        // Ajuster la page actuelle si nécessaire
+        if (currentPage > totalPages && totalPages > 0) {
+            currentPage = totalPages;
+        }
+
+        // Calculer les éléments à afficher
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
+        const paginatedTickers = tickers.slice(startIndex, endIndex);
+
+        // Afficher les éléments paginés
+        paginatedTickers.forEach(ticker => {
+            const data = processedData[ticker];
+            const signalAge = calculateSignalAge(data.EventDate);
+
+            // Déterminer la classe CSS pour le signal
+            let signalClass, signalText;
+            switch(data.Signal) {
+                case 'Strong Buy':
+                    signalClass = 'signal-strong-buy';
+                    signalText = 'Strong Buy';
+                    break;
+                case 'Buy':
+                    signalClass = 'signal-buy';
+                    signalText = 'Buy';
+                    break;
+                case 'Sell':
+                    signalClass = 'signal-sell';
+                    signalText = 'Sell';
+                    break;
+                case 'Strong Sell':
+                    signalClass = 'signal-strong-sell';
+                    signalText = 'Strong Sell';
+                    break;
+                case 'Hold':
+                    signalClass = 'signal-hold';
+                    signalText = 'Hold';
+                    break;
+                default:
+                    signalClass = '';
+                    signalText = data.Signal;
+            }
+
+            const row = document.createElement('tr');
+            row.className = 'ticker-card';
+            row.innerHTML = `
+                <td><strong>${data.Ticker}</strong></td>
+                <td><span class="signal-tag ${signalClass}">${signalText}</span></td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <div class="me-2">${data.Confidence}</div>
+                    </div>
+                </td>
+                <td>${signalAge}</td>
+                <td>$${data.ClosePrice.toFixed(2)}</td>
+                <td>${data.TargetPrice.toFixed(1)} %</td>
+                <td class="text-end">
+                    <button class="btn btn-sm btn-outline-primary view-detail" data-ticker="${ticker}">
+                        <i class="fas fa-eye me-1"></i> Détails
+                    </button>
+                </td>
+            `;
+            container.appendChild(row);
+        });
+
+        // Ajouter les événements pour les boutons de détail
+        document.querySelectorAll('.view-detail').forEach(button => {
+            button.addEventListener('click', function() {
+                const ticker = this.getAttribute('data-ticker');
+                showTickerDetail(ticker);
+            });
+        });
+
+        // Mettre à jour les icônes de tri
+        updateSortIcons();
+
+        // Ajouter la pagination
+        renderPagination(totalItems, totalPages);
+    }
+
+    function renderPagination(totalItems, totalPages) {
+        // Supprimer l'ancienne pagination si elle existe
+        const oldPagination = document.getElementById('pagination-container');
+        if (oldPagination) {
+            oldPagination.remove();
+        }
+
+        // Ne pas afficher la pagination s'il n'y a pas d'éléments
+        if (totalItems === 0) {
+            return;
+        }
+
+        // Créer le conteneur de pagination
+        const paginationContainer = document.createElement('div');
+        paginationContainer.id = 'pagination-container';
+        paginationContainer.className = 'pagination-container';
+
+        // Sélecteur d'éléments par page
+        paginationContainer.innerHTML = `
+        <div class="page-size-selector">
+            <label for="items-per-page">Éléments par page:</label>
+            <select id="items-per-page" class="form-select form-select-sm">
+                <option value="5" ${itemsPerPage === 5 ? 'selected' : ''}>5</option>
+                <option value="10" ${itemsPerPage === 10 ? 'selected' : ''}>10</option>
+                <option value="25" ${itemsPerPage === 25 ? 'selected' : ''}>25</option>
+                <option value="50" ${itemsPerPage === 50 ? 'selected' : ''}>50</option>
+                <option value="100" ${itemsPerPage === 100 ? 'selected' : ''}>100</option>
+            </select>
+        </div>
+        <div class="pagination-controls">
+            <button class="page-btn first-page" ${currentPage === 1 ? 'disabled' : ''}>
+                <i class="fas fa-angle-double-left"></i>
+            </button>
+            <button class="page-btn prev-page" ${currentPage === 1 ? 'disabled' : ''}>
+                <i class="fas fa-angle-left"></i>
+            </button>
+            <div class="pagination-info">
+                Page ${currentPage} sur ${totalPages}
+            </div>
+            <button class="page-btn next-page" ${currentPage === totalPages ? 'disabled' : ''}>
+                <i class="fas fa-angle-right"></i>
+            </button>
+            <button class="page-btn last-page" ${currentPage === totalPages ? 'disabled' : ''}>
+                <i class="fas fa-angle-double-right"></i>
+            </button>
+        </div>
+    `;
+
+        // Ajouter le conteneur de pagination après le tableau
+        const cardBody = document.querySelector('.card-body');
+        cardBody.appendChild(paginationContainer);
+
+        // Gestion des événements de pagination
+        document.getElementById('items-per-page').addEventListener('change', function(e) {
+            itemsPerPage = parseInt(e.target.value);
+            currentPage = 1; // Retour à la première page quand on change la taille
+            renderTickers();
+        });
+
+        document.querySelector('.first-page').addEventListener('click', function() {
+            if (currentPage > 1) {
+                currentPage = 1;
+                renderTickers();
+            }
+        });
+
+        document.querySelector('.prev-page').addEventListener('click', function() {
+            if (currentPage > 1) {
+                currentPage--;
+                renderTickers();
+            }
+        });
+
+        document.querySelector('.next-page').addEventListener('click', function() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderTickers();
+            }
+        });
+
+        document.querySelector('.last-page').addEventListener('click', function() {
+            if (currentPage < totalPages) {
+                currentPage = totalPages;
+                renderTickers();
+            }
+        });
+    }
+
+    // Fonction pour afficher la page détaillée d'un ticker
+    function showTickerDetail(ticker) {
+        const data = signalsData[ticker];
+
+        // Mettre à jour les informations de base
+        document.getElementById('ticker-name').textContent = `${ticker}`;
+        document.getElementById('ticker-score').textContent = data.score;
+        document.getElementById('current-price').textContent = `$${data.current_price.toFixed(2)}`;
+        document.getElementById('target-price').textContent = `$${data.target_price.toFixed(2)}`;
+        document.getElementById('signal-explanation').textContent = data.explanation;
+        document.getElementById('signal-confidence').textContent = `${data.confidence}%`;
+        document.getElementById('current-trend').textContent = data.trend;
+        document.getElementById('last-update').textContent = formatDate(data.last_update);
+
+        // Mettre à jour le statut du signal
+        const signalStatus = document.getElementById('signal-status');
+        signalStatus.className = 'signal-tag ';
+        switch(data.Status) {
+            case 'Strong Buy':
+                signalStatus.classList.add('signal-strong-buy');
+                signalStatus.textContent = 'Strong Buy';
+                break;
+            case 'Buy':
+                signalStatus.classList.add('signal-buy');
+                signalStatus.textContent = 'Buy';
+                break;
+            case 'Sell':
+                signalStatus.classList.add('signal-sell');
+                signalStatus.textContent = 'Sell';
+                break;
+            case 'Strong Sell':
+                signalStatus.classList.add('signal-strong-sell');
+                signalStatus.textContent = 'Strong Sell';
+                break;
+            case 'Hold':
+                signalStatus.classList.add('signal-hold');
+                signalStatus.textContent = 'Hold';
+                break;
+            default:
+                signalStatus.textContent = data.status;
+        }
+
+        // Mettre à jour les indicateurs techniques
+        if (data.indicators) {
+            document.getElementById('ind-rsi').textContent = data.indicators.rsi;
+            document.getElementById('ind-macd').textContent = data.indicators.macd;
+            document.getElementById('ind-ema50').textContent = data.indicators.ema50;
+            document.getElementById('ind-ema200').textContent = data.indicators.ema200;
+            document.getElementById('ind-obv').textContent = data.indicators.obv.toLocaleString();
+            document.getElementById('ind-adx').textContent = data.indicators.adx;
+            document.getElementById('ind-atr').textContent = data.indicators.atr;
+            document.getElementById('ind-vwap').textContent = data.indicators.vwap;
+        }
+
+        // Mettre à jour les patterns de chandeliers
+        const candlePatterns = document.getElementById('candle-patterns');
+        candlePatterns.innerHTML = '';
+
+        if (data.candlestick_patterns && data.candlestick_patterns.length > 0) {
+            data.candlestick_patterns.forEach(pattern => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                        <td>${pattern.name}</td>
+                        <td>${pattern.confirmed ? '<i class="fas fa-check text-success"></i>' : '<i class="fas fa-times text-danger"></i>'}</td>
+                        <td>${formatDate(pattern.timestamp)}</td>
+                    `;
+                candlePatterns.appendChild(row);
+            });
+        } else {
+            candlePatterns.innerHTML = '<tr><td colspan="3" class="text-center">Aucun pattern détecté</td></tr>';
+        }
+
+        // Mettre à jour les niveaux de support/résistance
+        const supportResistance = document.getElementById('support-resistance');
+        supportResistance.innerHTML = '';
+
+        if (data.support_resistance && data.support_resistance.length > 0) {
+            data.support_resistance.forEach(level => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                        <td>$${level.level.toFixed(2)}</td>
+                        <td>${level.type === 'support' ? 'Support' : 'Résistance'}</td>
+                        <td>
+                            ${'★'.repeat(level.confidence)}
+                            ${'☆'.repeat(5 - level.confidence)}
+                        </td>
+                    `;
+                supportResistance.appendChild(row);
+            });
+        } else {
+            supportResistance.innerHTML = '<tr><td colspan="3" class="text-center">Aucun niveau significatif</td></tr>';
+        }
+
+        // Mettre à jour les corrélations
+        const correlationsContainer = document.getElementById('correlations-container');
+        correlationsContainer.innerHTML = '';
+
+        if (data.correlations && data.correlations.length > 0) {
+            data.correlations.forEach(corr => {
+                const card = document.createElement('div');
+                card.className = 'correlation-card mb-2';
+                card.innerHTML = `
+                        <div class="d-flex justify-content-between">
+                            <div><strong>${corr.ticker}</strong></div>
+                            <div>Corrélation: ${corr.correlation > 0 ? '+' : ''}${corr.correlation.toFixed(2)}</div>
+                        </div>
+                        <div class="mt-2 small">
+                            Translation: ${corr.translation > 0 ? '+' : ''}${corr.translation.toFixed(2)}
+                            | Multiplication: ${corr.multiplication.toFixed(2)}
+                        </div>
+                    `;
+                correlationsContainer.appendChild(card);
+            });
+        } else {
+            correlationsContainer.innerHTML = '<div class="text-center py-3 text-muted">Aucune corrélation significative</div>';
+        }
+
+        // Mettre à jour la saisonnalité
+        const seasonalityData = document.getElementById('seasonality-data');
+        seasonalityData.innerHTML = '';
+
+        if (data.seasonality) {
+            // Heures
+            for (const [hour, trend] of Object.entries(data.seasonality.hourly)) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                        <td>${hour}:00</td>
+                        <td>${trend === 'bullish' ? 'Haussière' : trend === 'bearish' ? 'Baissière' : 'Neutre'}</td>
+                    `;
+                seasonalityData.appendChild(row);
+            }
+
+            // Jours de la semaine
+            for (const [day, trend] of Object.entries(data.seasonality.weekly)) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                        <td>${day}</td>
+                        <td>${trend === 'bullish' ? 'Haussière' : trend === 'bearish' ? 'Baissière' : 'Neutre'}</td>
+                    `;
+                seasonalityData.appendChild(row);
+            }
+        } else {
+            seasonalityData.innerHTML = '<tr><td colspan="2" class="text-center">Données de saisonnalité non disponibles</td></tr>';
+        }
+
+        // Mettre à jour l'historique des signaux
+        const signalHistory = document.getElementById('signal-history');
+        signalHistory.innerHTML = '';
+
+        if (data.signal_history && data.signal_history.length > 0) {
+            data.signal_history.forEach(history => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                        <td>${formatDate(history.timestamp)}</td>
+                        <td>${history.signal === 'buy' ? 'Achat' : 'Vente'}</td>
+                        <td>$${history.price_at_signal.toFixed(2)}</td>
+                        <td>$${history.target_price.toFixed(2)}</td>
+                        <td>
+                            ${history.outcome === 'correct' ?
+                    '<span class="badge bg-success">Correct</span>' :
+                    '<span class="badge bg-danger">Incorrect</span>'}
+                            (${history.error_percent.toFixed(2)}%)
+                        </td>
+                        <td>${history.confidence}%</td>
+                    `;
+                signalHistory.appendChild(row);
+            });
+        } else {
+            signalHistory.innerHTML = '<tr><td colspan="6" class="text-center">Aucun historique disponible</td></tr>';
+        }
+
+        // Passer à la vue détaillée
+        document.getElementById('main-view').classList.remove('active-view');
+        document.getElementById('detail-view').classList.add('active-view');
+    }
+
+    // Initialisation
+    document.addEventListener('DOMContentLoaded', function() {
+        currentPage = 1;
+
+        // Rendre les tickers
+        renderTickers();
+
+        // Gestion du bouton de retour
+        document.getElementById('back-button').addEventListener('click', function() {
+            document.getElementById('detail-view').classList.remove('active-view');
+            document.getElementById('main-view').classList.add('active-view');
+        });
+
+        // Gestion de la recherche
+        document.getElementById('search-input').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#tickers-container tr');
+
+            rows.forEach(row => {
+                const ticker = row.querySelector('td:first-child strong').textContent.toLowerCase();
+                if (ticker.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        // Gestion du tri
+        document.querySelectorAll('.sortable').forEach(header => {
+            header.addEventListener('click', function() {
+                const column = this.getAttribute('data-sort');
+
+                if (currentSort.column === column) {
+                    // Inverser la direction si on clique sur la même colonne
+                    currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+                } else {
+                    // Nouvelle colonne, direction asc par défaut
+                    currentSort.column = column;
+                    currentSort.direction = 'asc';
+                }
+
+                renderTickers();
+            });
+        });
+
+        // Gestion des filtres de signal
+        document.querySelectorAll('.filter-signal').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                currentSignalFilter = this.getAttribute('data-value');
+                renderTickers();
+
+                // Mettre à jour le texte du bouton
+                document.querySelector('#filterSignal').innerHTML = `
+                    <i class="fas fa-filter me-1"></i>
+                    Signal: ${this.textContent}
+                `;
+            });
+        });
+
+        // Gestion des filtres de confiance
+        document.querySelectorAll('.filter-confidence').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                currentConfidenceFilter = this.getAttribute('data-value');
+                renderTickers();
+
+                // Mettre à jour le texte du bouton
+                document.querySelector('#filterConfidence').innerHTML = `
+                    <i class="fas fa-chart-line me-1"></i>
+                    Confiance: ${this.textContent}
+                `;
+            });
+        });
+
+        // Gestion du bouton d'actualisation
+        document.getElementById('refresh-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            renderTickers();
+        });
+    });
+</script>
+</body>
+</html>
