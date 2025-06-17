@@ -278,9 +278,11 @@
                         <a href="#" class="btn btn-white" id="refresh-btn">
                             <i class="fas fa-sync-alt me-2"></i>Refresh
                         </a>
+                        <!--
                         <a href="#" class="btn btn-primary">
-                            <i class="fas fa-cog me-2"></i>Parameter
+                            <i class="fas fa-cog me-2"></i>Parameters
                         </a>
+                        -->
                     </div>
                 </div>
             </div>
@@ -290,7 +292,7 @@
         <div id="main-view" class="view-container active-view">
             <div class="dashboard-card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <span>Rechercher un ticker</span>
+                    <span>Search Ticker</span>
                     <div class="d-flex">
                         <div class="dropdown me-2">
                             <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="filterSignal" data-bs-toggle="dropdown">
@@ -305,15 +307,29 @@
                                 <li><a class="dropdown-item filter-signal" href="#" data-value="Strong Sell">Strong Sell</a></li>
                             </ul>
                         </div>
-                        <div class="dropdown">
+                        <div class="dropdown me-2">
                             <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="filterConfidence" data-bs-toggle="dropdown">
                                 <i class="fas fa-chart-line me-1"></i> Confidence
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="filterConfidence">
                                 <li><a class="dropdown-item filter-confidence" href="#" data-value="all">All</a></li>
-                                <li><a class="dropdown-item filter-confidence" href="#" data-value="High">High</a></li>
-                                <li><a class="dropdown-item filter-confidence" href="#" data-value="Medium">Medium</a></li>
-                                <li><a class="dropdown-item filter-confidence" href="#" data-value="Low">Low</a></li>
+                                <li><a class="dropdown-item filter-confidence" href="#" data-value="H">High</a></li>
+                                <li><a class="dropdown-item filter-confidence" href="#" data-value="M">Medium</a></li>
+                                <li><a class="dropdown-item filter-confidence" href="#" data-value="L">Low</a></li>
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="filterSize" data-bs-toggle="dropdown">
+                                <i class="fas fa-chart-line me-1"></i> Size
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="filterSize">
+                                <li><a class="dropdown-item filter-size" href="#" data-value="all">All</a></li>
+                                <li><a class="dropdown-item filter-size" href="#" data-value="Nano-Cap">Nano-Cap</a></li>
+                                <li><a class="dropdown-item filter-size" href="#" data-value="Micro-Cap">Micro-Cap</a></li>
+                                <li><a class="dropdown-item filter-size" href="#" data-value="Small-Cap">Small-Cap</a></li>
+                                <li><a class="dropdown-item filter-size" href="#" data-value="Mid-Cap">Mid-Cap</a></li>
+                                <li><a class="dropdown-item filter-size" href="#" data-value="Large-Cap">Large-Cap</a></li>
+                                <li><a class="dropdown-item filter-size" href="#" data-value="Mega-Cap">Mega-Cap</a></li>
                             </ul>
                         </div>
                     </div>
@@ -333,6 +349,7 @@
                             <thead>
                             <tr>
                                 <th class="w-1 sortable" data-sort="Ticker">Ticker <i class="fas fa-sort ms-1 sort-icon"></i></th>
+                                <th class="sortable" data-sort="Signal">Size <i class="fas fa-sort ms-1 sort-icon"></i></th>
                                 <th class="sortable" data-sort="Signal">Signal <i class="fas fa-sort ms-1 sort-icon"></i></th>
                                 <th class="sortable" data-sort="Confidence">Confidence <i class="fas fa-sort ms-1 sort-icon"></i></th>
                                 <th class="sortable" data-sort="Age">Signal Age <i class="fas fa-sort ms-1 sort-icon"></i></th>
@@ -373,6 +390,7 @@
     let currentSort = { column: 'ticker', direction: 'asc' };
     let currentSignalFilter = 'all';
     let currentConfidenceFilter = 'all';
+    let currentSizeFilter = 'all';
 
     // Fonction pour formater la date
     function formatDate(dateString) {
@@ -425,6 +443,16 @@
                     'L': 2,
                 };
                 return confidenceOrder[data.Confidence] || 3;
+            case 'Size':
+                const sizeOrder = {
+                    'Mega-Cap': 0,
+                    'Large-Cap': 1,
+                    'Mid-Cap': 2,
+                    'Small-Cap': 3,
+                    'Micro-Cap': 4,
+                    'Nano-Cap': 5,
+                };
+                return sizeOrder[data.Size] || 6;
             case 'Age':
                 return new Date(data.EventDate).getTime();
             case 'ClosePrice':
@@ -487,7 +515,16 @@
         // Filtre par confiance
         if (currentConfidenceFilter !== 'all') {
             Object.keys(filteredData).forEach(ticker => {
-                if (filteredData[ticker].Confidence.slice(2) !== currentConfidenceFilter) {
+                if (filteredData[ticker].Confidence !== currentConfidenceFilter) {
+                    delete filteredData[ticker];
+                }
+            });
+        }
+
+        // Filtre par size
+        if (currentSizeFilter !== 'all') {
+            Object.keys(filteredData).forEach(ticker => {
+                if (filteredData[ticker].Size !== currentSizeFilter) {
                     delete filteredData[ticker];
                 }
             });
@@ -520,12 +557,12 @@
     }
 
     function confidenceIcon(confidence) {
-        const confidenceIcon = {
+        const confidenceIcons = {
             'H': "✅ High",
             'M': "⚠️ Medium",
             'L': "❌ Low",
         };
-        return confidenceIcon[confidence] || "";
+        return confidenceIcons[confidence] || "";
     }
 
     // Fonction pour afficher les tickers dans le tableau principal
@@ -587,6 +624,7 @@
             row.className = 'ticker-card';
             row.innerHTML = `
                 <td><strong>${data.Ticker}</strong></td>
+                <td>${data.Size}</td>
                 <td><span class="signal-tag ${signalClass}">${signalText}</span></td>
                 <td>
                     <div class="d-flex align-items-center">
@@ -947,7 +985,22 @@
                 // Mettre à jour le texte du bouton
                 document.querySelector('#filterConfidence').innerHTML = `
                     <i class="fas fa-chart-line me-1"></i>
-                    Confiance: ${this.textContent}
+                    Confidence: ${this.textContent}
+                `;
+            });
+        });
+
+        // Gestion des filtres de size
+        document.querySelectorAll('.filter-size').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                currentSizeFilter = this.getAttribute('data-value');
+                renderTickers();
+
+                // Mettre à jour le texte du bouton
+                document.querySelector('#filterSize').innerHTML = `
+                    <i class="fas fa-chart-line me-1"></i>
+                    Size: ${this.textContent}
                 `;
             });
         });
