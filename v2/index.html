@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tableau de Suivi des Signaux de Trading</title>
+    <title>Trading Signals</title>
     <link href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta19/dist/css/tabler.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta19/dist/js/tabler.min.js"></script>
@@ -488,8 +488,10 @@
     }
 
     function loadJSONSync(url) {
+        var nocache = "_=" + new Date().getTime(); // ou Math.random() pour un identifiant unique
+        var separator = url.includes("?") ? "&" : "?";
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", url, false); // false makes the request synchronous
+        xhr.open("GET", url + separator + nocache, false); // false makes the request synchronous
         xhr.send(null);
 
         if (xhr.status === 200) {
