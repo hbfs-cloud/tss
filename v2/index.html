@@ -258,6 +258,7 @@
         }
     </style>
     <script>
+        let searchTerm = '';
         // Variables pour la pagination
         let currentPage = 1;
         let itemsPerPage = 10; // Valeur par défaut
@@ -485,9 +486,17 @@
 
         // Filtre par confiance
         if (currentConfidenceFilter !== 'all') {
-            console.log("currentConfidenceFilter", currentConfidenceFilter);
             Object.keys(filteredData).forEach(ticker => {
                 if (filteredData[ticker].Confidence.slice(2) !== currentConfidenceFilter) {
+                    delete filteredData[ticker];
+                }
+            });
+        }
+
+        // 🔍 Filtre par recherche
+        if (searchTerm !== '') {
+            Object.keys(filteredData).forEach(ticker => {
+                if (!ticker.toLowerCase().includes(searchTerm)) {
                     delete filteredData[ticker];
                 }
             });
@@ -881,17 +890,9 @@
 
         // Gestion de la recherche
         document.getElementById('search-input').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            const rows = document.querySelectorAll('#tickers-container tr');
-
-            rows.forEach(row => {
-                const ticker = row.querySelector('td:first-child strong').textContent.toLowerCase();
-                if (ticker.includes(searchTerm)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
+            searchTerm = e.target.value.toLowerCase();
+            currentPage = 1;
+            renderTickers();
         });
 
         // Gestion du tri
