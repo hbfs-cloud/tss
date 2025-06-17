@@ -295,6 +295,26 @@
                     <span>Search Ticker</span>
                     <div class="d-flex">
                         <div class="dropdown me-2">
+                            <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="filterType" data-bs-toggle="dropdown">
+                                <i class="fas fa-filter me-1"></i> Type
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="filterType" >
+                                <li><a class="dropdown-item filter-type" href="#" data-value="all">All</a></li>
+                                <li><a class="dropdown-item filter-type" href="#" data-value="Stock">Stock</a></li>
+                                <li><a class="dropdown-item filter-type" href="#" data-value="Etf">ETF</a></li>
+                            </ul>
+                        </div>
+                        <div class="dropdown me-2">
+                            <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="filterIndustry" data-bs-toggle="dropdown">
+                                <i class="fas fa-filter me-1"></i> Industry
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="filterIndustry" id="choiceIndustry">
+                                <li><a class="dropdown-item filter-industry" href="#" data-value="all">All</a></li>
+                                <li><a class="dropdown-item filter-industry" href="#" data-value="Exclude HealthCare">Exclude HealthCare</a></li>
+                                <li><a class="dropdown-item filter-industry" href="#" data-value="Software">Software</a></li>
+                            </ul>
+                        </div>
+                        <div class="dropdown me-2">
                             <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="filterSignal" data-bs-toggle="dropdown">
                                 <i class="fas fa-filter me-1"></i> Signal
                             </button>
@@ -318,7 +338,7 @@
                                 <li><a class="dropdown-item filter-confidence" href="#" data-value="L">Low</a></li>
                             </ul>
                         </div>
-                        <div class="dropdown">
+                        <div class="dropdown me-2">
                             <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="filterSize" data-bs-toggle="dropdown">
                                 <i class="fas fa-chart-line me-1"></i> Size
                             </button>
@@ -330,6 +350,20 @@
                                 <li><a class="dropdown-item filter-size" href="#" data-value="Mid-Cap">Mid-Cap</a></li>
                                 <li><a class="dropdown-item filter-size" href="#" data-value="Large-Cap">Large-Cap</a></li>
                                 <li><a class="dropdown-item filter-size" href="#" data-value="Mega-Cap">Mega-Cap</a></li>
+                                <li><a class="dropdown-item filter-size" href="#" data-value="Exclude Penny Stock">Exclude Penny Stock</a></li>
+                                <li><a class="dropdown-item filter-size" href="#" data-value="Only Penny Stock">Only Penny Stock</a></li>
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="filterAge" data-bs-toggle="dropdown">
+                                <i class="fas fa-chart-line me-1"></i> Age
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="filterAge">
+                                <li><a class="dropdown-item filter-age" href="#" data-value="all">All</a></li>
+                                <li><a class="dropdown-item filter-age" href="#" data-value="1d">< 1D</a></li>
+                                <li><a class="dropdown-item filter-age" href="#" data-value="1w">1D < X < 1W</a></li>
+                                <li><a class="dropdown-item filter-age" href="#" data-value="2w">1W < X < 2W</a></li>
+                                <li><a class="dropdown-item filter-age" href="#" data-value="1m">2W < X < 1M</a></li>
                             </ul>
                         </div>
                     </div>
@@ -349,7 +383,8 @@
                             <thead>
                             <tr>
                                 <th class="w-1 sortable" data-sort="Ticker">Ticker <i class="fas fa-sort ms-1 sort-icon"></i></th>
-                                <th class="sortable" data-sort="Signal">Size <i class="fas fa-sort ms-1 sort-icon"></i></th>
+                                <th class="sortable" data-sort="Industry">Industry <i class="fas fa-sort ms-1 sort-icon"></i></th>
+                                <th class="sortable" data-sort="Size">Size <i class="fas fa-sort ms-1 sort-icon"></i></th>
                                 <th class="sortable" data-sort="Signal">Signal <i class="fas fa-sort ms-1 sort-icon"></i></th>
                                 <th class="sortable" data-sort="Confidence">Confidence <i class="fas fa-sort ms-1 sort-icon"></i></th>
                                 <th class="sortable" data-sort="Age">Signal Age <i class="fas fa-sort ms-1 sort-icon"></i></th>
@@ -384,13 +419,15 @@
 
 <script>
     // Données de démonstration
-    const signalsData = loadJSONSync("data/signals-1d.json");;
-
+    const signalsData = loadJSONSync("data/signals-1d.json");
     // Variables pour le tri et le filtrage
     let currentSort = { column: 'ticker', direction: 'asc' };
     let currentSignalFilter = 'all';
     let currentConfidenceFilter = 'all';
     let currentSizeFilter = 'all';
+    let currentAgeFilter = 'all';
+    let currentIndustryFilter = 'all';
+    let currentTypeFilter = 'all';
 
     // Fonction pour formater la date
     function formatDate(dateString) {
@@ -426,6 +463,8 @@
         switch(column) {
             case 'Ticker':
                 return data.Ticker;
+            case 'Industry':
+                return data.Industry;
             case 'Signal':
                 // Ordre des signaux pour le tri
                 const signalOrder = {
@@ -444,15 +483,7 @@
                 };
                 return confidenceOrder[data.Confidence] || 3;
             case 'Size':
-                const sizeOrder = {
-                    'Mega-Cap': 0,
-                    'Large-Cap': 1,
-                    'Mid-Cap': 2,
-                    'Small-Cap': 3,
-                    'Micro-Cap': 4,
-                    'Nano-Cap': 5,
-                };
-                return sizeOrder[data.Size] || 6;
+                return data.Size;
             case 'Age':
                 return new Date(data.EventDate).getTime();
             case 'ClosePrice':
@@ -514,6 +545,41 @@
             });
         }
 
+        // Filtre par industry
+        if (currentIndustryFilter !== 'all') {
+            Object.keys(filteredData).forEach(ticker => {
+                switch (currentIndustryFilter) {
+                    case "Exclude HealthCare":
+                        if (filteredData[ticker].Industry === "Biotechnology" || filteredData[ticker].Industry === "Medical Care Facilities") {
+                            delete filteredData[ticker];
+                        }
+                        break;
+                    case "Software":
+                        if (!(filteredData[ticker].Industry === "Semiconductors"
+                            || filteredData[ticker].Industry === " Software - Application"
+                            || filteredData[ticker].Industry === "Software - Application"
+                            || filteredData[ticker].Industry ===  "Software - Infrastructure")) {
+                            delete filteredData[ticker];
+                        }
+                        break;
+                    default:
+                        if (filteredData[ticker].Industry !== currentIndustryFilter) {
+                            delete filteredData[ticker];
+                        }
+                        break;
+                }
+            });
+        }
+
+        // Filtre par type
+        if (currentTypeFilter !== 'all') {
+            Object.keys(filteredData).forEach(ticker => {
+                if (filteredData[ticker].Type !== currentTypeFilter) {
+                    delete filteredData[ticker];
+                }
+            });
+        }
+
         // Filtre par confiance
         if (currentConfidenceFilter !== 'all') {
             Object.keys(filteredData).forEach(ticker => {
@@ -523,12 +589,58 @@
             });
         }
 
+        // Filtre par age
+        if (currentAgeFilter !== 'all') {
+            const now = new Date();
+            let limitDate1 = null;
+            let limitDate2 = null;
+            switch (currentAgeFilter) {
+                case "1d":
+                    limitDate1 = now;
+                    limitDate2 = new Date(now.getTime() - 1 * 24 * 60 * 60 * 1000);
+                    break;
+                case "1w":
+                    limitDate1 = new Date(now.getTime() - 1 * 24 * 60 * 60 * 1000);
+                    limitDate2 = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+                    break;
+                case "2w":
+                    limitDate1 = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+                    limitDate2 = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
+                    break;
+                case "1m":
+                    limitDate1 = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
+                    limitDate2 = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+                    break;
+            }
+            Object.keys(filteredData).forEach(ticker => {
+                const eventDate = new Date(filteredData[ticker].EventDate);
+                if (!(limitDate2 < eventDate && eventDate < limitDate1)) {
+                    delete filteredData[ticker];
+                }
+            });
+        }
+
         // Filtre par size
         if (currentSizeFilter !== 'all') {
             Object.keys(filteredData).forEach(ticker => {
-                if (filteredData[ticker].Size !== currentSizeFilter) {
-                    delete filteredData[ticker];
+                switch (currentSizeFilter) {
+                    case "Exclude Penny Stock":
+                        if (filteredData[ticker].Size === "Nano-Cap" || filteredData[ticker].Size === "Micro-Cap" || filteredData[ticker].Size === "Small-Cap") {
+                            delete filteredData[ticker];
+                        }
+                        break;
+                    case "Only Penny Stock":
+                        if (!(filteredData[ticker].Size === "Nano-Cap" || filteredData[ticker].Size === "Micro-Cap" || filteredData[ticker].Size === "Small-Cap")) {
+                            delete filteredData[ticker];
+                        }
+                        break;
+                    default:
+                        if (filteredData[ticker].Size !== currentSizeFilter) {
+                            delete filteredData[ticker];
+                        }
+                        break;
                 }
+
             });
         }
 
@@ -626,6 +738,7 @@
             row.className = 'ticker-card';
             row.innerHTML = `
                 <td><strong>${data.Ticker}</strong></td>
+                <td>${data.Industry}</td>
                 <td>${data.Size}</td>
                 <td><span class="signal-tag ${signalClass}">${signalText}</span></td>
                 <td>
@@ -962,6 +1075,36 @@
             });
         });
 
+        // Gestion des filtres de type
+        document.querySelectorAll('.filter-type').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                currentTypeFilter = this.getAttribute('data-value');
+                renderTickers();
+
+                // Mettre à jour le texte du bouton
+                document.querySelector('#filterType').innerHTML = `
+                    <i class="fas fa-filter me-1"></i>
+                    Type: ${this.textContent}
+                `;
+            });
+        });
+
+        // Gestion des filtres de industry
+        document.querySelectorAll('.filter-industry').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                currentIndustryFilter = this.getAttribute('data-value');
+                renderTickers();
+
+                // Mettre à jour le texte du bouton
+                document.querySelector('#filterIndustry').innerHTML = `
+                    <i class="fas fa-filter me-1"></i>
+                    Industry: ${this.textContent}
+                `;
+            });
+        });
+
         // Gestion des filtres de signal
         document.querySelectorAll('.filter-signal').forEach(item => {
             item.addEventListener('click', function(e) {
@@ -1003,6 +1146,21 @@
                 document.querySelector('#filterSize').innerHTML = `
                     <i class="fas fa-chart-line me-1"></i>
                     Size: ${this.textContent}
+                `;
+            });
+        });
+
+        // Gestion des filtres de age
+        document.querySelectorAll('.filter-age').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                currentAgeFilter = this.getAttribute('data-value');
+                renderTickers();
+
+                // Mettre à jour le texte du bouton
+                document.querySelector('#filterAge').innerHTML = `
+                    <i class="fas fa-chart-line me-1"></i>
+                    Age: ${this.textContent}
                 `;
             });
         });
