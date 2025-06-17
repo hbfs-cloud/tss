@@ -420,11 +420,11 @@
                 return signalOrder[data.Signal] || 5;
             case 'Confidence':
                 const confidenceOrder = {
-                    'High': 0,
-                    'Medium': 1,
-                    'Low': 2,
+                    'H': 0,
+                    'M': 1,
+                    'L': 2,
                 };
-                return confidenceOrder[data.Confidence.slice(2)];
+                return confidenceOrder[data.Confidence] || 3;
             case 'Age':
                 return new Date(data.EventDate).getTime();
             case 'ClosePrice':
@@ -519,6 +519,15 @@
         }
     }
 
+    function confidenceIcon(confidence) {
+        const confidenceIcon = {
+            'H': "✅ High",
+            'M': "⚠️ Medium",
+            'L': "❌ Low",
+        };
+        return confidenceIcon[confidence] || "";
+    }
+
     // Fonction pour afficher les tickers dans le tableau principal
     function renderTickers() {
         const container = document.getElementById('tickers-container');
@@ -581,7 +590,7 @@
                 <td><span class="signal-tag ${signalClass}">${signalText}</span></td>
                 <td>
                     <div class="d-flex align-items-center">
-                        <div class="me-2">${data.Confidence}</div>
+                        <div class="me-2">${confidenceIcon(data.Confidence)}</div>
                     </div>
                 </td>
                 <td>${signalAge}</td>
