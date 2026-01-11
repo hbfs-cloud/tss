@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="https://market-watch.xyz/favicon.ico">
+    <title>Redirecting...</title>
+</head>
+
+<body>
+    <div id="msg" style="text-align:center;padding:50px;font-family:sans-serif;color:#64748b;">
+        <p>Redirecting...</p>
+    </div>
+    <script>
+        // Parse pretty URL and redirect to SPA
+        const path = window.location.pathname;
+        const parts = path.split('/').filter(p => p.length > 0);
+
+        // Check for file extensions (ignoring them for routing)
+        const isFile = path.match(/\.(html|json|css|js|png|jpg|jpeg|gif|ico|svg|map|woff|woff2|ttf)$/i);
+
+        if (isFile) {
+            // Real 404 for actual files
+            document.getElementById('msg').innerHTML = '<h1>404</h1><p>Page not found</p><p style="color:#94a3b8;font-size:0.8rem;">' + path + '</p><a href="/">Go to Dashboard</a>';
+        } else if (parts.length >= 1) {
+            // Pretty URL routing
+            // Supported formats:
+            // /eu -> report.html?id=eu&period=1y
+            // /eu/1y -> report.html?id=eu&period=1y
+            // /eu/1y/2026-01-04 -> report.html?id=eu&period=1y&date=2026-01-04
+            // /report/eu -> report.html?id=eu&period=1y (strip 'report' prefix)
+            // /report/eu/1y -> report.html?id=eu&period=1y
+
+            let idx = 0;
+            // Skip 'report' prefix if present
+            if (parts[0] === 'report' && parts.length > 1) {
+                idx = 1;
+            }
+
+            const id = parts[idx] || '';
+            const period = parts[idx + 1] || '1y';
+            const date = parts[idx + 2] || '';
+
+            if (!id) {
+                window.location.replace('/');
+                return;
+            }
+
+            let url = '/report.html?id=' + encodeURIComponent(id) + '&period=' + encodeURIComponent(period);
+            if (date) url += '&date=' + encodeURIComponent(date);
+
+            window.location.replace(url);
+        } else {
+            // Root catch-all (should never happen if index.html exists)
+            window.location.replace('/');
+        }
+    </script>
+</body>
+
+</html>

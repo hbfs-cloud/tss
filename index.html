@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Watch | Trading Strategies</title>
+    <link rel="icon" href="https://market-watch.xyz/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+        }
+
+        .mw-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.2s;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .mw-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.1);
+        }
+
+        .period-btn {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.7rem;
+            transition: all 0.15s;
+            border: 1px solid transparent;
+            background: #f8fafc;
+            color: #64748b;
+            border-color: #e2e8f0;
+            cursor: pointer;
+        }
+
+        .period-btn.active {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        .period-btn:hover:not(.active) {
+            background: #e2e8f0;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 min-h-screen flex flex-col">
+    <!-- HEADER -->
+    <nav class="bg-white border-b border-slate-200 px-4 py-3 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="flex items-center gap-2">
+                    <img src="https://market-watch.xyz/logo.svg" alt="MW" class="h-8">
+                    <span class="font-extrabold text-xl text-slate-900 hidden md:inline">MARKET WATCH</span>
+                </a>
+                <select id="currency-selector"
+                    class="text-xs font-mono bg-slate-100 text-slate-700 font-bold px-2 py-1 rounded border border-slate-200 outline-none cursor-pointer hover:bg-white"
+                    onchange="setCurrency(this.value)">
+                    <option value="EUR" selected>🇪🇺 EUR</option>
+                    <option value="USD">🇺🇸 USD</option>
+                    <option value="CHF">🇨🇭 CHF</option>
+                    <option value="HKD">🇭🇰 HKD</option>
+                    <option value="JPY">🇯🇵 JPY</option>
+                    <option value="CNY">🇨🇳 CNY</option>
+                    <option value="GBP">🇬🇧 GBP</option>
+                    <option value="PLN">🇵🇱 PLN</option>
+                    <option value="BTC">₿ BTC</option>
+                    <option value="GOLD">🥇 GOLD</option>
+                </select>
+            </div>
+
+            <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-lg" id="period-selector">
+                <button class="period-btn" data-period="1y" onclick="loadPeriod('1y')">1Y</button>
+            </div>
+
+            <!--
+            <div class="flex items-center gap-3">
+                <div class="flex flex-col items-end">
+                    <div class="text-xs uppercase font-bold text-blue-600 tracking-wider">Time Machine</div>
+                    <div id="tm-date" class="font-mono text-sm font-bold text-slate-700">LIVE</div>
+                </div>
+                <input type="range" id="timeSlider" min="0" max="0" value="0"
+                    class="w-32 md:w-40 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer"
+                    oninput="onSliderChange(this.value)">
+            </div>
+            -->
+        </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <main class="max-w-7xl mx-auto px-4 py-8 flex-grow w-full">
+        <header class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-black mb-2 text-slate-900">Trading Strategies</h1>
+            <p class="text-slate-500">Select a strategy to view detailed performance analysis.</p>
+        </header>
+
+        <div id="grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            <div class="col-span-full text-center py-12 text-slate-400"><i
+                    class="fas fa-spinner fa-spin mr-2"></i>Loading data...</div>
+        </div>
+
+        <div class="mw-card">
+            <h2 class="text-lg font-bold mb-4 flex items-center gap-2 text-slate-800"><i
+                    class="fa-solid fa-crosshairs text-blue-600"></i> Risk / Reward Overview</h2>
+            <div class="h-[350px] w-full"><canvas id="scatterChart"></canvas></div>
+        </div>
+    </main>
+
+    <footer
+        style="text-align:center; padding:3rem; color:#94a3b8; font-size:0.9rem; background:#f1f5f9; margin-top:4rem; border-top:1px solid #e2e8f0;">
+        <div class="max-w-7xl mx-auto px-6">
+            <p style="margin-bottom:1rem; font-weight:600; color:#64748b;">&copy; 2025 Market Watch.</p>
+            <p style="font-size:0.8rem; max-width:600px; margin:0 auto; line-height:1.6;">
+                Disclaimer: This report is for educational purposes only. Past performance is not indicative of future
+                results.
+                Investing involves risk.
+            </p>
+            <p class="text-xs text-slate-300 mt-2">Generated on 2026-01-11 10:24:17 UTC.</p>
+        </div>
+    </footer>
+
+    <script>
+        let scatterChartInstance = null;
+        const DEFAULT_DATE = '2026-01-11';
+        const AVAILABLE_DATES = ["2026-01-11"];
+
+        // Note: AVAILABLE_DATES is sorted Newest -> Oldest (Index 0 is newest)
+
+        let currentDate = DEFAULT_DATE;
+        let currentPeriod = '1y';
+        let currentCurrency = 'EUR';
+        let FX_HISTORY = {};
+
+        // Cache for current period data
+        let CACHED_STATS = null;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Load FX first
+            try {
+                const fxResp = await fetch('/fx.json');
+                if (fxResp.ok) {
+                    FX_HISTORY = await fxResp.json();
+                } else {
+                    console.warn("fx.json not found");
+                }
+            } catch (e) { console.warn("fx fetch error", e); }
+
+            // Init URL params
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('date')) currentDate = params.get('date');
+            if (params.get('period')) currentPeriod = params.get('period');
+            if (params.get('currency')) currentCurrency = params.get('currency');
+
+            document.getElementById('currency-selector').value = currentCurrency;
+
+            // If currentDate matches the first available date (newest), show LIVE
+            // Use fuzzy match or logic
+            updateDateDisplay();
+
+            // Sync slider
+            const idx = AVAILABLE_DATES.indexOf(currentDate);
+            if (idx !== -1) {
+                const slider = document.getElementById('timeSlider');
+                if (slider) slider.value = idx;
+            }
+
+            // Load
+            loadPeriod(currentPeriod);
+        });
+
+        async function setCurrency(curr) {
+            currentCurrency = curr;
+            if (window.fetchFX) await window.fetchFX(curr);
+            updateURL();
+            if (CACHED_STATS) {
+                renderDashboard(CACHED_STATS.summary, CACHED_STATS.benchmarks, currentPeriod);
+            }
+        }
+
+        function updateDateDisplay() {
+            const el = document.getElementById('tm-date');
+            if (!el) return;
+            // Always show the actual date
+            el.innerText = currentDate;
+            if (currentDate === AVAILABLE_DATES[0]) {
+                el.className = 'font-mono text-sm font-black text-emerald-600';
+            } else {
+                el.className = 'font-mono text-sm font-bold text-slate-700';
+            }
+        }
+
+        function updatePeriodButtons() {
+            document.querySelectorAll('.period-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.period === currentPeriod);
+            });
+        }
+
+        function setCurrency(currency) {
+            currentCurrency = currency;
+            updateURL();
+            // Trigger Re-Render with conversion
+            if (CACHED_STATS) {
+                renderDashboard(CACHED_STATS.summary, CACHED_STATS.benchmarks, currentPeriod);
+            }
+        }
+
+        function onSliderChange(val) {
+            const intVal = parseInt(val);
+            if (intVal >= 0 && intVal < AVAILABLE_DATES.length) {
+                currentDate = AVAILABLE_DATES[intVal];
+                updateDateDisplay();
+                updateURL();
+                loadPeriod(currentPeriod);
+            }
+        }
+
+        function updateURL() {
+            const urlParams = new URLSearchParams();
+            urlParams.set('date', currentDate);
+            urlParams.set('period', currentPeriod);
+            urlParams.set('currency', currentCurrency);
+            window.history.replaceState({}, '', '?' + urlParams.toString());
+        }
+
+        async function loadPeriod(period) {
+            currentPeriod = period;
+            updatePeriodButtons();
+
+            const grid = document.getElementById('grid');
+            grid.innerHTML = '<div class="col-span-full text-center py-12 text-slate-400"><i class="fas fa-spinner fa-spin mr-2"></i>Loading ' + period.toUpperCase() + ' data...</div>';
+
+            try {
+                // Fetch stats for specific period/date
+                const ts = new Date().getTime();
+                const url = currentDate + '/' + period + '/web/stats.json?t=' + ts;
+                const response = await fetch(url);
+                if (!response.ok) throw new Error("Data not found");
+                const data = await response.json();
+                CACHED_STATS = data;
+                renderDashboard(data.summary, data.benchmarks, period);
+            } catch (e) {
+                console.error(e);
+                CACHED_STATS = null;
+                grid.innerHTML = '<div class="col-span-full text-center py-12 text-rose-500 font-bold">Data for ' + period.toUpperCase() + ' not available on ' + currentDate + '.</div>';
+            }
+        }
+
+        function getFX(currency, date) {
+            if (currency === 'EUR') return 1.0;
+            if (!FX_HISTORY[currency]) return 1.0;
+
+            const rates = FX_HISTORY[currency];
+            let rawRate = rates[date];
+
+            // Fallback lookup if exact date missing
+            if (!rawRate || rawRate <= 0) {
+                const keys = Object.keys(rates).sort();
+                for (let i = keys.length - 1; i >= 0; i--) {
+                    if (keys[i] <= date) {
+                        rawRate = rates[keys[i]];
+                        break;
+                    }
+                }
+            }
+
+            if (!rawRate || rawRate <= 0) return 1.0;
+
+            // Logic:
+            // Currencies (USD, CHF...): Stored as "Units per EUR". Return 1/Rate to get "EUR per Unit".
+            // Commodities (GOLD, BTC...): Stored as "EUR per Unit". Return Rate directly.
+            if (['GOLD', 'BTC', 'SILVER', 'ETH'].includes(currency)) {
+                return rawRate;
+            }
+            return 1.0 / rawRate;
+        }
+
+        function calculateStats(equityCurve, dates, baseCurr, targetCurr) {
+            if (!equityCurve || equityCurve.length < 2 || !dates) return null;
+
+            // If currencies match, no calc needed
+            if (baseCurr === targetCurr) return null; // We might want to recalc for consistency if data is weekly
+
+            const converted = [];
+            let minLen = Math.min(equityCurve.length, dates.length);
+
+            for (let i = 0; i < minLen; i++) {
+                const d = dates[i];
+                const val = equityCurve[i];
+
+                const baseRate = getFX(baseCurr, d);
+                const valInEur = (baseRate > 0) ? val / baseRate : 0;
+
+                const targetRateInfo = getFX(targetCurr, d);
+                const newVal = valInEur * targetRateInfo;
+                converted.push(newVal);
+            }
+
+            // Calc Metrics
+            const start = converted[0];
+            const end = converted[converted.length - 1];
+            const ret = (start > 0) ? (end - start) / start : 0;
+
+            // DD
+            let max = -Infinity;
+            let maxDD = 0;
+            const rets = [];
+
+            converted.forEach((v, i) => {
+                if (v > max) max = v;
+                const dd = (max > 0) ? (v - max) / max : 0;
+                if (dd < maxDD) maxDD = dd;
+
+                if (i > 0 && converted[i - 1] !== 0) {
+                    rets.push((v - converted[i - 1]) / converted[i - 1]);
+                }
+            });
+
+            // Vol & Sharpe (Weekly adj)
+            // Approx 52 weeks/yr
+            const mean = rets.reduce((a, b) => a + b, 0) / rets.length;
+            const variance = rets.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / rets.length;
+            const std = Math.sqrt(variance);
+
+            const vol = std * Math.sqrt(52);
+            const sharpe = (std > 0) ? (mean / std) * Math.sqrt(52) : 0;
+
+            return {
+                ret: ret,
+                vol: vol,
+                max_dd: maxDD,
+                sharpe: sharpe,
+                equity_curve: converted
+            };
+        }
+
+        function renderDashboard(stats, bench, period) {
+            const grid = document.getElementById('grid');
+            grid.innerHTML = '';
+
+            const portfolioColors = {
+                'pure_hk': '#f97316', 'pure_it': '#8b5cf6', 'pure_fr': '#3b82f6',
+                'pure_es': '#eab308', 'pure_ch': '#ef4444', 'pure_de': '#10b981',
+                'pure_uk': '#6366f1', 'pure_pl': '#ec4899', 'pure_gr': '#06b6d4',
+                'pure_us': '#14b8a6', 'pure_crypto': '#f59e0b', 'pure_etf': '#84cc16',
+                'magnificent_8': '#a855f7', 'global_balanced': '#22c55e',
+                'pure_europe': '#8b5cf6', 'tss_speculative': '#f43f5e',
+                'global_optimal': '#0ea5e9'
+            };
+
+            // PREPARE DATA FOR RENDERING
+            const displayStats = stats.map(p => {
+                let curve = p.equity_curve;
+                let ret = p.ret_ytd;
+                let vol = p.vol;
+                let sharpe = p.sharpe;
+                let dd = p.max_dd;
+
+                // Perform Conversion if needed
+                const baseCurr = p.currency || 'EUR';
+
+                console.log(`[Dashboard] Portfolio ${p.id}: baseCurr=${baseCurr}, targetCurr=${currentCurrency}, has_curve=${!!p.equity_curve}, has_dates=${!!p.equity_curve_dates}, dates_len=${p.equity_curve_dates ? p.equity_curve_dates.length : 0}`);
+
+                if (p.equity_curve && p.equity_curve_dates && p.equity_curve_dates.length > 0) {
+                    const newMetrics = calculateStats(p.equity_curve, p.equity_curve_dates, baseCurr, currentCurrency);
+                    console.log(`[Dashboard] ${p.id} newMetrics:`, newMetrics);
+                    if (newMetrics) {
+                        curve = newMetrics.equity_curve;
+                        ret = newMetrics.ret;
+                        vol = newMetrics.vol;
+                        sharpe = newMetrics.sharpe;
+                        dd = newMetrics.max_dd;
+                    }
+                }
+
+                return {
+                    ...p,
+                    _curve: curve,
+                    _ret: ret,
+                    _vol: vol,
+                    _sharpe: sharpe,
+                    _dd: dd
+                };
+            });
+
+            // Sort by Return (using converted return)
+            displayStats.sort((a, b) => b._ret - a._ret);
+
+            displayStats.forEach((p, idx) => {
+                const card = document.createElement('div');
+                const pColor = portfolioColors[p.id] || '#64748b';
+                const retValue = p._ret;
+                const retColor = retValue >= 0 ? "text-emerald-600" : "text-rose-600";
+                const lineColor = retValue >= 0 ? "#10b981" : "#ef4444";
+
+                card.className = "mw-card flex flex-col h-full cursor-pointer hover:shadow-lg transition-shadow";
+                card.style.borderLeft = '4px solid ' + pColor;
+                card.onclick = () => window.location.href = `report.html?id=${p.id}&period=${currentPeriod}&date=${currentDate}&currency=${currentCurrency}`;
+
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <span class="text-xs font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-400 uppercase">${p.id}</span>
+                            <h3 class="text-lg font-bold mt-1 text-slate-900">${p.name}</h3>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-2xl font-black ${retColor}">${(retValue * 100).toFixed(1)}%</div>
+                            <div class="text-xs text-slate-400 uppercase">${period.toUpperCase()}</div>
+                        </div>
+                    </div>
+                    
+                        <div class="h-16 mb-3 bg-slate-50 rounded overflow-hidden">
+                        <canvas id="spark-${p.id}" class="w-full h-full"></canvas>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-2 text-center">
+                        <div class="bg-slate-50 p-2 rounded">
+                            <div class="text-xs text-slate-400 uppercase">Sharpe</div>
+                            <div class="text-sm font-bold text-slate-700">${p._sharpe.toFixed(2)}</div>
+                        </div>
+                        <div class="bg-slate-50 p-2 rounded">
+                             <div class="text-xs text-slate-400 uppercase">Max DD</div>
+                             <div class="text-sm font-bold text-rose-500">${(p._dd * 100).toFixed(1)}%</div>
+                        </div>
+                        <div class="bg-slate-50 p-2 rounded">
+                             <div class="text-xs text-slate-400 uppercase">Vol</div>
+                             <div class="text-sm font-bold text-slate-600">${(p._vol * 100).toFixed(1)}%</div>
+                        </div>
+                    </div>
+                    
+                    <!--
+                    <div class="h-[180px] w-full mt-4 bg-slate-50/50 rounded-lg p-2 border border-slate-100">
+                        <canvas id="radar-${p.id}"></canvas>
+                    </div>
+                    -->
+                `;
+                grid.appendChild(card);
+
+                setTimeout(() => {
+                    const ctx = document.getElementById('spark-' + p.id);
+                    if (ctx) {
+                        // Destroy existing instance if any
+                        if (window.sparklineInstances && window.sparklineInstances[p.id]) {
+                            window.sparklineInstances[p.id].destroy();
+                        }
+
+                        if (p._curve && p._curve.length > 0) {
+                            if (!window.sparklineInstances) window.sparklineInstances = {};
+
+                            window.sparklineInstances[p.id] = new Chart(ctx, {
+                                type: 'line',
+                                data: { labels: p._curve.map((_, i) => i), datasets: [{ data: p._curve, borderColor: lineColor, borderWidth: 1.5, fill: true, backgroundColor: lineColor + '20', pointRadius: 0, tension: 0.3 }] },
+                                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { enabled: false } }, scales: { x: { display: false }, y: { display: false } }, animation: false }
+                            });
+                        } else {
+                            ctx.style.display = 'none';
+                        }
+                    }
+
+                    // Radar Chart
+                    const radarCtx = document.getElementById('radar-' + p.id);
+                    if (radarCtx) {
+                        // Destroy existing
+                        if (window.radarInstances && window.radarInstances[p.id]) {
+                            window.radarInstances[p.id].destroy();
+                        }
+                        if (!window.radarInstances) window.radarInstances = {};
+
+                        const radarData = p.radar || p.Radar || { perf: 5, drawdown: 5, vol: 5, div_sect: 5, div_geo: 5, div_curr: 5 };
+                        // Note: p.radar usually comes from stats.json directly
+                        // If converted currency (calculateStats), we might need to adjust performance score?
+                        // For simplicity, we use the original radar score, as diversification/constance don't change much with currency.
+
+                        window.radarInstances[p.id] = new Chart(radarCtx, {
+                            type: 'radar',
+                            data: {
+                                labels: ['Performance', 'Constance', 'Stabilité', 'Div. Sect.', 'Div. Geo.', 'Devise'],
+                                datasets: [{
+                                    label: 'Score',
+                                    data: [radarData.perf, radarData.drawdown, radarData.vol, radarData.div_sect, radarData.div_geo, radarData.div_curr],
+                                    fill: true,
+                                    backgroundColor: pColor + '33',
+                                    borderColor: pColor,
+                                    pointBackgroundColor: pColor,
+                                    pointBorderColor: '#fff',
+                                    pointHoverBackgroundColor: '#fff',
+                                    pointHoverBorderColor: pColor,
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: { legend: { display: false } },
+                                scales: {
+                                    r: {
+                                        angleLines: { color: '#e2e8f0' },
+                                        grid: { color: '#e2e8f0' },
+                                        pointLabels: { font: { size: 9, weight: 'bold' }, color: '#64748b' },
+                                        suggestedMin: 0,
+                                        suggestedMax: 10,
+                                        ticks: { display: false, maxTicksLimit: 3 },
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }, 10);
+            });
+
+            renderScatter(displayStats, bench);
+        }
+
+        function renderScatter(stats, bench) {
+            const ctx = document.getElementById('scatterChart');
+            if (scatterChartInstance) scatterChartInstance.destroy();
+
+            const colors = {
+                'pure_hk': '#f97316', 'pure_it': '#8b5cf6', 'pure_fr': '#3b82f6',
+                'pure_es': '#eab308', 'pure_ch': '#ef4444', 'pure_de': '#10b981',
+                'pure_uk': '#6366f1', 'pure_pl': '#ec4899', 'pure_gr': '#06b6d4',
+                'pure_us': '#14b8a6', 'pure_crypto': '#f59e0b', 'pure_etf': '#84cc16',
+                'magnificent_8': '#a855f7', 'global_balanced': '#22c55e',
+                'pure_europe': '#8b5cf6', 'tss_speculative': '#f43f5e',
+                'global_optimal': '#0ea5e9'
+            };
+
+            let datasets = stats.map((p, idx) => {
+                const ret = p._ret * 100;
+                const sharpe = p._sharpe || 0;
+                // Clamp radius
+                const radius = Math.max(8, Math.min(30, 8 + (sharpe > 0 ? sharpe : 0) * 6));
+                return {
+                    label: p.name,
+                    // X Axis: Max DD (Absolute %), Y Axis: Return %
+                    // Bubble Radius: Sharpe (scaled)
+                    data: [{
+                        x: Math.abs(p._dd) * 100,
+                        y: ret,
+                        r: radius,
+                        _vol: p._vol * 100,
+                        _sharpe: sharpe
+                    }],
+                    backgroundColor: colors[p.id] || 'hsl(' + (idx * 30) + ', 70%, 50%)',
+                    hoverRadius: radius + 2,
+                    borderWidth: 2,
+                    borderColor: ret >= 0 ? '#10b981' : '#ef4444'
+                };
+            });
+
+            // Add Benchmarks
+            // Add Benchmarks from stats.json
+            const benchList = bench || {};
+            // Fallback hardcoded if missing? No, stats.json should have it.
+            // But if specific keys missing, handle it.
+            const benchKeys = ['S&P 500', 'Gold', 'Bitcoin', 'Crude Oil', 'Euro Stoxx 50'];
+
+            benchKeys.forEach(name => {
+                if (benchList[name]) {
+                    const b = benchList[name];
+                    // Use 'bubble' format for all datasets
+                    datasets.push({
+                        label: name,
+                        data: [{
+                            x: Math.abs(b.max_dd) * 100,
+                            y: b.ret_ytd * 100 || 0,
+                            r: Math.max(8, Math.min(30, 8 + (b.sharpe > 0 ? b.sharpe : 0) * 6)), // Match Portfolio Scaling
+                            sharpe: b.sharpe || 0
+                        }],
+                        backgroundColor: (name === 'Bitcoin' ? '#f97316' : (name === 'Gold' ? '#f59e0b' : (name === 'S&P 500' ? '#64748b' : (name === 'Crude Oil' ? '#000000' : '#3b82f6')))),
+                        // Benchmarks use distinct shape via pointStyle if possible, but Bubble does not support mixed pointStyles well?
+                        // Actually Chart.js Bubble allows pointStyle.
+                        pointStyle: 'rectRot',
+                        borderColor: '#fff',
+                        borderWidth: 1
+                    });
+                }
+            });
+
+            // Re-map portfolios to use consistent r structure
+            datasets = datasets.map(d => {
+                // If it's a portfolio (check if it has 'r' already or calculate it)
+                if (d.data[0] && d.data[0].r === undefined) {
+                    // It is a portfolio from previous step, let's inject r
+                    // We need the sharpe from original logic? 
+                    // Actually the previous step already computed radius but assigned it to `pointRadius`.
+                    // We should standardize.
+                    // Let's modify the portfolio loop above (lines 923-936) via context or just patch here.
+                    // But better to simply update the chart options to use scriptable radius for text labels too?
+                    // No, switching to 'bubble' chart type is cleanest for variable radius.
+                }
+                return d;
+            });
+
+            // Hardcoded fallbacks removed to ensure real data is used.
+
+            scatterChartInstance = new Chart(ctx, {
+                type: 'bubble', // Switch to Bubble to support 'r' natively
+                data: { datasets: datasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'right',
+                            labels: {
+                                color: '#0f172a',
+                                font: { size: 10 },
+                                usePointStyle: true,
+                                boxWidth: 8
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: (ctx) => {
+                                    const r = ctx.raw;
+                                    // r.x is DD, r.y is Ret
+                                    return `${ctx.dataset.label}: Ret ${r.y.toFixed(1)}% | DD ${r.x.toFixed(1)}% | Sharpe ${(r._sharpe || 0).toFixed(2)}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            title: {
+                                display: true,
+                                text: 'Max Drawdown (%)',
+                                color: '#ef4444',
+                                font: { size: 13, weight: 'bold' }
+                            },
+                            grid: { color: '#e2e8f0' },
+                            ticks: {
+                                color: '#64748b',
+                                callback: function (value) {
+                                    return value.toFixed(0) + '%';
+                                }
+                            },
+                            min: 0
+                        },
+                        y: {
+                            type: 'linear',
+                            title: {
+                                display: true,
+                                text: 'Return YTD (%)',
+                                color: '#10b981',
+                                font: { size: 13, weight: 'bold' }
+                            },
+                            grid: { color: '#e2e8f0' },
+                            ticks: {
+                                color: '#64748b',
+                                callback: function (value) {
+                                    return value.toFixed(0) + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+
+        async function init() {
+            // Load FX first
+            try {
+                const fxResp = await fetch('/fx.json');
+                if (fxResp.ok) {
+                    FX_HISTORY = await fxResp.json();
+                } else {
+                    console.warn("fx.json not found");
+                }
+            } catch (e) { console.warn("fx fetch error", e); }
+
+            // Init URL params
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('date')) currentDate = params.get('date');
+            if (params.get('period')) currentPeriod = params.get('period');
+            if (params.get('currency')) currentCurrency = params.get('currency');
+
+            document.getElementById('currency-selector').value = currentCurrency;
+
+            // If currentDate matches the first available date (newest), show LIVE
+            updateDateDisplay();
+
+            // Sync slider
+            const idx = AVAILABLE_DATES.indexOf(currentDate);
+            const slider = document.getElementById('timeSlider');
+            if (slider) {
+                if (AVAILABLE_DATES.length <= 1) {
+                    slider.disabled = true;
+                    slider.classList.add('opacity-50', 'cursor-not-allowed');
+                }
+                if (idx !== -1) {
+                    slider.value = idx;
+                }
+            }
+
+            loadPeriod(currentPeriod);
+        }
+    </script>
+</body>
+
+</html>
