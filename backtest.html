@@ -269,7 +269,7 @@
             </div>
 
             <!-- Live Trading Link -->
-            <a href="/live/dashboard.html"
+            <a href="live.html"
                 class="flex items-center gap-2 px-3 py-1.5 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition font-semibold text-sm border border-red-200">
                 <span class="relative flex h-2 w-2">
                     <span
@@ -1304,7 +1304,7 @@
                 results.
                 Investing involves risk.
             </p>
-            <p class="text-xs text-slate-300 mt-2">Generated on 2026-01-11 16:37:43 UTC.</p>
+            <p class="text-xs text-slate-300 mt-2">Generated on 2026-01-11 17:17:54 UTC.</p>
         </div>
     </footer>
 
@@ -1801,7 +1801,7 @@
 
             periods.forEach(p => {
                 const btn = document.createElement('a');
-                btn.href = `report.html?id=${PORTFOLIO_ID}&period=${p.id}&currency=${STATE.currency}`;
+                btn.href = `backtest.html?id=${PORTFOLIO_ID}&period=${p.id}&currency=${STATE.currency}`;
                 btn.className = `period-btn ${p.id === CURRENT_PERIOD ? 'active' : 'inactive'}`;
                 btn.textContent = p.label;
 
