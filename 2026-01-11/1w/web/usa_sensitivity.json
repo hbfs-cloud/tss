@@ -1,0 +1,13 @@
+{
+  "generated_at": "2026-01-11T22:50:08.206601",
+  "start_date_sensitivity": {},
+  "exit_delay_analysis": [
+    {
+      "delay": 0,
+      "avg_return": 0.0,
+      "win_rate": 0.0,
+      "samples": 0
+    }
+  ],
+  "trading_style": {}
+}
