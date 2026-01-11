@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-01-11T18:17:54.195455",
+  "generated_at": "2026-01-11T22:41:18.989871",
   "start_date_sensitivity": {
     "3M": {
       "mean": 2.0420697106423313,
@@ -1375,9 +1375,9 @@
     }
   ],
   "trading_style": {
-    "total_trades": 1738,
-    "avg_trades_per_week": 33.5,
-    "avg_trades_per_day": 4.79,
+    "total_trades": 2072,
+    "avg_trades_per_week": 40.0,
+    "avg_trades_per_day": 5.71,
     "frequency_label": "High",
     "effort_label": "Active Trader (Daily Ops)",
     "risk_metrics": {

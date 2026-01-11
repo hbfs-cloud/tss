@@ -1304,7 +1304,7 @@
                 results.
                 Investing involves risk.
             </p>
-            <p class="text-xs text-slate-300 mt-2">Generated on 2026-01-11 17:17:54 UTC.</p>
+            <p class="text-xs text-slate-300 mt-2">Generated on 2026-01-11 21:41:19 UTC.</p>
         </div>
     </footer>
 
@@ -3504,13 +3504,14 @@
                 });
             });
 
-            // Get set of pending order symbols to avoid duplicates
-            const pendingSymbols = new Set(pendingOrders.map(o => o.symbol));
+            // Get set of pending order keys (symbol+date+type) to avoid duplicates
+            const pendingKeys = new Set(pendingOrders.map(o => `${o.symbol}_${o.date}_${o.type}`));
 
             dayTrades.forEach(t => {
                 // Skip trades that are PENDING status AND already in pending_orders
                 const tradeStatus = t.Status || 'FILLED';
-                if (tradeStatus.toUpperCase() === 'PENDING' && pendingSymbols.has(t.Symbol)) {
+                const tradeKey = `${t.Symbol}_${t.Date}_${t.Type}`;
+                if (tradeStatus.toUpperCase() === 'PENDING' && pendingKeys.has(tradeKey)) {
                     return; // Skip duplicate pending
                 }
 
