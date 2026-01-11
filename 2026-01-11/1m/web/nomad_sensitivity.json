@@ -1,0 +1,26 @@
+{
+  "generated_at": "2026-01-11T13:52:09.707254",
+  "start_date_sensitivity": {},
+  "exit_delay_analysis": [
+    {
+      "delay": 0,
+      "avg_return": 0.0,
+      "win_rate": 0.0,
+      "samples": 0
+    }
+  ],
+  "trading_style": {
+    "total_trades": 179,
+    "avg_trades_per_week": 41.8,
+    "avg_trades_per_day": 5.97,
+    "frequency_label": "High",
+    "effort_label": "Active Trader (Daily Ops)",
+    "risk_metrics": {
+      "max_dd": -0.0198,
+      "volatility": 0.2212
+    },
+    "profile_label": "Conservative (Bon p\u00e8re de famille)",
+    "profile_badge": "success",
+    "profile_desc": "Low risk, stable growth. Ideal for capital preservation."
+  }
+}
