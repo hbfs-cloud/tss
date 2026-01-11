@@ -268,6 +268,17 @@
                 <!-- Period buttons will be injected here -->
             </div>
 
+            <!-- Live Trading Link -->
+            <a href="/live/dashboard.html"
+                class="flex items-center gap-2 px-3 py-1.5 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition font-semibold text-sm border border-red-200">
+                <span class="relative flex h-2 w-2">
+                    <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                </span>
+                Live
+            </a>
+
             <div class="flex items-center gap-3">
                 <div class="flex flex-col items-end">
                     <div class="text-xs uppercase font-bold text-blue-600 tracking-wider">Time Machine</div>
@@ -1293,13 +1304,13 @@
                 results.
                 Investing involves risk.
             </p>
-            <p class="text-xs text-slate-300 mt-2">Generated on 2026-01-11 13:10:36 UTC.</p>
+            <p class="text-xs text-slate-300 mt-2">Generated on 2026-01-11 15:37:16 UTC.</p>
         </div>
     </footer>
 
     <script>
         window.DEBUG_MODE = "false" === "true";
-        const PERIODS_LIST_JSON = [{"id": "1m", "label": "1M"}, {"id": "ytd", "label": "YTD"}, {"id": "1y", "label": "1Y"}, {"id": "5y", "label": "5Y"}];
+        const PERIODS_LIST_JSON = [{"id": "1y", "label": "1Y"}];
 
         let DATA, TRADES, BENCH, FX_HISTORY, RECOMMENDATIONS;
         let CURRENT_PERIOD = "1y";
