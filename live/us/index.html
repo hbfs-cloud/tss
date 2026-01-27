@@ -149,10 +149,8 @@
         <div class="mw-card">
             <div class="tab-bar">
                 <button class="tab-btn active" onclick="showTab('actions')">⚡ Actions</button>
-                <button class="tab-btn" onclick="showTab('logs')">📋 Logs</button>
             </div>
             <div class="tab-content active" id="tab-actions"></div>
-            <div class="tab-content" id="tab-logs"></div>
         </div>
 
         <!-- Footer -->
@@ -170,7 +168,7 @@
     <script>
     const snapshots = [
   {
-    "timestamp": "2026-01-27T21:42:14+01:00",
+    "timestamp": "2026-01-27T21:53:29+01:00",
     "date": "2026-01-26",
     "portfolio": "usa",
     "allocation": "usa",
@@ -308,31 +306,23 @@
       },
       {
         "type": "CREATE",
-        "symbol": "TRX",
+        "symbol": "TMQ",
         "side": "BUY",
         "order_type": "LIMIT",
-        "qty": 8441,
-        "limit_price": 1.431699985265732,
-        "stop_loss": 1.2550762985406931,
+        "qty": 1800,
+        "limit_price": 6.715599980354309,
+        "stop_loss": 5.862546414742003,
         "reason": "breakout_squeeze"
       },
       {
-        "type": "CANCEL",
+        "type": "CREATE",
         "symbol": "HSBC",
-        "side": "",
-        "order_type": "",
-        "qty": 0,
-        "order_id": "517859b5-81c6-4006-8687-73f3081443af",
-        "reason": "STALE_BUY"
-      },
-      {
-        "type": "CANCEL",
-        "symbol": "TMQ",
-        "side": "",
-        "order_type": "",
-        "qty": 0,
-        "order_id": "7db60f27-05d3-4bc3-8ee9-4351501a6d5e",
-        "reason": "STALE_BUY"
+        "side": "BUY",
+        "order_type": "LIMIT",
+        "qty": 36,
+        "limit_price": 87.64269622802735,
+        "stop_loss": 83.48991019913862,
+        "reason": "pre_squeeze"
       }
     ],
     "positions": [
@@ -340,8 +330,8 @@
         "Symbol": "ALM",
         "Qty": 3,
         "AvgEntry": 11.03,
-        "CurrentPrice": 11.02,
-        "UnrealizedPnL": -0.03,
+        "CurrentPrice": 11.065,
+        "UnrealizedPnL": 0.105,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -350,8 +340,8 @@
         "Symbol": "AXGN",
         "Qty": 148,
         "AvgEntry": 33.48,
-        "CurrentPrice": 34.625,
-        "UnrealizedPnL": 169.46,
+        "CurrentPrice": 34.65,
+        "UnrealizedPnL": 173.16,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -360,8 +350,8 @@
         "Symbol": "BLTE",
         "Qty": 31,
         "AvgEntry": 157.22,
-        "CurrentPrice": 166,
-        "UnrealizedPnL": 272.18,
+        "CurrentPrice": 166.985,
+        "UnrealizedPnL": 302.715,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -370,8 +360,8 @@
         "Symbol": "CELC",
         "Qty": 46,
         "AvgEntry": 103.925435,
-        "CurrentPrice": 116.67,
-        "UnrealizedPnL": 586.25,
+        "CurrentPrice": 116.625,
+        "UnrealizedPnL": 584.18,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -380,8 +370,8 @@
         "Symbol": "CHRW",
         "Qty": 29,
         "AvgEntry": 170.41,
-        "CurrentPrice": 180.125,
-        "UnrealizedPnL": 281.735,
+        "CurrentPrice": 181,
+        "UnrealizedPnL": 307.11,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -390,8 +380,8 @@
         "Symbol": "DVAX",
         "Qty": 21,
         "AvgEntry": 15.49,
-        "CurrentPrice": 15.48,
-        "UnrealizedPnL": -0.21,
+        "CurrentPrice": 15.485,
+        "UnrealizedPnL": -0.105,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -400,8 +390,8 @@
         "Symbol": "FOLD",
         "Qty": 820,
         "AvgEntry": 14.29,
-        "CurrentPrice": 14.29,
-        "UnrealizedPnL": 0,
+        "CurrentPrice": 14.285,
+        "UnrealizedPnL": -4.1,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -410,8 +400,8 @@
         "Symbol": "GH",
         "Qty": 45,
         "AvgEntry": 109.17,
-        "CurrentPrice": 114.19,
-        "UnrealizedPnL": 225.9,
+        "CurrentPrice": 114.415,
+        "UnrealizedPnL": 236.025,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -420,8 +410,8 @@
         "Symbol": "KRYS",
         "Qty": 19,
         "AvgEntry": 261.4,
-        "CurrentPrice": 279.49,
-        "UnrealizedPnL": 343.71,
+        "CurrentPrice": 278.18,
+        "UnrealizedPnL": 318.82,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -430,8 +420,8 @@
         "Symbol": "LCII",
         "Qty": 38,
         "AvgEntry": 131,
-        "CurrentPrice": 148.38,
-        "UnrealizedPnL": 660.44,
+        "CurrentPrice": 148.55,
+        "UnrealizedPnL": 666.9,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -440,8 +430,8 @@
         "Symbol": "LE",
         "Qty": 20,
         "AvgEntry": 19.06,
-        "CurrentPrice": 19.05,
-        "UnrealizedPnL": -0.2,
+        "CurrentPrice": 19.0976,
+        "UnrealizedPnL": 0.752,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -450,8 +440,8 @@
         "Symbol": "LYG",
         "Qty": 2060,
         "AvgEntry": 5.84,
-        "CurrentPrice": 5.845,
-        "UnrealizedPnL": 10.3,
+        "CurrentPrice": 5.855,
+        "UnrealizedPnL": 30.9,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -460,8 +450,8 @@
         "Symbol": "OLMA",
         "Qty": 176,
         "AvgEntry": 27.95483,
-        "CurrentPrice": 26.075,
-        "UnrealizedPnL": -330.85,
+        "CurrentPrice": 26.1,
+        "UnrealizedPnL": -326.45,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -470,8 +460,8 @@
         "Symbol": "PRAX",
         "Qty": 17,
         "AvgEntry": 282.55,
-        "CurrentPrice": 314.41,
-        "UnrealizedPnL": 541.62,
+        "CurrentPrice": 313.46,
+        "UnrealizedPnL": 525.47,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -480,8 +470,8 @@
         "Symbol": "REAL",
         "Qty": 301,
         "AvgEntry": 16.2,
-        "CurrentPrice": 16.11,
-        "UnrealizedPnL": -27.09,
+        "CurrentPrice": 16.12,
+        "UnrealizedPnL": -24.08,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -490,8 +480,8 @@
         "Symbol": "SATS",
         "Qty": 41,
         "AvgEntry": 119.988293,
-        "CurrentPrice": 124.69,
-        "UnrealizedPnL": 192.77,
+        "CurrentPrice": 124.995,
+        "UnrealizedPnL": 205.275,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -500,14 +490,194 @@
         "Symbol": "USAR",
         "Qty": 139,
         "AvgEntry": 26.94,
-        "CurrentPrice": 26.795,
-        "UnrealizedPnL": -20.155,
+        "CurrentPrice": 26.77,
+        "UnrealizedPnL": -23.63,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
       }
     ],
     "pending_orders": [
+      {
+        "OrderID": "50afd341-509a-4683-a69b-63181fb0e4b6",
+        "Symbol": "HSBC",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 36,
+        "LimitPrice": 87.64,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-27T20:53:29.029564254Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "fb7b0978-1f69-4193-9563-eeb57995f7d1",
+        "Symbol": "TMQ",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 1800,
+        "LimitPrice": 6.72,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-27T20:53:28.919584055Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "5c757b1f-f8ad-499e-bb0f-ebe45e391007",
+        "Symbol": "PRAX",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 17,
+        "LimitPrice": 0,
+        "StopPrice": 253.97,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-27T20:53:28.716419358Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "9343f5a8-1e5a-4615-941e-42857569f64a",
+        "Symbol": "LCII",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 38,
+        "LimitPrice": 0,
+        "StopPrice": 137.76,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-27T20:53:28.435112481Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "24ea3fdb-6308-43af-94e3-af2cc95d10b9",
+        "Symbol": "KRYS",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 19,
+        "LimitPrice": 0,
+        "StopPrice": 253.02,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-27T20:53:28.321972422Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "d8775636-e22a-461b-b39f-ca5aabe50ecb",
+        "Symbol": "GH",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 45,
+        "LimitPrice": 0,
+        "StopPrice": 103.14,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-27T20:53:28.222515824Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "f55f9b94-831e-43d2-80cf-11e7505eed97",
+        "Symbol": "FOLD",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 820,
+        "LimitPrice": 0,
+        "StopPrice": 14.19,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-27T20:53:28.114239435Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "6a80fc9b-6661-4d2d-a84c-78eac8091d93",
+        "Symbol": "DVAX",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 21,
+        "LimitPrice": 0,
+        "StopPrice": 15.34,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-27T20:53:28.030571Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "57b679ca-9401-45ce-aeb9-fe3c728f542c",
+        "Symbol": "CHRW",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 29,
+        "LimitPrice": 0,
+        "StopPrice": 170.66,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-27T20:53:27.913728Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "f7b97695-0ce2-4489-b2b0-b7e1a9207f02",
+        "Symbol": "CELC",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 46,
+        "LimitPrice": 0,
+        "StopPrice": 100.86,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-27T20:53:27.810384Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "754d9e63-2d21-4c0e-87ef-71c2ead2ac3b",
+        "Symbol": "BLTE",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 31,
+        "LimitPrice": 0,
+        "StopPrice": 145.29,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-27T20:53:27.690528Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "2d216280-5df8-4363-96e8-d3646c1bad6e",
+        "Symbol": "AXGN",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 148,
+        "LimitPrice": 0,
+        "StopPrice": 31.42,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-27T20:53:27.591897Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
       {
         "OrderID": "4c1bfdd3-7c7f-4114-a4a0-8c39542a0b5a",
         "Symbol": "TRX",
@@ -519,7 +689,7 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-01-27T20:42:14.920304588Z",
+        "PlacedDate": "2026-01-27T20:42:14.920305Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
       },
@@ -534,22 +704,7 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-01-27T20:32:28.451379938Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": ""
-      },
-      {
-        "OrderID": "b1b91527-1673-41fb-b0f8-06b206705dcd",
-        "Symbol": "DVAX",
-        "Side": "SELL",
-        "OrderType": "STOP",
-        "Qty": 21,
-        "LimitPrice": 0,
-        "StopPrice": 15.23,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "",
-        "PlacedDate": "2026-01-27T20:32:28.050592Z",
+        "PlacedDate": "2026-01-27T20:32:28.45138Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
       },
@@ -565,21 +720,6 @@
         "Status": "PENDING",
         "Currency": "",
         "PlacedDate": "2026-01-27T20:32:27.405158Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": ""
-      },
-      {
-        "OrderID": "13dd012f-39de-4c4a-9014-ceabac3cb059",
-        "Symbol": "FOLD",
-        "Side": "SELL",
-        "OrderType": "STOP",
-        "Qty": 820,
-        "LimitPrice": 0,
-        "StopPrice": 14.06,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "",
-        "PlacedDate": "2026-01-27T20:32:27.266533Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
       },
@@ -629,96 +769,6 @@
         "BrokerSource": ""
       },
       {
-        "OrderID": "d476f098-283d-42f3-b04d-c2fc7b4a2e75",
-        "Symbol": "BLTE",
-        "Side": "SELL",
-        "OrderType": "STOP",
-        "Qty": 31,
-        "LimitPrice": 0,
-        "StopPrice": 142.41,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "",
-        "PlacedDate": "2026-01-12T15:16:34.929563Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": ""
-      },
-      {
-        "OrderID": "f25b318b-62e1-46e8-85ae-72ea1a01663a",
-        "Symbol": "LCII",
-        "Side": "SELL",
-        "OrderType": "STOP",
-        "Qty": 38,
-        "LimitPrice": 0,
-        "StopPrice": 124.32,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "",
-        "PlacedDate": "2026-01-12T14:55:55.173832Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": ""
-      },
-      {
-        "OrderID": "c9202647-6a9b-4045-a345-846697cc1aa4",
-        "Symbol": "GH",
-        "Side": "SELL",
-        "OrderType": "STOP",
-        "Qty": 45,
-        "LimitPrice": 0,
-        "StopPrice": 100.27,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "",
-        "PlacedDate": "2026-01-12T14:34:22.215942Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": ""
-      },
-      {
-        "OrderID": "25c3092e-865f-464e-963d-04a60a069eb6",
-        "Symbol": "AXGN",
-        "Side": "SELL",
-        "OrderType": "STOP",
-        "Qty": 148,
-        "LimitPrice": 0,
-        "StopPrice": 29.82,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "",
-        "PlacedDate": "2026-01-12T14:32:54.72207Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": ""
-      },
-      {
-        "OrderID": "9687a4c5-dcd6-414d-9c60-1b727052d0b3",
-        "Symbol": "CELC",
-        "Side": "SELL",
-        "OrderType": "STOP",
-        "Qty": 46,
-        "LimitPrice": 0,
-        "StopPrice": 97.42,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "",
-        "PlacedDate": "2026-01-12T14:32:40.841788Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": ""
-      },
-      {
-        "OrderID": "c684a9fe-26f6-42b8-a889-85a0015c02ee",
-        "Symbol": "CHRW",
-        "Side": "SELL",
-        "OrderType": "STOP",
-        "Qty": 29,
-        "LimitPrice": 0,
-        "StopPrice": 163.39,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "",
-        "PlacedDate": "2026-01-12T14:32:19.918977Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": ""
-      },
-      {
         "OrderID": "17f995a5-3f60-4aa6-9d85-bb9b60e864a0",
         "Symbol": "OLMA",
         "Side": "SELL",
@@ -730,36 +780,6 @@
         "Status": "PENDING",
         "Currency": "",
         "PlacedDate": "2026-01-12T14:32:11.443574Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": ""
-      },
-      {
-        "OrderID": "c7dfc21f-b0eb-4509-89fa-21bb7d9b8644",
-        "Symbol": "PRAX",
-        "Side": "SELL",
-        "OrderType": "STOP",
-        "Qty": 17,
-        "LimitPrice": 0,
-        "StopPrice": 245.69,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "",
-        "PlacedDate": "2026-01-12T14:31:21.975502Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": ""
-      },
-      {
-        "OrderID": "37470530-7524-498a-8d61-9104eb65d4e1",
-        "Symbol": "KRYS",
-        "Side": "SELL",
-        "OrderType": "STOP",
-        "Qty": 19,
-        "LimitPrice": 0,
-        "StopPrice": 237.04,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "",
-        "PlacedDate": "2026-01-12T14:30:54.336156Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
       },
@@ -785,29 +805,30 @@
         "USD": 15645.42
       },
       "AvailableCashByCurrency": null,
-      "MarginUsed": 85065.96,
-      "TotalEquity": 100711.38,
+      "MarginUsed": 85133.18000000001,
+      "TotalEquity": 100778.6,
       "Timestamp": "0001-01-01T00:00:00Z",
       "BrokerSource": "alpaca"
     },
-    "logs": "21:42:06 INF cmd/live/main.go:94 \u003e Processing allocation allocation=usa broker=alpaca component=live mode=apply portfolio=usa strategy=trend-hybrid-af\n21:42:06 INF internal/broker/instruments_cache.go:41 \u003e Loaded raw API response from cache broker=Alpaca cache_age=35254158.157358 component=instruments-cache\n21:42:07 INF internal/broker/alpaca/adapter.go:206 \u003e Loaded instruments cache for CanHandle component=alpaca-adapter count=12407\n21:42:07 INF cmd/live/main.go:148 \u003e Instruments loaded component=live stocks=2341 total=5370\n21:42:10 INF cmd/live/main.go:164 \u003e Market data loaded component=live symbols=2360\n21:42:11 INF cmd/live/main.go:194 \u003e State loaded component=live path=state/usa/usa/alpaca/PA3MMWSEFLUA\n21:42:12 WRN cmd/live/main.go:257 \u003e Pending order scheduled for CANCEL component=live order_id=517859b5-81c6-4006-8687-73f3081443af qty=36 reason=STALE_BUY side=BUY symbol=HSBC\n21:42:12 WRN cmd/live/main.go:257 \u003e Pending order scheduled for CANCEL component=live order_id=7db60f27-05d3-4bc3-8ee9-4351501a6d5e qty=1798 reason=STALE_BUY side=BUY symbol=TMQ\n21:42:14 INF cmd/live/main.go:545 \u003e State saved component=live path=state/usa/usa/alpaca/PA3MMWSEFLUA/state-20260127-214214.json\n",
     "state": {
       "pm_state": {
         "equity_curve": [
           100720.26,
           100650.13,
-          100708.92
+          100708.92,
+          100771.04
         ],
         "equity_curve_dates": [
           "2026-01-26T21:59:49+01:00",
           "2026-01-26T22:00:01+01:00",
-          "2026-01-26T22:00:02+01:00"
+          "2026-01-26T22:00:02+01:00",
+          "2026-01-26T21:59:59+01:00"
         ],
         "global_pause_until": "0001-01-01T00:00:00Z",
         "is_in_grace_period": false,
         "last_liquidation_date": "0001-01-01T00:00:00Z",
         "last_streak_reset_date": "0001-01-01T00:00:00Z",
-        "peak_equity": 100720.26,
+        "peak_equity": 100771.04,
         "position_entries": {
           "ALM": 1,
           "DVAX": 1,
@@ -823,10 +844,10 @@
           "ALM": "2026-01-26T22:00:01+01:00",
           "DVAX": "2026-01-26T22:00:01+01:00",
           "FOLD": "2026-01-26T22:00:01+01:00",
-          "HSBC": "2026-01-26T22:00:01+01:00",
+          "HSBC": "2026-01-26T21:59:59+01:00",
           "LE": "2026-01-26T21:59:49+01:00",
           "LYG": "2026-01-26T22:00:01+01:00",
-          "TMQ": "2026-01-26T22:00:01+01:00",
+          "TMQ": "2026-01-26T21:59:59+01:00",
           "TRX": "2026-01-26T22:00:02+01:00",
           "USAR": "2026-01-26T21:59:49+01:00"
         },
@@ -853,6 +874,7 @@
           "USAR": 22.870998632382673
         },
         "regime_score_history": [
+          0.7071500258411052,
           0.7071500258411052,
           0.7071500258411052,
           0.7071500258411052
@@ -1116,29 +1138,12 @@
         document.getElementById('tab-actions').innerHTML = html;
     }
 
-    // ─── LOGS ───
-    function renderLogs() {
-        const s = snapshots[currentIdx];
-        const logs = s ? s.logs : '';
-        if(logs) {
-            document.getElementById('tab-logs').innerHTML = '<pre class="log-pre">' + escapeHtml(logs) + '</pre>';
-        } else {
-            document.getElementById('tab-logs').innerHTML = '<p class="empty">No logs available for this run</p>';
-        }
-    }
-    function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.appendChild(document.createTextNode(text));
-        return div.innerHTML;
-    }
-
     // ─── RENDER ALL ───
     function renderAll() {
         renderStats();
         renderPositions();
         renderPending();
         renderActions();
-        renderLogs();
     }
 
     // ─── INIT ───
