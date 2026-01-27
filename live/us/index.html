@@ -11,35 +11,28 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
-        @media (max-width:768px) {
-            body { padding:1rem; }
-            .header { flex-direction:column; align-items:flex-start !important; gap:1rem; }
-            .grid { grid-template-columns:repeat(2,1fr) !important; }
-            .grid-6 { grid-template-columns:repeat(2,1fr) !important; }
-            .grid-2col { grid-template-columns:1fr !important; }
-            .mw-card .grid { grid-template-columns:repeat(2,1fr) !important; }
-            .card-header { flex-direction:column; align-items:flex-start !important; gap:0.5rem; }
-        }
-        body { font-family:'Inter',sans-serif; background:#f8fafc; color:#0f172a; padding:0; line-height:1.6; }
+        body { font-family:'Inter',sans-serif; background:#f8fafc; color:#0f172a; padding:0; line-height:1.6; padding-bottom:70px; }
         .container { max-width:1400px; margin:0 auto; padding:1.5rem; }
-        /* Cards - matching live_dashboard.html */
-        .mw-card { background:white; border-radius:12px; padding:1.5rem; box-shadow:0 1px 3px rgba(0,0,0,0.1); border:1px solid #e2e8f0; margin-bottom:1.5rem; }
+
+        /* Cards */
+        .mw-card { background:white; border-radius:12px; padding:1.5rem; box-shadow:0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.06); border:1px solid #e2e8f0; margin-bottom:2rem; }
         .card-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; padding-bottom:0.75rem; border-bottom:2px solid #f1f5f9; }
         .card-title { font-size:1.125rem; font-weight:700; color:#0f172a; display:flex; align-items:center; gap:0.5rem; }
-        /* Stats */
-        .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; margin-bottom:1.5rem; }
-        .grid-6 { grid-template-columns:repeat(6,1fr); }
+
+        /* Hero stats */
+        .hero-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:1rem; margin-bottom:2rem; }
+        .hero-stat { text-align:center; padding:1.25rem; background:white; border:1px solid #e2e8f0; border-radius:12px; box-shadow:0 1px 2px rgba(0,0,0,0.05); }
+        .hero-stat .label { font-size:0.7rem; text-transform:uppercase; font-weight:700; color:#94a3b8; letter-spacing:0.5px; margin-bottom:0.25rem; }
+        .hero-stat .value { font-size:1.5rem; font-weight:800; color:#0f172a; }
+        .hero-stat .value.positive { color:#16a34a; }
+        .hero-stat .value.negative { color:#dc2626; }
+
+        /* Stats grid */
+        .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; margin-bottom:2rem; }
         .stat-card { background:white; border:1px solid #e2e8f0; border-radius:12px; padding:1.25rem; box-shadow:0 1px 2px rgba(0,0,0,0.05); }
         .stat-label { font-size:0.7rem; font-weight:600; color:#64748b; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.5rem; }
         .stat-value { font-size:1.5rem; font-weight:700; color:#0f172a; }
-        .stat-value.positive { color:#16a34a; }
-        .stat-value.negative { color:#dc2626; }
-        .stat-subtext { font-size:0.75rem; color:#64748b; margin-top:0.25rem; }
-        /* Timeline */
-        .timeline { display:flex; gap:4px; overflow-x:auto; padding:8px 0; }
-        .tm-btn { padding:6px 12px; border:1px solid #e2e8f0; border-radius:6px; background:white; color:#64748b; cursor:pointer; font-size:0.75rem; white-space:nowrap; transition:all 0.2s; font-family:inherit; }
-        .tm-btn:hover { background:#f1f5f9; color:#0f172a; }
-        .tm-btn.active { background:#2563eb; color:white; border-color:#2563eb; }
+
         /* Table */
         .table-container { overflow-x:auto; margin-top:1rem; }
         table { width:100%; border-collapse:collapse; font-size:0.875rem; }
@@ -50,6 +43,7 @@
         .symbol-cell { font-weight:700; color:#0f172a; font-family:'Courier New',monospace; }
         .pnl-positive { color:#16a34a; font-weight:600; }
         .pnl-negative { color:#dc2626; font-weight:600; }
+
         /* Badges */
         .badge { display:inline-block; padding:0.25rem 0.625rem; border-radius:6px; font-size:0.75rem; font-weight:600; }
         .badge.live { background:#dcfce7; color:#166534; }
@@ -57,76 +51,111 @@
         .badge-create { background:#dcfce7; color:#166534; }
         .badge-update { background:#fef3c7; color:#92400e; }
         .badge-cancel { background:#fee2e2; color:#991b1b; }
+
         /* Charts */
         .chart-container { position:relative; height:300px; margin-top:1rem; }
+
         /* Grid layouts */
         .grid-2col { display:grid; grid-template-columns:repeat(auto-fit,minmax(500px,1fr)); gap:1.5rem; margin-bottom:1.5rem; }
-        /* Tabs */
-        .tab-bar { display:flex; gap:4px; margin-bottom:1rem; }
-        .tab-btn { padding:8px 16px; border:1px solid #e2e8f0; border-radius:8px 8px 0 0; background:#f8fafc; color:#64748b; cursor:pointer; font-size:0.8rem; font-weight:600; font-family:inherit; transition:all 0.15s; }
-        .tab-btn.active { background:white; color:#0f172a; border-bottom-color:white; }
-        .tab-content { display:none; }
-        .tab-content.active { display:block; }
-        /* Logs */
-        .log-pre { background:#1e293b; color:#e2e8f0; padding:1rem; border-radius:8px; font-family:'Courier New',monospace; font-size:0.75rem; max-height:400px; overflow:auto; white-space:pre-wrap; word-break:break-all; }
-        /* Empty */
+
+        /* Empty / Alert */
         .empty { text-align:center; color:#94a3b8; padding:2rem; }
-        /* Alert */
         .alert { padding:1rem; border-radius:8px; margin-bottom:1rem; font-size:0.875rem; }
         .alert.info { background:#dbeafe; color:#1e40af; border-left:4px solid #2563eb; }
+
+        /* Floating footer */
+        .floating-footer { position:fixed; bottom:0; left:0; right:0; background:white; border-top:1px solid #e2e8f0; padding:0.75rem 1rem; box-shadow:0 -2px 8px rgba(0,0,0,0.1); z-index:40; display:flex; justify-content:center; align-items:center; }
+        .floating-footer-content { display:flex; gap:3rem; align-items:center; justify-content:center; max-width:100%; width:100%; flex-wrap:wrap; }
+        .footer-date { font-size:0.75rem; font-weight:700; color:#2563eb; font-family:'Inter',monospace; padding:0.25rem 0.75rem; background:#eff6ff; border-radius:6px; border:1px solid #bfdbfe; }
+        .footer-metric { display:flex; flex-direction:column; align-items:center; }
+        .footer-metric-label { font-size:0.65rem; text-transform:uppercase; font-weight:700; color:#64748b; letter-spacing:0.5px; margin-bottom:2px; }
+        .footer-metric-value { font-size:0.95rem; font-weight:800; color:#0f172a; font-family:'Inter',monospace; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width:6px; height:6px; }
+        ::-webkit-scrollbar-track { background:transparent; }
+        ::-webkit-scrollbar-thumb { background:#cbd5e1; border-radius:3px; }
+        ::-webkit-scrollbar-thumb:hover { background:#94a3b8; }
+
+        /* Responsive */
+        @media (max-width:768px) {
+            .hero-grid { grid-template-columns:repeat(2,1fr) !important; }
+            .stats-grid { grid-template-columns:repeat(2,1fr) !important; }
+            .grid-2col { grid-template-columns:1fr !important; }
+            .floating-footer-content { gap:1rem; }
+            .card-header { flex-direction:column; align-items:flex-start !important; gap:0.5rem; }
+        }
     </style>
 </head>
 <body>
-    <!-- Top Navigation (matching live_dashboard.html) -->
+    <!-- Navigation bar with currency selector + time machine slider -->
     <nav style="background:white; border-bottom:1px solid #e2e8f0; padding:0.75rem 1.5rem; position:sticky; top:0; z-index:50; box-shadow:0 1px 2px rgba(0,0,0,0.05);">
-        <div style="max-width:1400px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:1rem;">
-            <div style="display:flex; align-items:center; gap:1.5rem;">
-                <a href="../index.html" style="display:flex; align-items:center; gap:0.5rem; text-decoration:none;">
-                    <img src="https://market-watch.xyz/logo.svg" alt="MW" style="height:2rem;" onerror="this.style.display='none'">
-                    <span style="font-weight:800; font-size:1.25rem; color:#0f172a;">MARKET WATCH</span>
+        <div style="max-width:1400px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
+            <div style="display:flex; align-items:center; gap:1rem;">
+                <a href="../index.html" style="display:flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:50%; background:#f1f5f9; text-decoration:none;">
+                    <i class="fa-solid fa-arrow-left" style="color:#475569; font-size:0.8rem;"></i>
                 </a>
-                <div style="display:flex; gap:1rem; font-size:0.875rem;">
-                    <a href="../index.html" style="color:#64748b; text-decoration:none; font-weight:500;">🏠 Portfolios</a>
-                    <a href="#" style="color:#2563eb; text-decoration:none; font-weight:600;">🔴 Live Trading</a>
-                </div>
+                <span id="nav-title" style="font-size:1.1rem; font-weight:800; color:#0f172a;">Live Trading</span>
+                <select id="currency-selector" onchange="setGlobalCurrency(this.value)"
+                    style="font-size:0.75rem; font-family:monospace; background:#f1f5f9; color:#334155; font-weight:700; padding:4px 8px; border-radius:6px; border:1px solid #e2e8f0; outline:none; cursor:pointer;">
+                    <option value="EUR">EUR</option>
+                    <option value="USD">USD</option>
+                    <option value="CHF">CHF</option>
+                    <option value="HKD">HKD</option>
+                    <option value="JPY">JPY</option>
+                    <option value="CNY">CNY</option>
+                    <option value="GBP">GBP</option>
+                    <option value="PLN">PLN</option>
+                    <option value="BTC">BTC</option>
+                    <option value="GOLD">GOLD</option>
+                </select>
             </div>
-            <div id="nav-info" style="display:flex; align-items:center; gap:1rem;">
-                <div id="nav-date" style="font-size:0.75rem; color:#64748b;"></div>
+            <div style="display:flex; align-items:center; gap:1rem;">
+                <div style="display:flex; flex-direction:column; align-items:flex-end;">
+                    <div style="font-size:0.65rem; text-transform:uppercase; font-weight:700; color:#2563eb; letter-spacing:0.5px;">Time Machine</div>
+                    <div id="tm-date" style="font-family:monospace; font-size:0.875rem; font-weight:700; color:#334155;">LIVE</div>
+                </div>
+                <input type="range" id="timeSlider" min="0" max="0" value="0" style="width:10rem; height:6px; accent-color:#2563eb; cursor:pointer;">
             </div>
         </div>
     </nav>
 
     <div class="container">
-        <!-- Header -->
-        <div class="header mw-card" style="display:flex; justify-content:space-between; align-items:center; margin-top:1.5rem;">
-            <h1 style="font-size:1.75rem; font-weight:800; display:flex; align-items:center; gap:0.75rem;">
-                <i class="fas fa-broadcast-tower" style="color:#3b82f6;"></i>
-                <span id="header-title">Live Trading Dashboard</span>
-            </h1>
-            <div id="header-right" style="text-align:right;">
-                <div id="header-date" style="font-size:0.75rem; color:#64748b;"></div>
+        <!-- Hero KPI cards -->
+        <div class="hero-grid" style="margin-top:1.5rem;">
+            <div class="hero-stat">
+                <div class="label">Total Return</div>
+                <div class="value" id="kpi-return">--</div>
+            </div>
+            <div class="hero-stat">
+                <div class="label">Equity</div>
+                <div class="value" id="kpi-equity">--</div>
+            </div>
+            <div class="hero-stat">
+                <div class="label">Positions</div>
+                <div class="value" id="kpi-positions" style="color:#8b5cf6;">--</div>
+            </div>
+            <div class="hero-stat">
+                <div class="label">Max Drawdown</div>
+                <div class="value negative" id="kpi-dd">--</div>
+            </div>
+            <div class="hero-stat">
+                <div class="label">Unrealized P&amp;L</div>
+                <div class="value" id="kpi-pnl">--</div>
+            </div>
+            <div class="hero-stat">
+                <div class="label">Actions</div>
+                <div class="value" id="kpi-actions" style="color:#10b981;">--</div>
             </div>
         </div>
 
-        <!-- Time Machine -->
-        <div class="mw-card">
-            <div class="card-header">
-                <div class="card-title"><i class="fas fa-clock-rotate-left" style="color:#8b5cf6;"></i> 🕐 Time Machine</div>
-                <div id="snap-count" class="badge demo"></div>
-            </div>
-            <div class="timeline" id="timeline"></div>
-        </div>
-
-        <!-- Stats Grid - Account State (matching template layout) -->
-        <div class="grid grid-6" id="stats-grid" style="margin-bottom:1.5rem;"></div>
-
-        <!-- Performance Metrics -->
-        <div class="grid" id="perf-grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); margin-bottom:1.5rem;"></div>
+        <!-- Cash breakdown -->
+        <div class="stats-grid" id="cash-grid"></div>
 
         <!-- Equity Curve Chart -->
         <div class="mw-card">
             <div class="card-header">
-                <div class="card-title"><i class="fas fa-chart-area" style="color:#8b5cf6;"></i> 📈 Equity Curve</div>
+                <div class="card-title"><i class="fas fa-chart-area" style="color:#8b5cf6;"></i> Equity Curve</div>
             </div>
             <div class="chart-container"><canvas id="equityChart"></canvas></div>
         </div>
@@ -134,7 +163,7 @@
         <!-- Drawdown Chart -->
         <div class="mw-card">
             <div class="card-header">
-                <div class="card-title"><i class="fas fa-chart-line" style="color:#ef4444;"></i> 📉 Drawdown</div>
+                <div class="card-title"><i class="fas fa-chart-line" style="color:#ef4444;"></i> Drawdown</div>
             </div>
             <div class="chart-container"><canvas id="drawdownChart"></canvas></div>
         </div>
@@ -145,42 +174,119 @@
             <div class="mw-card" id="pending-card"></div>
         </div>
 
-        <!-- Tabs: Actions / Logs -->
+        <!-- Actions -->
         <div class="mw-card">
-            <div class="tab-bar">
-                <button class="tab-btn active" onclick="showTab('actions')">⚡ Actions</button>
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-bolt" style="color:#f59e0b;"></i> Actions</div>
             </div>
-            <div class="tab-content active" id="tab-actions"></div>
+            <div id="actions-content"></div>
         </div>
+    </div>
 
-        <!-- Footer -->
-        <footer style="text-align:center; padding:3rem; color:#94a3b8; font-size:0.9rem; background:#f1f5f9; margin-top:4rem; border-top:1px solid #e2e8f0;">
-            <div style="max-width:1400px; margin:0 auto;">
-                <p style="margin-bottom:1rem; font-weight:600; color:#64748b;">&copy; 2026 Market Watch.</p>
-                <p style="font-size:0.8rem; max-width:600px; margin:0 auto; line-height:1.6;">
-                    Disclaimer: This dashboard shows live trading data.
-                    Past performance is not indicative of future results. Investing involves risk.
-                </p>
+    <!-- Floating Footer -->
+    <div class="floating-footer">
+        <div class="floating-footer-content">
+            <div class="footer-date" id="footer-date">--</div>
+            <div class="footer-metric">
+                <div class="footer-metric-label">Positions Value</div>
+                <div class="footer-metric-value" id="footer-positions-value">--</div>
             </div>
-        </footer>
+            <div class="footer-metric">
+                <div class="footer-metric-label">Total Equity</div>
+                <div class="footer-metric-value" id="footer-total-equity">--</div>
+            </div>
+            <div class="footer-metric">
+                <div class="footer-metric-label">Cash</div>
+                <div class="footer-metric-value" id="footer-cash">--</div>
+            </div>
+            <div class="footer-metric">
+                <div class="footer-metric-label">Returns</div>
+                <div class="footer-metric-value" id="footer-returns">--</div>
+            </div>
+            <div class="footer-metric">
+                <div class="footer-metric-label">Max Drawdown</div>
+                <div class="footer-metric-value" id="footer-drawdown">--</div>
+            </div>
+        </div>
     </div>
 
     <script>
     const snapshots = [
   {
-    "timestamp": "2026-01-27T21:54:43+01:00",
+    "timestamp": "2026-01-27T22:24:48+01:00",
     "date": "2026-01-26",
     "portfolio": "usa",
     "allocation": "usa",
     "currency": "USD",
-    "actions": null,
+    "actions": [
+      {
+        "type": "UPDATE",
+        "symbol": "BLTE",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "stop_price": 145.3,
+        "order_id": "754d9e63-2d21-4c0e-87ef-71c2ead2ac3b",
+        "reason": "TRAILING_STOP_UPDATE"
+      },
+      {
+        "type": "UPDATE",
+        "symbol": "CELC",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "stop_price": 100.87,
+        "order_id": "f7b97695-0ce2-4489-b2b0-b7e1a9207f02",
+        "reason": "TRAILING_STOP_UPDATE"
+      },
+      {
+        "type": "UPDATE",
+        "symbol": "GH",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "stop_price": 103.15,
+        "order_id": "d8775636-e22a-461b-b39f-ca5aabe50ecb",
+        "reason": "TRAILING_STOP_UPDATE"
+      },
+      {
+        "type": "UPDATE",
+        "symbol": "LE",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "stop_price": 17.16,
+        "order_id": "66016f7c-7075-4bec-8aff-f35421460407",
+        "reason": "TRAILING_STOP_UPDATE"
+      },
+      {
+        "type": "UPDATE",
+        "symbol": "LYG",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "stop_price": 5.57,
+        "order_id": "b1c3a0a0-3b61-4d80-b1c6-21ca41700a09",
+        "reason": "TRAILING_STOP_UPDATE"
+      },
+      {
+        "type": "UPDATE",
+        "symbol": "USAR",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "stop_price": 22.88,
+        "order_id": "b2cb5903-07a7-4203-b59e-3a134df31b60",
+        "reason": "TRAILING_STOP_UPDATE"
+      }
+    ],
     "positions": [
       {
         "Symbol": "ALM",
         "Qty": 3,
         "AvgEntry": 11.03,
-        "CurrentPrice": 11.085,
-        "UnrealizedPnL": 0.165,
+        "CurrentPrice": 11.08,
+        "UnrealizedPnL": 0.15,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -189,8 +295,8 @@
         "Symbol": "AXGN",
         "Qty": 148,
         "AvgEntry": 33.48,
-        "CurrentPrice": 34.65,
-        "UnrealizedPnL": 173.16,
+        "CurrentPrice": 35.02,
+        "UnrealizedPnL": 227.92,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -199,8 +305,8 @@
         "Symbol": "BLTE",
         "Qty": 31,
         "AvgEntry": 157.22,
-        "CurrentPrice": 166.37,
-        "UnrealizedPnL": 283.65,
+        "CurrentPrice": 167.34,
+        "UnrealizedPnL": 313.72,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -209,8 +315,8 @@
         "Symbol": "CELC",
         "Qty": 46,
         "AvgEntry": 103.925435,
-        "CurrentPrice": 116.48,
-        "UnrealizedPnL": 577.51,
+        "CurrentPrice": 117.25,
+        "UnrealizedPnL": 612.93,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -219,8 +325,8 @@
         "Symbol": "CHRW",
         "Qty": 29,
         "AvgEntry": 170.41,
-        "CurrentPrice": 181.07,
-        "UnrealizedPnL": 309.14,
+        "CurrentPrice": 180.425,
+        "UnrealizedPnL": 290.435,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -239,8 +345,8 @@
         "Symbol": "FOLD",
         "Qty": 820,
         "AvgEntry": 14.29,
-        "CurrentPrice": 14.285,
-        "UnrealizedPnL": -4.1,
+        "CurrentPrice": 14.28,
+        "UnrealizedPnL": -8.2,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -249,8 +355,8 @@
         "Symbol": "GH",
         "Qty": 45,
         "AvgEntry": 109.17,
-        "CurrentPrice": 114.095,
-        "UnrealizedPnL": 221.625,
+        "CurrentPrice": 114.59,
+        "UnrealizedPnL": 243.9,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -259,8 +365,8 @@
         "Symbol": "KRYS",
         "Qty": 19,
         "AvgEntry": 261.4,
-        "CurrentPrice": 277.94,
-        "UnrealizedPnL": 314.26,
+        "CurrentPrice": 277.36,
+        "UnrealizedPnL": 303.24,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -269,8 +375,8 @@
         "Symbol": "LCII",
         "Qty": 38,
         "AvgEntry": 131,
-        "CurrentPrice": 148.3,
-        "UnrealizedPnL": 657.4,
+        "CurrentPrice": 148.05,
+        "UnrealizedPnL": 647.9,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -279,8 +385,8 @@
         "Symbol": "LE",
         "Qty": 20,
         "AvgEntry": 19.06,
-        "CurrentPrice": 19.14,
-        "UnrealizedPnL": 1.6,
+        "CurrentPrice": 19.15,
+        "UnrealizedPnL": 1.8,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -289,8 +395,8 @@
         "Symbol": "LYG",
         "Qty": 2060,
         "AvgEntry": 5.84,
-        "CurrentPrice": 5.8587,
-        "UnrealizedPnL": 38.522,
+        "CurrentPrice": 5.95,
+        "UnrealizedPnL": 226.6,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -299,8 +405,8 @@
         "Symbol": "OLMA",
         "Qty": 176,
         "AvgEntry": 27.95483,
-        "CurrentPrice": 26.13,
-        "UnrealizedPnL": -321.17,
+        "CurrentPrice": 25.0263,
+        "UnrealizedPnL": -515.4212,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -309,8 +415,8 @@
         "Symbol": "PRAX",
         "Qty": 17,
         "AvgEntry": 282.55,
-        "CurrentPrice": 313.475,
-        "UnrealizedPnL": 525.725,
+        "CurrentPrice": 314.75,
+        "UnrealizedPnL": 547.4,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -319,8 +425,8 @@
         "Symbol": "REAL",
         "Qty": 301,
         "AvgEntry": 16.2,
-        "CurrentPrice": 16.07,
-        "UnrealizedPnL": -39.13,
+        "CurrentPrice": 16.11,
+        "UnrealizedPnL": -27.09,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -329,8 +435,8 @@
         "Symbol": "SATS",
         "Qty": 41,
         "AvgEntry": 119.988293,
-        "CurrentPrice": 125.21,
-        "UnrealizedPnL": 214.09,
+        "CurrentPrice": 125.81,
+        "UnrealizedPnL": 238.69,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
@@ -339,14 +445,104 @@
         "Symbol": "USAR",
         "Qty": 139,
         "AvgEntry": 26.94,
-        "CurrentPrice": 26.6409,
-        "UnrealizedPnL": -41.5749,
+        "CurrentPrice": 26.0611,
+        "UnrealizedPnL": -122.1671,
         "Currency": "USD",
         "Timestamp": "0001-01-01T00:00:00Z",
         "BrokerSource": ""
       }
     ],
     "pending_orders": [
+      {
+        "OrderID": "dc175759-1a23-41b0-842e-b9c6682c708f",
+        "Symbol": "USAR",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 139,
+        "LimitPrice": 0,
+        "StopPrice": 22.88,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-27T21:24:48.780265706Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "86f50f6d-22d3-4e57-bfa6-cb613e6f062c",
+        "Symbol": "LYG",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 2060,
+        "LimitPrice": 0,
+        "StopPrice": 5.57,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-27T21:24:48.689442847Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "606e2c10-8718-4c20-a551-9442742a2848",
+        "Symbol": "LE",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 20,
+        "LimitPrice": 0,
+        "StopPrice": 17.16,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-27T21:24:48.600613328Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "655fff71-76d9-4f19-bb8b-c70c4ca6304d",
+        "Symbol": "GH",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 45,
+        "LimitPrice": 0,
+        "StopPrice": 103.15,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-27T21:24:48.508327139Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "178875e7-4936-4a8f-b56c-37a9314df4dc",
+        "Symbol": "CELC",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 46,
+        "LimitPrice": 0,
+        "StopPrice": 100.87,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-27T21:24:48.41997755Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "862807f8-24c7-4105-bf1f-8b718feac9d7",
+        "Symbol": "BLTE",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 31,
+        "LimitPrice": 0,
+        "StopPrice": 145.3,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-27T21:24:48.329945981Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
       {
         "OrderID": "50afd341-509a-4683-a69b-63181fb0e4b6",
         "Symbol": "HSBC",
@@ -654,8 +850,8 @@
         "USD": 15645.42
       },
       "AvailableCashByCurrency": null,
-      "MarginUsed": 85072.06,
-      "TotalEquity": 100717.48,
+      "MarginUsed": 85141.73,
+      "TotalEquity": 100787.15,
       "Timestamp": "0001-01-01T00:00:00Z",
       "BrokerSource": "alpaca"
     },
@@ -666,20 +862,22 @@
           100650.13,
           100708.92,
           100771.04,
-          100720.65
+          100720.65,
+          100787.15
         ],
         "equity_curve_dates": [
           "2026-01-26T21:59:49+01:00",
           "2026-01-26T22:00:01+01:00",
           "2026-01-26T22:00:02+01:00",
           "2026-01-26T21:59:59+01:00",
-          "2026-01-26T22:00:01+01:00"
+          "2026-01-26T22:00:01+01:00",
+          "2026-01-26T15:30:00+01:00"
         ],
         "global_pause_until": "0001-01-01T00:00:00Z",
         "is_in_grace_period": false,
         "last_liquidation_date": "0001-01-01T00:00:00Z",
         "last_streak_reset_date": "0001-01-01T00:00:00Z",
-        "peak_equity": 100771.04,
+        "peak_equity": 100787.15,
         "position_entries": {
           "ALM": 1,
           "DVAX": 1,
@@ -729,7 +927,7 @@
           0.7071500258411052,
           0.7071500258411052,
           0.7071500258411052,
-          0.7071500258411052
+          0.7054001648394572
         ],
         "stop_history": [],
         "stop_streak_count": 0,
@@ -743,57 +941,79 @@
     let equityChartInst = null;
     let ddChartInst = null;
 
-    // ─── CURRENCY ───
-    const ccySymbols = { USD:'$', EUR:'€', GBP:'£', CHF:'CHF ', JPY:'¥', CAD:'C$', HKD:'HK$', BTC:'₿', GOLD:'XAU ' };
-    function getCcy() {
-        if(!snapshots.length) return '$';
-        const s = snapshots[currentIdx];
-        const ccy = s.currency || (s.balance ? s.balance.BaseCurrency : '') || 'USD';
-        return ccySymbols[ccy] || ccy + ' ';
-    }
-    function getCcyCode() {
+    // ─── CURRENCY STATE ───
+    let displayCurrency = null; // null = native (from snapshot)
+
+    function getNativeCcy() {
         if(!snapshots.length) return 'USD';
         const s = snapshots[currentIdx];
         return s.currency || (s.balance ? s.balance.BaseCurrency : '') || 'USD';
     }
+    function getDisplayCcy() {
+        return displayCurrency || getNativeCcy();
+    }
 
-    // ─── HELPERS ───
-    function fmt(v) { return v ? Number(v).toLocaleString('en',{minimumFractionDigits:2,maximumFractionDigits:2}) : '-'; }
-    function fmtCcy(v) { return v ? getCcy() + fmt(v) : '-'; }
+    // ─── CURRENCY FORMATTING (Intl.NumberFormat like original template) ───
+    const fmtMoney = (v, ccy) => {
+        if(v == null || isNaN(v)) return '-';
+        const c = ccy || getDisplayCcy();
+        if(c === 'BTC') return '\u20bf ' + v.toFixed(6);
+        if(c === 'GOLD') return v.toFixed(2) + ' oz';
+        try {
+            return new Intl.NumberFormat('en-US', { style:'currency', currency:c, minimumFractionDigits:2, maximumFractionDigits:2 }).format(v);
+        } catch(e) {
+            return c + ' ' + Number(v).toLocaleString('en',{minimumFractionDigits:2,maximumFractionDigits:2});
+        }
+    };
     function fmtPct(v) { return v != null ? v.toFixed(2) + '%' : '-'; }
     function pnlCls(v) { return v >= 0 ? 'pnl-positive' : 'pnl-negative'; }
-    function valCls(v) { return v >= 0 ? 'positive' : 'negative'; }
 
-    // ─── TABS ───
-    function showTab(name) {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-        event.target.classList.add('active');
-        document.getElementById('tab-'+name).classList.add('active');
+    function setGlobalCurrency(c) {
+        displayCurrency = c;
+        // Note: no FX conversion in live mode — values stay in native currency,
+        // display label changes. For true conversion, FX history would be needed.
+        renderAll();
+        renderCharts();
     }
 
-    // ─── TIMELINE ───
-    function renderTimeline() {
-        const el = document.getElementById('timeline');
-        el.innerHTML = snapshots.map((s,i) =>
-            '<button class="tm-btn '+(i===currentIdx?'active':'')+'" onclick="selectDate('+i+')">'+s.date+'</button>'
-        ).join('');
-        document.getElementById('snap-count').textContent = snapshots.length + ' runs';
-        setTimeout(() => { const btn = el.querySelector('.active'); if(btn) btn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'}); }, 50);
+    // Set initial currency selector to match snapshot
+    function initCurrencySelector() {
+        const sel = document.getElementById('currency-selector');
+        const native = getNativeCcy();
+        sel.value = native;
+        displayCurrency = native;
     }
 
+    // ─── TIME MACHINE SLIDER ───
+    function initSlider() {
+        const slider = document.getElementById('timeSlider');
+        slider.max = snapshots.length - 1;
+        slider.value = currentIdx;
+        slider.addEventListener('input', function() {
+            currentIdx = parseInt(this.value);
+            renderAll();
+            updateSliderLabel();
+            updateChartHighlight();
+        });
+    }
+    function updateSliderLabel() {
+        const s = snapshots[currentIdx];
+        document.getElementById('tm-date').textContent = s ? s.date : 'LIVE';
+        document.getElementById('timeSlider').value = currentIdx;
+    }
     function selectDate(idx) {
         currentIdx = idx;
-        renderTimeline();
+        document.getElementById('timeSlider').value = idx;
         renderAll();
+        updateSliderLabel();
+        updateChartHighlight();
     }
 
-    // ─── STATS ───
-    function renderStats() {
+    // ─── KPI HERO STATS ───
+    function renderKPIs() {
         if(!snapshots.length) return;
         const s = snapshots[currentIdx];
         const bal = s.balance || {};
-        const ccy = getCcyCode();
 
         // Unrealized PnL
         let totalPnL = 0;
@@ -805,49 +1025,55 @@
         let peak = 0, maxDD = 0;
         equities.forEach(eq => { if(eq > peak) peak = eq; const dd = peak > 0 ? (peak-eq)/peak*100 : 0; if(dd > maxDD) maxDD = dd; });
 
-        // Account state (6-column grid like template)
-        let statsHtml = '';
-        statsHtml += statCard('💰 Cash ('+ccy+')', fmtCcy(bal.CashByCurrency ? bal.CashByCurrency[ccy] || 0 : 0), '#3b82f6');
-        statsHtml += statCard('📈 Equity ('+ccy+')', fmtCcy(bal.TotalEquity), '#3b82f6');
-        statsHtml += statCard('📊 P&L Non Réalisé', fmtCcy(totalPnL), totalPnL >= 0 ? '#16a34a' : '#dc2626');
-        statsHtml += statCard('📦 Positions', (s.positions ? s.positions.length : 0), '#8b5cf6');
-        statsHtml += statCard('⏳ Ordres Pending', (s.pending_orders ? s.pending_orders.length : 0), '#f59e0b');
-        statsHtml += statCard('⚡ Actions', (s.actions ? s.actions.length : 0), '#10b981');
+        // KPI cards
+        const retEl = document.getElementById('kpi-return');
+        retEl.textContent = fmtPct(totalReturn);
+        retEl.className = 'value ' + (totalReturn >= 0 ? 'positive' : 'negative');
 
-        // Additional cash currencies
+        document.getElementById('kpi-equity').textContent = fmtMoney(bal.TotalEquity);
+        document.getElementById('kpi-positions').textContent = s.positions ? s.positions.length : 0;
+
+        document.getElementById('kpi-dd').textContent = '-' + fmtPct(maxDD);
+
+        const pnlEl = document.getElementById('kpi-pnl');
+        pnlEl.textContent = fmtMoney(totalPnL);
+        pnlEl.className = 'value ' + (totalPnL >= 0 ? 'positive' : 'negative');
+
+        document.getElementById('kpi-actions').textContent = s.actions ? s.actions.length : 0;
+
+        // Nav title
+        document.getElementById('nav-title').textContent = 'Live Trading — ' + (s.portfolio || '').toUpperCase();
+
+        // Cash breakdown
+        const ccy = getDisplayCcy();
+        let cashHtml = '';
         if(bal.CashByCurrency) {
             for(const [c,amt] of Object.entries(bal.CashByCurrency)) {
-                if(c !== ccy) {
-                    const sym = ccySymbols[c] || c + ' ';
-                    statsHtml += statCard('💰 Cash ('+c+')', sym + fmt(amt), '#64748b');
-                }
+                cashHtml += '<div class="stat-card" style="border-left:4px solid #3b82f6;"><div class="stat-label">Cash ('+c+')</div><div class="stat-value" style="color:#3b82f6;">'+fmtMoney(amt,c)+'</div></div>';
             }
         }
-        document.getElementById('stats-grid').innerHTML = statsHtml;
+        document.getElementById('cash-grid').innerHTML = cashHtml;
 
-        // Performance metrics row
-        let perfHtml = '';
-        perfHtml += statCard('📈 Total Return', fmtPct(totalReturn), totalReturn >= 0 ? '#16a34a' : '#dc2626');
-        perfHtml += statCard('📉 Max Drawdown', fmtPct(maxDD), '#ef4444');
-        perfHtml += statCard('📅 First Run', snapshots[0] ? snapshots[0].date : '-', '#64748b');
-        perfHtml += statCard('📅 Current', s.date, '#64748b');
-        document.getElementById('perf-grid').innerHTML = perfHtml;
-
-        // Header
-        document.getElementById('header-title').textContent = 'Live Trading — ' + (s.portfolio || '').toUpperCase() + ' / ' + (s.allocation || '');
-        document.getElementById('header-date').textContent = s.date + ' · ' + s.timestamp;
-        document.getElementById('nav-date').textContent = s.date;
-    }
-
-    function statCard(label, value, color) {
-        return '<div class="stat-card" style="border-left:4px solid '+color+';"><div class="stat-label">'+label+'</div><div class="stat-value" style="color:'+color+';">'+value+'</div></div>';
+        // Floating footer
+        document.getElementById('footer-date').textContent = s.date;
+        let posValue = 0;
+        if(s.positions) s.positions.forEach(p => { posValue += (p.CurrentPrice||0) * (p.Qty||0); });
+        document.getElementById('footer-positions-value').textContent = fmtMoney(posValue);
+        document.getElementById('footer-total-equity').textContent = fmtMoney(bal.TotalEquity);
+        const mainCash = bal.CashByCurrency ? (bal.CashByCurrency[getNativeCcy()] || 0) : 0;
+        document.getElementById('footer-cash').textContent = fmtMoney(mainCash);
+        const retFooter = document.getElementById('footer-returns');
+        retFooter.textContent = fmtPct(totalReturn);
+        retFooter.style.color = totalReturn >= 0 ? '#16a34a' : '#dc2626';
+        const ddFooter = document.getElementById('footer-drawdown');
+        ddFooter.textContent = '-' + fmtPct(maxDD);
+        ddFooter.style.color = '#dc2626';
     }
 
     // ─── CHARTS ───
     function renderCharts() {
         const equities = [], dates = [], drawdowns = [];
         let peak = 0;
-        const sym = getCcy();
 
         snapshots.forEach(s => {
             const eq = s.balance ? s.balance.TotalEquity : 0;
@@ -863,12 +1089,14 @@
             return;
         }
 
+        const ccy = getDisplayCcy();
+
         // Equity
         if(equityChartInst) equityChartInst.destroy();
         equityChartInst = new Chart(document.getElementById('equityChart').getContext('2d'), {
             type:'line',
             data:{ labels:dates, datasets:[{
-                label:'Equity', data:equities, borderColor:'#2563eb',
+                label:'Equity ('+ccy+')', data:equities, borderColor:'#2563eb',
                 backgroundColor:'rgba(37,99,235,0.1)', fill:true, tension:0.3,
                 pointRadius:dates.map((_,i)=>i===currentIdx?6:1),
                 pointBackgroundColor:dates.map((_,i)=>i===currentIdx?'#ef4444':'#2563eb'),
@@ -879,7 +1107,7 @@
                 responsive:true, maintainAspectRatio:false,
                 plugins:{ legend:{position:'top'} },
                 scales:{
-                    y:{ beginAtZero:false, ticks:{ callback:v=>sym+v.toLocaleString() } },
+                    y:{ beginAtZero:false, ticks:{ callback:v=>fmtMoney(v) } },
                     x:{ ticks:{ maxTicksLimit:15, font:{size:10} } }
                 },
                 onClick:(e,els)=>{ if(els.length) selectDate(els[0].index); }
@@ -906,19 +1134,27 @@
         });
     }
 
+    function updateChartHighlight() {
+        if(!equityChartInst) return;
+        const n = equityChartInst.data.labels.length;
+        equityChartInst.data.datasets[0].pointRadius = Array.from({length:n},(_,i)=>i===currentIdx?6:1);
+        equityChartInst.data.datasets[0].pointBackgroundColor = Array.from({length:n},(_,i)=>i===currentIdx?'#ef4444':'#2563eb');
+        equityChartInst.data.datasets[0].pointBorderColor = Array.from({length:n},(_,i)=>i===currentIdx?'#ef4444':'#2563eb');
+        equityChartInst.update('none');
+    }
+
     // ─── POSITIONS (with STOP orders merged in) ───
     function renderPositions() {
         const s = snapshots[currentIdx];
         const positions = s ? s.positions : [];
         const pending = s ? s.pending_orders : [];
-        // Build a map: symbol -> stop price from STOP/TRAILING_STOP pending SELL orders
         const stopMap = {};
         for(const o of (pending||[])) {
             if(o.Side==='SELL' && (o.OrderType==='STOP'||o.OrderType==='TRAILING_STOP'||o.OrderType==='STOP_LIMIT') && o.StopPrice>0) {
                 stopMap[o.Symbol] = o.StopPrice;
             }
         }
-        let html = '<div class="card-header"><div class="card-title"><i class="fas fa-chart-line" style="color:#3b82f6;"></i> Positions Ouvertes</div><div class="badge live">'+positions.length+' positions</div></div>';
+        let html = '<div class="card-header"><div class="card-title"><i class="fas fa-chart-line" style="color:#3b82f6;"></i> Positions Ouvertes</div><div class="badge live">'+positions.length+'</div></div>';
         if(positions && positions.length > 0) {
             const sorted = [...positions].sort((a,b)=>(b.UnrealizedPnL||0)-(a.UnrealizedPnL||0));
             html += '<div class="table-container"><table><thead><tr><th>Symbol</th><th>Qty</th><th>Entry</th><th>Current</th><th>Stop</th><th>Value</th><th>P&L</th><th>P&L %</th></tr></thead><tbody>';
@@ -927,13 +1163,13 @@
                 const pct = p.AvgEntry > 0 ? ((p.CurrentPrice-p.AvgEntry)/p.AvgEntry*100) : 0;
                 const cls = pnlCls(pnl);
                 const stop = stopMap[p.Symbol] || 0;
-                const stopStr = stop > 0 ? fmtCcy(stop) : '-';
+                const stopStr = stop > 0 ? fmtMoney(stop) : '-';
                 const riskPct = (stop > 0 && p.CurrentPrice > 0) ? ((p.CurrentPrice-stop)/p.CurrentPrice*100).toFixed(1)+'%' : '';
                 html += '<tr><td class="symbol-cell">'+p.Symbol+'</td><td>'+p.Qty+'</td>';
-                html += '<td>'+fmtCcy(p.AvgEntry)+'</td><td>'+fmtCcy(p.CurrentPrice)+'</td>';
+                html += '<td>'+fmtMoney(p.AvgEntry)+'</td><td>'+fmtMoney(p.CurrentPrice)+'</td>';
                 html += '<td>'+(stop>0?stopStr+' <small style="color:#94a3b8;">('+riskPct+')</small>':'-')+'</td>';
-                html += '<td>'+fmtCcy(p.CurrentPrice*p.Qty)+'</td>';
-                html += '<td class="'+cls+'">'+fmtCcy(pnl)+'</td>';
+                html += '<td>'+fmtMoney(p.CurrentPrice*p.Qty)+'</td>';
+                html += '<td class="'+cls+'">'+fmtMoney(pnl)+'</td>';
                 html += '<td class="'+cls+'">'+pct.toFixed(2)+'%</td></tr>';
             }
             html += '</tbody></table></div>';
@@ -941,26 +1177,24 @@
         document.getElementById('positions-card').innerHTML = html;
     }
 
-    // ─── PENDING ORDERS (excluding STOP orders already merged into positions) ───
+    // ─── PENDING ORDERS (excluding STOP orders merged into positions) ───
     function renderPending() {
         const s = snapshots[currentIdx];
         const pending = s ? s.pending_orders : [];
         const positions = s ? s.positions : [];
-        // Build set of symbols with open positions
         const posSymbols = new Set((positions||[]).map(p=>p.Symbol));
-        // Filter out SELL STOP orders that are already shown in positions table
         const filtered = (pending||[]).filter(o => {
             if(o.Side==='SELL' && (o.OrderType==='STOP'||o.OrderType==='TRAILING_STOP'||o.OrderType==='STOP_LIMIT') && posSymbols.has(o.Symbol)) return false;
             return true;
         });
-        let html = '<div class="card-header"><div class="card-title"><i class="fas fa-clock" style="color:#f59e0b;"></i> Ordres en Attente</div><div class="badge demo">'+filtered.length+' ordres</div></div>';
+        let html = '<div class="card-header"><div class="card-title"><i class="fas fa-clock" style="color:#f59e0b;"></i> Ordres en Attente</div><div class="badge demo">'+filtered.length+'</div></div>';
         if(filtered.length > 0) {
             html += '<div class="table-container"><table><thead><tr><th>Symbol</th><th>Side</th><th>Type</th><th>Qty</th><th>Limit</th><th>Stop</th><th>Status</th></tr></thead><tbody>';
             for(const o of filtered) {
                 const cls = o.Side==='BUY'?'pnl-positive':'pnl-negative';
                 html += '<tr><td class="symbol-cell">'+o.Symbol+'</td><td class="'+cls+'">'+o.Side+'</td>';
                 html += '<td>'+o.OrderType+'</td><td>'+o.Qty+'</td>';
-                html += '<td>'+fmtCcy(o.LimitPrice)+'</td><td>'+fmtCcy(o.StopPrice)+'</td>';
+                html += '<td>'+fmtMoney(o.LimitPrice)+'</td><td>'+fmtMoney(o.StopPrice)+'</td>';
                 html += '<td>'+(o.Status||'-')+'</td></tr>';
             }
             html += '</tbody></table></div>';
@@ -978,21 +1212,20 @@
             for(const a of actions) {
                 const badge = a.type==='CREATE'?'badge-create':a.type==='UPDATE'?'badge-update':'badge-cancel';
                 const cls = a.side==='BUY'?'pnl-positive':'pnl-negative';
-                const stop = a.stop_price || 0;
                 html += '<tr><td><span class="badge '+badge+'">'+a.type+'</span></td>';
                 html += '<td class="symbol-cell">'+a.symbol+'</td><td class="'+cls+'">'+(a.side||'-')+'</td>';
-                html += '<td>'+(a.qty||'-')+'</td><td>'+fmtCcy(a.limit_price)+'</td>';
-                html += '<td>'+fmtCcy(stop)+'</td><td>'+fmtCcy(a.stop_loss)+'</td>';
+                html += '<td>'+(a.qty||'-')+'</td><td>'+fmtMoney(a.limit_price)+'</td>';
+                html += '<td>'+fmtMoney(a.stop_price)+'</td><td>'+fmtMoney(a.stop_loss)+'</td>';
                 html += '<td>'+(a.reason||'-')+'</td></tr>';
             }
             html += '</tbody></table></div>';
         } else { html += '<p class="empty">No actions for this date</p>'; }
-        document.getElementById('tab-actions').innerHTML = html;
+        document.getElementById('actions-content').innerHTML = html;
     }
 
     // ─── RENDER ALL ───
     function renderAll() {
-        renderStats();
+        renderKPIs();
         renderPositions();
         renderPending();
         renderActions();
@@ -1002,7 +1235,9 @@
     if(snapshots.length === 0) {
         document.querySelector('.container').innerHTML = '<div class="mw-card"><div class="alert info"><i class="fas fa-info-circle"></i> No snapshots yet. Run <code>./run.sh -apply -config config/portfolio_us.yaml</code> to generate data.</div></div>';
     } else {
-        renderTimeline();
+        initCurrencySelector();
+        initSlider();
+        updateSliderLabel();
         renderAll();
         renderCharts();
     }
