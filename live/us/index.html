@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Trading — Time Machine | Market Watch</title>
+    <link rel="icon" href="https://market-watch.xyz/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        @media (max-width:768px) {
+            body { padding:1rem; }
+            .header { flex-direction:column; align-items:flex-start !important; gap:1rem; }
+            .grid { grid-template-columns:repeat(2,1fr) !important; }
+            .grid-6 { grid-template-columns:repeat(2,1fr) !important; }
+            .grid-2col { grid-template-columns:1fr !important; }
+            .mw-card .grid { grid-template-columns:repeat(2,1fr) !important; }
+            .card-header { flex-direction:column; align-items:flex-start !important; gap:0.5rem; }
+        }
+        body { font-family:'Inter',sans-serif; background:#f8fafc; color:#0f172a; padding:0; line-height:1.6; }
+        .container { max-width:1400px; margin:0 auto; padding:1.5rem; }
+        /* Cards - matching live_dashboard.html */
+        .mw-card { background:white; border-radius:12px; padding:1.5rem; box-shadow:0 1px 3px rgba(0,0,0,0.1); border:1px solid #e2e8f0; margin-bottom:1.5rem; }
+        .card-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; padding-bottom:0.75rem; border-bottom:2px solid #f1f5f9; }
+        .card-title { font-size:1.125rem; font-weight:700; color:#0f172a; display:flex; align-items:center; gap:0.5rem; }
+        /* Stats */
+        .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; margin-bottom:1.5rem; }
+        .grid-6 { grid-template-columns:repeat(6,1fr); }
+        .stat-card { background:white; border:1px solid #e2e8f0; border-radius:12px; padding:1.25rem; box-shadow:0 1px 2px rgba(0,0,0,0.05); }
+        .stat-label { font-size:0.7rem; font-weight:600; color:#64748b; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.5rem; }
+        .stat-value { font-size:1.5rem; font-weight:700; color:#0f172a; }
+        .stat-value.positive { color:#16a34a; }
+        .stat-value.negative { color:#dc2626; }
+        .stat-subtext { font-size:0.75rem; color:#64748b; margin-top:0.25rem; }
+        /* Timeline */
+        .timeline { display:flex; gap:4px; overflow-x:auto; padding:8px 0; }
+        .tm-btn { padding:6px 12px; border:1px solid #e2e8f0; border-radius:6px; background:white; color:#64748b; cursor:pointer; font-size:0.75rem; white-space:nowrap; transition:all 0.2s; font-family:inherit; }
+        .tm-btn:hover { background:#f1f5f9; color:#0f172a; }
+        .tm-btn.active { background:#2563eb; color:white; border-color:#2563eb; }
+        /* Table */
+        .table-container { overflow-x:auto; margin-top:1rem; }
+        table { width:100%; border-collapse:collapse; font-size:0.875rem; }
+        thead { background:#f8fafc; border-bottom:2px solid #e2e8f0; }
+        th { padding:0.75rem 1rem; text-align:left; font-weight:600; color:#475569; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em; }
+        td { padding:0.875rem 1rem; border-bottom:1px solid #f1f5f9; }
+        tbody tr:hover { background:#f8fafc; }
+        .symbol-cell { font-weight:700; color:#0f172a; font-family:'Courier New',monospace; }
+        .pnl-positive { color:#16a34a; font-weight:600; }
+        .pnl-negative { color:#dc2626; font-weight:600; }
+        /* Badges */
+        .badge { display:inline-block; padding:0.25rem 0.625rem; border-radius:6px; font-size:0.75rem; font-weight:600; }
+        .badge.live { background:#dcfce7; color:#166534; }
+        .badge.demo { background:#dbeafe; color:#1e40af; }
+        .badge-create { background:#dcfce7; color:#166534; }
+        .badge-update { background:#fef3c7; color:#92400e; }
+        .badge-cancel { background:#fee2e2; color:#991b1b; }
+        /* Charts */
+        .chart-container { position:relative; height:300px; margin-top:1rem; }
+        /* Grid layouts */
+        .grid-2col { display:grid; grid-template-columns:repeat(auto-fit,minmax(500px,1fr)); gap:1.5rem; margin-bottom:1.5rem; }
+        /* Tabs */
+        .tab-bar { display:flex; gap:4px; margin-bottom:1rem; }
+        .tab-btn { padding:8px 16px; border:1px solid #e2e8f0; border-radius:8px 8px 0 0; background:#f8fafc; color:#64748b; cursor:pointer; font-size:0.8rem; font-weight:600; font-family:inherit; transition:all 0.15s; }
+        .tab-btn.active { background:white; color:#0f172a; border-bottom-color:white; }
+        .tab-content { display:none; }
+        .tab-content.active { display:block; }
+        /* Logs */
+        .log-pre { background:#1e293b; color:#e2e8f0; padding:1rem; border-radius:8px; font-family:'Courier New',monospace; font-size:0.75rem; max-height:400px; overflow:auto; white-space:pre-wrap; word-break:break-all; }
+        /* Empty */
+        .empty { text-align:center; color:#94a3b8; padding:2rem; }
+        /* Alert */
+        .alert { padding:1rem; border-radius:8px; margin-bottom:1rem; font-size:0.875rem; }
+        .alert.info { background:#dbeafe; color:#1e40af; border-left:4px solid #2563eb; }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation (matching live_dashboard.html) -->
+    <nav style="background:white; border-bottom:1px solid #e2e8f0; padding:0.75rem 1.5rem; position:sticky; top:0; z-index:50; box-shadow:0 1px 2px rgba(0,0,0,0.05);">
+        <div style="max-width:1400px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+            <div style="display:flex; align-items:center; gap:1.5rem;">
+                <a href="../index.html" style="display:flex; align-items:center; gap:0.5rem; text-decoration:none;">
+                    <img src="https://market-watch.xyz/logo.svg" alt="MW" style="height:2rem;" onerror="this.style.display='none'">
+                    <span style="font-weight:800; font-size:1.25rem; color:#0f172a;">MARKET WATCH</span>
+                </a>
+                <div style="display:flex; gap:1rem; font-size:0.875rem;">
+                    <a href="../index.html" style="color:#64748b; text-decoration:none; font-weight:500;">🏠 Portfolios</a>
+                    <a href="#" style="color:#2563eb; text-decoration:none; font-weight:600;">🔴 Live Trading</a>
+                </div>
+            </div>
+            <div id="nav-info" style="display:flex; align-items:center; gap:1rem;">
+                <div id="nav-date" style="font-size:0.75rem; color:#64748b;"></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header mw-card" style="display:flex; justify-content:space-between; align-items:center; margin-top:1.5rem;">
+            <h1 style="font-size:1.75rem; font-weight:800; display:flex; align-items:center; gap:0.75rem;">
+                <i class="fas fa-broadcast-tower" style="color:#3b82f6;"></i>
+                <span id="header-title">Live Trading Dashboard</span>
+            </h1>
+            <div id="header-right" style="text-align:right;">
+                <div id="header-date" style="font-size:0.75rem; color:#64748b;"></div>
+            </div>
+        </div>
+
+        <!-- Time Machine -->
+        <div class="mw-card">
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-clock-rotate-left" style="color:#8b5cf6;"></i> 🕐 Time Machine</div>
+                <div id="snap-count" class="badge demo"></div>
+            </div>
+            <div class="timeline" id="timeline"></div>
+        </div>
+
+        <!-- Stats Grid - Account State (matching template layout) -->
+        <div class="grid grid-6" id="stats-grid" style="margin-bottom:1.5rem;"></div>
+
+        <!-- Performance Metrics -->
+        <div class="grid" id="perf-grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); margin-bottom:1.5rem;"></div>
+
+        <!-- Equity Curve Chart -->
+        <div class="mw-card">
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-chart-area" style="color:#8b5cf6;"></i> 📈 Equity Curve</div>
+            </div>
+            <div class="chart-container"><canvas id="equityChart"></canvas></div>
+        </div>
+
+        <!-- Drawdown Chart -->
+        <div class="mw-card">
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-chart-line" style="color:#ef4444;"></i> 📉 Drawdown</div>
+            </div>
+            <div class="chart-container"><canvas id="drawdownChart"></canvas></div>
+        </div>
+
+        <!-- Positions & Pending Orders -->
+        <div class="grid-2col">
+            <div class="mw-card" id="positions-card"></div>
+            <div class="mw-card" id="pending-card"></div>
+        </div>
+
+        <!-- Tabs: Actions / Logs -->
+        <div class="mw-card">
+            <div class="tab-bar">
+                <button class="tab-btn active" onclick="showTab('actions')">⚡ Actions</button>
+                <button class="tab-btn" onclick="showTab('logs')">📋 Logs</button>
+            </div>
+            <div class="tab-content active" id="tab-actions"></div>
+            <div class="tab-content" id="tab-logs"></div>
+        </div>
+
+        <!-- Footer -->
+        <footer style="text-align:center; padding:3rem; color:#94a3b8; font-size:0.9rem; background:#f1f5f9; margin-top:4rem; border-top:1px solid #e2e8f0;">
+            <div style="max-width:1400px; margin:0 auto;">
+                <p style="margin-bottom:1rem; font-weight:600; color:#64748b;">&copy; 2026 Market Watch.</p>
+                <p style="font-size:0.8rem; max-width:600px; margin:0 auto; line-height:1.6;">
+                    Disclaimer: This dashboard shows live trading data.
+                    Past performance is not indicative of future results. Investing involves risk.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+    const snapshots = [
+  {
+    "timestamp": "2026-01-27T21:42:14+01:00",
+    "date": "2026-01-26",
+    "portfolio": "usa",
+    "allocation": "usa",
+    "currency": "USD",
+    "actions": [
+      {
+        "type": "UPDATE",
+        "symbol": "AXGN",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "stop_price": 31.415715626307897,
+        "order_id": "25c3092e-865f-464e-963d-04a60a069eb6",
+        "reason": "TRAILING_STOP_UPDATE"
+      },
+      {
+        "type": "UPDATE",
+        "symbol": "BLTE",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "stop_price": 145.29100472586495,
+        "order_id": "d476f098-283d-42f3-b04d-c2fc7b4a2e75",
+        "reason": "TRAILING_STOP_UPDATE"
+      },
+      {
+        "type": "UPDATE",
+        "symbol": "CELC",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "stop_price": 100.86185782296317,
+        "order_id": "9687a4c5-dcd6-414d-9c60-1b727052d0b3",
+        "reason": "TRAILING_STOP_UPDATE"
+      },
+      {
+        "type": "UPDATE",
+        "symbol": "CHRW",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "stop_price": 170.65856715611048,
+        "order_id": "c684a9fe-26f6-42b8-a889-85a0015c02ee",
+        "reason": "TRAILING_STOP_UPDATE"
+      },
+      {
+        "type": "UPDATE",
+        "symbol": "DVAX",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "stop_price": 15.335714748927526,
+        "order_id": "b1b91527-1673-41fb-b0f8-06b206705dcd",
+        "reason": "TRAILING_STOP_UPDATE"
+      },
+      {
+        "type": "UPDATE",
+        "symbol": "FOLD",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "stop_price": 14.187143189566475,
+        "order_id": "13dd012f-39de-4c4a-9014-ceabac3cb059",
+        "reason": "TRAILING_STOP_UPDATE"
+      },
+      {
+        "type": "UPDATE",
+        "symbol": "GH",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "stop_price": 103.1449955531529,
+        "order_id": "c9202647-6a9b-4045-a345-846697cc1aa4",
+        "reason": "TRAILING_STOP_UPDATE"
+      },
+      {
+        "type": "UPDATE",
+        "symbol": "KRYS",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "stop_price": 253.01942879813058,
+        "order_id": "37470530-7524-498a-8d61-9104eb65d4e1",
+        "reason": "TRAILING_STOP_UPDATE"
+      },
+      {
+        "type": "UPDATE",
+        "symbol": "LCII",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "stop_price": 137.75570569719588,
+        "order_id": "f25b318b-62e1-46e8-85ae-72ea1a01663a",
+        "reason": "TRAILING_STOP_UPDATE"
+      },
+      {
+        "type": "UPDATE",
+        "symbol": "LE",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "stop_price": 17.154604416268686,
+        "order_id": "66016f7c-7075-4bec-8aff-f35421460407",
+        "reason": "TRAILING_STOP_UPDATE"
+      },
+      {
+        "type": "UPDATE",
+        "symbol": "LYG",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "stop_price": 5.564636974595349,
+        "order_id": "b1c3a0a0-3b61-4d80-b1c6-21ca41700a09",
+        "reason": "TRAILING_STOP_UPDATE"
+      },
+      {
+        "type": "UPDATE",
+        "symbol": "PRAX",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "stop_price": 253.9686017717634,
+        "order_id": "c7dfc21f-b0eb-4509-89fa-21bb7d9b8644",
+        "reason": "TRAILING_STOP_UPDATE"
+      },
+      {
+        "type": "UPDATE",
+        "symbol": "USAR",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "stop_price": 22.870998632382673,
+        "order_id": "b2cb5903-07a7-4203-b59e-3a134df31b60",
+        "reason": "TRAILING_STOP_UPDATE"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "TRX",
+        "side": "BUY",
+        "order_type": "LIMIT",
+        "qty": 8441,
+        "limit_price": 1.431699985265732,
+        "stop_loss": 1.2550762985406931,
+        "reason": "breakout_squeeze"
+      },
+      {
+        "type": "CANCEL",
+        "symbol": "HSBC",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "order_id": "517859b5-81c6-4006-8687-73f3081443af",
+        "reason": "STALE_BUY"
+      },
+      {
+        "type": "CANCEL",
+        "symbol": "TMQ",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "order_id": "7db60f27-05d3-4bc3-8ee9-4351501a6d5e",
+        "reason": "STALE_BUY"
+      }
+    ],
+    "positions": [
+      {
+        "Symbol": "ALM",
+        "Qty": 3,
+        "AvgEntry": 11.03,
+        "CurrentPrice": 11.02,
+        "UnrealizedPnL": -0.03,
+        "Currency": "USD",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "Symbol": "AXGN",
+        "Qty": 148,
+        "AvgEntry": 33.48,
+        "CurrentPrice": 34.625,
+        "UnrealizedPnL": 169.46,
+        "Currency": "USD",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "Symbol": "BLTE",
+        "Qty": 31,
+        "AvgEntry": 157.22,
+        "CurrentPrice": 166,
+        "UnrealizedPnL": 272.18,
+        "Currency": "USD",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "Symbol": "CELC",
+        "Qty": 46,
+        "AvgEntry": 103.925435,
+        "CurrentPrice": 116.67,
+        "UnrealizedPnL": 586.25,
+        "Currency": "USD",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "Symbol": "CHRW",
+        "Qty": 29,
+        "AvgEntry": 170.41,
+        "CurrentPrice": 180.125,
+        "UnrealizedPnL": 281.735,
+        "Currency": "USD",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "Symbol": "DVAX",
+        "Qty": 21,
+        "AvgEntry": 15.49,
+        "CurrentPrice": 15.48,
+        "UnrealizedPnL": -0.21,
+        "Currency": "USD",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "Symbol": "FOLD",
+        "Qty": 820,
+        "AvgEntry": 14.29,
+        "CurrentPrice": 14.29,
+        "UnrealizedPnL": 0,
+        "Currency": "USD",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "Symbol": "GH",
+        "Qty": 45,
+        "AvgEntry": 109.17,
+        "CurrentPrice": 114.19,
+        "UnrealizedPnL": 225.9,
+        "Currency": "USD",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "Symbol": "KRYS",
+        "Qty": 19,
+        "AvgEntry": 261.4,
+        "CurrentPrice": 279.49,
+        "UnrealizedPnL": 343.71,
+        "Currency": "USD",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "Symbol": "LCII",
+        "Qty": 38,
+        "AvgEntry": 131,
+        "CurrentPrice": 148.38,
+        "UnrealizedPnL": 660.44,
+        "Currency": "USD",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "Symbol": "LE",
+        "Qty": 20,
+        "AvgEntry": 19.06,
+        "CurrentPrice": 19.05,
+        "UnrealizedPnL": -0.2,
+        "Currency": "USD",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "Symbol": "LYG",
+        "Qty": 2060,
+        "AvgEntry": 5.84,
+        "CurrentPrice": 5.845,
+        "UnrealizedPnL": 10.3,
+        "Currency": "USD",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "Symbol": "OLMA",
+        "Qty": 176,
+        "AvgEntry": 27.95483,
+        "CurrentPrice": 26.075,
+        "UnrealizedPnL": -330.85,
+        "Currency": "USD",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "Symbol": "PRAX",
+        "Qty": 17,
+        "AvgEntry": 282.55,
+        "CurrentPrice": 314.41,
+        "UnrealizedPnL": 541.62,
+        "Currency": "USD",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "Symbol": "REAL",
+        "Qty": 301,
+        "AvgEntry": 16.2,
+        "CurrentPrice": 16.11,
+        "UnrealizedPnL": -27.09,
+        "Currency": "USD",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "Symbol": "SATS",
+        "Qty": 41,
+        "AvgEntry": 119.988293,
+        "CurrentPrice": 124.69,
+        "UnrealizedPnL": 192.77,
+        "Currency": "USD",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "Symbol": "USAR",
+        "Qty": 139,
+        "AvgEntry": 26.94,
+        "CurrentPrice": 26.795,
+        "UnrealizedPnL": -20.155,
+        "Currency": "USD",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      }
+    ],
+    "pending_orders": [
+      {
+        "OrderID": "4c1bfdd3-7c7f-4114-a4a0-8c39542a0b5a",
+        "Symbol": "TRX",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 8441,
+        "LimitPrice": 1.43,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-27T20:42:14.920304588Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "545eba4e-8b60-48b7-a082-370a792f2d1a",
+        "Symbol": "ALM",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 3,
+        "LimitPrice": 0,
+        "StopPrice": 10.52,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-27T20:32:28.451379938Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "b1b91527-1673-41fb-b0f8-06b206705dcd",
+        "Symbol": "DVAX",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 21,
+        "LimitPrice": 0,
+        "StopPrice": 15.23,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-27T20:32:28.050592Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "b1c3a0a0-3b61-4d80-b1c6-21ca41700a09",
+        "Symbol": "LYG",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 2060,
+        "LimitPrice": 0,
+        "StopPrice": 5.56,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-27T20:32:27.405158Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "13dd012f-39de-4c4a-9014-ceabac3cb059",
+        "Symbol": "FOLD",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 820,
+        "LimitPrice": 0,
+        "StopPrice": 14.06,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-27T20:32:27.266533Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "66016f7c-7075-4bec-8aff-f35421460407",
+        "Symbol": "LE",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 20,
+        "LimitPrice": 0,
+        "StopPrice": 17.15,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-27T20:28:05.402176Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "b2cb5903-07a7-4203-b59e-3a134df31b60",
+        "Symbol": "USAR",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 139,
+        "LimitPrice": 0,
+        "StopPrice": 22.87,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-27T20:28:03.824651Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "1519fceb-a3b3-494c-a8a7-0c8b93620de0",
+        "Symbol": "SATS",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 41,
+        "LimitPrice": 0,
+        "StopPrice": 107.69,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-21T17:34:13.442575Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "d476f098-283d-42f3-b04d-c2fc7b4a2e75",
+        "Symbol": "BLTE",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 31,
+        "LimitPrice": 0,
+        "StopPrice": 142.41,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-12T15:16:34.929563Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "f25b318b-62e1-46e8-85ae-72ea1a01663a",
+        "Symbol": "LCII",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 38,
+        "LimitPrice": 0,
+        "StopPrice": 124.32,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-12T14:55:55.173832Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "c9202647-6a9b-4045-a345-846697cc1aa4",
+        "Symbol": "GH",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 45,
+        "LimitPrice": 0,
+        "StopPrice": 100.27,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-12T14:34:22.215942Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "25c3092e-865f-464e-963d-04a60a069eb6",
+        "Symbol": "AXGN",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 148,
+        "LimitPrice": 0,
+        "StopPrice": 29.82,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-12T14:32:54.72207Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "9687a4c5-dcd6-414d-9c60-1b727052d0b3",
+        "Symbol": "CELC",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 46,
+        "LimitPrice": 0,
+        "StopPrice": 97.42,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-12T14:32:40.841788Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "c684a9fe-26f6-42b8-a889-85a0015c02ee",
+        "Symbol": "CHRW",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 29,
+        "LimitPrice": 0,
+        "StopPrice": 163.39,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-12T14:32:19.918977Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "17f995a5-3f60-4aa6-9d85-bb9b60e864a0",
+        "Symbol": "OLMA",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 176,
+        "LimitPrice": 0,
+        "StopPrice": 23.33,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-12T14:32:11.443574Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "c7dfc21f-b0eb-4509-89fa-21bb7d9b8644",
+        "Symbol": "PRAX",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 17,
+        "LimitPrice": 0,
+        "StopPrice": 245.69,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-12T14:31:21.975502Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "37470530-7524-498a-8d61-9104eb65d4e1",
+        "Symbol": "KRYS",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 19,
+        "LimitPrice": 0,
+        "StopPrice": 237.04,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-12T14:30:54.336156Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "194fc8ed-aa0d-4fd5-873b-fd11421a4258",
+        "Symbol": "REAL",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 301,
+        "LimitPrice": 0,
+        "StopPrice": 14.63,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-01-12T14:30:43.992208Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      }
+    ],
+    "balance": {
+      "BaseCurrency": "USD",
+      "CashByCurrency": {
+        "USD": 15645.42
+      },
+      "AvailableCashByCurrency": null,
+      "MarginUsed": 85065.96,
+      "TotalEquity": 100711.38,
+      "Timestamp": "0001-01-01T00:00:00Z",
+      "BrokerSource": "alpaca"
+    },
+    "logs": "21:42:06 INF cmd/live/main.go:94 \u003e Processing allocation allocation=usa broker=alpaca component=live mode=apply portfolio=usa strategy=trend-hybrid-af\n21:42:06 INF internal/broker/instruments_cache.go:41 \u003e Loaded raw API response from cache broker=Alpaca cache_age=35254158.157358 component=instruments-cache\n21:42:07 INF internal/broker/alpaca/adapter.go:206 \u003e Loaded instruments cache for CanHandle component=alpaca-adapter count=12407\n21:42:07 INF cmd/live/main.go:148 \u003e Instruments loaded component=live stocks=2341 total=5370\n21:42:10 INF cmd/live/main.go:164 \u003e Market data loaded component=live symbols=2360\n21:42:11 INF cmd/live/main.go:194 \u003e State loaded component=live path=state/usa/usa/alpaca/PA3MMWSEFLUA\n21:42:12 WRN cmd/live/main.go:257 \u003e Pending order scheduled for CANCEL component=live order_id=517859b5-81c6-4006-8687-73f3081443af qty=36 reason=STALE_BUY side=BUY symbol=HSBC\n21:42:12 WRN cmd/live/main.go:257 \u003e Pending order scheduled for CANCEL component=live order_id=7db60f27-05d3-4bc3-8ee9-4351501a6d5e qty=1798 reason=STALE_BUY side=BUY symbol=TMQ\n21:42:14 INF cmd/live/main.go:545 \u003e State saved component=live path=state/usa/usa/alpaca/PA3MMWSEFLUA/state-20260127-214214.json\n",
+    "state": {
+      "pm_state": {
+        "equity_curve": [
+          100720.26,
+          100650.13,
+          100708.92
+        ],
+        "equity_curve_dates": [
+          "2026-01-26T21:59:49+01:00",
+          "2026-01-26T22:00:01+01:00",
+          "2026-01-26T22:00:02+01:00"
+        ],
+        "global_pause_until": "0001-01-01T00:00:00Z",
+        "is_in_grace_period": false,
+        "last_liquidation_date": "0001-01-01T00:00:00Z",
+        "last_streak_reset_date": "0001-01-01T00:00:00Z",
+        "peak_equity": 100720.26,
+        "position_entries": {
+          "ALM": 1,
+          "DVAX": 1,
+          "FOLD": 1,
+          "HSBC": 1,
+          "LE": 1,
+          "LYG": 1,
+          "TMQ": 1,
+          "TRX": 1,
+          "USAR": 1
+        },
+        "position_last_dca": {
+          "ALM": "2026-01-26T22:00:01+01:00",
+          "DVAX": "2026-01-26T22:00:01+01:00",
+          "FOLD": "2026-01-26T22:00:01+01:00",
+          "HSBC": "2026-01-26T22:00:01+01:00",
+          "LE": "2026-01-26T21:59:49+01:00",
+          "LYG": "2026-01-26T22:00:01+01:00",
+          "TMQ": "2026-01-26T22:00:01+01:00",
+          "TRX": "2026-01-26T22:00:02+01:00",
+          "USAR": "2026-01-26T21:59:49+01:00"
+        },
+        "position_stops": {
+          "ALM": 10.52,
+          "AXGN": 31.415715626307897,
+          "BLTE": 145.29100472586495,
+          "CELC": 100.86185782296317,
+          "CHRW": 170.65856715611048,
+          "DVAX": 15.335714748927526,
+          "FOLD": 14.187143189566475,
+          "GH": 103.1449955531529,
+          "HSBC": 83.48991019913862,
+          "KRYS": 253.01942879813058,
+          "LCII": 137.75570569719588,
+          "LE": 17.154604416268686,
+          "LYG": 5.564636974595349,
+          "OLMA": 23.33,
+          "PRAX": 253.9686017717634,
+          "REAL": 14.63,
+          "SATS": 107.69,
+          "TMQ": 5.862546414742003,
+          "TRX": 1.2550762985406931,
+          "USAR": 22.870998632382673
+        },
+        "regime_score_history": [
+          0.7071500258411052,
+          0.7071500258411052,
+          0.7071500258411052
+        ],
+        "stop_history": [],
+        "stop_streak_count": 0,
+        "stopped_symbols": {}
+      },
+      "prev_regime": "RECOVERY"
+    }
+  }
+];
+    let currentIdx = snapshots.length - 1;
+    let equityChartInst = null;
+    let ddChartInst = null;
+
+    // ─── CURRENCY ───
+    const ccySymbols = { USD:'$', EUR:'€', GBP:'£', CHF:'CHF ', JPY:'¥', CAD:'C$', HKD:'HK$', BTC:'₿', GOLD:'XAU ' };
+    function getCcy() {
+        if(!snapshots.length) return '$';
+        const s = snapshots[currentIdx];
+        const ccy = s.currency || (s.balance ? s.balance.BaseCurrency : '') || 'USD';
+        return ccySymbols[ccy] || ccy + ' ';
+    }
+    function getCcyCode() {
+        if(!snapshots.length) return 'USD';
+        const s = snapshots[currentIdx];
+        return s.currency || (s.balance ? s.balance.BaseCurrency : '') || 'USD';
+    }
+
+    // ─── HELPERS ───
+    function fmt(v) { return v ? Number(v).toLocaleString('en',{minimumFractionDigits:2,maximumFractionDigits:2}) : '-'; }
+    function fmtCcy(v) { return v ? getCcy() + fmt(v) : '-'; }
+    function fmtPct(v) { return v != null ? v.toFixed(2) + '%' : '-'; }
+    function pnlCls(v) { return v >= 0 ? 'pnl-positive' : 'pnl-negative'; }
+    function valCls(v) { return v >= 0 ? 'positive' : 'negative'; }
+
+    // ─── TABS ───
+    function showTab(name) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        event.target.classList.add('active');
+        document.getElementById('tab-'+name).classList.add('active');
+    }
+
+    // ─── TIMELINE ───
+    function renderTimeline() {
+        const el = document.getElementById('timeline');
+        el.innerHTML = snapshots.map((s,i) =>
+            '<button class="tm-btn '+(i===currentIdx?'active':'')+'" onclick="selectDate('+i+')">'+s.date+'</button>'
+        ).join('');
+        document.getElementById('snap-count').textContent = snapshots.length + ' runs';
+        setTimeout(() => { const btn = el.querySelector('.active'); if(btn) btn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'}); }, 50);
+    }
+
+    function selectDate(idx) {
+        currentIdx = idx;
+        renderTimeline();
+        renderAll();
+    }
+
+    // ─── STATS ───
+    function renderStats() {
+        if(!snapshots.length) return;
+        const s = snapshots[currentIdx];
+        const bal = s.balance || {};
+        const ccy = getCcyCode();
+
+        // Unrealized PnL
+        let totalPnL = 0;
+        if(s.positions) s.positions.forEach(p => { totalPnL += (p.UnrealizedPnL || 0); });
+
+        // Return & drawdown from equity curve
+        const equities = snapshots.map(sn => sn.balance ? sn.balance.TotalEquity : 0).filter(v => v > 0);
+        const totalReturn = equities.length >= 2 ? ((equities[equities.length-1] / equities[0]) - 1) * 100 : 0;
+        let peak = 0, maxDD = 0;
+        equities.forEach(eq => { if(eq > peak) peak = eq; const dd = peak > 0 ? (peak-eq)/peak*100 : 0; if(dd > maxDD) maxDD = dd; });
+
+        // Account state (6-column grid like template)
+        let statsHtml = '';
+        statsHtml += statCard('💰 Cash ('+ccy+')', fmtCcy(bal.CashByCurrency ? bal.CashByCurrency[ccy] || 0 : 0), '#3b82f6');
+        statsHtml += statCard('📈 Equity ('+ccy+')', fmtCcy(bal.TotalEquity), '#3b82f6');
+        statsHtml += statCard('📊 P&L Non Réalisé', fmtCcy(totalPnL), totalPnL >= 0 ? '#16a34a' : '#dc2626');
+        statsHtml += statCard('📦 Positions', (s.positions ? s.positions.length : 0), '#8b5cf6');
+        statsHtml += statCard('⏳ Ordres Pending', (s.pending_orders ? s.pending_orders.length : 0), '#f59e0b');
+        statsHtml += statCard('⚡ Actions', (s.actions ? s.actions.length : 0), '#10b981');
+
+        // Additional cash currencies
+        if(bal.CashByCurrency) {
+            for(const [c,amt] of Object.entries(bal.CashByCurrency)) {
+                if(c !== ccy) {
+                    const sym = ccySymbols[c] || c + ' ';
+                    statsHtml += statCard('💰 Cash ('+c+')', sym + fmt(amt), '#64748b');
+                }
+            }
+        }
+        document.getElementById('stats-grid').innerHTML = statsHtml;
+
+        // Performance metrics row
+        let perfHtml = '';
+        perfHtml += statCard('📈 Total Return', fmtPct(totalReturn), totalReturn >= 0 ? '#16a34a' : '#dc2626');
+        perfHtml += statCard('📉 Max Drawdown', fmtPct(maxDD), '#ef4444');
+        perfHtml += statCard('📅 First Run', snapshots[0] ? snapshots[0].date : '-', '#64748b');
+        perfHtml += statCard('📅 Current', s.date, '#64748b');
+        document.getElementById('perf-grid').innerHTML = perfHtml;
+
+        // Header
+        document.getElementById('header-title').textContent = 'Live Trading — ' + (s.portfolio || '').toUpperCase() + ' / ' + (s.allocation || '');
+        document.getElementById('header-date').textContent = s.date + ' · ' + s.timestamp;
+        document.getElementById('nav-date').textContent = s.date;
+    }
+
+    function statCard(label, value, color) {
+        return '<div class="stat-card" style="border-left:4px solid '+color+';"><div class="stat-label">'+label+'</div><div class="stat-value" style="color:'+color+';">'+value+'</div></div>';
+    }
+
+    // ─── CHARTS ───
+    function renderCharts() {
+        const equities = [], dates = [], drawdowns = [];
+        let peak = 0;
+        const sym = getCcy();
+
+        snapshots.forEach(s => {
+            const eq = s.balance ? s.balance.TotalEquity : 0;
+            if(eq <= 0) return;
+            dates.push(s.date);
+            equities.push(eq);
+            if(eq > peak) peak = eq;
+            drawdowns.push(peak > 0 ? -((peak-eq)/peak*100) : 0);
+        });
+
+        if(equities.length < 2) {
+            document.getElementById('equityChart').parentElement.innerHTML = '<div class="alert info"><i class="fas fa-info-circle"></i> Not enough data for charts. Run the pipeline multiple times to build history.</div>';
+            return;
+        }
+
+        // Equity
+        if(equityChartInst) equityChartInst.destroy();
+        equityChartInst = new Chart(document.getElementById('equityChart').getContext('2d'), {
+            type:'line',
+            data:{ labels:dates, datasets:[{
+                label:'Equity', data:equities, borderColor:'#2563eb',
+                backgroundColor:'rgba(37,99,235,0.1)', fill:true, tension:0.3,
+                pointRadius:dates.map((_,i)=>i===currentIdx?6:1),
+                pointBackgroundColor:dates.map((_,i)=>i===currentIdx?'#ef4444':'#2563eb'),
+                pointBorderColor:dates.map((_,i)=>i===currentIdx?'#ef4444':'#2563eb'),
+                borderWidth:2
+            }]},
+            options:{
+                responsive:true, maintainAspectRatio:false,
+                plugins:{ legend:{position:'top'} },
+                scales:{
+                    y:{ beginAtZero:false, ticks:{ callback:v=>sym+v.toLocaleString() } },
+                    x:{ ticks:{ maxTicksLimit:15, font:{size:10} } }
+                },
+                onClick:(e,els)=>{ if(els.length) selectDate(els[0].index); }
+            }
+        });
+
+        // Drawdown
+        if(ddChartInst) ddChartInst.destroy();
+        ddChartInst = new Chart(document.getElementById('drawdownChart').getContext('2d'), {
+            type:'line',
+            data:{ labels:dates, datasets:[{
+                label:'Drawdown', data:drawdowns, borderColor:'#ef4444',
+                backgroundColor:'rgba(239,68,68,0.1)', fill:true, tension:0.3,
+                pointRadius:1, borderWidth:2
+            }]},
+            options:{
+                responsive:true, maintainAspectRatio:false,
+                plugins:{ legend:{display:false} },
+                scales:{
+                    y:{ max:0, ticks:{ callback:v=>v.toFixed(1)+'%' } },
+                    x:{ ticks:{ maxTicksLimit:15, font:{size:10} } }
+                }
+            }
+        });
+    }
+
+    // ─── POSITIONS (with STOP orders merged in) ───
+    function renderPositions() {
+        const s = snapshots[currentIdx];
+        const positions = s ? s.positions : [];
+        const pending = s ? s.pending_orders : [];
+        // Build a map: symbol -> stop price from STOP/TRAILING_STOP pending SELL orders
+        const stopMap = {};
+        for(const o of (pending||[])) {
+            if(o.Side==='SELL' && (o.OrderType==='STOP'||o.OrderType==='TRAILING_STOP'||o.OrderType==='STOP_LIMIT') && o.StopPrice>0) {
+                stopMap[o.Symbol] = o.StopPrice;
+            }
+        }
+        let html = '<div class="card-header"><div class="card-title"><i class="fas fa-chart-line" style="color:#3b82f6;"></i> Positions Ouvertes</div><div class="badge live">'+positions.length+' positions</div></div>';
+        if(positions && positions.length > 0) {
+            const sorted = [...positions].sort((a,b)=>(b.UnrealizedPnL||0)-(a.UnrealizedPnL||0));
+            html += '<div class="table-container"><table><thead><tr><th>Symbol</th><th>Qty</th><th>Entry</th><th>Current</th><th>Stop</th><th>Value</th><th>P&L</th><th>P&L %</th></tr></thead><tbody>';
+            for(const p of sorted) {
+                const pnl = p.UnrealizedPnL || 0;
+                const pct = p.AvgEntry > 0 ? ((p.CurrentPrice-p.AvgEntry)/p.AvgEntry*100) : 0;
+                const cls = pnlCls(pnl);
+                const stop = stopMap[p.Symbol] || 0;
+                const stopStr = stop > 0 ? fmtCcy(stop) : '-';
+                const riskPct = (stop > 0 && p.CurrentPrice > 0) ? ((p.CurrentPrice-stop)/p.CurrentPrice*100).toFixed(1)+'%' : '';
+                html += '<tr><td class="symbol-cell">'+p.Symbol+'</td><td>'+p.Qty+'</td>';
+                html += '<td>'+fmtCcy(p.AvgEntry)+'</td><td>'+fmtCcy(p.CurrentPrice)+'</td>';
+                html += '<td>'+(stop>0?stopStr+' <small style="color:#94a3b8;">('+riskPct+')</small>':'-')+'</td>';
+                html += '<td>'+fmtCcy(p.CurrentPrice*p.Qty)+'</td>';
+                html += '<td class="'+cls+'">'+fmtCcy(pnl)+'</td>';
+                html += '<td class="'+cls+'">'+pct.toFixed(2)+'%</td></tr>';
+            }
+            html += '</tbody></table></div>';
+        } else { html += '<p class="empty">No open positions</p>'; }
+        document.getElementById('positions-card').innerHTML = html;
+    }
+
+    // ─── PENDING ORDERS (excluding STOP orders already merged into positions) ───
+    function renderPending() {
+        const s = snapshots[currentIdx];
+        const pending = s ? s.pending_orders : [];
+        const positions = s ? s.positions : [];
+        // Build set of symbols with open positions
+        const posSymbols = new Set((positions||[]).map(p=>p.Symbol));
+        // Filter out SELL STOP orders that are already shown in positions table
+        const filtered = (pending||[]).filter(o => {
+            if(o.Side==='SELL' && (o.OrderType==='STOP'||o.OrderType==='TRAILING_STOP'||o.OrderType==='STOP_LIMIT') && posSymbols.has(o.Symbol)) return false;
+            return true;
+        });
+        let html = '<div class="card-header"><div class="card-title"><i class="fas fa-clock" style="color:#f59e0b;"></i> Ordres en Attente</div><div class="badge demo">'+filtered.length+' ordres</div></div>';
+        if(filtered.length > 0) {
+            html += '<div class="table-container"><table><thead><tr><th>Symbol</th><th>Side</th><th>Type</th><th>Qty</th><th>Limit</th><th>Stop</th><th>Status</th></tr></thead><tbody>';
+            for(const o of filtered) {
+                const cls = o.Side==='BUY'?'pnl-positive':'pnl-negative';
+                html += '<tr><td class="symbol-cell">'+o.Symbol+'</td><td class="'+cls+'">'+o.Side+'</td>';
+                html += '<td>'+o.OrderType+'</td><td>'+o.Qty+'</td>';
+                html += '<td>'+fmtCcy(o.LimitPrice)+'</td><td>'+fmtCcy(o.StopPrice)+'</td>';
+                html += '<td>'+(o.Status||'-')+'</td></tr>';
+            }
+            html += '</tbody></table></div>';
+        } else { html += '<p class="empty">No pending orders</p>'; }
+        document.getElementById('pending-card').innerHTML = html;
+    }
+
+    // ─── ACTIONS ───
+    function renderActions() {
+        const s = snapshots[currentIdx];
+        const actions = s ? s.actions : [];
+        let html = '';
+        if(actions && actions.length > 0) {
+            html += '<div class="table-container"><table><thead><tr><th>Type</th><th>Symbol</th><th>Side</th><th>Qty</th><th>Limit</th><th>Stop</th><th>SL</th><th>Reason</th></tr></thead><tbody>';
+            for(const a of actions) {
+                const badge = a.type==='CREATE'?'badge-create':a.type==='UPDATE'?'badge-update':'badge-cancel';
+                const cls = a.side==='BUY'?'pnl-positive':'pnl-negative';
+                const stop = a.stop_price || 0;
+                html += '<tr><td><span class="badge '+badge+'">'+a.type+'</span></td>';
+                html += '<td class="symbol-cell">'+a.symbol+'</td><td class="'+cls+'">'+(a.side||'-')+'</td>';
+                html += '<td>'+(a.qty||'-')+'</td><td>'+fmtCcy(a.limit_price)+'</td>';
+                html += '<td>'+fmtCcy(stop)+'</td><td>'+fmtCcy(a.stop_loss)+'</td>';
+                html += '<td>'+(a.reason||'-')+'</td></tr>';
+            }
+            html += '</tbody></table></div>';
+        } else { html += '<p class="empty">No actions for this date</p>'; }
+        document.getElementById('tab-actions').innerHTML = html;
+    }
+
+    // ─── LOGS ───
+    function renderLogs() {
+        const s = snapshots[currentIdx];
+        const logs = s ? s.logs : '';
+        if(logs) {
+            document.getElementById('tab-logs').innerHTML = '<pre class="log-pre">' + escapeHtml(logs) + '</pre>';
+        } else {
+            document.getElementById('tab-logs').innerHTML = '<p class="empty">No logs available for this run</p>';
+        }
+    }
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.appendChild(document.createTextNode(text));
+        return div.innerHTML;
+    }
+
+    // ─── RENDER ALL ───
+    function renderAll() {
+        renderStats();
+        renderPositions();
+        renderPending();
+        renderActions();
+        renderLogs();
+    }
+
+    // ─── INIT ───
+    if(snapshots.length === 0) {
+        document.querySelector('.container').innerHTML = '<div class="mw-card"><div class="alert info"><i class="fas fa-info-circle"></i> No snapshots yet. Run <code>./run.sh -apply -config config/portfolio_us.yaml</code> to generate data.</div></div>';
+    } else {
+        renderTimeline();
+        renderAll();
+        renderCharts();
+    }
+    </script>
+</body>
+</html>

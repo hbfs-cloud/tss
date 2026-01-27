@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Watch — Live Portfolios</title>
+    <link rel="icon" href="https://market-watch.xyz/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Inter',sans-serif; background:#f8fafc; color:#0f172a; min-height:100vh; }
+        nav { background:white; border-bottom:1px solid #e2e8f0; padding:0.75rem 1.5rem; box-shadow:0 1px 2px rgba(0,0,0,0.05); }
+        .nav-inner { max-width:1000px; margin:0 auto; display:flex; align-items:center; gap:0.5rem; }
+        .nav-inner span { font-weight:800; font-size:1.25rem; }
+        .container { max-width:1000px; margin:0 auto; padding:2rem 1.5rem; }
+        h1 { font-size:2rem; font-weight:800; margin-bottom:0.5rem; display:flex; align-items:center; gap:0.75rem; }
+        .subtitle { color:#64748b; margin-bottom:2rem; }
+        .portfolio-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; }
+        .portfolio-card { background:white; border:1px solid #e2e8f0; border-radius:12px; padding:1.5rem; box-shadow:0 1px 3px rgba(0,0,0,0.1); transition:all 0.2s; text-decoration:none; color:inherit; display:block; }
+        .portfolio-card:hover { transform:translateY(-2px); box-shadow:0 8px 16px -4px rgba(0,0,0,0.1); border-color:#3b82f6; }
+        .portfolio-name { font-size:1.25rem; font-weight:700; margin-bottom:0.5rem; display:flex; align-items:center; gap:0.5rem; }
+        .portfolio-desc { color:#64748b; font-size:0.875rem; }
+        .badge-live { display:inline-block; padding:2px 8px; border-radius:4px; font-size:0.7rem; font-weight:600; background:#dcfce7; color:#166534; }
+        .last-update { color:#94a3b8; font-size:0.75rem; margin-top:0.5rem; }
+        footer { text-align:center; padding:3rem; color:#94a3b8; font-size:0.8rem; margin-top:4rem; border-top:1px solid #e2e8f0; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <img src="https://market-watch.xyz/logo.svg" alt="MW" style="height:2rem;" onerror="this.style.display='none'">
+            <span>MARKET WATCH</span>
+        </div>
+    </nav>
+    <div class="container">
+        <h1><i class="fas fa-broadcast-tower" style="color:#3b82f6;"></i> Live Portfolios</h1>
+        <p class="subtitle">Select a portfolio to view the Time Machine dashboard.</p>
+        <div class="portfolio-grid">
+            <a href="us/index.html" class="portfolio-card">
+                <div class="portfolio-name"><i class="fas fa-flag-usa" style="color:#3b82f6;"></i> US <span class="badge-live">LIVE</span></div>
+                <div class="portfolio-desc">US stocks portfolio</div>
+                <div class="last-update">Last update: 2026-01-27 21:42</div>
+            </a>
+        </div>
+    </div>
+    <footer>&copy; 2026 Market Watch. Past performance is not indicative of future results.</footer>
+</body>
+</html>
