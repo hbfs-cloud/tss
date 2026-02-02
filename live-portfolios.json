@@ -4,19 +4,23 @@
     "name": "US",
     "icon": "fa-flag-usa",
     "color": "#3b82f6",
-    "equity": 101138.15,
-    "cash": 48.67,
+    "equity": 100531.89,
+    "cash": 41.93,
     "positions": 16,
     "date": "2026-01-30",
-    "timestamp": "2026-02-02T18:01:14+01:00",
+    "timestamp": "2026-02-02T18:03:56+01:00",
     "currency": "USD",
-    "ret": 0,
-    "max_dd": 0,
+    "ret": -0.005994177271385632,
+    "max_dd": -0.005994177271385632,
     "sharpe": 0,
-    "vol": 0,
+    "vol": 0.0,
     "peak_equity": 101138.15,
-    "equity_curve": [],
+    "equity_curve": [
+      101138.15,
+      100531.91
+    ],
     "equity_curve_dates": [
+      "2026-01-30T15:30:00+01:00",
       "2026-01-30T15:30:00+01:00"
     ]
   },
