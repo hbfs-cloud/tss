@@ -1,7 +1,7 @@
 [
   {
     "id": "us",
-    "name": "US",
+    "name": "US Trend Hybrid (35 pos)",
     "icon": "fa-flag-usa",
     "color": "#3b82f6",
     "equity": 100047.27,
@@ -213,7 +213,7 @@
   },
   {
     "id": "us_highvol",
-    "name": "US HIGHVOL",
+    "name": "US HighVol Breakout (14 pos)",
     "icon": "fa-bolt",
     "color": "#f59e0b",
     "equity": 101033.02,
