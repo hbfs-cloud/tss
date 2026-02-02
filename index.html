@@ -106,6 +106,60 @@
 
     <!-- CONTENT -->
     <main class="max-w-7xl mx-auto px-4 py-8 flex-grow w-full">
+        <!-- LIVE PORTFOLIOS SECTION -->
+        <section class="mb-12">
+            <header class="mb-6">
+                <h1 class="text-3xl md:text-4xl font-black mb-2 text-slate-900 flex items-center gap-3">
+                    <i class="fas fa-broadcast-tower text-emerald-500"></i> Live Portfolios
+                </h1>
+                <p class="text-slate-500">Real-time trading portfolios with Time Machine view.</p>
+            </header>
+            <div id="live-portfolios" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="col-span-full text-center py-8 text-slate-400"><i class="fas fa-spinner fa-spin mr-2"></i>Loading live portfolios...</div>
+            </div>
+        </section>
+        <script>
+        (async function loadLivePortfolios() {
+            const container = document.getElementById('live-portfolios');
+            try {
+                const res = await fetch('live-portfolios.json?t=' + Date.now());
+                if (!res.ok) throw new Error('Not found');
+                const portfolios = await res.json();
+                if (!portfolios.length) {
+                    container.innerHTML = '<div class="col-span-full text-center py-8 text-slate-400">No live portfolios yet.</div>';
+                    return;
+                }
+                container.innerHTML = portfolios.map(p => {
+                    const icon = p.id.includes('highvol') ? 'fa-bolt' : (p.id.includes('us') ? 'fa-flag-usa' : 'fa-chart-line');
+                    const color = p.id.includes('highvol') ? '#f59e0b' : '#3b82f6';
+                    const equity = p.equity ? p.equity.toLocaleString('en-US', {style:'currency', currency: p.currency || 'USD', maximumFractionDigits:0}) : '-';
+                    return `
+                    <a href="${p.id}/index.html" class="mw-card cursor-pointer hover:shadow-lg transition-shadow" style="border-left: 4px solid ${color};">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <span class="text-xs font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700 uppercase">LIVE</span>
+                                <h3 class="text-lg font-bold mt-1 text-slate-900 flex items-center gap-2">
+                                    <i class="fas ${icon}" style="color: ${color};"></i> ${p.name}
+                                </h3>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xl font-black text-slate-800">${equity}</div>
+                                <div class="text-xs text-slate-400">Equity</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 text-sm">
+                            <div><span class="text-slate-400">Positions:</span> <span class="font-bold">${p.positions}</span></div>
+                            <div><span class="text-slate-400">Date:</span> <span class="font-bold">${p.date}</span></div>
+                        </div>
+                    </a>`;
+                }).join('');
+            } catch(e) {
+                container.innerHTML = '<div class="col-span-full text-center py-8 text-slate-400">No live portfolios available.</div>';
+            }
+        })();
+        </script>
+
+        <!-- BACKTESTED STRATEGIES SECTION -->
         <header class="mb-8">
             <h1 class="text-3xl md:text-4xl font-black mb-2 text-slate-900">Trading Strategies</h1>
             <p class="text-slate-500">Select a strategy to view detailed performance analysis.</p>

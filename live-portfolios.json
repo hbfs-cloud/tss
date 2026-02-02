@@ -1,0 +1,22 @@
+[
+  {
+    "id": "us",
+    "name": "US",
+    "equity": 101504.4,
+    "cash": 121.37,
+    "positions": 16,
+    "date": "2026-01-30",
+    "timestamp": "2026-02-02T17:22:22+01:00",
+    "currency": "USD"
+  },
+  {
+    "id": "us_highvol",
+    "name": "US HIGHVOL",
+    "equity": 100633.62,
+    "cash": 77120.04,
+    "positions": 4,
+    "date": "2026-01-30",
+    "timestamp": "2026-02-02T17:22:35+01:00",
+    "currency": "USD"
+  }
+]
