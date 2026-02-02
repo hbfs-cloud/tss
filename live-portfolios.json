@@ -19,5 +19,26 @@
     "equity_curve_dates": [
       "2026-01-30T15:30:00+01:00"
     ]
+  },
+  {
+    "id": "us_highvol",
+    "name": "US HIGHVOL",
+    "icon": "fa-bolt",
+    "color": "#f59e0b",
+    "equity": 100878.7,
+    "cash": 77120.04,
+    "positions": 4,
+    "date": "2026-01-30",
+    "timestamp": "2026-02-02T18:01:28+01:00",
+    "currency": "USD",
+    "ret": 0,
+    "max_dd": 0,
+    "sharpe": 0,
+    "vol": 0,
+    "peak_equity": 100875.23,
+    "equity_curve": [],
+    "equity_curve_dates": [
+      "2026-01-30T15:30:00+01:00"
+    ]
   }
 ]
