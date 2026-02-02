@@ -4,7 +4,7 @@
     "name": "US Trend Hybrid (35 pos)",
     "icon": "fa-flag-usa",
     "color": "#3b82f6",
-    "equity": 100176.08,
+    "equity": 100109.59,
     "cash": 13.29,
     "positions_count": 16,
     "positions": [
@@ -12,34 +12,34 @@
         "symbol": "FDX",
         "qty": 36,
         "entry": 323.65,
-        "price": 332.16,
-        "pnl": 306.4,
-        "pnl_pct": 2.63,
-        "mkt_value": 11957.76,
+        "price": 332.0,
+        "pnl": 300.46,
+        "pnl_pct": 2.58,
+        "mkt_value": 11951.82,
         "stop": 312.16,
-        "risk_pct": 6.02
+        "risk_pct": 5.97
       },
       {
         "symbol": "TAK",
         "qty": 677,
         "entry": 17.34,
         "price": 17.5,
-        "pnl": 106.56,
-        "pnl_pct": 0.91,
-        "mkt_value": 11847.5,
+        "pnl": 109.94,
+        "pnl_pct": 0.94,
+        "mkt_value": 11850.89,
         "stop": 16.79,
-        "risk_pct": 4.06
+        "risk_pct": 4.08
       },
       {
         "symbol": "TTC",
         "qty": 127,
         "entry": 91.56,
-        "price": 93.19,
-        "pnl": 206.38,
-        "pnl_pct": 1.77,
-        "mkt_value": 11834.5,
+        "price": 93.25,
+        "pnl": 214.0,
+        "pnl_pct": 1.84,
+        "mkt_value": 11842.11,
         "stop": 88.88,
-        "risk_pct": 4.62
+        "risk_pct": 4.68
       },
       {
         "symbol": "DVAX",
@@ -89,12 +89,12 @@
         "symbol": "TRX",
         "qty": 7158,
         "entry": 1.6,
-        "price": 1.59,
-        "pnl": -29.57,
-        "pnl_pct": -0.26,
-        "mkt_value": 11417.01,
+        "price": 1.58,
+        "pnl": -101.15,
+        "pnl_pct": -0.88,
+        "mkt_value": 11345.43,
         "stop": 1.32,
-        "risk_pct": 17.24
+        "risk_pct": 16.72
       },
       {
         "symbol": "UNF",
@@ -144,10 +144,10 @@
         "symbol": "CVX",
         "qty": 1,
         "entry": 173.52,
-        "price": 175.08,
-        "pnl": 1.56,
-        "pnl_pct": 0.9,
-        "mkt_value": 175.08,
+        "price": 175.07,
+        "pnl": 1.55,
+        "pnl_pct": 0.89,
+        "mkt_value": 175.07,
         "stop": 172.01,
         "risk_pct": 1.75
       },
@@ -155,12 +155,12 @@
         "symbol": "DBRG",
         "qty": 7,
         "entry": 15.4,
-        "price": 15.41,
-        "pnl": 0.1,
-        "pnl_pct": 0.1,
-        "mkt_value": 107.91,
+        "price": 15.42,
+        "pnl": 0.14,
+        "pnl_pct": 0.13,
+        "mkt_value": 107.94,
         "stop": 15.29,
-        "risk_pct": 0.81
+        "risk_pct": 0.84
       },
       {
         "symbol": "RNA",
@@ -188,18 +188,20 @@
     "pending_count": 0,
     "pending_orders": [],
     "date": "2026-01-30",
-    "timestamp": "2026-02-02T19:02:07+01:00",
+    "timestamp": "2026-02-02T19:04:33+01:00",
     "currency": "USD",
-    "ret": 0.0017608000000000174,
-    "max_dd": 0,
-    "sharpe": 0,
-    "vol": 0.0,
+    "ret": 0.001095899999999965,
+    "max_dd": -0.0007012388919766691,
+    "sharpe": 4.887237004745984,
+    "vol": 0.016083357095987603,
     "peak_equity": 100179.84,
     "equity_curve": [
       100047.27,
-      100179.84
+      100179.84,
+      100109.59
     ],
     "equity_curve_dates": [
+      "2026-01-30T15:30:00+01:00",
       "2026-01-30T15:30:00+01:00",
       "2026-01-30T15:30:00+01:00"
     ]

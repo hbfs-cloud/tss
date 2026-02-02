@@ -326,65 +326,32 @@
         const container = document.getElementById(containerId);
         if (!container) return;
         if (!items || !items.length) {
-            container.innerHTML = '<tr><td colspan="10" class="no-data">No holdings</td></tr>';
+            container.innerHTML = '<tr><td colspan="3" class="no-data">No holdings</td></tr>';
             return;
         }
 
         const rows = items.map(item => {
             const isPending = item.isPending;
-            const pnlClass = (item.pnl_pct || 0) >= 0 ? 'positive' : 'negative';
             const symbol = item.symbol;
 
-            if (isPending) {
-                return `<tr>
-                    <td>
-                        <div class="symbol-cell">
-                            <span class="symbol-name">${symbol}</span>
-                            <span class="pending-tag">PENDING</span>
-                            <div class="symbol-links">
-                                <a href="https://finance.yahoo.com/quote/${symbol}" target="_blank" class="symbol-link" title="Yahoo">Y</a>
-                                <a href="https://www.tradingview.com/chart/?symbol=${symbol}" target="_blank" class="symbol-link" title="TradingView">TV</a>
-                            </div>
+            return `<tr>
+                <td>
+                    <div class="symbol-cell">
+                        <span class="symbol-name">${symbol}</span>
+                        ${isPending ? '<span class="pending-tag">PENDING</span>' : ''}
+                        <div class="symbol-links">
+                            <a href="https://finance.yahoo.com/quote/${symbol}" target="_blank" class="symbol-link" title="Yahoo">Y</a>
+                            <a href="https://www.tradingview.com/chart/?symbol=${symbol}" target="_blank" class="symbol-link" title="TradingView">TV</a>
                         </div>
-                    </td>
-                    <td class="chart-cell">
-                        <a href="https://finviz.com/quote.ashx?t=${symbol}" target="_blank">
-                            <img src="${getFinvizChartUrl(symbol)}" alt="${symbol}" loading="lazy" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'">
-                        </a>
-                    </td>
-                    <td class="text-right font-mono">${item.qty}</td>
-                    <td class="text-right font-mono">${formatCurrency(item.limit_price, 2)}</td>
-                    <td class="text-right font-mono">-</td>
-                    <td class="text-right font-mono">-</td>
-                    <td class="text-right font-mono">-</td>
-                    <td class="text-right font-mono">${formatCurrency(item.value, 0)}</td>
-                    <td class="text-right font-mono">${item.stop_price > 0 ? formatCurrency(item.stop_price, 2) : '-'}</td>
-                </tr>`;
-            } else {
-                return `<tr>
-                    <td>
-                        <div class="symbol-cell">
-                            <span class="symbol-name">${symbol}</span>
-                            <div class="symbol-links">
-                                <a href="https://finance.yahoo.com/quote/${symbol}" target="_blank" class="symbol-link" title="Yahoo">Y</a>
-                                <a href="https://www.tradingview.com/chart/?symbol=${symbol}" target="_blank" class="symbol-link" title="TradingView">TV</a>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="chart-cell">
-                        <a href="https://finviz.com/quote.ashx?t=${symbol}" target="_blank">
-                            <img src="${getFinvizChartUrl(symbol)}" alt="${symbol}" loading="lazy" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'">
-                        </a>
-                    </td>
-                    <td class="text-right font-mono">${item.qty.toLocaleString()}</td>
-                    <td class="text-right font-mono">${formatCurrency(item.entry, 2)}</td>
-                    <td class="text-right font-mono">${formatCurrency(item.price, 2)}</td>
-                    <td class="text-right font-mono ${pnlClass}">${formatPct(item.pnl_pct)}</td>
-                    <td class="text-right font-mono ${pnlClass}">${formatCurrency(item.pnl, 2)}</td>
-                    <td class="text-right font-mono">${formatCurrency(item.mkt_value, 0)}</td>
-                    <td class="text-right font-mono">${item.stop > 0 ? formatCurrency(item.stop, 2) : '-'}</td>
-                </tr>`;
-            }
+                    </div>
+                </td>
+                <td class="chart-cell">
+                    <a href="https://finviz.com/quote.ashx?t=${symbol}" target="_blank">
+                        <img src="${getFinvizChartUrl(symbol)}" alt="${symbol}" loading="lazy" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'">
+                    </a>
+                </td>
+                <td class="text-right font-mono">${formatCurrency(isPending ? item.limit_price : item.price, 2)}</td>
+            </tr>`;
         }).join('');
 
         container.innerHTML = rows;
@@ -470,13 +437,7 @@
                                     <tr>
                                         <th onclick="sortColumn('${p.id}', 'symbol', this)">Symbol <i class="fas fa-sort sort-icon"></i></th>
                                         <th>Chart</th>
-                                        <th class="text-right" onclick="sortColumn('${p.id}', 'qty', this)">Qty <i class="fas fa-sort sort-icon"></i></th>
-                                        <th class="text-right" onclick="sortColumn('${p.id}', 'entry', this)">Entry <i class="fas fa-sort sort-icon"></i></th>
                                         <th class="text-right" onclick="sortColumn('${p.id}', 'price', this)">Price <i class="fas fa-sort sort-icon"></i></th>
-                                        <th class="text-right" onclick="sortColumn('${p.id}', 'pnl_pct', this)">P&L % <i class="fas fa-sort sort-icon"></i></th>
-                                        <th class="text-right" onclick="sortColumn('${p.id}', 'pnl', this)">P&L $ <i class="fas fa-sort sort-icon"></i></th>
-                                        <th class="text-right sorted" onclick="sortColumn('${p.id}', 'mkt_value', this)">Value <i class="fas fa-sort-down sort-icon"></i></th>
-                                        <th class="text-right" onclick="sortColumn('${p.id}', 'stop', this)">Stop <i class="fas fa-sort sort-icon"></i></th>
                                     </tr>
                                 </thead>
                                 <tbody id="tbody-${p.id}"></tbody>
@@ -504,10 +465,10 @@
                 }));
 
                 const allItems = [...positions, ...pending];
-                allItems.sort((a, b) => (b.mkt_value || b.value || 0) - (a.mkt_value || a.value || 0));
+                allItems.sort((a, b) => a.symbol.localeCompare(b.symbol));
 
                 window.portfolioData[p.id] = allItems;
-                window.sortState[p.id] = { column: 'mkt_value', direction: 'desc' };
+                window.sortState[p.id] = { column: 'symbol', direction: 'asc' };
 
                 renderWatchlistTable(allItems, 'tbody-' + p.id, p.id);
 
