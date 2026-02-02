@@ -4,7 +4,7 @@
     "name": "US Trend Hybrid (35 pos)",
     "icon": "fa-flag-usa",
     "color": "#3b82f6",
-    "equity": 100161.6,
+    "equity": 100133.78,
     "cash": 13.29,
     "positions_count": 16,
     "positions": [
@@ -12,34 +12,34 @@
         "symbol": "FDX",
         "qty": 36,
         "entry": 323.65,
-        "price": 331.42,
-        "pnl": 279.76,
-        "pnl_pct": 2.4,
-        "mkt_value": 11931.12,
+        "price": 331.34,
+        "pnl": 276.88,
+        "pnl_pct": 2.38,
+        "mkt_value": 11928.24,
         "stop": 312.16,
-        "risk_pct": 5.81
+        "risk_pct": 5.79
       },
       {
         "symbol": "TTC",
         "qty": 127,
         "entry": 91.56,
-        "price": 93.25,
-        "pnl": 215.26,
-        "pnl_pct": 1.85,
-        "mkt_value": 11843.39,
+        "price": 93.29,
+        "pnl": 219.71,
+        "pnl_pct": 1.89,
+        "mkt_value": 11847.83,
         "stop": 88.88,
-        "risk_pct": 4.69
+        "risk_pct": 4.73
       },
       {
         "symbol": "TAK",
         "qty": 677,
         "entry": 17.34,
         "price": 17.48,
-        "pnl": 96.41,
-        "pnl_pct": 0.82,
-        "mkt_value": 11837.34,
+        "pnl": 89.64,
+        "pnl_pct": 0.76,
+        "mkt_value": 11830.58,
         "stop": 16.79,
-        "risk_pct": 3.97
+        "risk_pct": 3.92
       },
       {
         "symbol": "DVAX",
@@ -78,23 +78,23 @@
         "symbol": "PHIN",
         "qty": 163,
         "entry": 72.07,
-        "price": 70.22,
-        "pnl": -300.74,
-        "pnl_pct": -2.56,
-        "mkt_value": 11446.67,
+        "price": 70.25,
+        "pnl": -297.48,
+        "pnl_pct": -2.53,
+        "mkt_value": 11449.94,
         "stop": 68.64,
-        "risk_pct": 2.26
+        "risk_pct": 2.28
       },
       {
         "symbol": "TRX",
         "qty": 7158,
         "entry": 1.6,
-        "price": 1.6,
-        "pnl": -3.8,
-        "pnl_pct": -0.03,
-        "mkt_value": 11442.78,
+        "price": 1.59,
+        "pnl": -29.57,
+        "pnl_pct": -0.26,
+        "mkt_value": 11417.01,
         "stop": 1.32,
-        "risk_pct": 17.43
+        "risk_pct": 17.24
       },
       {
         "symbol": "UNF",
@@ -133,34 +133,34 @@
         "symbol": "BCS",
         "qty": 9,
         "entry": 27.19,
-        "price": 27.5,
-        "pnl": 2.83,
-        "pnl_pct": 1.16,
-        "mkt_value": 247.54,
+        "price": 27.49,
+        "pnl": 2.7,
+        "pnl_pct": 1.1,
+        "mkt_value": 247.41,
         "stop": 26.04,
-        "risk_pct": 5.33
+        "risk_pct": 5.27
       },
       {
         "symbol": "CVX",
         "qty": 1,
         "entry": 173.52,
-        "price": 175.21,
-        "pnl": 1.69,
-        "pnl_pct": 0.97,
-        "mkt_value": 175.21,
+        "price": 175.26,
+        "pnl": 1.74,
+        "pnl_pct": 1.0,
+        "mkt_value": 175.26,
         "stop": 172.01,
-        "risk_pct": 1.83
+        "risk_pct": 1.85
       },
       {
         "symbol": "DBRG",
         "qty": 7,
         "entry": 15.4,
         "price": 15.41,
-        "pnl": 0.1,
-        "pnl_pct": 0.1,
-        "mkt_value": 107.91,
+        "pnl": 0.07,
+        "pnl_pct": 0.06,
+        "mkt_value": 107.87,
         "stop": 15.29,
-        "risk_pct": 0.81
+        "risk_pct": 0.78
       },
       {
         "symbol": "RNA",
@@ -179,21 +179,21 @@
         "entry": 11.9,
         "price": 11.89,
         "pnl": -0.01,
-        "pnl_pct": -0.08,
+        "pnl_pct": -0.04,
         "mkt_value": 11.89,
         "stop": 11.84,
-        "risk_pct": 0.42
+        "risk_pct": 0.46
       }
     ],
     "pending_count": 0,
     "pending_orders": [],
     "date": "2026-01-30",
-    "timestamp": "2026-02-02T19:10:54+01:00",
+    "timestamp": "2026-02-02T19:13:39+01:00",
     "currency": "USD",
-    "ret": 0.0016160000000000581,
+    "ret": 0.0013377999999999884,
     "max_dd": -0.0007012388919766691,
-    "sharpe": 6.623757613792061,
-    "vol": 0.010247783738562338,
+    "sharpe": 4.836424908802566,
+    "vol": 0.00996248642613489,
     "peak_equity": 100179.84,
     "equity_curve": [
       100000.0,
@@ -202,9 +202,11 @@
       100109.59,
       100176.55,
       100163.49,
-      100161.6
+      100161.6,
+      100133.78
     ],
     "equity_curve_dates": [
+      "2026-01-30T15:30:00+01:00",
       "2026-01-30T15:30:00+01:00",
       "2026-01-30T15:30:00+01:00",
       "2026-01-30T15:30:00+01:00",

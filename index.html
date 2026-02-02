@@ -24,88 +24,99 @@
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-        .container { max-width: 1600px; margin: 0 auto; padding: 2rem 1rem; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
 
-        header { text-align: center; margin-bottom: 2rem; }
-        header h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.75rem; }
-        header p { color: var(--text-muted); font-size: 0.9rem; }
+        header { text-align: center; margin-bottom: 2.5rem; }
+        header h1 { font-size: 1.75rem; font-weight: 800; margin-bottom: 0.25rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+        header p { color: var(--text-muted); font-size: 0.85rem; }
 
-        .portfolios { display: flex; flex-direction: column; gap: 2rem; }
+        .portfolios {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            gap: 1.5rem;
+        }
+        @media (max-width: 520px) {
+            .portfolios { grid-template-columns: 1fr; }
+        }
 
         .portfolio-section {
             background: var(--bg-card);
-            border-radius: 16px;
+            border-radius: 12px;
             overflow: hidden;
             border: 1px solid var(--border);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
 
         .portfolio-header {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .portfolio-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.25rem 1.5rem;
-            border-bottom: 1px solid var(--border);
-            flex-wrap: wrap;
-            gap: 1rem;
+            margin-bottom: 0.75rem;
         }
 
         .portfolio-title {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.5rem;
         }
-        .portfolio-title i { font-size: 1.25rem; }
-        .portfolio-title h2 { font-size: 1.25rem; font-weight: 700; }
+        .portfolio-title i { font-size: 1rem; }
+        .portfolio-title h2 { font-size: 1rem; font-weight: 700; }
         .portfolio-title .badge {
-            font-size: 0.55rem;
+            font-size: 0.5rem;
             font-weight: 700;
-            padding: 0.15rem 0.4rem;
-            border-radius: 4px;
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
             background: var(--green);
             color: white;
             text-transform: uppercase;
         }
 
+        .view-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.4rem 0.75rem;
+            background: var(--blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 0.7rem;
+            transition: all 0.2s;
+        }
+        .view-btn:hover { background: #2563eb; }
+
         .portfolio-metrics {
             display: flex;
-            gap: 1.25rem;
+            gap: 0.5rem;
             align-items: center;
-            flex-wrap: wrap;
         }
 
         .metric {
+            flex: 1;
             text-align: center;
-            min-width: 70px;
+            padding: 0.5rem 0.25rem;
+            background: var(--bg-table);
+            border-radius: 6px;
         }
-        .metric-value { font-size: 1.1rem; font-weight: 700; }
-        .metric-label { font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        .metric-value { font-size: 0.9rem; font-weight: 700; }
+        .metric-label { font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-top: 0.1rem; }
 
         .positive { color: var(--green); }
         .negative { color: var(--red); }
 
         .equity-spark {
-            width: 140px;
-            height: 45px;
+            flex: 1.5;
+            height: 40px;
             background: var(--bg-table);
             border-radius: 6px;
             padding: 4px;
         }
-
-        .view-btn {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.6rem 1rem;
-            background: var(--blue);
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            transition: all 0.2s;
-        }
-        .view-btn:hover { background: #2563eb; }
 
         /* Watchlist */
         .watchlist-header {
@@ -215,12 +226,17 @@
         }
 
         .chart-cell {
-            width: 80px;
-            height: 35px;
+            width: 160px;
+            height: 60px;
+            padding: 2px;
         }
-        .chart-cell canvas {
-            width: 100%;
-            height: 100%;
+        .chart-cell a { display: block; }
+        .chart-cell img {
+            width: 160px;
+            height: 60px;
+            object-fit: contain;
+            border-radius: 4px;
+            background: #fff;
         }
 
         .text-right { text-align: right; }
@@ -301,6 +317,10 @@
         });
     }
 
+    function getFinvizChartUrl(symbol) {
+        return `https://charts2.finviz.com/chart.ashx?t=${symbol}&ty=c&ta=0&p=d&s=m`;
+    }
+
     function sortData(data, column, direction) {
         return [...data].sort((a, b) => {
             let valA = a[column];
@@ -320,10 +340,9 @@
             return;
         }
 
-        const rows = items.map((item, idx) => {
+        const rows = items.map(item => {
             const isPending = item.isPending;
             const symbol = item.symbol;
-            const canvasId = `chart-${portfolioId}-${idx}`;
 
             return `<tr>
                 <td>
@@ -337,50 +356,16 @@
                     </div>
                 </td>
                 <td class="chart-cell">
-                    <canvas id="${canvasId}"></canvas>
+                    <a href="https://finviz.com/quote.ashx?t=${symbol}" target="_blank">
+                        <img src="${getFinvizChartUrl(symbol)}" alt="${symbol}" loading="lazy"
+                             onerror="this.style.display='none'">
+                    </a>
                 </td>
                 <td class="text-right font-mono">${formatCurrency(isPending ? item.limit_price : item.price, 2)}</td>
             </tr>`;
         }).join('');
 
         container.innerHTML = rows;
-
-        // Create sparklines for each item
-        items.forEach((item, idx) => {
-            const canvasId = `chart-${portfolioId}-${idx}`;
-            const canvas = document.getElementById(canvasId);
-            if (!canvas) return;
-
-            const isPending = item.isPending;
-            const entry = isPending ? item.limit_price : item.entry;
-            const current = isPending ? item.limit_price : item.price;
-            const isUp = current >= entry;
-            const color = isUp ? '#10b981' : '#ef4444';
-
-            // Create simple 2-point sparkline (entry → current)
-            new Chart(canvas, {
-                type: 'line',
-                data: {
-                    labels: ['Entry', 'Now'],
-                    datasets: [{
-                        data: [entry, current],
-                        borderColor: color,
-                        borderWidth: 2,
-                        fill: true,
-                        backgroundColor: color + '20',
-                        pointRadius: 0,
-                        tension: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, tooltip: { enabled: false } },
-                    scales: { x: { display: false }, y: { display: false } },
-                    animation: false
-                }
-            });
-        });
     }
 
     (async function() {
@@ -409,14 +394,18 @@
                 const sparkColor = ret >= 0 ? '#10b981' : '#ef4444';
 
                 return `
-                <div class="portfolio-section" style="border-left: 4px solid ${p.color || '#3b82f6'};">
+                <div class="portfolio-section">
                     <div class="portfolio-header">
-                        <div class="portfolio-title">
-                            <i class="fas ${p.icon || 'fa-chart-line'}" style="color: ${p.color || '#3b82f6'};"></i>
-                            <h2>${p.name}</h2>
-                            <span class="badge">LIVE</span>
+                        <div class="portfolio-top">
+                            <div class="portfolio-title">
+                                <i class="fas ${p.icon || 'fa-chart-line'}" style="color: ${p.color || '#3b82f6'};"></i>
+                                <h2>${p.name}</h2>
+                                <span class="badge">LIVE</span>
+                            </div>
+                            <a href="${p.id}/" class="view-btn">
+                                <i class="fas fa-clock-rotate-left"></i> Time Machine
+                            </a>
                         </div>
-
                         <div class="portfolio-metrics">
                             <div class="metric">
                                 <div class="metric-value">${formatCurrency(equity, 0)}</div>
@@ -441,9 +430,6 @@
                             <div class="equity-spark">
                                 <canvas id="spark-${p.id}" style="width:100%;height:100%;"></canvas>
                             </div>
-                            <a href="${p.id}/" class="view-btn">
-                                <i class="fas fa-clock-rotate-left"></i> Time Machine
-                            </a>
                         </div>
                     </div>
 
