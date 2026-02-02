@@ -297,16 +297,26 @@
     async function loadExternalData() {
         if (snapshots === null) {
             try {
-                const [snapRes, fxRes] = await Promise.all([
-                    fetch('data/snapshots.json'),
-                    fetch('data/fx.json')
-                ]);
+                const snapRes = await fetch('data/snapshots.json');
                 snapshots = await snapRes.json();
-                fxHistory = await fxRes.json();
             } catch (e) {
-                console.error('Failed to load data:', e);
+                console.error('Failed to load snapshots:', e);
                 document.querySelector('.container').innerHTML = '<div class="card"><div class="card-body"><p class="empty">Failed to load data files.</p></div></div>';
                 return false;
+            }
+            // Load FX from root (1 file per currency: fx-usd.json, fx-eur.json, etc.)
+            if (fxHistory === null) {
+                fxHistory = {};
+                const currencies = ['USD', 'EUR', 'GBP', 'CHF', 'JPY', 'CAD', 'CNY', 'HKD', 'PLN', 'BRL', 'INR', 'ZAR', 'RUB'];
+                await Promise.all(currencies.map(async (ccy) => {
+                    try {
+                        const res = await fetch('../../fx-' + ccy.toLowerCase() + '.json');
+                        const data = await res.json();
+                        Object.assign(fxHistory, data); // Merge {CCY: {date: rate}}
+                    } catch (e) {
+                        // Currency file not available, skip
+                    }
+                }));
             }
         }
         currentIdx = snapshots.length - 1;
@@ -323,10 +333,13 @@
     function getCurrentDate() { return snapshots[currentIdx]?.date || null; }
 
     // ─── FX ───
-    function fxRateOnDate(pair, date) {
-        const h = fxHistory[pair];
+    // fxHistory format: {currency: {date: rate_to_EUR}}
+    // e.g. {USD: {"2026-01-27": 0.92}, EUR: {"2026-01-27": 1.0}}
+    function currencyRateOnDate(currency, date) {
+        const h = fxHistory[currency];
         if(!h) return null;
         if(h[date]) return h[date];
+        // Try previous days if exact date not found
         const d = new Date(date);
         for(let i = 1; i <= 7; i++) {
             d.setDate(d.getDate() - 1);
@@ -338,18 +351,11 @@
     function fxRate(from, to, date) {
         if(from === to) return 1;
         const dt = date || getCurrentDate();
-        let r = fxRateOnDate(from+to, dt);
-        if(r) return r;
-        r = fxRateOnDate(to+from, dt);
-        if(r) return 1/r;
-        // via USD
-        const a = fxRateOnDate(from+'USD', dt) || (fxRateOnDate('USD'+from, dt) ? 1/fxRateOnDate('USD'+from, dt) : null);
-        const b = fxRateOnDate('USD'+to, dt) || (fxRateOnDate(to+'USD', dt) ? 1/fxRateOnDate(to+'USD', dt) : null);
-        if(a && b) return a * b;
-        // via EUR
-        const c = fxRateOnDate(from+'EUR', dt) || (fxRateOnDate('EUR'+from, dt) ? 1/fxRateOnDate('EUR'+from, dt) : null);
-        const d2 = fxRateOnDate('EUR'+to, dt) || (fxRateOnDate(to+'EUR', dt) ? 1/fxRateOnDate(to+'EUR', dt) : null);
-        if(c && d2) return c * d2;
+        // Get both rates to EUR
+        const fromRate = currencyRateOnDate(from, dt);
+        const toRate = currencyRateOnDate(to, dt);
+        if(fromRate && toRate) return fromRate / toRate;
+        // Fallback: no conversion if FX data missing
         return 1;
     }
     function convertCcy(v, date) {
