@@ -211,7 +211,7 @@
     "name": "US HighVol Breakout (14 pos)",
     "icon": "fa-bolt",
     "color": "#f59e0b",
-    "equity": 100976.51,
+    "equity": 101001.61,
     "cash": 77120.04,
     "positions_count": 4,
     "positions": [
@@ -219,34 +219,34 @@
         "symbol": "WDC",
         "qty": 23,
         "entry": 245.8,
-        "price": 272.95,
-        "pnl": 624.45,
-        "pnl_pct": 11.05,
-        "mkt_value": 6277.85,
+        "price": 273.58,
+        "pnl": 638.94,
+        "pnl_pct": 11.3,
+        "mkt_value": 6292.34,
         "stop": 200.15,
-        "risk_pct": 26.67
+        "risk_pct": 26.84
       },
       {
         "symbol": "ALLO",
         "qty": 3260,
         "entry": 1.74,
         "price": 1.86,
-        "pnl": 407.42,
-        "pnl_pct": 7.2,
-        "mkt_value": 6063.6,
+        "pnl": 423.72,
+        "pnl_pct": 7.49,
+        "mkt_value": 6079.9,
         "stop": 1.37,
-        "risk_pct": 26.11
+        "risk_pct": 26.31
       },
       {
         "symbol": "TGB",
         "qty": 787,
         "entry": 7.6,
-        "price": 7.62,
-        "pnl": 15.74,
-        "pnl_pct": 0.26,
-        "mkt_value": 5996.94,
+        "price": 7.61,
+        "pnl": 7.87,
+        "pnl_pct": 0.13,
+        "mkt_value": 5989.07,
         "stop": 6.23,
-        "risk_pct": 18.19
+        "risk_pct": 18.08
       },
       {
         "symbol": "ELE",
@@ -288,18 +288,20 @@
       }
     ],
     "date": "2026-01-30",
-    "timestamp": "2026-02-02T19:02:24+01:00",
+    "timestamp": "2026-02-02T19:04:47+01:00",
     "currency": "USD",
-    "ret": 0.009765099999999948,
+    "ret": 0.010016100000000005,
     "max_dd": -0.0005593220909363029,
-    "sharpe": 0,
-    "vol": 0.0,
+    "sharpe": -6.105986221951173,
+    "vol": 0.0064124658139839506,
     "peak_equity": 101033.02,
     "equity_curve": [
       101033.02,
-      100976.51
+      100976.51,
+      101001.61
     ],
     "equity_curve_dates": [
+      "2026-01-30T15:30:00+01:00",
       "2026-01-30T15:30:00+01:00",
       "2026-01-30T15:30:00+01:00"
     ]
