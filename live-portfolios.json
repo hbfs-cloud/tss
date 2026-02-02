@@ -4,7 +4,7 @@
     "name": "US Trend Hybrid (35 pos)",
     "icon": "fa-flag-usa",
     "color": "#3b82f6",
-    "equity": 100163.49,
+    "equity": 100161.6,
     "cash": 13.29,
     "positions_count": 16,
     "positions": [
@@ -12,34 +12,34 @@
         "symbol": "FDX",
         "qty": 36,
         "entry": 323.65,
-        "price": 331.62,
-        "pnl": 286.96,
-        "pnl_pct": 2.46,
-        "mkt_value": 11938.32,
+        "price": 331.42,
+        "pnl": 279.76,
+        "pnl_pct": 2.4,
+        "mkt_value": 11931.12,
         "stop": 312.16,
-        "risk_pct": 5.87
+        "risk_pct": 5.81
       },
       {
         "symbol": "TTC",
         "qty": 127,
         "entry": 91.56,
-        "price": 93.3,
-        "pnl": 220.98,
-        "pnl_pct": 1.9,
-        "mkt_value": 11849.1,
+        "price": 93.25,
+        "pnl": 215.26,
+        "pnl_pct": 1.85,
+        "mkt_value": 11843.39,
         "stop": 88.88,
-        "risk_pct": 4.74
+        "risk_pct": 4.69
       },
       {
         "symbol": "TAK",
         "qty": 677,
         "entry": 17.34,
-        "price": 17.49,
-        "pnl": 99.79,
-        "pnl_pct": 0.85,
-        "mkt_value": 11840.73,
+        "price": 17.48,
+        "pnl": 96.41,
+        "pnl_pct": 0.82,
+        "mkt_value": 11837.34,
         "stop": 16.79,
-        "risk_pct": 4.0
+        "risk_pct": 3.97
       },
       {
         "symbol": "DVAX",
@@ -67,34 +67,34 @@
         "symbol": "CFLT",
         "qty": 381,
         "entry": 30.56,
-        "price": 30.55,
-        "pnl": -1.91,
-        "pnl_pct": -0.02,
-        "mkt_value": 11641.45,
+        "price": 30.56,
+        "pnl": 0,
+        "pnl_pct": 0.0,
+        "mkt_value": 11643.36,
         "stop": 30.38,
-        "risk_pct": 0.57
+        "risk_pct": 0.59
       },
       {
         "symbol": "PHIN",
         "qty": 163,
         "entry": 72.07,
-        "price": 70.3,
-        "pnl": -289.32,
-        "pnl_pct": -2.46,
-        "mkt_value": 11458.09,
+        "price": 70.22,
+        "pnl": -300.74,
+        "pnl_pct": -2.56,
+        "mkt_value": 11446.67,
         "stop": 68.64,
-        "risk_pct": 2.35
+        "risk_pct": 2.26
       },
       {
         "symbol": "TRX",
         "qty": 7158,
         "entry": 1.6,
-        "price": 1.59,
-        "pnl": -29.57,
-        "pnl_pct": -0.26,
-        "mkt_value": 11417.01,
+        "price": 1.6,
+        "pnl": -3.8,
+        "pnl_pct": -0.03,
+        "mkt_value": 11442.78,
         "stop": 1.32,
-        "risk_pct": 17.24
+        "risk_pct": 17.43
       },
       {
         "symbol": "UNF",
@@ -144,12 +144,12 @@
         "symbol": "CVX",
         "qty": 1,
         "entry": 173.52,
-        "price": 175.15,
-        "pnl": 1.63,
-        "pnl_pct": 0.94,
-        "mkt_value": 175.15,
+        "price": 175.21,
+        "pnl": 1.69,
+        "pnl_pct": 0.97,
+        "mkt_value": 175.21,
         "stop": 172.01,
-        "risk_pct": 1.79
+        "risk_pct": 1.83
       },
       {
         "symbol": "DBRG",
@@ -179,30 +179,33 @@
         "entry": 11.9,
         "price": 11.89,
         "pnl": -0.01,
-        "pnl_pct": -0.04,
+        "pnl_pct": -0.08,
         "mkt_value": 11.89,
         "stop": 11.84,
-        "risk_pct": 0.46
+        "risk_pct": 0.42
       }
     ],
     "pending_count": 0,
     "pending_orders": [],
     "date": "2026-01-30",
-    "timestamp": "2026-02-02T19:08:04+01:00",
+    "timestamp": "2026-02-02T19:10:54+01:00",
     "currency": "USD",
-    "ret": 0.0016349000000000524,
+    "ret": 0.0016160000000000581,
     "max_dd": -0.0007012388919766691,
-    "sharpe": 5.987471573667949,
-    "vol": 0.012230022129579481,
+    "sharpe": 6.623757613792061,
+    "vol": 0.010247783738562338,
     "peak_equity": 100179.84,
     "equity_curve": [
+      100000.0,
       100047.27,
       100179.84,
       100109.59,
       100176.55,
-      100163.49
+      100163.49,
+      100161.6
     ],
     "equity_curve_dates": [
+      "2026-01-30T15:30:00+01:00",
       "2026-01-30T15:30:00+01:00",
       "2026-01-30T15:30:00+01:00",
       "2026-01-30T15:30:00+01:00",
@@ -296,10 +299,11 @@
     "currency": "USD",
     "ret": 0.009639700000000011,
     "max_dd": -0.0006834399288470533,
-    "sharpe": -8.129794268420397,
-    "vol": 0.005295795758414117,
+    "sharpe": 7.273245010806705,
+    "vol": 0.0668476168855601,
     "peak_equity": 101033.02,
     "equity_curve": [
+      100000.0,
       101033.02,
       100976.51,
       101001.61,
