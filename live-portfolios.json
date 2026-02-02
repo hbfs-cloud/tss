@@ -213,7 +213,7 @@
     "name": "US HighVol Breakout (14 pos)",
     "icon": "fa-bolt",
     "color": "#f59e0b",
-    "equity": 101001.61,
+    "equity": 101007.31,
     "cash": 77120.04,
     "positions_count": 4,
     "positions": [
@@ -221,45 +221,45 @@
         "symbol": "WDC",
         "qty": 23,
         "entry": 245.8,
-        "price": 273.58,
-        "pnl": 638.94,
-        "pnl_pct": 11.3,
-        "mkt_value": 6292.34,
+        "price": 273.32,
+        "pnl": 633.08,
+        "pnl_pct": 11.2,
+        "mkt_value": 6286.47,
         "stop": 200.15,
-        "risk_pct": 26.84
+        "risk_pct": 26.77
       },
       {
         "symbol": "ALLO",
         "qty": 3260,
         "entry": 1.74,
-        "price": 1.86,
-        "pnl": 423.72,
-        "pnl_pct": 7.49,
-        "mkt_value": 6079.9,
+        "price": 1.87,
+        "pnl": 440.02,
+        "pnl_pct": 7.78,
+        "mkt_value": 6096.2,
         "stop": 1.37,
-        "risk_pct": 26.31
+        "risk_pct": 26.51
       },
       {
         "symbol": "TGB",
         "qty": 787,
         "entry": 7.6,
         "price": 7.61,
-        "pnl": 7.87,
-        "pnl_pct": 0.13,
-        "mkt_value": 5989.07,
+        "pnl": 3.94,
+        "pnl_pct": 0.07,
+        "mkt_value": 5985.14,
         "stop": 6.23,
-        "risk_pct": 18.08
+        "risk_pct": 18.03
       },
       {
         "symbol": "ELE",
         "qty": 268,
         "entry": 21.95,
-        "price": 20.6,
-        "pnl": -362.62,
-        "pnl_pct": -6.16,
-        "mkt_value": 5520.26,
+        "price": 20.59,
+        "pnl": -363.42,
+        "pnl_pct": -6.18,
+        "mkt_value": 5519.46,
         "stop": 17.19,
-        "risk_pct": 16.54
+        "risk_pct": 16.53
       }
     ],
     "pending_count": 3,
@@ -290,19 +290,21 @@
       }
     ],
     "date": "2026-01-30",
-    "timestamp": "2026-02-02T19:04:47+01:00",
+    "timestamp": "2026-02-02T19:06:21+01:00",
     "currency": "USD",
-    "ret": 0.010016100000000005,
+    "ret": 0.010073099999999977,
     "max_dd": -0.0005593220909363029,
-    "sharpe": -6.105986221951173,
-    "vol": 0.0064124658139839506,
+    "sharpe": -3.9050815640183103,
+    "vol": 0.005470419272004869,
     "peak_equity": 101033.02,
     "equity_curve": [
       101033.02,
       100976.51,
-      101001.61
+      101001.61,
+      101007.31
     ],
     "equity_curve_dates": [
+      "2026-01-30T15:30:00+01:00",
       "2026-01-30T15:30:00+01:00",
       "2026-01-30T15:30:00+01:00",
       "2026-01-30T15:30:00+01:00"
