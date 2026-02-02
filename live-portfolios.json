@@ -4,42 +4,42 @@
     "name": "US Trend Hybrid (35 pos)",
     "icon": "fa-flag-usa",
     "color": "#3b82f6",
-    "equity": 100047.27,
-    "cash": 24.42,
+    "equity": 100176.08,
+    "cash": 13.29,
     "positions_count": 16,
     "positions": [
       {
         "symbol": "FDX",
         "qty": 36,
         "entry": 323.65,
-        "price": 331.06,
-        "pnl": 266.8,
-        "pnl_pct": 2.29,
-        "mkt_value": 11918.16,
+        "price": 332.16,
+        "pnl": 306.4,
+        "pnl_pct": 2.63,
+        "mkt_value": 11957.76,
         "stop": 312.16,
-        "risk_pct": 5.71
+        "risk_pct": 6.02
       },
       {
         "symbol": "TAK",
         "qty": 677,
         "entry": 17.34,
-        "price": 17.52,
-        "pnl": 117.73,
-        "pnl_pct": 1.0,
-        "mkt_value": 11858.67,
+        "price": 17.5,
+        "pnl": 106.56,
+        "pnl_pct": 0.91,
+        "mkt_value": 11847.5,
         "stop": 16.79,
-        "risk_pct": 4.15
+        "risk_pct": 4.06
       },
       {
         "symbol": "TTC",
         "qty": 127,
         "entry": 91.56,
-        "price": 93.03,
-        "pnl": 187.32,
-        "pnl_pct": 1.61,
-        "mkt_value": 11815.44,
+        "price": 93.19,
+        "pnl": 206.38,
+        "pnl_pct": 1.77,
+        "mkt_value": 11834.5,
         "stop": 88.88,
-        "risk_pct": 4.47
+        "risk_pct": 4.62
       },
       {
         "symbol": "DVAX",
@@ -57,110 +57,110 @@
         "qty": 815,
         "entry": 14.3,
         "price": 14.29,
-        "pnl": -8.15,
-        "pnl_pct": -0.07,
-        "mkt_value": 11646.35,
+        "pnl": -4.08,
+        "pnl_pct": -0.03,
+        "mkt_value": 11650.42,
         "stop": 14.21,
-        "risk_pct": 0.56
+        "risk_pct": 0.59
       },
       {
         "symbol": "CFLT",
         "qty": 381,
         "entry": 30.56,
-        "price": 30.55,
-        "pnl": -3.81,
-        "pnl_pct": -0.03,
-        "mkt_value": 11639.55,
+        "price": 30.56,
+        "pnl": 0,
+        "pnl_pct": 0.0,
+        "mkt_value": 11643.36,
         "stop": 30.38,
-        "risk_pct": 0.56
+        "risk_pct": 0.59
       },
       {
         "symbol": "PHIN",
         "qty": 163,
         "entry": 72.07,
-        "price": 70.29,
-        "pnl": -290.14,
-        "pnl_pct": -2.47,
-        "mkt_value": 11457.27,
+        "price": 70.3,
+        "pnl": -289.32,
+        "pnl_pct": -2.46,
+        "mkt_value": 11458.09,
         "stop": 68.64,
         "risk_pct": 2.35
       },
       {
         "symbol": "TRX",
-        "qty": 7151,
+        "qty": 7158,
         "entry": 1.6,
-        "price": 1.58,
-        "pnl": -126.86,
-        "pnl_pct": -1.11,
-        "mkt_value": 11308.59,
+        "price": 1.59,
+        "pnl": -29.57,
+        "pnl_pct": -0.26,
+        "mkt_value": 11417.01,
         "stop": 1.32,
-        "risk_pct": 16.53
+        "risk_pct": 17.24
       },
       {
         "symbol": "UNF",
         "qty": 16,
         "entry": 218.88,
-        "price": 212.5,
-        "pnl": -102.06,
-        "pnl_pct": -2.91,
-        "mkt_value": 3400.08,
+        "price": 210.87,
+        "pnl": -128.22,
+        "pnl_pct": -3.66,
+        "mkt_value": 3373.92,
         "stop": 205.78,
-        "risk_pct": 3.16
+        "risk_pct": 2.41
       },
       {
         "symbol": "HI",
         "qty": 76,
         "entry": 31.91,
-        "price": 31.9,
-        "pnl": -0.76,
-        "pnl_pct": -0.03,
-        "mkt_value": 2424.4,
+        "price": 31.91,
+        "pnl": -0.38,
+        "pnl_pct": -0.02,
+        "mkt_value": 2424.78,
         "stop": 31.81,
-        "risk_pct": 0.28
+        "risk_pct": 0.3
       },
       {
         "symbol": "MSGS",
         "qty": 1,
         "entry": 288,
-        "price": 287.24,
-        "pnl": -0.76,
-        "pnl_pct": -0.26,
-        "mkt_value": 287.24,
+        "price": 287.9,
+        "pnl": -0.1,
+        "pnl_pct": -0.03,
+        "mkt_value": 287.9,
         "stop": 272.7,
-        "risk_pct": 5.06
+        "risk_pct": 5.28
       },
       {
         "symbol": "BCS",
         "qty": 9,
         "entry": 27.19,
-        "price": 27.46,
-        "pnl": 2.48,
-        "pnl_pct": 1.01,
-        "mkt_value": 247.19,
+        "price": 27.52,
+        "pnl": 3.02,
+        "pnl_pct": 1.23,
+        "mkt_value": 247.72,
         "stop": 26.04,
-        "risk_pct": 5.19
+        "risk_pct": 5.4
       },
       {
         "symbol": "CVX",
         "qty": 1,
         "entry": 173.52,
-        "price": 175.24,
-        "pnl": 1.72,
-        "pnl_pct": 0.99,
-        "mkt_value": 175.24,
+        "price": 175.08,
+        "pnl": 1.56,
+        "pnl_pct": 0.9,
+        "mkt_value": 175.08,
         "stop": 172.01,
-        "risk_pct": 1.84
+        "risk_pct": 1.75
       },
       {
         "symbol": "DBRG",
         "qty": 7,
         "entry": 15.4,
-        "price": 15.4,
-        "pnl": 0.04,
-        "pnl_pct": 0.03,
-        "mkt_value": 107.83,
+        "price": 15.41,
+        "pnl": 0.1,
+        "pnl_pct": 0.1,
+        "mkt_value": 107.91,
         "stop": 15.29,
-        "risk_pct": 0.75
+        "risk_pct": 0.81
       },
       {
         "symbol": "RNA",
@@ -185,29 +185,22 @@
         "risk_pct": 0.42
       }
     ],
-    "pending_count": 1,
-    "pending_orders": [
-      {
-        "symbol": "TRX",
-        "qty": 7,
-        "limit_price": 1.68,
-        "stop_price": 1.22,
-        "order_type": "LIMIT",
-        "value": 11.76
-      }
-    ],
+    "pending_count": 0,
+    "pending_orders": [],
     "date": "2026-01-30",
-    "timestamp": "2026-02-02T18:13:17+01:00",
+    "timestamp": "2026-02-02T19:02:07+01:00",
     "currency": "USD",
-    "ret": 0.00047270000000004076,
+    "ret": 0.0017608000000000174,
     "max_dd": 0,
     "sharpe": 0,
-    "vol": 0,
-    "peak_equity": 100047.27,
+    "vol": 0.0,
+    "peak_equity": 100179.84,
     "equity_curve": [
-      100047.27
+      100047.27,
+      100179.84
     ],
     "equity_curve_dates": [
+      "2026-01-30T15:30:00+01:00",
       "2026-01-30T15:30:00+01:00"
     ]
   },
