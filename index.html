@@ -7,68 +7,253 @@
     <title>Market Watch | Live Portfolios</title>
     <link rel="icon" href="https://market-watch.xyz/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #0f172a; min-height: 100vh; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
-
-        header { text-align: center; margin-bottom: 3rem; }
-        header h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.75rem; }
-        header p { color: #64748b; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; }
-
-        .card {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            border: 1px solid #e2e8f0;
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.2s, box-shadow 0.2s;
+        :root {
+            --bg: #0f172a;
+            --bg-card: #1e293b;
+            --bg-table: #334155;
+            --border: #475569;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --green: #10b981;
+            --red: #ef4444;
+            --blue: #3b82f6;
+            --amber: #f59e0b;
         }
-        .card:hover { transform: translateY(-2px); box-shadow: 0 8px 16px -4px rgba(0,0,0,0.1); }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem 1rem; }
 
-        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
-        .card-title { font-size: 1.25rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; }
-        .card-badge { font-size: 0.65rem; font-weight: 700; padding: 0.25rem 0.5rem; border-radius: 4px; background: #dcfce7; color: #166534; text-transform: uppercase; }
+        header { text-align: center; margin-bottom: 2rem; }
+        header h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.75rem; }
+        header p { color: var(--text-muted); font-size: 0.9rem; }
 
-        .card-return { text-align: right; }
-        .card-return-value { font-size: 1.75rem; font-weight: 800; }
-        .card-return-label { font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; }
+        .portfolios { display: flex; flex-direction: column; gap: 2rem; }
 
-        .positive { color: #10b981; }
-        .negative { color: #ef4444; }
+        .portfolio-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
 
-        .sparkline { height: 60px; background: #f8fafc; border-radius: 8px; margin-bottom: 1rem; overflow: hidden; }
+        .portfolio-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
 
-        .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-bottom: 1rem; }
-        .metric { background: #f8fafc; padding: 0.75rem 0.5rem; border-radius: 6px; text-align: center; }
-        .metric-label { font-size: 0.65rem; color: #94a3b8; text-transform: uppercase; margin-bottom: 0.25rem; }
-        .metric-value { font-size: 0.875rem; font-weight: 700; }
+        .portfolio-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .portfolio-title i { font-size: 1.5rem; }
+        .portfolio-title h2 { font-size: 1.5rem; font-weight: 700; }
+        .portfolio-title .badge {
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            background: var(--green);
+            color: white;
+            text-transform: uppercase;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
 
-        .card-footer { display: flex; gap: 1.5rem; font-size: 0.75rem; color: #94a3b8; margin-top: auto; }
-        .card-footer span { font-weight: 600; color: #64748b; }
+        .portfolio-metrics {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
 
-        footer { text-align: center; padding: 2rem; color: #94a3b8; font-size: 0.8rem; margin-top: 3rem; border-top: 1px solid #e2e8f0; }
+        .metric {
+            text-align: center;
+            min-width: 80px;
+        }
+        .metric-value { font-size: 1.25rem; font-weight: 700; }
+        .metric-label { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
 
-        .loading { text-align: center; padding: 3rem; color: #94a3b8; }
-        .no-data { text-align: center; padding: 3rem; color: #94a3b8; }
+        .positive { color: var(--green); }
+        .negative { color: var(--red); }
+
+        .sparkline-container {
+            width: 120px;
+            height: 40px;
+        }
+
+        .view-details {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: var(--blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .view-details:hover { background: #2563eb; transform: translateY(-1px); }
+
+        /* Watchlist Table */
+        .watchlist {
+            padding: 0 1.5rem 1.5rem;
+        }
+        .watchlist-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-top: 1rem;
+        }
+        .watchlist-header h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .watchlist-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: all 0.2s;
+        }
+        .watchlist-toggle:hover { border-color: var(--text); color: var(--text); }
+
+        .table-container {
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        th {
+            background: var(--bg-table);
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap;
+            border-bottom: 1px solid var(--border);
+        }
+        th:hover { color: var(--text); }
+        th .sort-icon { margin-left: 0.25rem; opacity: 0.5; }
+        th.sorted .sort-icon { opacity: 1; color: var(--blue); }
+
+        td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+        }
+        tr:last-child td { border-bottom: none; }
+        tr:hover { background: rgba(255,255,255,0.03); }
+
+        .symbol-cell {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .symbol-name {
+            font-weight: 700;
+            color: var(--text);
+        }
+        .symbol-links {
+            display: flex;
+            gap: 0.4rem;
+        }
+        .symbol-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 4px;
+            background: var(--bg-table);
+            color: var(--text-muted);
+            font-size: 0.65rem;
+            text-decoration: none;
+            transition: all 0.15s;
+        }
+        .symbol-link:hover { background: var(--blue); color: white; }
+        .symbol-link.yahoo:hover { background: #6001d2; }
+        .symbol-link.tv:hover { background: #2962ff; }
+
+        .pnl-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .pnl-bar-bg {
+            width: 60px;
+            height: 6px;
+            background: var(--bg-table);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .pnl-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.3s;
+        }
+
+        .text-right { text-align: right; }
+        .font-mono { font-family: 'SF Mono', Monaco, monospace; font-size: 0.8rem; }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .loading { text-align: center; padding: 4rem; color: var(--text-muted); }
+        .no-data { text-align: center; padding: 4rem; color: var(--text-muted); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .portfolio-header { flex-direction: column; align-items: flex-start; }
+            .portfolio-metrics { width: 100%; justify-content: space-between; }
+            .metric { min-width: auto; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-broadcast-tower" style="color: #10b981;"></i> Live Portfolios</h1>
-            <p>Real-time trading portfolios with Time Machine view</p>
+            <h1><i class="fas fa-broadcast-tower" style="color: var(--green);"></i> Live Portfolios</h1>
+            <p>Real-time trading portfolios with position tracking</p>
         </header>
 
-        <div id="portfolios" class="grid">
+        <div id="portfolios" class="portfolios">
             <div class="loading"><i class="fas fa-spinner fa-spin"></i> Loading portfolios...</div>
         </div>
     </div>
@@ -78,6 +263,102 @@
     </footer>
 
     <script>
+    const INITIAL_CAPITAL = 100000;
+
+    function formatCurrency(val, decimals = 0) {
+        return '$' + val.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+    }
+
+    function formatPct(val, decimals = 1) {
+        const sign = val >= 0 ? '+' : '';
+        return sign + val.toFixed(decimals) + '%';
+    }
+
+    function formatTimestamp(ts) {
+        if (!ts) return '-';
+        return ts.substring(0, 10) + ' ' + ts.substring(11, 16);
+    }
+
+    function createSparkline(canvasId, data, color) {
+        const canvas = document.getElementById(canvasId);
+        if (!canvas || !data || data.length < 2) return;
+
+        new Chart(canvas, {
+            type: 'line',
+            data: {
+                labels: data.map((_, i) => i),
+                datasets: [{
+                    data: data,
+                    borderColor: color,
+                    borderWidth: 2,
+                    fill: true,
+                    backgroundColor: color + '20',
+                    pointRadius: 0,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false }, tooltip: { enabled: false } },
+                scales: { x: { display: false }, y: { display: false } },
+                animation: false
+            }
+        });
+    }
+
+    function sortTable(tableBody, positions, column, direction) {
+        const sorted = [...positions].sort((a, b) => {
+            let valA = a[column];
+            let valB = b[column];
+            if (typeof valA === 'string') {
+                return direction === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
+            }
+            return direction === 'asc' ? valA - valB : valB - valA;
+        });
+        return sorted;
+    }
+
+    function renderPositionsTable(positions, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        const rows = positions.map(pos => {
+            const pnlClass = pos.pnl_pct >= 0 ? 'positive' : 'negative';
+            const pnlWidth = Math.min(Math.abs(pos.pnl_pct) * 5, 100);
+            const pnlColor = pos.pnl_pct >= 0 ? 'var(--green)' : 'var(--red)';
+
+            return `<tr>
+                <td>
+                    <div class="symbol-cell">
+                        <span class="symbol-name">${pos.symbol}</span>
+                        <div class="symbol-links">
+                            <a href="https://finance.yahoo.com/quote/${pos.symbol}" target="_blank" class="symbol-link yahoo" title="Yahoo Finance">Y</a>
+                            <a href="https://www.tradingview.com/chart/?symbol=${pos.symbol}" target="_blank" class="symbol-link tv" title="TradingView">TV</a>
+                        </div>
+                    </div>
+                </td>
+                <td class="text-right font-mono">${pos.qty.toLocaleString()}</td>
+                <td class="text-right font-mono">${formatCurrency(pos.entry, 2)}</td>
+                <td class="text-right font-mono">${formatCurrency(pos.price, 2)}</td>
+                <td class="text-right font-mono ${pnlClass}">${formatCurrency(pos.pnl, 2)}</td>
+                <td class="text-right">
+                    <div class="pnl-bar">
+                        <span class="font-mono ${pnlClass}">${formatPct(pos.pnl_pct)}</span>
+                        <div class="pnl-bar-bg">
+                            <div class="pnl-bar-fill" style="width: ${pnlWidth}%; background: ${pnlColor};"></div>
+                        </div>
+                    </div>
+                </td>
+                <td class="text-right font-mono">${formatCurrency(pos.mkt_value, 0)}</td>
+                <td class="text-right font-mono">${pos.stop > 0 ? formatCurrency(pos.stop, 2) : '-'}</td>
+                <td class="text-right font-mono ${pos.risk_pct > 10 ? 'negative' : ''}">${pos.risk_pct > 0 ? pos.risk_pct.toFixed(1) + '%' : '-'}</td>
+            </tr>`;
+        }).join('');
+
+        container.innerHTML = rows;
+    }
+
     (async function() {
         const container = document.getElementById('portfolios');
 
@@ -91,98 +372,143 @@
                 return;
             }
 
-            container.innerHTML = portfolios.map(p => {
-                const ret = p.ret || 0;
+            container.innerHTML = portfolios.map((p, idx) => {
+                const ret = (p.ret || 0) * 100;
                 const retClass = ret >= 0 ? 'positive' : 'negative';
-                const equity = p.equity ? '$' + p.equity.toLocaleString('en-US', {maximumFractionDigits: 0}) : '-';
+                const maxDD = Math.abs(p.max_dd || 0) * 100;
+                const vol = (p.vol || 0) * 100;
                 const sharpe = (p.sharpe || 0).toFixed(2);
-                const maxDD = ((p.max_dd || 0) * 100).toFixed(1);
-                const vol = ((p.vol || 0) * 100).toFixed(1);
+                const equity = p.equity || 0;
+                const sparkColor = ret >= 0 ? '#10b981' : '#ef4444';
+                const positionsCount = p.positions_count || 0;
 
                 return `
-                <a href="${p.id}/" class="card" style="border-left: 4px solid ${p.color || '#3b82f6'};">
-                    <div class="card-header">
-                        <div>
-                            <span class="card-badge">LIVE</span>
-                            <div class="card-title">
-                                <i class="fas ${p.icon || 'fa-chart-line'}" style="color: ${p.color || '#3b82f6'};"></i>
-                                ${p.name}
+                <div class="portfolio-section" style="border-left: 4px solid ${p.color || '#3b82f6'};">
+                    <div class="portfolio-header">
+                        <div class="portfolio-title">
+                            <i class="fas ${p.icon || 'fa-chart-line'}" style="color: ${p.color || '#3b82f6'};"></i>
+                            <h2>${p.name}</h2>
+                            <span class="badge">LIVE</span>
+                        </div>
+
+                        <div class="portfolio-metrics">
+                            <div class="metric">
+                                <div class="metric-value">${formatCurrency(equity, 0)}</div>
+                                <div class="metric-label">Equity</div>
                             </div>
-                        </div>
-                        <div class="card-return">
-                            <div class="card-return-value ${retClass}">${(ret * 100).toFixed(1)}%</div>
-                            <div class="card-return-label">Return</div>
-                        </div>
-                    </div>
-
-                    <div class="sparkline">
-                        <canvas id="spark-${p.id}" data-curve='${JSON.stringify(p.equity_curve || [])}' data-color="${ret >= 0 ? '#10b981' : '#ef4444'}"></canvas>
-                    </div>
-
-                    <div class="metrics">
-                        <div class="metric">
-                            <div class="metric-label">Equity</div>
-                            <div class="metric-value">${equity}</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-label">Sharpe</div>
-                            <div class="metric-value">${sharpe}</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-label">Max DD</div>
-                            <div class="metric-value negative">${maxDD}%</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-label">Vol</div>
-                            <div class="metric-value">${vol}%</div>
+                            <div class="metric">
+                                <div class="metric-value ${retClass}">${formatPct(ret)}</div>
+                                <div class="metric-label">Return</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">${sharpe}</div>
+                                <div class="metric-label">Sharpe</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value negative">${maxDD.toFixed(1)}%</div>
+                                <div class="metric-label">Max DD</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">${vol.toFixed(1)}%</div>
+                                <div class="metric-label">Vol</div>
+                            </div>
+                            <div class="sparkline-container">
+                                <canvas id="spark-${p.id}"></canvas>
+                            </div>
+                            <a href="${p.id}/" class="view-details">
+                                <i class="fas fa-clock-rotate-left"></i> Time Machine
+                            </a>
                         </div>
                     </div>
 
-                    <div class="card-footer">
-                        <div>Positions: <span>${p.positions}</span></div>
-                        <div>Updated: <span>${p.date}</span></div>
+                    <div class="watchlist" id="watchlist-${p.id}">
+                        <div class="watchlist-header">
+                            <h3><i class="fas fa-list"></i> Positions (${positionsCount})</h3>
+                            <button class="watchlist-toggle" onclick="toggleWatchlist('${p.id}')">
+                                <i class="fas fa-chevron-up" id="toggle-icon-${p.id}"></i>
+                            </button>
+                        </div>
+                        <div class="table-container" id="table-${p.id}">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th data-col="symbol" onclick="sortColumn('${p.id}', 'symbol', this)">Symbol <i class="fas fa-sort sort-icon"></i></th>
+                                        <th data-col="qty" onclick="sortColumn('${p.id}', 'qty', this)" class="text-right">Qty <i class="fas fa-sort sort-icon"></i></th>
+                                        <th data-col="entry" onclick="sortColumn('${p.id}', 'entry', this)" class="text-right">Entry <i class="fas fa-sort sort-icon"></i></th>
+                                        <th data-col="price" onclick="sortColumn('${p.id}', 'price', this)" class="text-right">Price <i class="fas fa-sort sort-icon"></i></th>
+                                        <th data-col="pnl" onclick="sortColumn('${p.id}', 'pnl', this)" class="text-right">P&L <i class="fas fa-sort sort-icon"></i></th>
+                                        <th data-col="pnl_pct" onclick="sortColumn('${p.id}', 'pnl_pct', this)" class="text-right">P&L % <i class="fas fa-sort sort-icon"></i></th>
+                                        <th data-col="mkt_value" onclick="sortColumn('${p.id}', 'mkt_value', this)" class="text-right sorted">Value <i class="fas fa-sort-down sort-icon"></i></th>
+                                        <th data-col="stop" onclick="sortColumn('${p.id}', 'stop', this)" class="text-right">Stop <i class="fas fa-sort sort-icon"></i></th>
+                                        <th data-col="risk_pct" onclick="sortColumn('${p.id}', 'risk_pct', this)" class="text-right">Risk % <i class="fas fa-sort sort-icon"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody-${p.id}"></tbody>
+                            </table>
+                        </div>
                     </div>
-                </a>`;
+                </div>`;
             }).join('');
 
-            // Render sparklines
-            setTimeout(() => {
-                portfolios.forEach(p => {
-                    const canvas = document.getElementById('spark-' + p.id);
-                    if (!canvas) return;
-                    const curve = JSON.parse(canvas.dataset.curve || '[]');
-                    if (curve.length < 2) return;
+            // Store data and render tables
+            window.portfolioData = {};
+            window.sortState = {};
 
-                    new Chart(canvas, {
-                        type: 'line',
-                        data: {
-                            labels: curve.map((_, i) => i),
-                            datasets: [{
-                                data: curve,
-                                borderColor: canvas.dataset.color,
-                                borderWidth: 2,
-                                fill: true,
-                                backgroundColor: canvas.dataset.color + '20',
-                                pointRadius: 0,
-                                tension: 0.3
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: { legend: { display: false }, tooltip: { enabled: false } },
-                            scales: { x: { display: false }, y: { display: false } },
-                            animation: false
-                        }
-                    });
-                });
-            }, 50);
+            portfolios.forEach(p => {
+                window.portfolioData[p.id] = p.positions || [];
+                window.sortState[p.id] = { column: 'mkt_value', direction: 'desc' };
+                renderPositionsTable(p.positions || [], 'tbody-' + p.id);
+
+                // Render sparklines
+                const curve = p.equity_curve || [];
+                if (curve.length >= 2) {
+                    createSparkline('spark-' + p.id, curve, p.ret >= 0 ? '#10b981' : '#ef4444');
+                }
+            });
 
         } catch(e) {
             console.error(e);
             container.innerHTML = '<div class="no-data">Failed to load portfolios.</div>';
         }
     })();
+
+    function toggleWatchlist(id) {
+        const table = document.getElementById('table-' + id);
+        const icon = document.getElementById('toggle-icon-' + id);
+        if (table.style.display === 'none') {
+            table.style.display = 'block';
+            icon.className = 'fas fa-chevron-up';
+        } else {
+            table.style.display = 'none';
+            icon.className = 'fas fa-chevron-down';
+        }
+    }
+
+    function sortColumn(portfolioId, column, headerEl) {
+        const state = window.sortState[portfolioId];
+        const positions = window.portfolioData[portfolioId];
+
+        // Update sort direction
+        if (state.column === column) {
+            state.direction = state.direction === 'asc' ? 'desc' : 'asc';
+        } else {
+            state.column = column;
+            state.direction = 'desc';
+        }
+
+        // Update header styles
+        const headers = headerEl.parentElement.querySelectorAll('th');
+        headers.forEach(th => {
+            th.classList.remove('sorted');
+            th.querySelector('.sort-icon').className = 'fas fa-sort sort-icon';
+        });
+        headerEl.classList.add('sorted');
+        headerEl.querySelector('.sort-icon').className = state.direction === 'asc' ? 'fas fa-sort-up sort-icon' : 'fas fa-sort-down sort-icon';
+
+        // Sort and re-render
+        const sorted = sortTable(null, positions, column, state.direction);
+        renderPositionsTable(sorted, 'tbody-' + portfolioId);
+    }
     </script>
 </body>
 </html>
