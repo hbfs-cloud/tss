@@ -1,0 +1,23 @@
+[
+  {
+    "id": "us",
+    "name": "US",
+    "icon": "fa-flag-usa",
+    "color": "#3b82f6",
+    "equity": 100047.27,
+    "cash": 24.42,
+    "positions": 16,
+    "date": "2026-01-30",
+    "timestamp": "2026-02-02T18:13:17+01:00",
+    "currency": "USD",
+    "ret": 0,
+    "max_dd": 0,
+    "sharpe": 0,
+    "vol": 0,
+    "peak_equity": 100047.27,
+    "equity_curve": [],
+    "equity_curve_dates": [
+      "2026-01-30T15:30:00+01:00"
+    ]
+  }
+]
