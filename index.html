@@ -129,11 +129,22 @@
                     container.innerHTML = '<div class="col-span-full text-center py-8 text-slate-400">No live portfolios yet.</div>';
                     return;
                 }
+
+                // Store sparkline instances for cleanup
+                window.liveSparklineInstances = window.liveSparklineInstances || {};
+
                 container.innerHTML = portfolios.map(p => {
                     const equity = p.equity ? p.equity.toLocaleString('en-US', {style:'currency', currency: p.currency || 'USD', maximumFractionDigits:0}) : '-';
+                    const ret = p.ret || 0;
+                    const retColor = ret >= 0 ? 'text-emerald-600' : 'text-rose-600';
+                    const sharpe = (p.sharpe || 0).toFixed(2);
+                    const maxDD = ((p.max_dd || 0) * 100).toFixed(1);
+                    const vol = ((p.vol || 0) * 100).toFixed(1);
+                    const hasSparkline = p.equity_curve && p.equity_curve.length > 1;
+
                     return `
-                    <a href="${p.id}/index.html" class="mw-card cursor-pointer hover:shadow-lg transition-shadow" style="border-left: 4px solid ${p.color || '#3b82f6'};">
-                        <div class="flex justify-between items-start mb-2">
+                    <a href="${p.id}/index.html" class="mw-card cursor-pointer hover:shadow-lg transition-shadow flex flex-col h-full" style="border-left: 4px solid ${p.color || '#3b82f6'};">
+                        <div class="flex justify-between items-start mb-3">
                             <div>
                                 <span class="text-xs font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700 uppercase">LIVE</span>
                                 <h3 class="text-lg font-bold mt-1 text-slate-900 flex items-center gap-2">
@@ -141,17 +152,83 @@
                                 </h3>
                             </div>
                             <div class="text-right">
-                                <div class="text-xl font-black text-slate-800">${equity}</div>
-                                <div class="text-xs text-slate-400">Equity</div>
+                                <div class="text-2xl font-black ${retColor}">${(ret * 100).toFixed(1)}%</div>
+                                <div class="text-xs text-slate-400">Return</div>
                             </div>
                         </div>
-                        <div class="flex gap-4 text-sm">
-                            <div><span class="text-slate-400">Positions:</span> <span class="font-bold">${p.positions}</span></div>
-                            <div><span class="text-slate-400">Date:</span> <span class="font-bold">${p.date}</span></div>
+
+                        ${hasSparkline ? `<div class="h-16 mb-3 bg-slate-50 rounded overflow-hidden">
+                            <canvas id="live-spark-${p.id}" class="w-full h-full" data-curve='${JSON.stringify(p.equity_curve)}' data-color="${ret >= 0 ? '#10b981' : '#ef4444'}'></canvas>
+                        </div>` : '<div class="h-16 mb-3 bg-slate-50 rounded flex items-center justify-center text-slate-300 text-xs">No data</div>'}
+
+                        <div class="grid grid-cols-4 gap-2 text-center mb-3">
+                            <div class="bg-slate-50 p-2 rounded">
+                                <div class="text-xs text-slate-400 uppercase">Equity</div>
+                                <div class="text-sm font-bold text-slate-700">${equity}</div>
+                            </div>
+                            <div class="bg-slate-50 p-2 rounded">
+                                <div class="text-xs text-slate-400 uppercase">Sharpe</div>
+                                <div class="text-sm font-bold text-slate-700">${sharpe}</div>
+                            </div>
+                            <div class="bg-slate-50 p-2 rounded">
+                                <div class="text-xs text-slate-400 uppercase">Max DD</div>
+                                <div class="text-sm font-bold text-rose-500">${maxDD}%</div>
+                            </div>
+                            <div class="bg-slate-50 p-2 rounded">
+                                <div class="text-xs text-slate-400 uppercase">Vol</div>
+                                <div class="text-sm font-bold text-slate-600">${vol}%</div>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 text-xs text-slate-400 mt-auto">
+                            <div><span>Positions:</span> <span class="font-bold text-slate-600">${p.positions}</span></div>
+                            <div><span>Updated:</span> <span class="font-bold text-slate-600">${p.date}</span></div>
                         </div>
                     </a>`;
                 }).join('');
+
+                // Render sparklines after DOM is ready
+                setTimeout(() => {
+                    portfolios.forEach(p => {
+                        if (!p.equity_curve || p.equity_curve.length < 2) return;
+                        const canvas = document.getElementById('live-spark-' + p.id);
+                        if (!canvas) return;
+
+                        const curve = JSON.parse(canvas.dataset.curve);
+                        const lineColor = canvas.dataset.color;
+
+                        // Destroy existing instance
+                        if (window.liveSparklineInstances[p.id]) {
+                            window.liveSparklineInstances[p.id].destroy();
+                        }
+
+                        window.liveSparklineInstances[p.id] = new Chart(canvas, {
+                            type: 'line',
+                            data: {
+                                labels: curve.map((_, i) => i),
+                                datasets: [{
+                                    data: curve,
+                                    borderColor: lineColor,
+                                    borderWidth: 1.5,
+                                    fill: true,
+                                    backgroundColor: lineColor + '20',
+                                    pointRadius: 0,
+                                    tension: 0.3
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: { legend: { display: false }, tooltip: { enabled: false } },
+                                scales: { x: { display: false }, y: { display: false } },
+                                animation: false
+                            }
+                        });
+                    });
+                }, 50);
+
             } catch(e) {
+                console.error('Error loading live portfolios:', e);
                 container.innerHTML = '<div class="col-span-full text-center py-8 text-slate-400">No live portfolios available.</div>';
             }
         })();
