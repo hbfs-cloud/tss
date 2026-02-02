@@ -2,6 +2,8 @@
   {
     "id": "us",
     "name": "US",
+    "icon": "fa-flag-usa",
+    "color": "#3b82f6",
     "equity": 101504.4,
     "cash": 121.37,
     "positions": 16,
@@ -12,6 +14,8 @@
   {
     "id": "us_highvol",
     "name": "US HIGHVOL",
+    "icon": "fa-bolt",
+    "color": "#f59e0b",
     "equity": 100633.62,
     "cash": 77120.04,
     "positions": 4,
