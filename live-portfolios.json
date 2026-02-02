@@ -185,6 +185,17 @@
         "risk_pct": 0.42
       }
     ],
+    "pending_count": 1,
+    "pending_orders": [
+      {
+        "symbol": "TRX",
+        "qty": 7,
+        "limit_price": 1.68,
+        "stop_price": 1.22,
+        "order_type": "LIMIT",
+        "value": 11.76
+      }
+    ],
     "date": "2026-01-30",
     "timestamp": "2026-02-02T18:13:17+01:00",
     "currency": "USD",
@@ -252,6 +263,33 @@
         "mkt_value": 5668.2,
         "stop": 17.19,
         "risk_pct": 18.72
+      }
+    ],
+    "pending_count": 3,
+    "pending_orders": [
+      {
+        "symbol": "AAOI",
+        "qty": 192,
+        "limit_price": 43.83,
+        "stop_price": 31.14,
+        "order_type": "LIMIT",
+        "value": 8415.36
+      },
+      {
+        "symbol": "COHR",
+        "qty": 28,
+        "limit_price": 213.24,
+        "stop_price": 180.92,
+        "order_type": "LIMIT",
+        "value": 5970.72
+      },
+      {
+        "symbol": "LITE",
+        "qty": 15,
+        "limit_price": 393.8,
+        "stop_price": 324.43,
+        "order_type": "LIMIT",
+        "value": 5907.0
       }
     ],
     "date": "2026-01-30",
