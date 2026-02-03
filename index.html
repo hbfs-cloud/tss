@@ -27,24 +27,75 @@
         .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
 
         header { text-align: center; margin-bottom: 2.5rem; }
-        header h1 { font-size: 1.75rem; font-weight: 800; margin-bottom: 0.25rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
-        header p { color: var(--text-muted); font-size: 0.85rem; }
+        header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        header h1 i {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse 2s infinite;
+        }
+        header p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        header .realtime-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.2rem 0.6rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--green);
+        }
+        header .realtime-badge .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
 
         .portfolios {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
             gap: 1.5rem;
+            align-items: start; /* Prevent portfolios from stretching to match height */
         }
-        @media (max-width: 520px) {
+        @media (max-width: 560px) {
             .portfolios { grid-template-columns: 1fr; }
         }
 
         .portfolio-section {
             background: var(--bg-card);
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
             border: 1px solid var(--border);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        .portfolio-section:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
         }
 
         .portfolio-header {
@@ -67,13 +118,20 @@
         .portfolio-title i { font-size: 1rem; }
         .portfolio-title h2 { font-size: 1rem; font-weight: 700; }
         .portfolio-title .badge {
-            font-size: 0.5rem;
+            font-size: 0.55rem;
             font-weight: 700;
-            padding: 0.1rem 0.3rem;
-            border-radius: 3px;
-            background: var(--green);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: white;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
+            animation: livePulse 2s infinite;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+        }
+        @keyframes livePulse {
+            0%, 100% { box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3); }
+            50% { box-shadow: 0 2px 16px rgba(16, 185, 129, 0.5); }
         }
 
         .view-btn {
@@ -123,32 +181,50 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.75rem 1.5rem;
-            background: var(--bg-table);
+            padding: 0.85rem 1.5rem;
+            background: linear-gradient(90deg, var(--bg-table) 0%, #f8fafc 100%);
             cursor: pointer;
             user-select: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
         }
-        .watchlist-header:hover { background: #e2e8f0; }
+        .watchlist-header:hover {
+            background: linear-gradient(90deg, #e2e8f0 0%, #f1f5f9 100%);
+            border-left-color: var(--blue);
+        }
         .watchlist-header h3 {
-            font-size: 0.8rem;
-            font-weight: 600;
+            font-size: 0.85rem;
+            font-weight: 700;
             color: var(--text-muted);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
+        }
+        .watchlist-header h3 i {
+            color: var(--blue);
         }
         .watchlist-toggle {
             background: none;
             border: none;
             color: var(--text-muted);
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
+            transition: transform 0.3s;
+        }
+        .watchlist-content.expanded + .watchlist-header .watchlist-toggle,
+        .watchlist-header.expanded .watchlist-toggle {
+            transform: rotate(180deg);
         }
 
         .watchlist-content {
             display: none;
+            animation: slideDown 0.3s ease;
         }
         .watchlist-content.expanded { display: block; }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         /* Table */
         .table-wrapper {
@@ -183,63 +259,250 @@
             vertical-align: middle;
         }
         tr:last-child td { border-bottom: none; }
-        tr:hover { background: rgba(0,0,0,0.015); }
+        tr { transition: all 0.2s ease; }
+        tr:hover {
+            background: linear-gradient(90deg, rgba(59,130,246,0.05) 0%, rgba(59,130,246,0.02) 100%);
+            transform: scale(1.005);
+        }
 
         .symbol-cell {
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.6rem;
+            min-width: 140px;
+        }
+        .symbol-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+        .symbol-logo img {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        .symbol-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
         }
         .symbol-name {
-            font-weight: 700;
-            font-size: 0.85rem;
+            font-weight: 800;
+            font-size: 0.95rem;
+            color: var(--text);
+            letter-spacing: -0.02em;
         }
         .symbol-links {
             display: flex;
-            gap: 0.2rem;
+            gap: 0.25rem;
         }
         .symbol-link {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 18px;
-            height: 18px;
-            border-radius: 3px;
+            width: 20px;
+            height: 16px;
+            border-radius: 4px;
             background: var(--bg-table);
             color: var(--text-muted);
-            font-size: 0.55rem;
+            font-size: 0.5rem;
             font-weight: 700;
             text-decoration: none;
             transition: all 0.15s;
         }
-        .symbol-link:hover { background: var(--blue); color: white; }
+        .symbol-link:hover { background: var(--blue); color: white; transform: scale(1.1); }
 
         .pending-tag {
-            display: inline-block;
-            padding: 0.1rem 0.35rem;
-            background: var(--amber);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.2rem;
+            padding: 0.15rem 0.4rem;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
             color: white;
             font-size: 0.55rem;
             font-weight: 700;
-            border-radius: 3px;
-            margin-left: 0.3rem;
+            border-radius: 4px;
+            animation: pendingPulse 2s infinite;
+        }
+        @keyframes pendingPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
         .chart-cell {
-            width: 220px;
-            height: 80px;
-            padding: 2px;
+            width: 180px;
+            padding: 4px;
         }
         .chart-cell a { display: block; }
         .chart-cell img {
-            width: 220px;
-            height: 80px;
+            width: 180px;
+            height: 60px;
             object-fit: contain;
-            border-radius: 4px;
+            border-radius: 6px;
             background: #fff;
+            border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .chart-cell img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .price-cell {
+            min-width: 80px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .change-cell {
+            min-width: 70px;
+            font-size: 0.9rem;
+            font-weight: 700;
         }
         .change-positive { color: #10b981; }
         .change-negative { color: #ef4444; }
+
+        /* Reason expandable - Telegram style */
+        .reason-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: var(--bg-table);
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            transition: all 0.2s;
+        }
+        .reason-toggle:hover {
+            background: var(--blue);
+            color: white;
+            transform: scale(1.1);
+        }
+        .reason-toggle.expanded {
+            background: var(--blue);
+            color: white;
+        }
+        .reason-row {
+            display: none;
+        }
+        .reason-row.visible {
+            display: table-row;
+            animation: reasonSlide 0.3s ease;
+        }
+        @keyframes reasonSlide {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .reason-row td {
+            padding: 0 !important;
+            border-bottom: 1px solid var(--border);
+        }
+        .reason-content {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            margin: 0;
+            padding: 1rem 1.25rem;
+            border-left: 3px solid var(--blue);
+        }
+        .reason-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .reason-header i {
+            color: var(--blue);
+        }
+        .reason-checklist {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .reason-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.7rem;
+            background: white;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text);
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+        .reason-item:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .reason-item .check {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            flex-shrink: 0;
+        }
+        .reason-item.good .check {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+        .reason-item.warn .check {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+        }
+        .reason-item.info .check {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+        }
+        .reason-item.neutral .check {
+            background: var(--bg-table);
+            color: var(--text-muted);
+        }
+        .reason-item .label {
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        .reason-item .value {
+            color: var(--text);
+            font-weight: 700;
+        }
+        .reason-main-action {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            background: linear-gradient(135deg, var(--blue) 0%, #1d4ed8 100%);
+            color: white;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        .reason-main-action i {
+            font-size: 0.9rem;
+        }
 
         .text-right { text-align: right; }
         .font-mono { font-family: 'SF Mono', Monaco, 'Courier New', monospace; font-size: 0.75rem; }
@@ -278,8 +541,14 @@
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-broadcast-tower" style="color: var(--green);"></i> Live Portfolios</h1>
-            <p>Real-time trading portfolios with position tracking</p>
+            <h1><i class="fas fa-broadcast-tower"></i> Live Portfolios</h1>
+            <p>
+                Real-time trading portfolios with position tracking
+                <span class="realtime-badge" id="realtime-status">
+                    <span class="dot"></span>
+                    <span>REAL-TIME</span>
+                </span>
+            </p>
         </header>
 
         <div id="portfolios" class="portfolios">
@@ -352,6 +621,24 @@
         });
     }
 
+    function getLogoUrl(symbol) {
+        // Try multiple logo sources
+        const clean = symbol.replace(/[^A-Za-z]/g, '').toUpperCase();
+        return `https://assets.parqet.com/logos/symbol/${symbol}?format=jpg`;
+    }
+
+    function getLogoFallback(symbol) {
+        // Generate gradient color based on symbol
+        const colors = [
+            ['#667eea', '#764ba2'], ['#f093fb', '#f5576c'], ['#4facfe', '#00f2fe'],
+            ['#43e97b', '#38f9d7'], ['#fa709a', '#fee140'], ['#a8edea', '#fed6e3'],
+            ['#ff9a9e', '#fecfef'], ['#a18cd1', '#fbc2eb'], ['#ffecd2', '#fcb69f'],
+            ['#ff8177', '#b12a5b'], ['#c471f5', '#fa71cd'], ['#48c6ef', '#6f86d6']
+        ];
+        const idx = symbol.charCodeAt(0) % colors.length;
+        return colors[idx];
+    }
+
     function renderWatchlistTable(items, containerId, portfolioId) {
         const container = document.getElementById(containerId);
         if (!container) return;
@@ -365,26 +652,36 @@
             const symbol = item.symbol;
             const changePct = item.change_pct || 0;
             const changeClass = changePct >= 0 ? 'change-positive' : 'change-negative';
+            const changeIcon = changePct >= 0 ? '▲' : '▼';
+            const [grad1, grad2] = getLogoFallback(symbol);
+            const logoUrl = getLogoUrl(symbol);
+            const initials = symbol.substring(0, 2);
 
             return `<tr>
                 <td>
                     <div class="symbol-cell">
-                        <span class="symbol-name">${symbol}</span>
-                        ${isPending ? '<span class="pending-tag">PENDING</span>' : ''}
-                        <div class="symbol-links">
-                            <a href="https://finance.yahoo.com/quote/${symbol}" target="_blank" class="symbol-link" title="Yahoo">Y</a>
-                            <a href="https://www.tradingview.com/chart/?symbol=${symbol}" target="_blank" class="symbol-link" title="TradingView">TV</a>
+                        <div class="symbol-logo" style="background: linear-gradient(135deg, ${grad1} 0%, ${grad2} 100%);">
+                            <img src="${logoUrl}" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <span style="display:none">${initials}</span>
+                        </div>
+                        <div class="symbol-info">
+                            <span class="symbol-name">${symbol}</span>
+                            <div class="symbol-links">
+                                ${isPending ? '<span class="pending-tag"><i class="fas fa-clock"></i> PENDING</span>' : ''}
+                                <a href="https://finance.yahoo.com/quote/${symbol}" target="_blank" class="symbol-link" title="Yahoo">Y</a>
+                                <a href="https://www.tradingview.com/chart/?symbol=${symbol}" target="_blank" class="symbol-link" title="TradingView">TV</a>
+                            </div>
                         </div>
                     </div>
                 </td>
                 <td class="chart-cell">
                     <a href="https://finviz.com/quote.ashx?t=${symbol}" target="_blank">
                         <img src="${getFinvizChartUrl(symbol)}" alt="${symbol}" loading="lazy"
-                             onerror="this.style.display='none'">
+                             onerror="this.style.opacity='0.3'">
                     </a>
                 </td>
-                <td class="text-right font-mono">${formatCurrency(isPending ? item.limit_price : item.price, 2)}</td>
-                <td class="text-right font-mono ${changeClass}">${isPending ? '-' : formatPct(changePct)}</td>
+                <td class="text-right price-cell">${formatCurrency(isPending ? item.limit_price : item.price, 2)}</td>
+                <td class="text-right change-cell ${changeClass}">${isPending ? '-' : changeIcon + ' ' + formatPct(changePct)}</td>
             </tr>`;
         }).join('');
 
@@ -655,34 +952,36 @@
     async function fetchYahooQuotes(symbols) {
         if (!symbols.length) return;
 
-        // Split into batches of 20 symbols (Yahoo API limit)
-        const batchSize = 20;
+        // Split into batches of 10 symbols
+        const batchSize = 10;
         for (let i = 0; i < symbols.length; i += batchSize) {
             const batch = symbols.slice(i, i + batchSize);
             try {
-                // Try Yahoo Finance v8 quote API (better CORS support)
-                const url = `https://query1.finance.yahoo.com/v8/finance/chart/${batch[0]}?interval=1d&range=1d`;
+                // Yahoo API requires CORS proxy from browser
+                const yahooUrl = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${batch.join(',')}`;
 
-                // For multiple symbols, use v7 API
-                const multiUrl = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${batch.join(',')}`;
+                // Try multiple CORS proxies
+                const proxies = [
+                    `https://api.allorigins.win/raw?url=${encodeURIComponent(yahooUrl)}`,
+                    `https://corsproxy.io/?${encodeURIComponent(yahooUrl)}`,
+                ];
 
-                const res = await fetch(multiUrl, {
-                    headers: {
-                        'Accept': 'application/json',
+                let success = false;
+                for (const proxyUrl of proxies) {
+                    if (success) break;
+                    try {
+                        const res = await fetch(proxyUrl, {
+                            signal: AbortSignal.timeout(5000)
+                        });
+                        if (res.ok) {
+                            const data = await res.json();
+                            processYahooQuotes(data);
+                            success = true;
+                        }
+                    } catch (proxyErr) {
+                        console.warn('[Yahoo] Proxy failed:', proxyErr.message);
                     }
-                });
-
-                if (!res.ok) {
-                    // Try CORS proxy as fallback
-                    const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(multiUrl)}`;
-                    const proxyRes = await fetch(proxyUrl);
-                    const data = await proxyRes.json();
-                    processYahooQuotes(data);
-                    continue;
                 }
-
-                const data = await res.json();
-                processYahooQuotes(data);
 
             } catch (e) {
                 console.error('[Yahoo HTTP] Fetch failed for batch:', e);
@@ -725,16 +1024,17 @@
                         rows.forEach(row => {
                             const symbolCell = row.querySelector('.symbol-name');
                             if (symbolCell && symbolCell.textContent === symbol) {
-                                // Update price cell (3rd td)
                                 const cells = row.querySelectorAll('td');
+                                // Update price cell (3rd td)
                                 if (cells[2]) {
                                     cells[2].textContent = formatCurrency(price, 2);
                                 }
-                                // Update 24h cell (4th td)
+                                // Update 24h cell (4th td) with icon
                                 if (cells[3] && changePercent !== undefined) {
                                     const pct = changePercent;
-                                    cells[3].textContent = formatPct(pct);
-                                    cells[3].className = 'text-right font-mono ' + (pct >= 0 ? 'change-positive' : 'change-negative');
+                                    const icon = pct >= 0 ? '▲' : '▼';
+                                    cells[3].innerHTML = icon + ' ' + formatPct(pct);
+                                    cells[3].className = 'text-right change-cell ' + (pct >= 0 ? 'change-positive' : 'change-negative');
                                 }
                             }
                         });
