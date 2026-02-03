@@ -1103,7 +1103,7 @@
                     <div class="watchlist-header" onclick="toggleWatchlist('${p.id}')">
                         <h3>
                             <i class="fas fa-briefcase"></i>
-                            Holdings: ${positionsCount} positions
+                            Holdings: ${positionsCount + pendingCount} symbols
                         </h3>
                         <button class="watchlist-toggle">
                             <i class="fas fa-chevron-down" id="toggle-icon-${p.id}"></i>
@@ -1142,7 +1142,7 @@
                     });
                 }
 
-                // Only show positions (no pending orders)
+                // Show all symbols (positions + pending BUY orders) without distinction
                 // Use cached previousClose from localStorage for immediate 24H display
                 const positions = (p.positions || []).map(pos => {
                     const cachedPrevClose = getSymbolPrevClose(pos.symbol);
@@ -1152,14 +1152,31 @@
                     }
                     return {
                         ...pos,
-                        isPending: false,
-                        change_pct: changePct,  // From cache or null (will be updated from Yahoo)
+                        change_pct: changePct,
                         previousClose: cachedPrevClose,
                         reason: pos.reason || reasonMap[pos.symbol] || ''
                     };
                 });
 
-                const allItems = [...positions];
+                // Add pending BUY orders (use limit_price as price)
+                const pending = (p.pending_orders || []).map(order => {
+                    const cachedPrevClose = getSymbolPrevClose(order.symbol);
+                    let changePct = null;
+                    const price = order.limit_price || 0;
+                    if (cachedPrevClose && price > 0) {
+                        changePct = ((price - cachedPrevClose) / cachedPrevClose) * 100;
+                    }
+                    return {
+                        symbol: order.symbol,
+                        price: price,
+                        change_pct: changePct,
+                        previousClose: cachedPrevClose,
+                        reason: order.reason || '',
+                        since: order.since || p.date || ''
+                    };
+                });
+
+                const allItems = [...positions, ...pending];
                 allItems.sort((a, b) => a.symbol.localeCompare(b.symbol));
 
                 window.portfolioData[p.id] = allItems;
