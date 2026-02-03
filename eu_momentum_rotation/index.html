@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Trading — Time Machine | Market Watch</title>
+    <link rel="icon" href="https://market-watch.xyz/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-card: #ffffff;
+            --border-color: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --accent-blue: #2563eb;
+            --accent-green: #16a34a;
+            --accent-red: #dc2626;
+            --accent-purple: #8b5cf6;
+            --accent-orange: #f59e0b;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family:'Inter',system-ui,-apple-system,sans-serif;
+            background:var(--bg-primary);
+            color:var(--text-primary);
+            line-height:1.5;
+            min-height:100vh;
+        }
+
+        /* Sticky Nav */
+        .nav {
+            position:sticky; top:0; z-index:100;
+            background:var(--bg-card);
+            border-bottom:1px solid var(--border-color);
+            padding:0.75rem 1rem;
+            box-shadow:0 1px 3px rgba(0,0,0,0.05);
+        }
+        .nav-inner {
+            max-width:1400px; margin:0 auto;
+            display:flex; align-items:center; justify-content:space-between;
+            gap:1rem; flex-wrap:wrap;
+        }
+        .nav-left { display:flex; align-items:center; gap:0.75rem; }
+        .nav-back {
+            display:flex; align-items:center; justify-content:center;
+            width:36px; height:36px; border-radius:8px;
+            background:var(--bg-primary); text-decoration:none;
+            color:var(--text-secondary); transition:all 0.15s;
+        }
+        .nav-back:hover { background:var(--border-color); }
+        .nav-title { font-size:1rem; font-weight:700; }
+        .nav-select {
+            font-size:0.8rem; font-family:monospace;
+            background:var(--bg-primary); color:var(--text-primary);
+            font-weight:600; padding:0.4rem 0.6rem;
+            border-radius:6px; border:1px solid var(--border-color);
+            cursor:pointer; outline:none;
+        }
+        .nav-right { display:flex; align-items:center; gap:1rem; }
+        .tm-label { font-size:0.65rem; text-transform:uppercase; font-weight:700; color:var(--accent-blue); letter-spacing:0.5px; }
+        .tm-date { font-family:monospace; font-size:0.85rem; font-weight:700; color:var(--text-primary); }
+        .tm-slider {
+            width:12rem; height:6px; accent-color:var(--accent-blue); cursor:pointer;
+        }
+
+        /* Main Container */
+        .container { max-width:1400px; margin:0 auto; padding:1rem; }
+
+        /* KPI Grid */
+        .kpi-grid {
+            display:grid;
+            grid-template-columns:repeat(6, 1fr);
+            gap:0.75rem;
+            margin-bottom:1.5rem;
+        }
+        @media (max-width:1200px) { .kpi-grid { grid-template-columns:repeat(3, 1fr); } }
+        @media (max-width:600px) { .kpi-grid { grid-template-columns:repeat(2, 1fr); } }
+
+        .kpi-card {
+            background:var(--bg-card);
+            border:1px solid var(--border-color);
+            border-radius:10px;
+            padding:1rem;
+            text-align:center;
+        }
+        .kpi-label {
+            font-size:0.65rem; text-transform:uppercase;
+            font-weight:700; color:var(--text-muted);
+            letter-spacing:0.5px; margin-bottom:0.25rem;
+        }
+        .kpi-value {
+            font-size:1.4rem; font-weight:800;
+            font-variant-numeric:tabular-nums;
+        }
+        .kpi-value.positive { color:var(--accent-green); }
+        .kpi-value.negative { color:var(--accent-red); }
+        .kpi-value.neutral { color:var(--text-primary); }
+        .kpi-value.purple { color:var(--accent-purple); }
+        .kpi-sub { font-size:0.7rem; color:var(--text-muted); margin-top:2px; }
+
+        /* Cards */
+        .card {
+            background:var(--bg-card);
+            border:1px solid var(--border-color);
+            border-radius:12px;
+            margin-bottom:1rem;
+            overflow:hidden;
+        }
+        .card-header {
+            display:flex; justify-content:space-between; align-items:center;
+            padding:1rem 1.25rem;
+            border-bottom:1px solid var(--border-color);
+            background:var(--bg-primary);
+        }
+        .card-title {
+            font-size:0.9rem; font-weight:700;
+            display:flex; align-items:center; gap:0.5rem;
+        }
+        .card-body { padding:1rem 1.25rem; }
+        .card-badge {
+            font-size:0.7rem; font-weight:700;
+            padding:0.25rem 0.5rem; border-radius:4px;
+            background:var(--accent-blue); color:white;
+        }
+
+        /* Chart Container */
+        .chart-wrap { height:280px; position:relative; }
+
+        /* Tables */
+        .table-wrap { overflow-x:auto; }
+        table { width:100%; border-collapse:collapse; font-size:0.8rem; }
+        thead { background:var(--bg-primary); }
+        th {
+            padding:0.6rem 0.75rem; text-align:left;
+            font-weight:600; color:var(--text-secondary);
+            font-size:0.7rem; text-transform:uppercase;
+            letter-spacing:0.03em; white-space:nowrap;
+        }
+        td {
+            padding:0.6rem 0.75rem;
+            border-bottom:1px solid var(--border-color);
+            white-space:nowrap;
+        }
+        tbody tr:hover { background:var(--bg-primary); }
+        .cell-symbol { font-weight:700; font-family:monospace; }
+        .cell-positive { color:var(--accent-green); font-weight:600; }
+        .cell-negative { color:var(--accent-red); font-weight:600; }
+        .cell-muted { color:var(--text-muted); font-size:0.75rem; }
+
+        /* Badges */
+        .badge {
+            display:inline-block; padding:0.2rem 0.5rem;
+            border-radius:4px; font-size:0.7rem; font-weight:600;
+        }
+        .badge-create { background:#dcfce7; color:#166534; }
+        .badge-update { background:#fef3c7; color:#92400e; }
+        .badge-cancel { background:#fee2e2; color:#991b1b; }
+
+        /* Grid layouts */
+        .grid-2 {
+            display:grid;
+            grid-template-columns:repeat(2, 1fr);
+            gap:1rem;
+        }
+        @media (max-width:900px) { .grid-2 { grid-template-columns:1fr; } }
+
+        /* Empty state */
+        .empty {
+            text-align:center; color:var(--text-muted);
+            padding:2rem; font-size:0.85rem;
+        }
+
+        /* Toggle */
+        .toggle-label {
+            display:flex; align-items:center; gap:0.4rem;
+            font-size:0.75rem; color:var(--text-secondary);
+            cursor:pointer; user-select:none;
+        }
+        .toggle-label input { cursor:pointer; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width:6px; height:6px; }
+        ::-webkit-scrollbar-track { background:transparent; }
+        ::-webkit-scrollbar-thumb { background:#cbd5e1; border-radius:3px; }
+
+        /* Reason formatting */
+        .cell-reason { max-width: 400px; }
+        .reason-box { font-size: 0.75rem; line-height: 1.4; }
+        .reason-main { font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+        .reason-item { display: flex; gap: 0.5rem; margin: 0.25rem 0; }
+        .reason-key { color: var(--text-secondary); min-width: 60px; }
+        .reason-val { font-weight: 600; color: var(--text-primary); }
+        .reason-score { color: var(--accent-blue); }
+        .reason-risk { color: var(--accent-orange); }
+        .reason-warning { color: #f59e0b; }
+        .reason-tag { display: inline-block; padding: 0.15rem 0.4rem; margin: 0.15rem 0.25rem 0.15rem 0; border-radius: 4px; background: var(--bg-secondary); font-size: 0.7rem; }
+        .reason-bullish { background: #dcfce7; color: #166534; }
+        .reason-bearish { background: #fee2e2; color: #991b1b; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <div class="nav-left">
+                <a href="../" class="nav-back"><i class="fa-solid fa-arrow-left"></i></a>
+                <span class="nav-title" id="nav-title">Live Trading</span>
+                <select id="currency-selector" class="nav-select" onchange="setGlobalCurrency(this.value)">
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="CHF">CHF</option>
+                    <option value="GBP">GBP</option>
+                    <option value="JPY">JPY</option>
+                    <option value="CNY">CNY</option>
+                    <option value="HKD">HKD</option>
+                    <option value="PLN">PLN</option>
+                </select>
+            </div>
+            <div class="nav-right">
+                <div style="text-align:right;">
+                    <div class="tm-label">Time Machine</div>
+                    <div class="tm-date" id="tm-date">LIVE</div>
+                </div>
+                <input type="range" id="timeSlider" class="tm-slider" min="0" max="0" value="0">
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- KPI Cards -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">Total Return</div>
+                <div class="kpi-value" id="kpi-return">--</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Equity</div>
+                <div class="kpi-value neutral" id="kpi-equity">--</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Max Drawdown</div>
+                <div class="kpi-value negative" id="kpi-dd">--</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Positions</div>
+                <div class="kpi-value purple" id="kpi-positions">--</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Unrealized P&L</div>
+                <div class="kpi-value" id="kpi-pnl">--</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Cash</div>
+                <div class="kpi-value neutral" id="kpi-cash">--</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Avg Slippage</div>
+                <div class="kpi-value" id="kpi-slippage">--</div>
+                <div class="kpi-sub" id="kpi-slippage-count"></div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Fill Rate</div>
+                <div class="kpi-value" id="kpi-fillrate">--</div>
+                <div class="kpi-sub" id="kpi-fillrate-count"></div>
+            </div>
+        </div>
+
+        <!-- Total Return Chart -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-chart-area" style="color:var(--accent-blue);"></i> Total Return</div>
+            </div>
+            <div class="card-body">
+                <div class="chart-wrap"><canvas id="returnChart"></canvas></div>
+            </div>
+        </div>
+
+        <!-- Max Drawdown Chart -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-chart-line" style="color:var(--accent-red);"></i> Max Drawdown</div>
+            </div>
+            <div class="card-body">
+                <div class="chart-wrap"><canvas id="maxDdChart"></canvas></div>
+            </div>
+        </div>
+
+        <!-- Execution Metrics Chart (Slippage & Fill Rate) -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-exchange-alt" style="color:var(--accent-purple);"></i> Execution Quality</div>
+            </div>
+            <div class="card-body">
+                <div class="chart-wrap"><canvas id="execChart"></canvas></div>
+            </div>
+        </div>
+
+        <!-- Positions & Pending -->
+        <div class="grid-2">
+            <div class="card" id="positions-card"></div>
+            <div class="card" id="pending-card"></div>
+        </div>
+
+        <!-- Actions -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-bolt" style="color:var(--accent-orange);"></i> Actions</div>
+                <label class="toggle-label">
+                    <input type="checkbox" id="showAllActions" onchange="renderActions()">
+                    Show all history
+                </label>
+            </div>
+            <div class="card-body" id="actions-content"></div>
+        </div>
+    </div>
+
+    <script>
+    // Data can be embedded (for backward compat) or loaded from external files
+    let snapshots = null;
+    let fxHistory = null;
+    let currentIdx = 0;
+    let returnChart = null;
+    let maxDdChart = null;
+    let execChart = null;
+    let displayCurrency = null;
+
+    // Load data from external JSON files if not embedded
+    async function loadExternalData() {
+        if (snapshots === null) {
+            try {
+                const snapRes = await fetch('data/snapshots.json');
+                snapshots = await snapRes.json();
+            } catch (e) {
+                console.error('Failed to load snapshots:', e);
+                document.querySelector('.container').innerHTML = '<div class="card"><div class="card-body"><p class="empty">Failed to load data files.</p></div></div>';
+                return false;
+            }
+        }
+        // Load FX rates if not embedded (separate from snapshots check)
+        // This ensures FX is loaded even when snapshots are inline but FX rates are external
+        if (fxHistory === null || Object.keys(fxHistory).length === 0) {
+            fxHistory = fxHistory || {};
+            const currencies = ['USD', 'EUR', 'GBP', 'CHF', 'JPY', 'CAD', 'CNY', 'HKD', 'PLN', 'BRL', 'INR', 'ZAR', 'RUB'];
+            await Promise.all(currencies.map(async (ccy) => {
+                try {
+                    const res = await fetch('../fx-' + ccy.toLowerCase() + '.json');
+                    const data = await res.json();
+                    Object.assign(fxHistory, data); // Merge {CCY: {date: rate}}
+                } catch (e) {
+                    // Currency file not available, skip
+                }
+            }));
+        }
+        currentIdx = 0; // Index 0 = newest snapshot (sorted newest first)
+        return true;
+    }
+
+    // ─── HELPERS ───
+    function getNativeCcy() {
+        if(!snapshots.length) return 'USD';
+        const s = snapshots[currentIdx];
+        return s.currency || (s.balance?.BaseCurrency) || 'USD';
+    }
+    function getDisplayCcy() { return displayCurrency || getNativeCcy(); }
+    function getCurrentDate() { return snapshots[currentIdx]?.date || null; }
+
+    // ─── FX ───
+    // fxHistory format: {currency: {date: rate_to_EUR}}
+    // e.g. {USD: {"2026-01-27": 0.92}, EUR: {"2026-01-27": 1.0}}
+    function currencyRateOnDate(currency, date) {
+        const h = fxHistory[currency];
+        if(!h) return null;
+        if(h[date]) return h[date];
+        // Try previous days if exact date not found
+        const d = new Date(date);
+        for(let i = 1; i <= 7; i++) {
+            d.setDate(d.getDate() - 1);
+            const key = d.toISOString().slice(0,10);
+            if(h[key]) return h[key];
+        }
+        return null;
+    }
+    function fxRate(from, to, date) {
+        if(from === to) return 1;
+        const dt = date || getCurrentDate();
+        // Get both rates to EUR
+        const fromRate = currencyRateOnDate(from, dt);
+        const toRate = currencyRateOnDate(to, dt);
+        if(fromRate && toRate) return fromRate / toRate;
+        // Fallback: no conversion if FX data missing
+        return 1;
+    }
+    function convertCcy(v, date) {
+        const native = getNativeCcy();
+        const display = getDisplayCcy();
+        return native === display ? v : v * fxRate(native, display, date);
+    }
+
+    // ─── FORMATTING ───
+    function fmtMoney(v, ccy) {
+        if(v == null || isNaN(v)) return '-';
+        const c = ccy || getDisplayCcy();
+        try {
+            return new Intl.NumberFormat('en-US', {style:'currency', currency:c, minimumFractionDigits:2, maximumFractionDigits:2}).format(v);
+        } catch(e) { return c + ' ' + v.toFixed(2); }
+    }
+    function fmtMoneyFx(v, date) {
+        if(v == null || isNaN(v)) return '-';
+        return fmtMoney(convertCcy(v, date));
+    }
+    function fmtPct(v) { return v != null ? (v >= 0 ? '+' : '') + v.toFixed(2) + '%' : '-'; }
+    function pnlCls(v) { return v >= 0 ? 'cell-positive' : 'cell-negative'; }
+
+    // ─── CURRENCY ───
+    function setGlobalCurrency(c) {
+        displayCurrency = c;
+        const url = new URL(window.location);
+        url.searchParams.set('ccy', c);
+        history.replaceState(null, '', url);
+        renderAll();
+        updateChartData();
+    }
+    function initCurrencySelector() {
+        const sel = document.getElementById('currency-selector');
+        const urlCcy = new URL(window.location).searchParams.get('ccy');
+        if(urlCcy && [...sel.options].some(o => o.value === urlCcy)) {
+            sel.value = urlCcy;
+            displayCurrency = urlCcy;
+        } else {
+            const native = getNativeCcy();
+            sel.value = native;
+            displayCurrency = native;
+        }
+    }
+
+    // ─── TIME MACHINE ───
+    // Slider: left=oldest, right=newest (most intuitive)
+    // Snapshots are sorted newest first (index 0 = newest)
+    // So we reverse: sliderValue 0 = oldest (index max), sliderValue max = newest (index 0)
+    function sliderToIdx(sliderVal) {
+        return (snapshots.length - 1) - parseInt(sliderVal);
+    }
+    function idxToSlider(idx) {
+        return (snapshots.length - 1) - idx;
+    }
+
+    function initSlider() {
+        const slider = document.getElementById('timeSlider');
+        slider.max = snapshots.length - 1;
+        slider.value = idxToSlider(currentIdx); // currentIdx=0 -> slider=max (rightmost)
+        slider.addEventListener('input', function() {
+            currentIdx = sliderToIdx(this.value);
+            renderAll();
+            updateSliderLabel();
+            updateChartData();
+        });
+    }
+    function updateSliderLabel() {
+        const s = snapshots[currentIdx];
+        let label = 'LIVE';
+        if(s && s.timestamp) {
+            // Show full timestamp: "2026-02-02 18:04"
+            const ts = s.timestamp;
+            label = ts.substring(0, 10) + ' ' + ts.substring(11, 16);
+            // Mark as LIVE if it's the most recent (index 0)
+            if(currentIdx === 0) label += ' (LIVE)';
+        }
+        document.getElementById('tm-date').textContent = label;
+    }
+
+    // ─── EXECUTION METRICS (Slippage & Fill Rate) ───
+    // Analyzes snapshots to calculate:
+    // - Slippage%: (AvgEntry - LimitPrice) / LimitPrice * 100 for filled BUY orders
+    // - Fill Rate: % of BUY LIMIT orders that got filled vs cancelled
+    function calculateExecutionMetrics() {
+        if (snapshots.length < 2) return { slippages: [], fillRates: [], avgSlippage: 0, totalFillRate: 0, filledCount: 0, cancelledCount: 0 };
+
+        const slippages = [];      // {date, symbol, limitPrice, avgEntry, slippage%}
+        const fillRates = [];      // {date, filled, cancelled, rate%}
+        let totalFilledCount = 0;
+        let totalCancelledCount = 0;
+
+        // Snapshots are sorted newest-first, so iterate in reverse (oldest to newest)
+        for (let i = snapshots.length - 1; i > 0; i--) {
+            const prevSnap = snapshots[i];      // older snapshot
+            const currSnap = snapshots[i - 1];  // newer snapshot
+
+            const prevPositions = new Map((prevSnap.positions || []).map(p => [p.Symbol, p]));
+            const currPositions = new Map((currSnap.positions || []).map(p => [p.Symbol, p]));
+
+            // Get BUY LIMIT orders from previous snapshot
+            const prevBuyOrders = (prevSnap.pending_orders || []).filter(o =>
+                o.Side === 'BUY' && o.OrderType === 'LIMIT' && o.LimitPrice > 0
+            );
+
+            // Get current pending BUY orders (still pending)
+            const currPendingSymbols = new Set(
+                (currSnap.pending_orders || [])
+                    .filter(o => o.Side === 'BUY')
+                    .map(o => o.Symbol)
+            );
+
+            let dailyFilled = 0;
+            let dailyCancelled = 0;
+
+            for (const order of prevBuyOrders) {
+                const sym = order.Symbol;
+                const hadPosition = prevPositions.has(sym);
+                const hasPosition = currPositions.has(sym);
+                const stillPending = currPendingSymbols.has(sym);
+
+                // Order was filled if: didn't have position before, has position now, not still pending
+                if (!hadPosition && hasPosition && !stillPending) {
+                    const pos = currPositions.get(sym);
+                    const limitPrice = order.LimitPrice;
+                    const avgEntry = pos.AvgEntry;
+
+                    if (limitPrice > 0 && avgEntry > 0) {
+                        const slippagePct = ((avgEntry - limitPrice) / limitPrice) * 100;
+                        slippages.push({
+                            date: currSnap.date,
+                            symbol: sym,
+                            limitPrice,
+                            avgEntry,
+                            slippage: slippagePct
+                        });
+                        dailyFilled++;
+                        totalFilledCount++;
+                    }
+                }
+                // Order was cancelled if: not filled and no longer pending
+                else if (!hasPosition && !stillPending && !hadPosition) {
+                    dailyCancelled++;
+                    totalCancelledCount++;
+                }
+            }
+
+            if (dailyFilled > 0 || dailyCancelled > 0) {
+                const rate = (dailyFilled + dailyCancelled) > 0
+                    ? (dailyFilled / (dailyFilled + dailyCancelled)) * 100
+                    : 100;
+                fillRates.push({
+                    date: currSnap.date,
+                    filled: dailyFilled,
+                    cancelled: dailyCancelled,
+                    rate
+                });
+            }
+        }
+
+        // Calculate averages
+        const avgSlippage = slippages.length > 0
+            ? slippages.reduce((sum, s) => sum + s.slippage, 0) / slippages.length
+            : 0;
+        const totalFillRate = (totalFilledCount + totalCancelledCount) > 0
+            ? (totalFilledCount / (totalFilledCount + totalCancelledCount)) * 100
+            : 100;
+
+        return {
+            slippages,
+            fillRates,
+            avgSlippage,
+            totalFillRate,
+            filledCount: totalFilledCount,
+            cancelledCount: totalCancelledCount
+        };
+    }
+
+    // Global metrics cache (recalculated on data load)
+    let executionMetrics = null;
+
+    function getExecutionMetricsUpToDate(targetDate) {
+        if (!executionMetrics) return { avgSlippage: 0, fillRate: 100, filledCount: 0, cancelledCount: 0 };
+
+        const relevantSlippages = executionMetrics.slippages.filter(s => s.date <= targetDate);
+        const relevantFillRates = executionMetrics.fillRates.filter(f => f.date <= targetDate);
+
+        const avgSlippage = relevantSlippages.length > 0
+            ? relevantSlippages.reduce((sum, s) => sum + s.slippage, 0) / relevantSlippages.length
+            : 0;
+
+        const totalFilled = relevantFillRates.reduce((sum, f) => sum + f.filled, 0);
+        const totalCancelled = relevantFillRates.reduce((sum, f) => sum + f.cancelled, 0);
+        const fillRate = (totalFilled + totalCancelled) > 0
+            ? (totalFilled / (totalFilled + totalCancelled)) * 100
+            : 100;
+
+        return { avgSlippage, fillRate, filledCount: totalFilled, cancelledCount: totalCancelled };
+    }
+
+    // ─── KPIs ───
+    function getInitialCapital() {
+        // Get initial capital from oldest snapshot's equity (first data point)
+        // Snapshots are sorted newest-first, so last element is oldest
+        if (!snapshots.length) return 100000;
+        const oldest = snapshots[snapshots.length - 1];
+        const eq = oldest?.balance?.TotalEquity || 0;
+        // If oldest equity is available and reasonable, use it; otherwise fallback
+        if (eq > 0) return eq;
+        return 100000;
+    }
+
+    function renderKPIs() {
+        if(!snapshots.length) return;
+        const s = snapshots[currentIdx];
+        const bal = s.balance || {};
+        const date = s.date;
+
+        // P&L
+        let totalPnL = 0;
+        (s.positions || []).forEach(p => totalPnL += (p.UnrealizedPnL || 0));
+
+        // Return - calculate from ACTUAL initial capital (oldest snapshot equity)
+        const initialCapital = getInitialCapital();
+        const initialCapitalConverted = convertCcy(initialCapital, snapshots[snapshots.length - 1]?.date);
+        const currentEquity = convertCcy(bal.TotalEquity || 0, date);
+        const totalReturn = initialCapitalConverted > 0 ? ((currentEquity / initialCapitalConverted) - 1) * 100 : 0;
+
+        // Max DD from all snapshots - peak is the highest equity reached, not initial capital
+        // Snapshots are sorted newest first, so reverse for chronological order
+        const allEquities = [...snapshots].reverse().map(sn => convertCcy(sn.balance?.TotalEquity || 0, sn.date)).filter(v => v > 0);
+        let peak = 0, maxDD = 0;
+        allEquities.forEach(eq => {
+            if(eq > peak) peak = eq;
+            const dd = peak > 0 ? (peak - eq) / peak * 100 : 0;
+            if(dd > maxDD) maxDD = dd;
+        });
+
+        // Update KPIs
+        const retEl = document.getElementById('kpi-return');
+        retEl.textContent = fmtPct(totalReturn);
+        retEl.className = 'kpi-value ' + (totalReturn >= 0 ? 'positive' : 'negative');
+
+        document.getElementById('kpi-equity').textContent = fmtMoneyFx(bal.TotalEquity, date);
+        document.getElementById('kpi-dd').textContent = '-' + maxDD.toFixed(2) + '%';
+        document.getElementById('kpi-positions').textContent = (s.positions || []).length;
+
+        const pnlEl = document.getElementById('kpi-pnl');
+        pnlEl.textContent = fmtMoneyFx(totalPnL, date);
+        pnlEl.className = 'kpi-value ' + (totalPnL >= 0 ? 'positive' : 'negative');
+
+        const mainCash = bal.CashByCurrency ? (bal.CashByCurrency[getNativeCcy()] || 0) : 0;
+        document.getElementById('kpi-cash').textContent = fmtMoneyFx(mainCash, date);
+
+        document.getElementById('nav-title').textContent = 'Live — ' + (s.portfolio || '').toUpperCase();
+
+        // Execution metrics (slippage & fill rate) up to current date
+        const metrics = getExecutionMetricsUpToDate(date);
+
+        const slipEl = document.getElementById('kpi-slippage');
+        if (slipEl) {
+            const slipVal = metrics.avgSlippage;
+            slipEl.textContent = (slipVal >= 0 ? '+' : '') + slipVal.toFixed(2) + '%';
+            slipEl.className = 'kpi-value ' + (slipVal <= 0 ? 'positive' : slipVal < 1 ? 'neutral' : 'negative');
+        }
+        const slipCountEl = document.getElementById('kpi-slippage-count');
+        if (slipCountEl) slipCountEl.textContent = metrics.filledCount + ' fills';
+
+        const fillEl = document.getElementById('kpi-fillrate');
+        if (fillEl) {
+            fillEl.textContent = metrics.fillRate.toFixed(1) + '%';
+            fillEl.className = 'kpi-value ' + (metrics.fillRate >= 80 ? 'positive' : metrics.fillRate >= 50 ? 'neutral' : 'negative');
+        }
+        const fillCountEl = document.getElementById('kpi-fillrate-count');
+        if (fillCountEl) fillCountEl.textContent = metrics.filledCount + '/' + (metrics.filledCount + metrics.cancelledCount) + ' orders';
+    }
+
+    // ─── CHARTS ───
+    function initCharts() {
+        const retCtx = document.getElementById('returnChart')?.getContext('2d');
+        const ddCtx = document.getElementById('maxDdChart')?.getContext('2d');
+        if(!retCtx || !ddCtx) return;
+
+        const chartOpts = {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: false, // No animation
+            plugins: { legend: { display: false } },
+            interaction: { intersect: false, mode: 'index' },
+            elements: { point: { radius: 0, hoverRadius: 4 } }
+        };
+
+        returnChart = new Chart(retCtx, {
+            type: 'line',
+            data: { labels: [], datasets: [{ data: [], borderColor: '#2563eb', backgroundColor: 'rgba(37,99,235,0.08)', fill: true, tension: 0.3, borderWidth: 2 }] },
+            options: { ...chartOpts, scales: { y: { ticks: { callback: v => v.toFixed(0) + '%' } }, x: { ticks: { maxTicksLimit: 12, font: { size: 10 } } } } }
+        });
+
+        maxDdChart = new Chart(ddCtx, {
+            type: 'line',
+            data: { labels: [], datasets: [{ data: [], borderColor: '#ef4444', backgroundColor: 'rgba(239,68,68,0.08)', fill: true, tension: 0.3, borderWidth: 2 }] },
+            options: { ...chartOpts, scales: { y: { max: 0, ticks: { callback: v => v.toFixed(1) + '%' } }, x: { ticks: { maxTicksLimit: 12, font: { size: 10 } } } } }
+        });
+
+        // Execution quality chart (slippage & fill rate)
+        const execCtx = document.getElementById('execChart')?.getContext('2d');
+        if (execCtx) {
+            execChart = new Chart(execCtx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [
+                        {
+                            label: 'Avg Slippage %',
+                            data: [],
+                            borderColor: '#8b5cf6',
+                            backgroundColor: 'rgba(139,92,246,0.1)',
+                            fill: true,
+                            tension: 0.3,
+                            borderWidth: 2,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Fill Rate %',
+                            data: [],
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16,185,129,0.1)',
+                            fill: false,
+                            tension: 0.3,
+                            borderWidth: 2,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    ...chartOpts,
+                    plugins: {
+                        legend: { display: true, position: 'top', labels: { boxWidth: 12, font: { size: 10 } } }
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            position: 'left',
+                            title: { display: true, text: 'Slippage %', font: { size: 10 } },
+                            ticks: { callback: v => v.toFixed(1) + '%' }
+                        },
+                        y1: {
+                            type: 'linear',
+                            position: 'right',
+                            title: { display: true, text: 'Fill Rate %', font: { size: 10 } },
+                            min: 0,
+                            max: 100,
+                            grid: { drawOnChartArea: false },
+                            ticks: { callback: v => v.toFixed(0) + '%' }
+                        },
+                        x: { ticks: { maxTicksLimit: 12, font: { size: 10 } } }
+                    }
+                }
+            });
+        }
+
+        updateChartData();
+    }
+
+    function updateChartData() {
+        if(!returnChart || !maxDdChart) return;
+
+        // Always show ALL snapshots up to current selection (chronological order)
+        // Snapshots are newest-first, so reverse and take up to currentIdx
+        const allReversed = [...snapshots].reverse();
+        const upToIdx = snapshots.length - currentIdx;
+        const visible = allReversed.slice(0, upToIdx);
+
+        const dates = [], returns = [], maxDDs = [];
+        let peak = 0, maxDD = 0;
+        // Use actual initial capital from oldest snapshot (same as KPIs)
+        const initialCapital = getInitialCapital();
+        const oldestDate = snapshots[snapshots.length - 1]?.date;
+        const initialCapitalConverted = convertCcy(initialCapital, oldestDate);
+
+        visible.forEach(s => {
+            const eq = convertCcy(s.balance?.TotalEquity || 0, s.date);
+            if(eq <= 0) return;
+            dates.push(s.date);
+            // Total return % from actual initial capital (same as KPIs)
+            const ret = initialCapitalConverted > 0 ? ((eq / initialCapitalConverted) - 1) * 100 : 0;
+            returns.push(ret);
+            // Max drawdown (cumulative max)
+            if(eq > peak) peak = eq;
+            const dd = peak > 0 ? ((peak - eq) / peak * 100) : 0;
+            if(dd > maxDD) maxDD = dd;
+            maxDDs.push(-maxDD);
+        });
+
+        returnChart.data.labels = dates;
+        returnChart.data.datasets[0].data = returns;
+        returnChart.update('none');
+
+        maxDdChart.data.labels = dates;
+        maxDdChart.data.datasets[0].data = maxDDs;
+        maxDdChart.update('none');
+
+        // Update execution metrics chart
+        if (execChart && executionMetrics) {
+            const execDates = [];
+            const slippageData = [];
+            const fillRateData = [];
+
+            // Build cumulative metrics for each date
+            let cumSlippages = [];
+            let cumFilled = 0;
+            let cumCancelled = 0;
+
+            // Iterate through visible dates and calculate cumulative metrics
+            visible.forEach(s => {
+                const date = s.date;
+                execDates.push(date);
+
+                // Add slippages up to this date
+                const newSlips = executionMetrics.slippages.filter(sl => sl.date === date);
+                cumSlippages = cumSlippages.concat(newSlips);
+
+                // Add fills/cancels up to this date
+                const dayMetric = executionMetrics.fillRates.find(f => f.date === date);
+                if (dayMetric) {
+                    cumFilled += dayMetric.filled;
+                    cumCancelled += dayMetric.cancelled;
+                }
+
+                // Calculate cumulative averages
+                const avgSlip = cumSlippages.length > 0
+                    ? cumSlippages.reduce((sum, sl) => sum + sl.slippage, 0) / cumSlippages.length
+                    : 0;
+                const fillRate = (cumFilled + cumCancelled) > 0
+                    ? (cumFilled / (cumFilled + cumCancelled)) * 100
+                    : 100;
+
+                slippageData.push(avgSlip);
+                fillRateData.push(fillRate);
+            });
+
+            execChart.data.labels = execDates;
+            execChart.data.datasets[0].data = slippageData;
+            execChart.data.datasets[1].data = fillRateData;
+            execChart.update('none');
+        }
+    }
+
+    // ─── POSITIONS ───
+    function renderPositions() {
+        const s = snapshots[currentIdx];
+        const positions = s?.positions || [];
+        const pending = s?.pending_orders || [];
+
+        // Build stop map
+        const stopMap = {};
+        pending.forEach(o => {
+            if(o.Side === 'SELL' && ['STOP','TRAILING_STOP','STOP_LIMIT'].includes(o.OrderType) && o.StopPrice > 0) {
+                stopMap[o.Symbol] = o.StopPrice;
+            }
+        });
+
+        let html = '<div class="card-header"><div class="card-title"><i class="fas fa-wallet" style="color:var(--accent-blue);"></i> Positions</div><span class="card-badge">' + positions.length + '</span></div>';
+        html += '<div class="card-body">';
+
+        if(positions.length > 0) {
+            const sorted = [...positions].sort((a,b) => (b.UnrealizedPnL||0) - (a.UnrealizedPnL||0));
+            html += '<div class="table-wrap"><table><thead><tr><th>Symbol</th><th>Qty</th><th>Entry</th><th>Price</th><th>Stop</th><th>P&L</th><th>%</th></tr></thead><tbody>';
+            sorted.forEach(p => {
+                const pnl = p.UnrealizedPnL || 0;
+                const pct = p.AvgEntry > 0 ? ((p.CurrentPrice - p.AvgEntry) / p.AvgEntry * 100) : 0;
+                const stop = stopMap[p.Symbol] || 0;
+                const riskPct = (stop > 0 && p.CurrentPrice > 0) ? ((p.CurrentPrice - stop) / p.CurrentPrice * 100).toFixed(1) : '';
+                html += '<tr>';
+                html += '<td class="cell-symbol">' + p.Symbol + '</td>';
+                html += '<td>' + (p.Qty || 0) + '</td>';
+                html += '<td>' + fmtMoney(p.AvgEntry) + '</td>';
+                html += '<td>' + fmtMoney(p.CurrentPrice) + '</td>';
+                html += '<td>' + (stop > 0 ? fmtMoney(stop) + ' <span class="cell-muted">(' + riskPct + '%)</span>' : '-') + '</td>';
+                html += '<td class="' + pnlCls(pnl) + '">' + fmtMoney(pnl) + '</td>';
+                html += '<td class="' + pnlCls(pct) + '">' + pct.toFixed(1) + '%</td>';
+                html += '</tr>';
+            });
+            html += '</tbody></table></div>';
+        } else {
+            html += '<p class="empty">No open positions</p>';
+        }
+        html += '</div>';
+        document.getElementById('positions-card').innerHTML = html;
+    }
+
+    // ─── PENDING ORDERS ───
+    function renderPending() {
+        const s = snapshots[currentIdx];
+        const pending = s?.pending_orders || [];
+        const positions = s?.positions || [];
+        const posSymbols = new Set(positions.map(p => p.Symbol));
+
+        // Build map of STOP orders by symbol (for bracket order display)
+        const stopsBySymbol = {};
+        pending.forEach(o => {
+            if(o.Side === 'SELL' && ['STOP','TRAILING_STOP','STOP_LIMIT'].includes(o.OrderType)) {
+                stopsBySymbol[o.Symbol] = o;
+            }
+        });
+
+        // Show BUY orders with their linked stop price, and standalone SELL orders
+        const filtered = pending.filter(o => {
+            // Show all BUY orders
+            if(o.Side === 'BUY') return true;
+            // For SELL STOP: only show if no position AND no pending BUY (orphan stop)
+            if(o.Side === 'SELL' && ['STOP','TRAILING_STOP','STOP_LIMIT'].includes(o.OrderType)) {
+                const hasBuy = pending.some(b => b.Side === 'BUY' && b.Symbol === o.Symbol);
+                if(posSymbols.has(o.Symbol) || hasBuy) return false;
+            }
+            return true;
+        });
+
+        let html = '<div class="card-header"><div class="card-title"><i class="fas fa-clock" style="color:var(--accent-orange);"></i> Pending Orders</div><span class="card-badge">' + filtered.length + '</span></div>';
+        html += '<div class="card-body">';
+
+        if(filtered.length > 0) {
+            html += '<div class="table-wrap"><table><thead><tr><th>Symbol</th><th>Side</th><th>Type</th><th>Qty</th><th>Limit</th><th>Stop Loss</th></tr></thead><tbody>';
+            filtered.forEach(o => {
+                // For BUY orders, look up linked stop price from bracket
+                let stopPrice = o.StopPrice;
+                if(o.Side === 'BUY' && stopsBySymbol[o.Symbol]) {
+                    stopPrice = stopsBySymbol[o.Symbol].StopPrice;
+                }
+                html += '<tr>';
+                html += '<td class="cell-symbol">' + o.Symbol + '</td>';
+                html += '<td class="' + (o.Side === 'BUY' ? 'cell-positive' : 'cell-negative') + '">' + o.Side + '</td>';
+                html += '<td>' + o.OrderType + '</td>';
+                html += '<td>' + (o.Qty || '-') + '</td>';
+                html += '<td>' + (o.LimitPrice > 0 ? fmtMoney(o.LimitPrice) : '-') + '</td>';
+                html += '<td class="cell-negative">' + (stopPrice > 0 ? fmtMoney(stopPrice) : '-') + '</td>';
+                html += '</tr>';
+            });
+            html += '</tbody></table></div>';
+        } else {
+            html += '<p class="empty">No pending orders</p>';
+        }
+        html += '</div>';
+        document.getElementById('pending-card').innerHTML = html;
+    }
+
+    // ─── FORMAT REASON ───
+    function formatReason(reason) {
+        if (!reason || reason === '-') return '-';
+
+        // Parse the reason string: "BUY X @ $Y | Key=Val | ... || Strategy: Z | ..."
+        const parts = reason.split('||').map(s => s.trim());
+
+        let html = '<div class="reason-box">';
+
+        parts.forEach((section, idx) => {
+            const items = section.split('|').map(s => s.trim()).filter(s => s);
+
+            items.forEach((item, i) => {
+                // First item of first section is usually the main action
+                if (idx === 0 && i === 0) {
+                    html += '<div class="reason-main">' + escapeHtml(item) + '</div>';
+                    return;
+                }
+
+                // Check for key=value or key: value patterns
+                const kvMatch = item.match(/^([^=:]+)[=:](.+)$/);
+                if (kvMatch) {
+                    const key = kvMatch[1].trim();
+                    const val = kvMatch[2].trim();
+
+                    // Color coding based on key
+                    let valClass = '';
+                    if (key.toLowerCase().includes('score')) valClass = 'reason-score';
+                    else if (key.toLowerCase().includes('risk')) valClass = 'reason-risk';
+                    else if (key.toLowerCase().includes('rsi') && parseFloat(val) > 70) valClass = 'reason-warning';
+
+                    html += '<div class="reason-item"><span class="reason-key">' + escapeHtml(key) + '</span> <span class="reason-val ' + valClass + '">' + escapeHtml(val) + '</span></div>';
+                } else {
+                    // Plain text item - check for keywords
+                    let icon = '';
+                    let cls = 'reason-tag';
+                    const lower = item.toLowerCase();
+
+                    if (lower.includes('bullish') || lower.includes('aligned')) { icon = '✓'; cls += ' reason-bullish'; }
+                    else if (lower.includes('bearish')) { icon = '✗'; cls += ' reason-bearish'; }
+                    else if (lower.includes('overbought')) { icon = '⚠'; cls += ' reason-warning'; }
+                    else if (lower.includes('volume') || lower.includes('spike')) { icon = '📊'; }
+                    else if (lower.includes('breaking') || lower.includes('high')) { icon = '📈'; cls += ' reason-bullish'; }
+                    else if (lower.includes('strategy')) { icon = '🎯'; }
+
+                    html += '<span class="' + cls + '">' + icon + ' ' + escapeHtml(item) + '</span>';
+                }
+            });
+        });
+
+        html += '</div>';
+        return html;
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    // ─── ACTIONS ───
+    function renderActions() {
+        const showAll = document.getElementById('showAllActions')?.checked || false;
+        let actions = [];
+
+        if(showAll) {
+            // Show all history UP TO the current selection
+            // Snapshots are newest-first (index 0 = LIVE), so slice from currentIdx to end
+            // to get all snapshots from current selection back to oldest
+            const visible = snapshots.slice(currentIdx);
+            visible.forEach(sn => {
+                if(sn.actions?.length > 0) {
+                    const ts = sn.timestamp ? sn.timestamp.substring(0,16).replace('T',' ') : sn.date;
+                    sn.actions.forEach(a => actions.push({...a, _ts: ts}));
+                }
+            });
+            // Reverse to show newest first (since we iterated oldest-first)
+        } else {
+            const s = snapshots[currentIdx];
+            if(s?.actions?.length > 0) {
+                const ts = s.timestamp ? s.timestamp.substring(0,16).replace('T',' ') : s.date;
+                actions = s.actions.map(a => ({...a, _ts: ts}));
+            }
+        }
+
+        let html = '';
+        if(actions.length > 0) {
+            html += '<div class="table-wrap"><table><thead><tr><th>Date</th><th>Type</th><th>Symbol</th><th>Side</th><th>Qty</th><th>Price</th><th>Stop Loss</th><th>Reason</th></tr></thead><tbody>';
+            actions.forEach(a => {
+                const badge = a.type === 'CREATE' ? 'badge-create' : a.type === 'UPDATE' ? 'badge-update' : 'badge-cancel';
+                const sideCls = a.side === 'BUY' ? 'cell-positive' : (a.side === 'SELL' ? 'cell-negative' : '');
+                const price = a.limit_price > 0 ? fmtMoney(a.limit_price) : (a.stop_price > 0 ? fmtMoney(a.stop_price) : '-');
+                const stopLoss = a.stop_loss > 0 ? fmtMoney(a.stop_loss) : '-';
+                html += '<tr>';
+                html += '<td class="cell-muted">' + a._ts + '</td>';
+                html += '<td><span class="badge ' + badge + '">' + a.type + '</span></td>';
+                html += '<td class="cell-symbol">' + a.symbol + '</td>';
+                html += '<td class="' + sideCls + '">' + (a.side || '-') + '</td>';
+                html += '<td>' + (a.qty > 0 ? a.qty : '-') + '</td>';
+                html += '<td>' + price + '</td>';
+                html += '<td class="cell-negative">' + stopLoss + '</td>';
+                html += '<td class="cell-reason">' + formatReason(a.reason) + '</td>';
+                html += '</tr>';
+            });
+            html += '</tbody></table></div>';
+        } else {
+            html += '<p class="empty">No actions' + (showAll ? ' in history' : ' for this date') + '</p>';
+        }
+        document.getElementById('actions-content').innerHTML = html;
+    }
+
+    // ─── RENDER ALL ───
+    function renderAll() {
+        renderKPIs();
+        renderPositions();
+        renderPending();
+        renderActions();
+    }
+
+    // ─── INIT ───
+    async function init() {
+        // Load external data if needed
+        if (!await loadExternalData()) return;
+
+        if(snapshots.length === 0) {
+            document.querySelector('.container').innerHTML = '<div class="card"><div class="card-body"><p class="empty">No snapshots yet. Run <code>./run.sh -apply</code> to generate data.</p></div></div>';
+        } else {
+            // Calculate execution metrics (slippage & fill rate) once on load
+            executionMetrics = calculateExecutionMetrics();
+            console.log('Execution metrics:', executionMetrics.avgSlippage.toFixed(2) + '% avg slippage,',
+                        executionMetrics.totalFillRate.toFixed(1) + '% fill rate,',
+                        executionMetrics.filledCount, 'fills,',
+                        executionMetrics.cancelledCount, 'cancelled');
+
+            initCurrencySelector();
+            initSlider();
+            updateSliderLabel();
+            renderAll();
+            initCharts();
+        }
+    }
+    init();
+    </script>
+</body>
+</html>
