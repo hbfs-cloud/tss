@@ -8,7 +8,7 @@
     "cash": 0,
     "positions_count": 0,
     "positions": [],
-    "pending_count": 4,
+    "pending_count": 10,
     "pending_orders": [
       {
         "symbol": "FMV.DE",
@@ -17,7 +17,25 @@
         "stop_price": 0,
         "order_type": "",
         "value": 8027.52,
-        "reason": "BUY FMV.DE @ $17.78 | Score=62 | Risk=22.0% | Size=$8K (9.0% of equity) || Strategy=momentum-rotation, RSI=48.8, ATR=$1.70, Mom=15.8%"
+        "reason": ""
+      },
+      {
+        "symbol": "ENR.DE",
+        "qty": 52,
+        "limit_price": 152,
+        "stop_price": 0,
+        "order_type": "",
+        "value": 7904,
+        "reason": ""
+      },
+      {
+        "symbol": "NDX1.DE",
+        "qty": 23,
+        "limit_price": 35.72,
+        "stop_price": 0,
+        "order_type": "",
+        "value": 821.56,
+        "reason": "BUY NDX1.DE @ $35.72 | Score=31 | Risk=8.9% | Size=$1K (0.9% of equity) || Strategy=momentum-rotation, RSI=65.0, ATR=$1.07, Mom=10.6%"
       },
       {
         "symbol": "NDA.DE",
@@ -26,7 +44,25 @@
         "stop_price": 0,
         "order_type": "",
         "value": 668,
-        "reason": "BUY NDA.DE @ $167.07 | Score=48 | Risk=9.6% | Size=$1K (0.7% of equity) || Strategy=momentum-rotation, RSI=79.7, ATR=$5.58, Mom=26.1%"
+        "reason": ""
+      },
+      {
+        "symbol": "LOM.DE",
+        "qty": 1,
+        "limit_price": 557,
+        "stop_price": 0,
+        "order_type": "",
+        "value": 557,
+        "reason": ""
+      },
+      {
+        "symbol": "FPMB.DE",
+        "qty": 7,
+        "limit_price": 53,
+        "stop_price": 0,
+        "order_type": "",
+        "value": 371,
+        "reason": ""
       },
       {
         "symbol": "AMC.DE",
@@ -35,7 +71,7 @@
         "stop_price": 0,
         "order_type": "",
         "value": 145.9,
-        "reason": "BUY AMC.DE @ $145.91 | Score=44 | Risk=15.7% | Size=$0K (0.2% of equity) || Strategy=momentum-rotation, RSI=41.0, ATR=$9.30, Mom=13.1%"
+        "reason": ""
       },
       {
         "symbol": "DBG.PA",
@@ -44,25 +80,45 @@
         "stop_price": 0,
         "order_type": "",
         "value": 82.2,
-        "reason": "BUY DBG.PA @ $8.22 | Score=37 | Risk=9.5% | Size=$0K (0.1% of equity) || Strategy=momentum-rotation, RSI=75.1, ATR=$0.27, Mom=16.5%"
+        "reason": ""
+      },
+      {
+        "symbol": "RIO1.DE",
+        "qty": 1,
+        "limit_price": 81.01,
+        "stop_price": 0,
+        "order_type": "",
+        "value": 81.01,
+        "reason": "BUY RIO1.DE @ $81.02 | Score=28 | Risk=8.0% | Size=$0K (0.1% of equity) || Strategy=momentum-rotation, RSI=70.1, ATR=$2.05, Mom=11.9%"
+      },
+      {
+        "symbol": "VK.PA",
+        "qty": 2,
+        "limit_price": 18.64,
+        "stop_price": 0,
+        "order_type": "",
+        "value": 37.28,
+        "reason": "BUY VK.PA @ $18.65 | Score=16 | Risk=9.0% | Size=$0K (0.0% of equity) || Strategy=momentum-rotation, RSI=62.0, ATR=$0.57, Mom=11.3%"
       }
     ],
     "date": "2026-02-02",
-    "timestamp": "2026-02-03T21:21:16+01:00",
+    "timestamp": "2026-02-03T21:31:14+01:00",
     "currency": "EUR",
     "ret": -0.10700339999999997,
     "max_dd": -0.10700339999999997,
-    "sharpe": -11.224972160321826,
-    "vol": 0.8007401240398533,
+    "sharpe": -9.165151389911681,
+    "vol": 0.7355267701764564,
     "peak_equity": 89299.66,
     "equity_curve": [
       100000.0,
+      89299.66,
       89299.66,
       89299.66,
       89299.66
     ],
     "equity_curve_dates": [
       "2026-02-02T08:00:00+01:00",
+      "2026-02-02T09:00:00+01:00",
       "2026-02-02T09:00:00+01:00",
       "2026-02-02T09:00:00+01:00"
     ]
