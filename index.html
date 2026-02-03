@@ -341,13 +341,13 @@
         }
 
         .chart-cell {
-            width: 180px;
+            width: 120px;
             padding: 4px;
         }
-        .chart-cell a { display: block; }
+        .chart-cell > div { display: block; }
         .chart-cell img {
-            width: 180px;
-            height: 60px;
+            width: 120px;
+            height: 45px;
             object-fit: contain;
             border-radius: 6px;
             background: #fff;
@@ -360,46 +360,76 @@
         }
 
         .price-cell {
-            min-width: 80px;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 700;
             color: var(--text);
+            transition: background-color 0.3s ease;
+        }
+        .price-cell.flash-up {
+            animation: flashUp 0.6s ease;
+        }
+        .price-cell.flash-down {
+            animation: flashDown 0.6s ease;
+        }
+        @keyframes flashUp {
+            0% { background-color: transparent; }
+            20% { background-color: rgba(16, 185, 129, 0.25); }
+            100% { background-color: transparent; }
+        }
+        @keyframes flashDown {
+            0% { background-color: transparent; }
+            20% { background-color: rgba(239, 68, 68, 0.25); }
+            100% { background-color: transparent; }
         }
 
         .change-cell {
-            min-width: 70px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 700;
+            transition: background-color 0.3s ease;
+        }
+        .change-cell.flash-up {
+            animation: flashUp 0.6s ease;
+        }
+        .change-cell.flash-down {
+            animation: flashDown 0.6s ease;
         }
         .change-positive { color: #10b981; }
         .change-negative { color: #ef4444; }
 
         .since-cell {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
             color: var(--text-muted);
-            white-space: nowrap;
         }
 
-        /* Reason expandable - Telegram style */
+        /* Responsive table */
+        @media (max-width: 700px) {
+            .chart-cell { display: none; }
+            .symbol-logo { width: 36px; height: 36px; }
+            .symbol-logo img { width: 36px; height: 36px; }
+            .symbol-name { font-size: 0.9rem; }
+            .price-cell { font-size: 0.8rem; }
+            .change-cell { font-size: 0.75rem; }
+        }
+
+        /* Reason expandable - Simple checklist */
         .reason-toggle {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 28px;
-            height: 28px;
-            border-radius: 8px;
+            width: 26px;
+            height: 26px;
+            border-radius: 6px;
             background: var(--bg-table);
             border: none;
             cursor: pointer;
             color: var(--text-muted);
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             transition: all 0.2s;
         }
         .reason-toggle:hover {
             background: var(--blue);
             color: white;
-            transform: scale(1.1);
         }
         .reason-toggle.expanded {
             background: var(--blue);
@@ -410,7 +440,7 @@
         }
         .reason-row.visible {
             display: table-row;
-            animation: reasonSlide 0.3s ease;
+            animation: reasonSlide 0.2s ease;
         }
         @keyframes reasonSlide {
             from { opacity: 0; }
@@ -421,95 +451,48 @@
             border-bottom: 1px solid var(--border);
         }
         .reason-content {
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            background: #f8fafc;
             margin: 0;
-            padding: 1rem 1.25rem;
-            border-left: 3px solid var(--blue);
+            padding: 0.75rem 1rem;
+            border-left: 3px solid var(--green);
         }
-        .reason-header {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.75rem;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .reason-header i {
-            color: var(--blue);
-        }
-        .reason-checklist {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-        .reason-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.35rem 0.7rem;
-            background: white;
-            border-radius: 8px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--text);
-            border: 1px solid var(--border);
-            transition: all 0.2s;
-        }
-        .reason-item:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-        .reason-item .check {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.6rem;
-            flex-shrink: 0;
-        }
-        .reason-item.good .check {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-        }
-        .reason-item.warn .check {
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-            color: white;
-        }
-        .reason-item.info .check {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            color: white;
-        }
-        .reason-item.neutral .check {
-            background: var(--bg-table);
-            color: var(--text-muted);
-        }
-        .reason-item .label {
-            color: var(--text-muted);
-            font-weight: 600;
-        }
-        .reason-item .value {
-            color: var(--text);
-            font-weight: 700;
-        }
-        .reason-main-action {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 0.75rem;
-            background: linear-gradient(135deg, var(--blue) 0%, #1d4ed8 100%);
-            color: white;
-            border-radius: 8px;
+        .reason-title {
             font-size: 0.8rem;
             font-weight: 700;
-            margin-bottom: 0.75rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
         }
-        .reason-main-action i {
-            font-size: 0.9rem;
+        .reason-title i {
+            color: var(--green);
+        }
+        .reason-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .reason-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            padding: 0.25rem 0;
+            font-size: 0.8rem;
+            color: var(--text);
+        }
+        .reason-list li::before {
+            content: "✓";
+            color: var(--green);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .reason-list .label {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .reason-list .value {
+            font-weight: 600;
         }
 
         .text-right { text-align: right; }
@@ -946,37 +929,25 @@
         const { main, items } = parseReason(reason);
 
         if (!main && items.length === 0) {
-            return '<div class="reason-content"><span style="color: var(--text-muted); font-size: 0.8rem;">No details available</span></div>';
+            return '<div class="reason-content"><span style="color: var(--text-muted); font-size: 0.8rem;">No details</span></div>';
         }
 
         let html = '<div class="reason-content">';
 
         if (main) {
-            html += `<div class="reason-main-action"><i class="fas fa-bolt"></i> ${escapeHtml(main)}</div>`;
+            html += `<div class="reason-title"><i class="fas fa-check-circle"></i> ${escapeHtml(main)}</div>`;
         }
 
         if (items.length > 0) {
-            html += '<div class="reason-header"><i class="fas fa-list-check"></i> Details</div>';
-            html += '<div class="reason-checklist">';
-
+            html += '<ul class="reason-list">';
             items.forEach(item => {
-                const icon = item.type === 'good' ? '✓' : item.type === 'warn' ? '!' : item.type === 'info' ? 'i' : '•';
-
                 if (item.key) {
-                    html += `<div class="reason-item ${item.type}">
-                        <span class="check">${icon}</span>
-                        <span class="label">${escapeHtml(item.key)}</span>
-                        <span class="value">${escapeHtml(item.val)}</span>
-                    </div>`;
+                    html += `<li><span class="label">${escapeHtml(item.key)}:</span> <span class="value">${escapeHtml(item.val)}</span></li>`;
                 } else if (item.text) {
-                    html += `<div class="reason-item ${item.type}">
-                        <span class="check">${icon}</span>
-                        <span class="value">${escapeHtml(item.text)}</span>
-                    </div>`;
+                    html += `<li>${escapeHtml(item.text)}</li>`;
                 }
             });
-
-            html += '</div>';
+            html += '</ul>';
         }
 
         html += '</div>';
@@ -1382,19 +1353,21 @@
     }
 
     // Fetch quotes via Yahoo v8/chart API (same as Go code)
+    // Batches requests to avoid rate limiting
     async function fetchYahooQuotes(symbols) {
         if (!symbols.length) return;
 
         let updated = 0;
-        // Fetch each symbol individually using v8/chart API
-        const promises = symbols.map(async (symbol) => {
+        const BATCH_SIZE = 3;  // Fetch 3 at a time
+        const BATCH_DELAY = 600;  // 600ms between batches
+
+        // Helper to fetch a single symbol
+        async function fetchSymbol(symbol) {
             try {
-                // Use v8/chart API with range=1d to get current price and previous close
                 const now = Math.floor(Date.now() / 1000);
-                const period1 = now - 86400 * 2; // 2 days ago
+                const period1 = now - 86400 * 2;
                 const yahooUrl = `https://query2.finance.yahoo.com/v8/finance/chart/${symbol}?period1=${period1}&period2=${now}&interval=1d`;
 
-                // Try CORS proxies
                 const proxies = [
                     `https://api.allorigins.win/raw?url=${encodeURIComponent(yahooUrl)}`,
                     `https://corsproxy.io/?${encodeURIComponent(yahooUrl)}`,
@@ -1411,8 +1384,7 @@
                                 const prevClose = meta.chartPreviousClose || meta.previousClose || 0;
                                 if (price > 0) {
                                     updateSymbolPrice(symbol, price, prevClose);
-                                    updated++;
-                                    return;
+                                    return true;
                                 }
                             }
                         }
@@ -1423,11 +1395,23 @@
             } catch (e) {
                 console.warn('[Yahoo] Failed for', symbol, e.message);
             }
-        });
+            return false;
+        }
 
-        await Promise.all(promises);
+        // Process in batches with delay to avoid rate limiting
+        for (let i = 0; i < symbols.length; i += BATCH_SIZE) {
+            const batch = symbols.slice(i, i + BATCH_SIZE);
+            const results = await Promise.all(batch.map(fetchSymbol));
+            updated += results.filter(Boolean).length;
+
+            // Delay between batches (except for last batch)
+            if (i + BATCH_SIZE < symbols.length) {
+                await new Promise(resolve => setTimeout(resolve, BATCH_DELAY));
+            }
+        }
+
         if (updated > 0) {
-            console.log('[Yahoo HTTP] Updated', updated, 'quotes via v8/chart API');
+            console.log('[Yahoo HTTP] Updated', updated, '/', symbols.length, 'quotes via v8/chart API');
             document.querySelectorAll('.live-dot').forEach(dot => dot.classList.add('connected'));
         }
     }
@@ -1446,12 +1430,17 @@
             changePct = ((price - previousClose) / previousClose) * 100;
         }
 
-        // Update data and DOM directly (no full re-render)
+        // Update data and DOM directly (no full re-render to preserve sort order)
         Object.keys(window.portfolioData || {}).forEach(portfolioId => {
             const items = window.portfolioData[portfolioId];
 
             items.forEach((item, idx) => {
                 if (item.symbol === symbol && !item.isPending) {
+                    const oldPrice = item.price || 0;
+                    const priceChanged = oldPrice > 0 && Math.abs(price - oldPrice) > 0.001;
+                    const priceDirection = price > oldPrice ? 'up' : 'down';
+
+                    // Update data
                     item.price = price;
                     if (previousClose && previousClose > 0) {
                         item.previousClose = previousClose;
@@ -1460,23 +1449,40 @@
                         item.change_pct = changePct;
                     }
 
-                    // Find and update the row directly
+                    // Find and update the row directly (preserves sort order)
                     const tbody = document.getElementById('tbody-' + portfolioId);
                     if (tbody) {
-                        const rows = tbody.querySelectorAll('tr');
+                        const rows = tbody.querySelectorAll('tr:not(.reason-row)');
                         rows.forEach(row => {
                             const symbolCell = row.querySelector('.symbol-name');
                             if (symbolCell && symbolCell.textContent === symbol) {
                                 const cells = row.querySelectorAll('td');
+
                                 // Update price cell (3rd td)
                                 if (cells[2]) {
                                     cells[2].textContent = formatCurrency(price, 2);
+
+                                    // Flash animation on price change
+                                    if (priceChanged) {
+                                        cells[2].classList.remove('flash-up', 'flash-down');
+                                        // Force reflow to restart animation
+                                        void cells[2].offsetWidth;
+                                        cells[2].classList.add(priceDirection === 'up' ? 'flash-up' : 'flash-down');
+                                    }
                                 }
+
                                 // Update 24h cell (4th td) with icon - from Yahoo data
                                 if (cells[3] && changePct !== null) {
                                     const icon = changePct >= 0 ? '▲' : '▼';
                                     cells[3].innerHTML = icon + ' ' + formatPct(changePct);
                                     cells[3].className = 'text-right change-cell ' + (changePct >= 0 ? 'change-positive' : 'change-negative');
+
+                                    // Flash animation on change update
+                                    if (priceChanged) {
+                                        cells[3].classList.remove('flash-up', 'flash-down');
+                                        void cells[3].offsetWidth;
+                                        cells[3].classList.add(priceDirection === 'up' ? 'flash-up' : 'flash-down');
+                                    }
                                 }
                             }
                         });
