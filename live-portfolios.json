@@ -1,5 +1,32 @@
 [
   {
+    "id": "eu_momentum_rotation",
+    "name": "EU Momentum Rotation",
+    "icon": "fa-chart-line",
+    "color": "#10b981",
+    "equity": 89299.66,
+    "cash": 0,
+    "positions_count": 0,
+    "positions": [],
+    "pending_count": 0,
+    "pending_orders": [],
+    "date": "2026-02-02",
+    "timestamp": "2026-02-03T21:12:26+01:00",
+    "currency": "EUR",
+    "ret": -0.10700339999999997,
+    "max_dd": -0.10700339999999997,
+    "sharpe": 0,
+    "vol": 0.0,
+    "peak_equity": 89299.66,
+    "equity_curve": [
+      100000.0,
+      89299.66
+    ],
+    "equity_curve_dates": [
+      "2026-02-02T08:00:00+01:00"
+    ]
+  },
+  {
     "id": "us",
     "name": "US Trend Hybrid (35 pos)",
     "icon": "fa-flag-usa",
