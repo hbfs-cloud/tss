@@ -977,13 +977,12 @@
         }
 
         const rows = items.map((item, idx) => {
-            const isPending = item.isPending;
             const symbol = item.symbol;
             const changePct = item.change_pct;
             const hasChange = changePct !== null && changePct !== undefined;
             const changeClass = hasChange ? (changePct >= 0 ? 'change-positive' : 'change-negative') : '';
             const changeIcon = hasChange ? (changePct >= 0 ? '▲' : '▼') : '';
-            const changeDisplay = isPending ? '-' : (hasChange ? changeIcon + ' ' + formatPct(changePct) : '<i class="fas fa-spinner fa-spin" style="font-size:0.7rem;color:var(--text-muted)"></i>');
+            const changeDisplay = hasChange ? changeIcon + ' ' + formatPct(changePct) : '<i class="fas fa-spinner fa-spin" style="font-size:0.7rem;color:var(--text-muted)"></i>';
             const [grad1, grad2] = getLogoFallback(symbol);
             const logoUrl = getLogoUrl(symbol);
             const initials = symbol.substring(0, 2);
@@ -1003,7 +1002,6 @@
                         <div class="symbol-info">
                             <span class="symbol-name">${symbol}</span>
                             <div class="symbol-links">
-                                ${isPending ? '<span class="pending-tag"><i class="fas fa-clock"></i> PENDING</span>' : ''}
                                 <a href="https://finance.yahoo.com/quote/${symbol}" target="_blank" class="symbol-link" title="Yahoo">Y</a>
                                 <a href="https://www.tradingview.com/chart/?symbol=${symbol}" target="_blank" class="symbol-link" title="TradingView">TV</a>
                             </div>
@@ -1016,7 +1014,7 @@
                              onerror="this.style.opacity='0.3'">
                     </div>
                 </td>
-                <td class="text-right price-cell">${formatCurrency(isPending ? item.limit_price : item.price, 2)}</td>
+                <td class="text-right price-cell">${formatCurrency(item.price, 2)}</td>
                 <td class="text-right change-cell ${changeClass}">${changeDisplay}</td>
                 <td class="since-cell">${sinceDisplay}</td>
                 <td style="text-align: center; width: 40px;">
@@ -1105,7 +1103,7 @@
                     <div class="watchlist-header" onclick="toggleWatchlist('${p.id}')">
                         <h3>
                             <i class="fas fa-briefcase"></i>
-                            Holdings: ${positionsCount} positions${pendingCount > 0 ? ' + ' + pendingCount + ' pending' : ''}
+                            Holdings: ${positionsCount} positions
                         </h3>
                         <button class="watchlist-toggle">
                             <i class="fas fa-chevron-down" id="toggle-icon-${p.id}"></i>
@@ -1144,7 +1142,7 @@
                     });
                 }
 
-                // Merge positions and pending into one list
+                // Only show positions (no pending orders)
                 // Use cached previousClose from localStorage for immediate 24H display
                 const positions = (p.positions || []).map(pos => {
                     const cachedPrevClose = getSymbolPrevClose(pos.symbol);
@@ -1160,20 +1158,8 @@
                         reason: pos.reason || reasonMap[pos.symbol] || ''
                     };
                 });
-                const pending = (p.pending_orders || []).map(order => ({
-                    symbol: order.symbol,
-                    qty: order.qty,
-                    limit_price: order.limit_price,
-                    reason: order.reason || '',
-                    stop_price: order.stop_price,
-                    value: order.value,
-                    mkt_value: order.value,
-                    isPending: true,
-                    change_pct: null,
-                    since: order.since || p.date || ''  // Use order since or portfolio date
-                }));
 
-                const allItems = [...positions, ...pending];
+                const allItems = [...positions];
                 allItems.sort((a, b) => a.symbol.localeCompare(b.symbol));
 
                 window.portfolioData[p.id] = allItems;
@@ -1248,7 +1234,7 @@
         const symbols = new Set();
         Object.values(window.portfolioData || {}).forEach(items => {
             items.forEach(item => {
-                if (item.symbol && !item.isPending) symbols.add(item.symbol);
+                if (item.symbol) symbols.add(item.symbol);
             });
         });
         return [...symbols];
@@ -1435,7 +1421,7 @@
             const items = window.portfolioData[portfolioId];
 
             items.forEach((item, idx) => {
-                if (item.symbol === symbol && !item.isPending) {
+                if (item.symbol === symbol) {
                     const oldPrice = item.price || 0;
                     const priceChanged = oldPrice > 0 && Math.abs(price - oldPrice) > 0.001;
                     const priceDirection = price > oldPrice ? 'up' : 'down';

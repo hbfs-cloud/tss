@@ -17,8 +17,9 @@
         "pnl_pct": 11.31,
         "mkt_value": 12741.24,
         "stop": 1.32,
-        "reason": "MISSING_STOP: 7158 shares @ $1.32 | P&L: 2.6%, Risk: 19.5%",
-        "since": "2026-01-30"
+        "risk_pct": 25.84,
+        "change_today": 0.08537,
+        "reason": ""
       },
       {
         "symbol": "FDX",
@@ -29,8 +30,9 @@
         "pnl_pct": 5.66,
         "mkt_value": 12310.56,
         "stop": 320.66,
-        "reason": "TRAILING_STOP: Raising stop $312.16->$320.66 | Max loss now: -0.9% | Current P&L: 3.6%, Price: $335.30, Risk to stop: 4.4%",
-        "since": ""
+        "risk_pct": 6.23,
+        "change_today": 0.01986,
+        "reason": ""
       },
       {
         "symbol": "TTC",
@@ -41,8 +43,9 @@
         "pnl_pct": 1.82,
         "mkt_value": 11840.21,
         "stop": 89.86,
-        "reason": "TRAILING_STOP: Raising stop $88.88->$89.86 | Max loss now: -1.9% | Current P&L: 1.8%, Price: $93.23, Risk to stop: 3.6%",
-        "since": ""
+        "risk_pct": 3.61,
+        "change_today": 0,
+        "reason": ""
       },
       {
         "symbol": "TAK",
@@ -53,8 +56,9 @@
         "pnl_pct": 0.62,
         "mkt_value": 11813.65,
         "stop": 17.09,
-        "reason": "MISSING_STOP: 677 shares @ $17.09 | P&L: 0.8%, Risk: 2.3%",
-        "since": "2026-02-02"
+        "risk_pct": 2.06,
+        "change_today": -0.00229,
+        "reason": ""
       },
       {
         "symbol": "FOLD",
@@ -65,8 +69,9 @@
         "pnl_pct": -0.07,
         "mkt_value": 11646.35,
         "stop": 14.21,
-        "reason": "",
-        "since": ""
+        "risk_pct": 0.56,
+        "change_today": 0,
+        "reason": ""
       },
       {
         "symbol": "CFLT",
@@ -77,8 +82,9 @@
         "pnl_pct": -0.07,
         "mkt_value": 11635.74,
         "stop": 30.38,
-        "reason": "",
-        "since": ""
+        "risk_pct": 0.52,
+        "change_today": 0,
+        "reason": ""
       },
       {
         "symbol": "DVAX",
@@ -89,8 +95,9 @@
         "pnl_pct": -0.13,
         "mkt_value": 11633.44,
         "stop": 15.35,
-        "reason": "TRAILING_STOP: Raising stop $15.30->$15.35 | Max loss now: -0.9% | Current P&L: -0.0%, Price: $15.49, Risk to stop: 0.9%",
-        "since": ""
+        "risk_pct": 0.78,
+        "change_today": -0.00129,
+        "reason": ""
       },
       {
         "symbol": "PHIN",
@@ -101,8 +108,9 @@
         "pnl_pct": -3.15,
         "mkt_value": 11377.4,
         "stop": 68.64,
-        "reason": "",
-        "since": ""
+        "risk_pct": 1.66,
+        "change_today": 0,
+        "reason": ""
       },
       {
         "symbol": "UNF",
@@ -113,8 +121,9 @@
         "pnl_pct": -4.96,
         "mkt_value": 3328.32,
         "stop": 205.78,
-        "reason": "",
-        "since": ""
+        "risk_pct": 1.08,
+        "change_today": 0,
+        "reason": ""
       },
       {
         "symbol": "HI",
@@ -125,8 +134,9 @@
         "pnl_pct": -0.03,
         "mkt_value": 2424.4,
         "stop": 31.81,
-        "reason": "",
-        "since": ""
+        "risk_pct": 0.28,
+        "change_today": 0,
+        "reason": ""
       },
       {
         "symbol": "MSGS",
@@ -137,8 +147,9 @@
         "pnl_pct": -1.27,
         "mkt_value": 284.34,
         "stop": 272.7,
-        "reason": "",
-        "since": ""
+        "risk_pct": 4.09,
+        "change_today": 0,
+        "reason": ""
       },
       {
         "symbol": "BCS",
@@ -149,8 +160,9 @@
         "pnl_pct": 1.07,
         "mkt_value": 247.32,
         "stop": 26.5,
-        "reason": "TRAILING_STOP: Raising stop $26.04->$26.50 | Max loss now: -2.5% | Current P&L: 1.2%, Price: $27.51, Risk to stop: 3.7%",
-        "since": ""
+        "risk_pct": 3.57,
+        "change_today": -0.00109,
+        "reason": ""
       },
       {
         "symbol": "CVX",
@@ -161,8 +173,9 @@
         "pnl_pct": 0.0,
         "mkt_value": 173.52,
         "stop": 172.01,
-        "reason": "",
-        "since": ""
+        "risk_pct": 0.87,
+        "change_today": -0.00293,
+        "reason": ""
       },
       {
         "symbol": "DBRG",
@@ -173,8 +186,9 @@
         "pnl_pct": 0.19,
         "mkt_value": 108.01,
         "stop": 15.33,
-        "reason": "TRAILING_STOP: Raising stop $15.29->$15.33 | Max loss now: -0.5% | Current P&L: 0.3%, Price: $15.44, Risk to stop: 0.7%",
-        "since": ""
+        "risk_pct": 0.65,
+        "change_today": -0.00065,
+        "reason": ""
       },
       {
         "symbol": "RNA",
@@ -185,8 +199,9 @@
         "pnl_pct": 0.06,
         "mkt_value": 72.74,
         "stop": 72.37,
-        "reason": "TRAILING_STOP: Raising stop $72.23->$72.37 | Max loss now: -0.5% | Current P&L: 0.1%, Price: $72.74, Risk to stop: 0.5%",
-        "since": ""
+        "risk_pct": 0.51,
+        "change_today": 0,
+        "reason": ""
       },
       {
         "symbol": "SEMR",
@@ -197,8 +212,9 @@
         "pnl_pct": -0.1,
         "mkt_value": 11.89,
         "stop": 11.84,
-        "reason": "",
-        "since": ""
+        "risk_pct": 0.41,
+        "change_today": -0.00013,
+        "reason": ""
       }
     ],
     "pending_count": 0,
@@ -295,8 +311,9 @@
         "pnl_pct": 4.52,
         "mkt_value": 8793.6,
         "stop": 32.49,
-        "reason": "TRAILING: $31.14->$32.49",
-        "since": ""
+        "risk_pct": 29.07,
+        "change_today": 0.03714,
+        "reason": ""
       },
       {
         "symbol": "WDC",
@@ -307,8 +324,9 @@
         "pnl_pct": 11.68,
         "mkt_value": 6313.5,
         "stop": 200.15,
-        "reason": "MISSING_STOP: 23 shares @ $200.15 | P&L: 9.9%, Risk: 25.9%",
-        "since": "2026-02-02"
+        "risk_pct": 27.09,
+        "change_today": 0.0158,
+        "reason": ""
       },
       {
         "symbol": "TGB",
@@ -319,8 +337,9 @@
         "pnl_pct": 4.61,
         "mkt_value": 6256.65,
         "stop": 6.23,
-        "reason": "TRAILING: $6.53->$6.23",
-        "since": ""
+        "risk_pct": 21.59,
+        "change_today": 0.03113,
+        "reason": ""
       },
       {
         "symbol": "ALLO",
@@ -331,8 +350,9 @@
         "pnl_pct": 9.51,
         "mkt_value": 6194.0,
         "stop": 1.37,
-        "reason": "TRAILING: $1.55->$1.37",
-        "since": ""
+        "risk_pct": 27.67,
+        "change_today": 0.01604,
+        "reason": ""
       },
       {
         "symbol": "ELE",
@@ -343,8 +363,9 @@
         "pnl_pct": -4.88,
         "mkt_value": 5595.84,
         "stop": 17.19,
-        "reason": "TRAILING: $18.51->$17.19",
-        "since": ""
+        "risk_pct": 17.67,
+        "change_today": 0.02806,
+        "reason": ""
       }
     ],
     "pending_count": 3,
@@ -353,25 +374,28 @@
         "symbol": "RMBS",
         "qty": 73,
         "limit_price": 114.28,
+        "stop_price": 83.59,
+        "order_type": "LIMIT",
         "value": 8342.44,
-        "reason": "",
-        "since": "2026-02-02"
+        "reason": ""
       },
       {
         "symbol": "COHR",
         "qty": 28,
         "limit_price": 213.24,
+        "stop_price": 180.92,
+        "order_type": "LIMIT",
         "value": 5970.72,
-        "reason": "",
-        "since": "2026-02-02"
+        "reason": ""
       },
       {
         "symbol": "LITE",
         "qty": 15,
         "limit_price": 393.8,
+        "stop_price": 324.43,
+        "order_type": "LIMIT",
         "value": 5907.0,
-        "reason": "",
-        "since": "2026-02-02"
+        "reason": ""
       }
     ],
     "date": "2026-02-02",
