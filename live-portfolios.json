@@ -19,7 +19,8 @@
         "stop": 1.32,
         "risk_pct": 25.84,
         "change_today": 0.08537,
-        "reason": ""
+        "reason": "",
+        "since": "2026-02-02"
       },
       {
         "symbol": "FDX",
@@ -32,7 +33,8 @@
         "stop": 320.66,
         "risk_pct": 6.23,
         "change_today": 0.01986,
-        "reason": ""
+        "reason": "",
+        "since": "2026-02-02"
       },
       {
         "symbol": "TTC",
@@ -45,7 +47,8 @@
         "stop": 89.86,
         "risk_pct": 3.61,
         "change_today": 0,
-        "reason": ""
+        "reason": "",
+        "since": "2026-02-02"
       },
       {
         "symbol": "TAK",
@@ -58,7 +61,8 @@
         "stop": 17.09,
         "risk_pct": 2.06,
         "change_today": -0.00229,
-        "reason": ""
+        "reason": "",
+        "since": "2026-02-02"
       },
       {
         "symbol": "FOLD",
@@ -71,7 +75,8 @@
         "stop": 14.21,
         "risk_pct": 0.56,
         "change_today": 0,
-        "reason": ""
+        "reason": "",
+        "since": "2026-02-02"
       },
       {
         "symbol": "CFLT",
@@ -84,7 +89,8 @@
         "stop": 30.38,
         "risk_pct": 0.52,
         "change_today": 0,
-        "reason": ""
+        "reason": "",
+        "since": "2026-02-02"
       },
       {
         "symbol": "DVAX",
@@ -97,7 +103,8 @@
         "stop": 15.35,
         "risk_pct": 0.78,
         "change_today": -0.00129,
-        "reason": ""
+        "reason": "",
+        "since": "2026-02-02"
       },
       {
         "symbol": "PHIN",
@@ -110,7 +117,8 @@
         "stop": 68.64,
         "risk_pct": 1.66,
         "change_today": 0,
-        "reason": ""
+        "reason": "",
+        "since": "2026-02-02"
       },
       {
         "symbol": "UNF",
@@ -123,7 +131,8 @@
         "stop": 205.78,
         "risk_pct": 1.08,
         "change_today": 0,
-        "reason": ""
+        "reason": "",
+        "since": "2026-02-02"
       },
       {
         "symbol": "HI",
@@ -136,7 +145,8 @@
         "stop": 31.81,
         "risk_pct": 0.28,
         "change_today": 0,
-        "reason": ""
+        "reason": "",
+        "since": "2026-02-02"
       },
       {
         "symbol": "MSGS",
@@ -149,7 +159,8 @@
         "stop": 272.7,
         "risk_pct": 4.09,
         "change_today": 0,
-        "reason": ""
+        "reason": "",
+        "since": "2026-02-02"
       },
       {
         "symbol": "BCS",
@@ -162,7 +173,8 @@
         "stop": 26.5,
         "risk_pct": 3.57,
         "change_today": -0.00109,
-        "reason": ""
+        "reason": "",
+        "since": "2026-02-02"
       },
       {
         "symbol": "CVX",
@@ -175,7 +187,8 @@
         "stop": 172.01,
         "risk_pct": 0.87,
         "change_today": -0.00293,
-        "reason": ""
+        "reason": "",
+        "since": "2026-02-02"
       },
       {
         "symbol": "DBRG",
@@ -188,7 +201,8 @@
         "stop": 15.33,
         "risk_pct": 0.65,
         "change_today": -0.00065,
-        "reason": ""
+        "reason": "",
+        "since": "2026-02-02"
       },
       {
         "symbol": "RNA",
@@ -201,7 +215,8 @@
         "stop": 72.37,
         "risk_pct": 0.51,
         "change_today": 0,
-        "reason": ""
+        "reason": "",
+        "since": "2026-02-02"
       },
       {
         "symbol": "SEMR",
@@ -214,7 +229,8 @@
         "stop": 11.84,
         "risk_pct": 0.41,
         "change_today": -0.00013,
-        "reason": ""
+        "reason": "",
+        "since": "2026-02-02"
       }
     ],
     "pending_count": 0,
@@ -313,7 +329,8 @@
         "stop": 32.49,
         "risk_pct": 29.07,
         "change_today": 0.03714,
-        "reason": ""
+        "reason": "",
+        "since": "2026-02-02"
       },
       {
         "symbol": "WDC",
@@ -326,7 +343,8 @@
         "stop": 200.15,
         "risk_pct": 27.09,
         "change_today": 0.0158,
-        "reason": ""
+        "reason": "",
+        "since": "2026-01-25"
       },
       {
         "symbol": "TGB",
@@ -339,7 +357,8 @@
         "stop": 6.23,
         "risk_pct": 21.59,
         "change_today": 0.03113,
-        "reason": ""
+        "reason": "",
+        "since": "2026-01-25"
       },
       {
         "symbol": "ALLO",
@@ -352,7 +371,8 @@
         "stop": 1.37,
         "risk_pct": 27.67,
         "change_today": 0.01604,
-        "reason": ""
+        "reason": "",
+        "since": "2026-01-25"
       },
       {
         "symbol": "ELE",
@@ -365,7 +385,8 @@
         "stop": 17.19,
         "risk_pct": 17.67,
         "change_today": 0.02806,
-        "reason": ""
+        "reason": "",
+        "since": "2026-01-25"
       }
     ],
     "pending_count": 3,
