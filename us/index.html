@@ -207,7 +207,7 @@
     <nav class="nav">
         <div class="nav-inner">
             <div class="nav-left">
-                <a href="../index.html" class="nav-back"><i class="fa-solid fa-arrow-left"></i></a>
+                <a href="../" class="nav-back"><i class="fa-solid fa-arrow-left"></i></a>
                 <span class="nav-title" id="nav-title">Live Trading</span>
                 <select id="currency-selector" class="nav-select" onchange="setGlobalCurrency(this.value)">
                     <option value="USD">USD</option>
@@ -528,17 +528,22 @@
     function updateChartData() {
         if(!returnChart || !maxDdChart) return;
 
-        const visible = snapshots.slice(0, currentIdx + 1);
+        // Always show ALL snapshots up to current selection (chronological order)
+        // Snapshots are newest-first, so reverse and take up to currentIdx
+        const allReversed = [...snapshots].reverse();
+        const upToIdx = snapshots.length - currentIdx;
+        const visible = allReversed.slice(0, upToIdx);
+
         const dates = [], returns = [], maxDDs = [];
         let peak = 0, maxDD = 0;
-        const initialEquity = visible.length > 0 ? convertCcy(visible[0].balance?.TotalEquity || 0, visible[0].date) : 0;
+        const INITIAL_CAPITAL = 100000; // Same as KPIs
 
         visible.forEach(s => {
             const eq = convertCcy(s.balance?.TotalEquity || 0, s.date);
             if(eq <= 0) return;
             dates.push(s.date);
-            // Total return %
-            const ret = initialEquity > 0 ? ((eq / initialEquity) - 1) * 100 : 0;
+            // Total return % from INITIAL_CAPITAL (same as KPIs)
+            const ret = INITIAL_CAPITAL > 0 ? ((eq / INITIAL_CAPITAL) - 1) * 100 : 0;
             returns.push(ret);
             // Max drawdown (cumulative max)
             if(eq > peak) peak = eq;
@@ -720,14 +725,17 @@
         let actions = [];
 
         if(showAll) {
-            const visible = snapshots.slice(0, currentIdx + 1);
+            // Show all history UP TO the current selection
+            // Snapshots are newest-first (index 0 = LIVE), so slice from currentIdx to end
+            // to get all snapshots from current selection back to oldest
+            const visible = snapshots.slice(currentIdx);
             visible.forEach(sn => {
                 if(sn.actions?.length > 0) {
                     const ts = sn.timestamp ? sn.timestamp.substring(0,16).replace('T',' ') : sn.date;
                     sn.actions.forEach(a => actions.push({...a, _ts: ts}));
                 }
             });
-            actions.reverse();
+            // Reverse to show newest first (since we iterated oldest-first)
         } else {
             const s = snapshots[currentIdx];
             if(s?.actions?.length > 0) {

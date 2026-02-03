@@ -226,21 +226,41 @@
         }
 
         .chart-cell {
-            width: 160px;
-            height: 60px;
+            width: 220px;
+            height: 80px;
             padding: 2px;
         }
         .chart-cell a { display: block; }
         .chart-cell img {
-            width: 160px;
-            height: 60px;
+            width: 220px;
+            height: 80px;
             object-fit: contain;
             border-radius: 4px;
             background: #fff;
         }
+        .change-positive { color: #10b981; }
+        .change-negative { color: #ef4444; }
 
         .text-right { text-align: right; }
         .font-mono { font-family: 'SF Mono', Monaco, 'Courier New', monospace; font-size: 0.75rem; }
+
+        .live-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: #94a3b8;
+            border-radius: 50%;
+            margin-left: 4px;
+            vertical-align: middle;
+        }
+        .live-dot.connected {
+            background: var(--green);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
 
         footer {
             text-align: center;
@@ -268,7 +288,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2025 Market Watch. For educational purposes only.</p>
+        <p>&copy; 2026 Market Watch. For educational purposes only.</p>
     </footer>
 
     <script>
@@ -336,13 +356,15 @@
         const container = document.getElementById(containerId);
         if (!container) return;
         if (!items || !items.length) {
-            container.innerHTML = '<tr><td colspan="3" class="no-data">No holdings</td></tr>';
+            container.innerHTML = '<tr><td colspan="4" class="no-data">No holdings</td></tr>';
             return;
         }
 
         const rows = items.map(item => {
             const isPending = item.isPending;
             const symbol = item.symbol;
+            const changePct = item.change_pct || 0;
+            const changeClass = changePct >= 0 ? 'change-positive' : 'change-negative';
 
             return `<tr>
                 <td>
@@ -362,6 +384,7 @@
                     </a>
                 </td>
                 <td class="text-right font-mono">${formatCurrency(isPending ? item.limit_price : item.price, 2)}</td>
+                <td class="text-right font-mono ${changeClass}">${isPending ? '-' : formatPct(changePct)}</td>
             </tr>`;
         }).join('');
 
@@ -449,7 +472,8 @@
                                     <tr>
                                         <th onclick="sortColumn('${p.id}', 'symbol', this)">Symbol <i class="fas fa-sort sort-icon"></i></th>
                                         <th>Chart</th>
-                                        <th class="text-right" onclick="sortColumn('${p.id}', 'price', this)">Price <i class="fas fa-sort sort-icon"></i></th>
+                                        <th class="text-right" onclick="sortColumn('${p.id}', 'price', this)">Price <span class="live-dot" id="live-dot-${p.id}" title="Real-time"></span> <i class="fas fa-sort sort-icon"></i></th>
+                                        <th class="text-right" onclick="sortColumn('${p.id}', 'change_pct', this)">24h <i class="fas fa-sort sort-icon"></i></th>
                                     </tr>
                                 </thead>
                                 <tbody id="tbody-${p.id}"></tbody>
@@ -465,7 +489,11 @@
 
             portfolios.forEach(p => {
                 // Merge positions and pending into one list
-                const positions = (p.positions || []).map(pos => ({ ...pos, isPending: false }));
+                const positions = (p.positions || []).map(pos => ({
+                    ...pos,
+                    isPending: false,
+                    change_pct: (pos.change_today || 0) * 100  // 24h change (vs yesterday close)
+                }));
                 const pending = (p.pending_orders || []).map(order => ({
                     symbol: order.symbol,
                     qty: order.qty,
@@ -473,7 +501,8 @@
                     stop_price: order.stop_price,
                     value: order.value,
                     mkt_value: order.value,
-                    isPending: true
+                    isPending: true,
+                    change_pct: 0
                 }));
 
                 const allItems = [...positions, ...pending];
@@ -489,11 +518,231 @@
                 createEquitySparkline('spark-' + p.id, curve, p.ret >= 0 ? '#10b981' : '#ef4444');
             });
 
+            // Start real-time price updates
+            // First do an immediate HTTP fetch for quotes
+            const allSymbols = getAllSymbols();
+            if (allSymbols.length > 0) {
+                fetchYahooQuotes(allSymbols);
+            }
+            // Then connect WebSocket for real-time updates
+            initYahooWebSocket();
+            // Refresh quotes every 30s as fallback
+            setInterval(() => {
+                if (!yahooWS || yahooWS.readyState !== WebSocket.OPEN) {
+                    fetchYahooQuotes(getAllSymbols());
+                }
+            }, 30000);
+
         } catch(e) {
             console.error(e);
             container.innerHTML = '<div class="no-data">Failed to load portfolios.</div>';
         }
     })();
+
+    // ─── YAHOO FINANCE WEBSOCKET ───
+    let yahooWS = null;
+    let reconnectAttempts = 0;
+    const MAX_RECONNECT = 5;
+
+    function getAllSymbols() {
+        const symbols = new Set();
+        Object.values(window.portfolioData || {}).forEach(items => {
+            items.forEach(item => {
+                if (item.symbol && !item.isPending) symbols.add(item.symbol);
+            });
+        });
+        return [...symbols];
+    }
+
+    function initYahooWebSocket() {
+        const symbols = getAllSymbols();
+        if (symbols.length === 0) return;
+
+        try {
+            yahooWS = new WebSocket('wss://streamer.finance.yahoo.com');
+
+            yahooWS.onopen = () => {
+                console.log('[Yahoo WS] Connected, subscribing to', symbols.length, 'symbols');
+                reconnectAttempts = 0;
+                yahooWS.send(JSON.stringify({ subscribe: symbols }));
+                // Show live indicator
+                document.querySelectorAll('.live-dot').forEach(dot => dot.classList.add('connected'));
+            };
+
+            yahooWS.onmessage = (event) => {
+                try {
+                    const data = decodeYahooMessage(event.data);
+                    if (data && data.id) {
+                        updateSymbolPrice(data.id, data.price, data.changePercent);
+                    }
+                } catch (e) {
+                    // Silently ignore decode errors
+                }
+            };
+
+            yahooWS.onclose = () => {
+                console.log('[Yahoo WS] Disconnected');
+                document.querySelectorAll('.live-dot').forEach(dot => dot.classList.remove('connected'));
+                if (reconnectAttempts < MAX_RECONNECT) {
+                    reconnectAttempts++;
+                    setTimeout(initYahooWebSocket, 5000 * reconnectAttempts);
+                }
+            };
+
+            yahooWS.onerror = (e) => {
+                console.error('[Yahoo WS] Error:', e);
+                // Fallback to HTTP API
+                fetchYahooQuotes(symbols);
+            };
+
+        } catch (e) {
+            console.error('[Yahoo WS] Failed to connect:', e);
+            // Fallback to HTTP API
+            fetchYahooQuotes(getAllSymbols());
+        }
+    }
+
+    // Decode Yahoo Finance protobuf message (base64 encoded)
+    function decodeYahooMessage(base64) {
+        const binary = atob(base64);
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) {
+            bytes[i] = binary.charCodeAt(i);
+        }
+
+        // Simple protobuf decoder for Yahoo quote format
+        // Field 1: id (string), Field 2: price (float), Field 4: previousClose (float), Field 7: changePercent (float)
+        let pos = 0;
+        const result = {};
+
+        while (pos < bytes.length) {
+            const tag = bytes[pos++];
+            const fieldNum = tag >> 3;
+            const wireType = tag & 0x07;
+
+            if (wireType === 2) { // Length-delimited (string)
+                let len = 0, shift = 0;
+                while (bytes[pos] & 0x80) {
+                    len |= (bytes[pos++] & 0x7f) << shift;
+                    shift += 7;
+                }
+                len |= bytes[pos++] << shift;
+
+                if (fieldNum === 1) { // id
+                    result.id = String.fromCharCode(...bytes.slice(pos, pos + len));
+                }
+                pos += len;
+            } else if (wireType === 5) { // 32-bit (float)
+                const view = new DataView(bytes.buffer, pos, 4);
+                const val = view.getFloat32(0, true);
+                if (fieldNum === 2) result.price = val;
+                if (fieldNum === 4) result.previousClose = val;
+                if (fieldNum === 7) result.changePercent = val;
+                pos += 4;
+            } else if (wireType === 1) { // 64-bit
+                pos += 8;
+            } else if (wireType === 0) { // Varint
+                while (bytes[pos++] & 0x80);
+            } else {
+                break; // Unknown wire type
+            }
+        }
+
+        return result.id ? result : null;
+    }
+
+    // Fallback: fetch quotes via Yahoo HTTP API if WebSocket fails
+    async function fetchYahooQuotes(symbols) {
+        if (!symbols.length) return;
+
+        // Split into batches of 20 symbols (Yahoo API limit)
+        const batchSize = 20;
+        for (let i = 0; i < symbols.length; i += batchSize) {
+            const batch = symbols.slice(i, i + batchSize);
+            try {
+                // Try Yahoo Finance v8 quote API (better CORS support)
+                const url = `https://query1.finance.yahoo.com/v8/finance/chart/${batch[0]}?interval=1d&range=1d`;
+
+                // For multiple symbols, use v7 API
+                const multiUrl = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${batch.join(',')}`;
+
+                const res = await fetch(multiUrl, {
+                    headers: {
+                        'Accept': 'application/json',
+                    }
+                });
+
+                if (!res.ok) {
+                    // Try CORS proxy as fallback
+                    const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(multiUrl)}`;
+                    const proxyRes = await fetch(proxyUrl);
+                    const data = await proxyRes.json();
+                    processYahooQuotes(data);
+                    continue;
+                }
+
+                const data = await res.json();
+                processYahooQuotes(data);
+
+            } catch (e) {
+                console.error('[Yahoo HTTP] Fetch failed for batch:', e);
+            }
+        }
+    }
+
+    function processYahooQuotes(data) {
+        if (data.quoteResponse?.result) {
+            data.quoteResponse.result.forEach(q => {
+                if (q.symbol && q.regularMarketPrice) {
+                    const changePercent = q.regularMarketChangePercent || 0;
+                    updateSymbolPrice(q.symbol, q.regularMarketPrice, changePercent);
+                }
+            });
+            console.log('[Yahoo HTTP] Updated', data.quoteResponse.result.length, 'quotes');
+            // Show live indicator for HTTP updates too
+            document.querySelectorAll('.live-dot').forEach(dot => dot.classList.add('connected'));
+        }
+    }
+
+    function updateSymbolPrice(symbol, price, changePercent) {
+        if (!price || price <= 0) return;
+
+        // Update data and DOM directly (no full re-render)
+        Object.keys(window.portfolioData || {}).forEach(portfolioId => {
+            const items = window.portfolioData[portfolioId];
+
+            items.forEach((item, idx) => {
+                if (item.symbol === symbol && !item.isPending) {
+                    item.price = price;
+                    if (changePercent !== undefined) {
+                        item.change_pct = changePercent;
+                    }
+
+                    // Find and update the row directly
+                    const tbody = document.getElementById('tbody-' + portfolioId);
+                    if (tbody) {
+                        const rows = tbody.querySelectorAll('tr');
+                        rows.forEach(row => {
+                            const symbolCell = row.querySelector('.symbol-name');
+                            if (symbolCell && symbolCell.textContent === symbol) {
+                                // Update price cell (3rd td)
+                                const cells = row.querySelectorAll('td');
+                                if (cells[2]) {
+                                    cells[2].textContent = formatCurrency(price, 2);
+                                }
+                                // Update 24h cell (4th td)
+                                if (cells[3] && changePercent !== undefined) {
+                                    const pct = changePercent;
+                                    cells[3].textContent = formatPct(pct);
+                                    cells[3].className = 'text-right font-mono ' + (pct >= 0 ? 'change-positive' : 'change-negative');
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        });
+    }
 
     function toggleWatchlist(id) {
         const content = document.getElementById('watchlist-' + id);
