@@ -525,6 +525,101 @@
             50% { opacity: 0.5; }
         }
 
+        /* Fullscreen Chart Dialog */
+        .chart-dialog-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            animation: fadeIn 0.2s ease;
+        }
+        .chart-dialog-overlay.visible {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .chart-dialog {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            max-width: 95vw;
+            max-height: 95vh;
+            position: relative;
+            animation: scaleIn 0.2s ease;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .chart-dialog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .chart-dialog-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .chart-dialog-title h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+        }
+        .chart-dialog-links {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .chart-dialog-links a {
+            padding: 0.4rem 0.8rem;
+            background: var(--bg-table);
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .chart-dialog-links a:hover {
+            background: var(--blue);
+            color: white;
+        }
+        .chart-dialog-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: var(--bg-table);
+            color: var(--text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            transition: all 0.2s;
+        }
+        .chart-dialog-close:hover {
+            background: var(--red);
+            color: white;
+            transform: rotate(90deg);
+        }
+        .chart-dialog-image {
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
         footer {
             text-align: center;
             padding: 2rem;
@@ -553,6 +648,24 @@
 
         <div id="portfolios" class="portfolios">
             <div class="loading"><i class="fas fa-spinner fa-spin"></i> Loading portfolios...</div>
+        </div>
+    </div>
+
+    <!-- Fullscreen Chart Dialog -->
+    <div class="chart-dialog-overlay" id="chartDialog" onclick="closeChartDialog(event)">
+        <div class="chart-dialog" onclick="event.stopPropagation()">
+            <div class="chart-dialog-header">
+                <div class="chart-dialog-title">
+                    <h3 id="chartDialogSymbol">AAPL</h3>
+                    <div class="chart-dialog-links">
+                        <a id="chartDialogYahoo" href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Yahoo</a>
+                        <a id="chartDialogTV" href="#" target="_blank"><i class="fas fa-chart-line"></i> TradingView</a>
+                        <a id="chartDialogFinviz" href="#" target="_blank"><i class="fas fa-chart-area"></i> Finviz</a>
+                    </div>
+                </div>
+                <button class="chart-dialog-close" onclick="closeChartDialog()"><i class="fas fa-times"></i></button>
+            </div>
+            <img id="chartDialogImage" class="chart-dialog-image" src="" alt="Chart">
         </div>
     </div>
 
@@ -610,6 +723,44 @@
         return `https://charts2.finviz.com/chart.ashx?t=${symbol}&ty=c&ta=0&p=d&s=m`;
     }
 
+    function getFinvizChartUrlLarge(symbol) {
+        // Large chart for dialog (l = large)
+        return `https://charts2.finviz.com/chart.ashx?t=${symbol}&ty=c&ta=1&p=d&s=l`;
+    }
+
+    function openChartDialog(symbol) {
+        const dialog = document.getElementById('chartDialog');
+        const img = document.getElementById('chartDialogImage');
+        const symbolEl = document.getElementById('chartDialogSymbol');
+        const yahooLink = document.getElementById('chartDialogYahoo');
+        const tvLink = document.getElementById('chartDialogTV');
+        const finvizLink = document.getElementById('chartDialogFinviz');
+
+        symbolEl.textContent = symbol;
+        img.src = getFinvizChartUrlLarge(symbol);
+        yahooLink.href = `https://finance.yahoo.com/quote/${symbol}`;
+        tvLink.href = `https://www.tradingview.com/chart/?symbol=${symbol}`;
+        finvizLink.href = `https://finviz.com/quote.ashx?t=${symbol}`;
+
+        dialog.classList.add('visible');
+        document.body.style.overflow = 'hidden';
+
+        // Close on Escape key
+        document.addEventListener('keydown', handleEscKey);
+    }
+
+    function closeChartDialog(event) {
+        if (event && event.target !== document.getElementById('chartDialog')) return;
+        const dialog = document.getElementById('chartDialog');
+        dialog.classList.remove('visible');
+        document.body.style.overflow = '';
+        document.removeEventListener('keydown', handleEscKey);
+    }
+
+    function handleEscKey(e) {
+        if (e.key === 'Escape') closeChartDialog();
+    }
+
     function sortData(data, column, direction) {
         return [...data].sort((a, b) => {
             let valA = a[column];
@@ -639,25 +790,137 @@
         return colors[idx];
     }
 
+    // Parse reason string into structured checklist items
+    function parseReason(reason) {
+        if (!reason) return { main: null, items: [] };
+
+        const parts = reason.split('||').map(s => s.trim());
+        const items = [];
+        let main = null;
+
+        parts.forEach((section, idx) => {
+            const subParts = section.split('|').map(s => s.trim()).filter(s => s);
+
+            subParts.forEach((part, i) => {
+                // First part of first section is the main action
+                if (idx === 0 && i === 0) {
+                    main = part;
+                    return;
+                }
+
+                // Parse key=value or key: value patterns
+                const kvMatch = part.match(/^([^=:]+)[=:](.+)$/);
+                if (kvMatch) {
+                    const key = kvMatch[1].trim();
+                    const val = kvMatch[2].trim();
+
+                    // Determine item type based on key/value
+                    let type = 'neutral';
+                    const keyLower = key.toLowerCase();
+                    const valNum = parseFloat(val);
+
+                    if (keyLower.includes('score') && valNum >= 50) type = 'good';
+                    else if (keyLower.includes('score')) type = 'info';
+                    else if (keyLower.includes('risk')) type = 'warn';
+                    else if (keyLower.includes('rsi') && valNum > 70) type = 'warn';
+                    else if (keyLower.includes('rsi') && valNum < 30) type = 'good';
+                    else if (keyLower.includes('atr') || keyLower.includes('vol')) type = 'info';
+                    else if (keyLower.includes('mom') && valNum > 0) type = 'good';
+                    else if (keyLower.includes('dist') && valNum > 0) type = 'good';
+                    else type = 'info';
+
+                    items.push({ key, val, type });
+                } else {
+                    // Plain text - categorize by keywords
+                    let type = 'neutral';
+                    const lower = part.toLowerCase();
+                    if (lower.includes('bullish') || lower.includes('aligned') || lower.includes('breakout')) type = 'good';
+                    else if (lower.includes('bearish') || lower.includes('overbought')) type = 'warn';
+                    else if (lower.includes('volume') || lower.includes('spike')) type = 'info';
+
+                    items.push({ text: part, type });
+                }
+            });
+        });
+
+        return { main, items };
+    }
+
+    function renderReasonChecklist(reason) {
+        const { main, items } = parseReason(reason);
+
+        if (!main && items.length === 0) {
+            return '<div class="reason-content"><span style="color: var(--text-muted); font-size: 0.8rem;">No details available</span></div>';
+        }
+
+        let html = '<div class="reason-content">';
+
+        if (main) {
+            html += `<div class="reason-main-action"><i class="fas fa-bolt"></i> ${escapeHtml(main)}</div>`;
+        }
+
+        html += '<div class="reason-header"><i class="fas fa-list-check"></i> Entry Criteria</div>';
+        html += '<div class="reason-checklist">';
+
+        items.forEach(item => {
+            const icon = item.type === 'good' ? '✓' : item.type === 'warn' ? '!' : item.type === 'info' ? 'i' : '•';
+
+            if (item.key) {
+                html += `<div class="reason-item ${item.type}">
+                    <span class="check">${icon}</span>
+                    <span class="label">${escapeHtml(item.key)}</span>
+                    <span class="value">${escapeHtml(item.val)}</span>
+                </div>`;
+            } else if (item.text) {
+                html += `<div class="reason-item ${item.type}">
+                    <span class="check">${icon}</span>
+                    <span class="value">${escapeHtml(item.text)}</span>
+                </div>`;
+            }
+        });
+
+        html += '</div></div>';
+        return html;
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    function toggleReason(btn, rowId) {
+        const reasonRow = document.getElementById(rowId);
+        if (reasonRow) {
+            reasonRow.classList.toggle('visible');
+            btn.classList.toggle('expanded');
+        }
+    }
+
     function renderWatchlistTable(items, containerId, portfolioId) {
         const container = document.getElementById(containerId);
         if (!container) return;
         if (!items || !items.length) {
-            container.innerHTML = '<tr><td colspan="4" class="no-data">No holdings</td></tr>';
+            container.innerHTML = '<tr><td colspan="5" class="no-data">No holdings</td></tr>';
             return;
         }
 
-        const rows = items.map(item => {
+        const rows = items.map((item, idx) => {
             const isPending = item.isPending;
             const symbol = item.symbol;
-            const changePct = item.change_pct || 0;
-            const changeClass = changePct >= 0 ? 'change-positive' : 'change-negative';
-            const changeIcon = changePct >= 0 ? '▲' : '▼';
+            const changePct = item.change_pct;
+            const hasChange = changePct !== null && changePct !== undefined;
+            const changeClass = hasChange ? (changePct >= 0 ? 'change-positive' : 'change-negative') : '';
+            const changeIcon = hasChange ? (changePct >= 0 ? '▲' : '▼') : '';
+            const changeDisplay = isPending ? '-' : (hasChange ? changeIcon + ' ' + formatPct(changePct) : '<i class="fas fa-spinner fa-spin" style="font-size:0.7rem;color:var(--text-muted)"></i>');
             const [grad1, grad2] = getLogoFallback(symbol);
             const logoUrl = getLogoUrl(symbol);
             const initials = symbol.substring(0, 2);
+            const reason = item.reason || '';
+            const reasonId = `reason-${portfolioId}-${idx}`;
+            const hasReason = reason && reason.length > 0;
 
-            return `<tr>
+            let html = `<tr>
                 <td>
                     <div class="symbol-cell">
                         <div class="symbol-logo" style="background: linear-gradient(135deg, ${grad1} 0%, ${grad2} 100%);">
@@ -675,14 +938,26 @@
                     </div>
                 </td>
                 <td class="chart-cell">
-                    <a href="https://finviz.com/quote.ashx?t=${symbol}" target="_blank">
+                    <div onclick="openChartDialog('${symbol}')" style="cursor: pointer;">
                         <img src="${getFinvizChartUrl(symbol)}" alt="${symbol}" loading="lazy"
                              onerror="this.style.opacity='0.3'">
-                    </a>
+                    </div>
                 </td>
                 <td class="text-right price-cell">${formatCurrency(isPending ? item.limit_price : item.price, 2)}</td>
-                <td class="text-right change-cell ${changeClass}">${isPending ? '-' : changeIcon + ' ' + formatPct(changePct)}</td>
+                <td class="text-right change-cell ${changeClass}">${changeDisplay}</td>
+                <td style="text-align: center; width: 40px;">
+                    ${hasReason ? `<button class="reason-toggle" onclick="toggleReason(this, '${reasonId}')" title="Why this position?"><i class="fas fa-info"></i></button>` : ''}
+                </td>
             </tr>`;
+
+            // Add expandable reason row
+            if (hasReason) {
+                html += `<tr class="reason-row" id="${reasonId}">
+                    <td colspan="5">${renderReasonChecklist(reason)}</td>
+                </tr>`;
+            }
+
+            return html;
         }).join('');
 
         container.innerHTML = rows;
@@ -771,6 +1046,7 @@
                                         <th>Chart</th>
                                         <th class="text-right" onclick="sortColumn('${p.id}', 'price', this)">Price <span class="live-dot" id="live-dot-${p.id}" title="Real-time"></span> <i class="fas fa-sort sort-icon"></i></th>
                                         <th class="text-right" onclick="sortColumn('${p.id}', 'change_pct', this)">24h <i class="fas fa-sort sort-icon"></i></th>
+                                        <th style="width: 40px; text-align: center;">Why</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tbody-${p.id}"></tbody>
@@ -785,21 +1061,40 @@
             window.sortState = {};
 
             portfolios.forEach(p => {
+                // Build reason map from positions_reasons if available
+                const reasonMap = {};
+                if (p.positions_reasons) {
+                    Object.entries(p.positions_reasons).forEach(([sym, reason]) => {
+                        reasonMap[sym] = reason;
+                    });
+                }
+
                 // Merge positions and pending into one list
-                const positions = (p.positions || []).map(pos => ({
-                    ...pos,
-                    isPending: false,
-                    change_pct: (pos.change_today || 0) * 100  // 24h change (vs yesterday close)
-                }));
+                // Use cached previousClose from localStorage for immediate 24H display
+                const positions = (p.positions || []).map(pos => {
+                    const cachedPrevClose = getSymbolPrevClose(pos.symbol);
+                    let changePct = null;
+                    if (cachedPrevClose && pos.price > 0) {
+                        changePct = ((pos.price - cachedPrevClose) / cachedPrevClose) * 100;
+                    }
+                    return {
+                        ...pos,
+                        isPending: false,
+                        change_pct: changePct,  // From cache or null (will be updated from Yahoo)
+                        previousClose: cachedPrevClose,
+                        reason: pos.reason || reasonMap[pos.symbol] || ''
+                    };
+                });
                 const pending = (p.pending_orders || []).map(order => ({
                     symbol: order.symbol,
                     qty: order.qty,
                     limit_price: order.limit_price,
+                    reason: order.reason || '',
                     stop_price: order.stop_price,
                     value: order.value,
                     mkt_value: order.value,
                     isPending: true,
-                    change_pct: 0
+                    change_pct: null
                 }));
 
                 const allItems = [...positions, ...pending];
@@ -836,6 +1131,38 @@
         }
     })();
 
+    // ─── PREVIOUS CLOSE CACHE (localStorage) ───
+    const PREV_CLOSE_KEY = 'mw_prev_close';
+
+    function getCachedPrevClose() {
+        try {
+            const data = localStorage.getItem(PREV_CLOSE_KEY);
+            return data ? JSON.parse(data) : {};
+        } catch (e) {
+            return {};
+        }
+    }
+
+    function setCachedPrevClose(symbol, prevClose) {
+        try {
+            const cache = getCachedPrevClose();
+            cache[symbol] = { price: prevClose, ts: Date.now() };
+            localStorage.setItem(PREV_CLOSE_KEY, JSON.stringify(cache));
+        } catch (e) {
+            // localStorage full or disabled
+        }
+    }
+
+    function getSymbolPrevClose(symbol) {
+        const cache = getCachedPrevClose();
+        const entry = cache[symbol];
+        // Return cached value if less than 24h old
+        if (entry && (Date.now() - entry.ts) < 24 * 60 * 60 * 1000) {
+            return entry.price;
+        }
+        return null;
+    }
+
     // ─── YAHOO FINANCE WEBSOCKET ───
     let yahooWS = null;
     let reconnectAttempts = 0;
@@ -869,8 +1196,9 @@
             yahooWS.onmessage = (event) => {
                 try {
                     const data = decodeYahooMessage(event.data);
-                    if (data && data.id) {
-                        updateSymbolPrice(data.id, data.price, data.changePercent);
+                    if (data && data.id && data.price) {
+                        // Calculate 24h change from Yahoo: (price - previousClose) / previousClose
+                        updateSymbolPrice(data.id, data.price, data.previousClose);
                     }
                 } catch (e) {
                     // Silently ignore decode errors
@@ -993,8 +1321,9 @@
         if (data.quoteResponse?.result) {
             data.quoteResponse.result.forEach(q => {
                 if (q.symbol && q.regularMarketPrice) {
-                    const changePercent = q.regularMarketChangePercent || 0;
-                    updateSymbolPrice(q.symbol, q.regularMarketPrice, changePercent);
+                    // Pass previousClose to calculate 24h change: (price - prevClose) / prevClose
+                    const prevClose = q.regularMarketPreviousClose || q.previousClose || 0;
+                    updateSymbolPrice(q.symbol, q.regularMarketPrice, prevClose);
                 }
             });
             console.log('[Yahoo HTTP] Updated', data.quoteResponse.result.length, 'quotes');
@@ -1003,8 +1332,19 @@
         }
     }
 
-    function updateSymbolPrice(symbol, price, changePercent) {
+    function updateSymbolPrice(symbol, price, previousClose) {
         if (!price || price <= 0) return;
+
+        // Save previousClose to localStorage for next page load
+        if (previousClose && previousClose > 0) {
+            setCachedPrevClose(symbol, previousClose);
+        }
+
+        // Calculate 24h change from Yahoo: (realtime_price - yesterday_close) / yesterday_close * 100
+        let changePct = null;
+        if (previousClose && previousClose > 0) {
+            changePct = ((price - previousClose) / previousClose) * 100;
+        }
 
         // Update data and DOM directly (no full re-render)
         Object.keys(window.portfolioData || {}).forEach(portfolioId => {
@@ -1013,8 +1353,11 @@
             items.forEach((item, idx) => {
                 if (item.symbol === symbol && !item.isPending) {
                     item.price = price;
-                    if (changePercent !== undefined) {
-                        item.change_pct = changePercent;
+                    if (previousClose && previousClose > 0) {
+                        item.previousClose = previousClose;
+                    }
+                    if (changePct !== null) {
+                        item.change_pct = changePct;
                     }
 
                     // Find and update the row directly
@@ -1029,12 +1372,11 @@
                                 if (cells[2]) {
                                     cells[2].textContent = formatCurrency(price, 2);
                                 }
-                                // Update 24h cell (4th td) with icon
-                                if (cells[3] && changePercent !== undefined) {
-                                    const pct = changePercent;
-                                    const icon = pct >= 0 ? '▲' : '▼';
-                                    cells[3].innerHTML = icon + ' ' + formatPct(pct);
-                                    cells[3].className = 'text-right change-cell ' + (pct >= 0 ? 'change-positive' : 'change-negative');
+                                // Update 24h cell (4th td) with icon - from Yahoo data
+                                if (cells[3] && changePct !== null) {
+                                    const icon = changePct >= 0 ? '▲' : '▼';
+                                    cells[3].innerHTML = icon + ' ' + formatPct(changePct);
+                                    cells[3].className = 'text-right change-cell ' + (changePct >= 0 ? 'change-positive' : 'change-negative');
                                 }
                             }
                         });
