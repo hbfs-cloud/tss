@@ -17,7 +17,7 @@
         "stop_price": 0,
         "order_type": "",
         "value": 80295,
-        "reason": "BUY OHB.DE @ $264.71 | Score=176 | Risk=23.5% | Size=$80K (89.8% of equity) || Strategy=momentum-rotation, RSI=74.2, ATR=$27.21, Mom=97.7%"
+        "reason": ""
       },
       {
         "symbol": "FMV.DE",
@@ -35,7 +35,7 @@
         "stop_price": 0,
         "order_type": "",
         "value": 7999.2,
-        "reason": "BUY EXA.PA @ $121.13 | Score=31 | Risk=11.2% | Size=$8K (9.0% of equity) || Strategy=momentum-rotation, RSI=69.0, ATR=$5.00, Mom=20.2%"
+        "reason": ""
       },
       {
         "symbol": "ENR.DE",
@@ -120,15 +120,16 @@
       }
     ],
     "date": "2026-02-02",
-    "timestamp": "2026-02-03T21:44:47+01:00",
+    "timestamp": "2026-02-03T21:45:08+01:00",
     "currency": "EUR",
     "ret": -0.10700339999999997,
     "max_dd": -0.10700339999999997,
-    "sharpe": -5.999999999999998,
-    "vol": 0.5617678500000001,
+    "sharpe": -5.612486080160911,
+    "vol": 0.5338267493599024,
     "peak_equity": 89299.66,
     "equity_curve": [
       100000.0,
+      89299.66,
       89299.66,
       89299.66,
       89299.66,
@@ -140,6 +141,7 @@
     ],
     "equity_curve_dates": [
       "2026-02-02T08:00:00+01:00",
+      "2026-02-02T09:00:00+01:00",
       "2026-02-02T09:00:00+01:00",
       "2026-02-02T09:00:00+01:00",
       "2026-02-02T09:00:00+01:00",
