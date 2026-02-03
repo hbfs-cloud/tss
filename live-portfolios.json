@@ -8,23 +8,62 @@
     "cash": 0,
     "positions_count": 0,
     "positions": [],
-    "pending_count": 0,
-    "pending_orders": [],
+    "pending_count": 4,
+    "pending_orders": [
+      {
+        "symbol": "FMV.DE",
+        "qty": 452,
+        "limit_price": 17.76,
+        "stop_price": 0,
+        "order_type": "",
+        "value": 8027.52,
+        "reason": "BUY FMV.DE @ $17.78 | Score=62 | Risk=22.0% | Size=$8K (9.0% of equity) || Strategy=momentum-rotation, RSI=48.8, ATR=$1.70, Mom=15.8%"
+      },
+      {
+        "symbol": "NDA.DE",
+        "qty": 4,
+        "limit_price": 167,
+        "stop_price": 0,
+        "order_type": "",
+        "value": 668,
+        "reason": "BUY NDA.DE @ $167.07 | Score=48 | Risk=9.6% | Size=$1K (0.7% of equity) || Strategy=momentum-rotation, RSI=79.7, ATR=$5.58, Mom=26.1%"
+      },
+      {
+        "symbol": "AMC.DE",
+        "qty": 1,
+        "limit_price": 145.9,
+        "stop_price": 0,
+        "order_type": "",
+        "value": 145.9,
+        "reason": "BUY AMC.DE @ $145.91 | Score=44 | Risk=15.7% | Size=$0K (0.2% of equity) || Strategy=momentum-rotation, RSI=41.0, ATR=$9.30, Mom=13.1%"
+      },
+      {
+        "symbol": "DBG.PA",
+        "qty": 10,
+        "limit_price": 8.22,
+        "stop_price": 0,
+        "order_type": "",
+        "value": 82.2,
+        "reason": "BUY DBG.PA @ $8.22 | Score=37 | Risk=9.5% | Size=$0K (0.1% of equity) || Strategy=momentum-rotation, RSI=75.1, ATR=$0.27, Mom=16.5%"
+      }
+    ],
     "date": "2026-02-02",
-    "timestamp": "2026-02-03T21:17:07+01:00",
+    "timestamp": "2026-02-03T21:21:16+01:00",
     "currency": "EUR",
     "ret": -0.10700339999999997,
     "max_dd": -0.10700339999999997,
-    "sharpe": -15.874507866387544,
-    "vol": 0.8493131575151063,
+    "sharpe": -11.224972160321826,
+    "vol": 0.8007401240398533,
     "peak_equity": 89299.66,
     "equity_curve": [
       100000.0,
+      89299.66,
       89299.66,
       89299.66
     ],
     "equity_curve_dates": [
       "2026-02-02T08:00:00+01:00",
+      "2026-02-02T09:00:00+01:00",
       "2026-02-02T09:00:00+01:00"
     ]
   },
