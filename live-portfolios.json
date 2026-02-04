@@ -4,7 +4,7 @@
     "name": "EU Momentum Rotation",
     "icon": "fa-chart-line",
     "color": "#10b981",
-    "equity": 88987.16,
+    "equity": 88981.94,
     "initial_capital": 89299.66,
     "cash": 0,
     "positions_count": 9,
@@ -14,13 +14,13 @@
         "qty": 10,
         "entry": 8.05,
         "price": 0,
-        "pnl": -0.95,
+        "pnl": -0.2,
         "pnl_pct": -100.0,
         "mkt_value": 0,
         "stop": 7.45,
         "risk_pct": 0,
         "change_today": 0,
-        "reason": "BUY DBG.PA @ $8.22 | Score=37 | Risk=9.5% | Size=$0K (0.1% of equity) || Strategy=momentum-rotation, RSI=75.1, ATR=$0.27, Mom=16.5%",
+        "reason": "",
         "since": "2026-02-02"
       },
       {
@@ -28,13 +28,13 @@
         "qty": 23,
         "entry": 34.96,
         "price": 0,
-        "pnl": -9.2,
+        "pnl": -17.02,
         "pnl_pct": -100.0,
         "mkt_value": 0,
         "stop": 32.55,
         "risk_pct": 0,
         "change_today": 0,
-        "reason": "BUY NDX1.DE @ $35.72 | Score=31 | Risk=8.9% | Size=$1K (0.9% of equity) || Strategy=momentum-rotation, RSI=65.0, ATR=$1.07, Mom=10.6%",
+        "reason": "",
         "since": "2026-02-02"
       },
       {
@@ -42,13 +42,13 @@
         "qty": 66,
         "entry": 120.8,
         "price": 0,
-        "pnl": -171.6,
+        "pnl": -105.6,
         "pnl_pct": -100.0,
         "mkt_value": 0,
         "stop": 108.4,
         "risk_pct": 0,
         "change_today": 0,
-        "reason": "BUY EXA.PA @ $121.13 | Score=31 | Risk=11.2% | Size=$8K (9.0% of equity) || Strategy=momentum-rotation, RSI=69.0, ATR=$5.00, Mom=20.2%",
+        "reason": "",
         "since": "2026-02-02"
       },
       {
@@ -62,7 +62,7 @@
         "stop": 17.04,
         "risk_pct": 0,
         "change_today": 0,
-        "reason": "BUY VK.PA @ $18.65 | Score=16 | Risk=9.0% | Size=$0K (0.0% of equity) || Strategy=momentum-rotation, RSI=62.0, ATR=$0.57, Mom=11.3%",
+        "reason": "",
         "since": "2026-02-02"
       },
       {
@@ -70,13 +70,13 @@
         "qty": 1,
         "entry": 144.96,
         "price": 0,
-        "pnl": 0.04,
+        "pnl": -0.1,
         "pnl_pct": -100.0,
         "mkt_value": 0,
         "stop": 123.06,
         "risk_pct": 0,
         "change_today": 0,
-        "reason": "BUY AMC.DE @ $145.91 | Score=44 | Risk=15.7% | Size=$0K (0.2% of equity) || Strategy=momentum-rotation, RSI=41.0, ATR=$9.30, Mom=13.1%",
+        "reason": "",
         "since": "2026-02-02"
       },
       {
@@ -84,7 +84,7 @@
         "qty": 1,
         "entry": 533.5,
         "price": 0,
-        "pnl": -1.8,
+        "pnl": -1.2,
         "pnl_pct": -100.0,
         "mkt_value": 0,
         "stop": 500.23,
@@ -104,7 +104,7 @@
         "stop": 23.8,
         "risk_pct": 0,
         "change_today": 0,
-        "reason": "BUY VBK.DE @ $26.64 | Score=64 | Risk=10.8% | Size=$8K (9.3% of equity) || Strategy=momentum-rotation, RSI=55.4, ATR=$1.04, Mom=10.8%",
+        "reason": "",
         "since": "2026-02-03"
       },
       {
@@ -112,13 +112,13 @@
         "qty": 70,
         "entry": 11.54,
         "price": 0,
-        "pnl": -6.3,
+        "pnl": -12.6,
         "pnl_pct": -100.0,
         "mkt_value": 0,
         "stop": 10.87,
         "risk_pct": 0,
         "change_today": 0,
-        "reason": "BUY TKA.DE @ $12.19 | Score=29 | Risk=10.8% | Size=$1K (1.0% of equity) || Strategy=momentum-rotation, RSI=73.1, ATR=$0.48, Mom=23.4%",
+        "reason": "",
         "since": "2026-02-03"
       },
       {
@@ -126,13 +126,13 @@
         "qty": 2,
         "entry": 35.6,
         "price": 0,
-        "pnl": -0.2,
+        "pnl": -0.64,
         "pnl_pct": -100.0,
         "mkt_value": 0,
         "stop": 33.2,
         "risk_pct": 0,
         "change_today": 0,
-        "reason": "BUY 8TRA.DE @ $36.19 | Score=20 | Risk=8.4% | Size=$0K (0.1% of equity) || Strategy=momentum-rotation, RSI=74.7, ATR=$0.99, Mom=10.6%",
+        "reason": "",
         "since": "2026-02-03"
       }
     ],
@@ -194,12 +194,12 @@
       }
     ],
     "date": "2026-02-03",
-    "timestamp": "2026-02-04T10:13:08+01:00",
+    "timestamp": "2026-02-04T10:21:11+01:00",
     "currency": "EUR",
-    "ret": -0.0034994534133724583,
+    "ret": -0.003557908283189445,
     "max_dd": -0.003596766213891546,
-    "sharpe": -5.616353072479336,
-    "vol": 0.010475141858531037,
+    "sharpe": -5.518912750192869,
+    "vol": 0.010164445112891933,
     "peak_equity": 89299.66,
     "equity_curve": [
       89299.66,
@@ -217,7 +217,8 @@
       88996.78,
       88995.56,
       88983.18,
-      88987.16
+      88987.16,
+      88981.84
     ],
     "equity_curve_dates": [
       "2026-02-02T08:00:00+01:00",
@@ -235,6 +236,7 @@
       "2026-02-03T09:00:00+01:00",
       "2026-02-03T09:00:00+01:00",
       "2026-02-03T09:00:00+01:00",
+      "2026-02-03T09:00:00+01:00",
       "2026-02-03T09:00:00+01:00"
     ]
   },
@@ -244,7 +246,7 @@
     "icon": "fa-flag-usa",
     "color": "#3b82f6",
     "equity": 101148.22,
-    "initial_capital": 100047.27,
+    "initial_capital": 100133.78,
     "cash": 14877.06,
     "positions_count": 14,
     "positions": [
@@ -487,10 +489,10 @@
     "date": "2026-02-03",
     "timestamp": "2026-02-04T09:36:43+01:00",
     "currency": "USD",
-    "ret": 0.011004298268208588,
+    "ret": 0.010130846952946372,
     "max_dd": -0.0064582821533291715,
-    "sharpe": 1.8632757095081176,
-    "vol": 0.04684722430794546,
+    "sharpe": 1.8632757095081172,
+    "vol": 0.046847224307945474,
     "peak_equity": 101805.71,
     "equity_curve": [
       100047.27,
@@ -569,7 +571,7 @@
     "icon": "fa-bolt",
     "color": "#f59e0b",
     "equity": 102092.17,
-    "initial_capital": 101033.02,
+    "initial_capital": 100985.68,
     "cash": 60818.48,
     "positions_count": 6,
     "positions": [
@@ -598,7 +600,7 @@
         "stop": 83.59,
         "risk_pct": 14.83,
         "change_today": -0.00305,
-        "reason": "ENTRY",
+        "reason": "",
         "since": "2026-02-02"
       },
       {
@@ -736,7 +738,7 @@
     "date": "2026-02-03",
     "timestamp": "2026-02-04T09:37:15+01:00",
     "currency": "USD",
-    "ret": 0.010483206381438407,
+    "ret": 0.010956900027805975,
     "max_dd": -0.002974869069136878,
     "sharpe": 4.443467174109402,
     "vol": 0.034937730843971684,
