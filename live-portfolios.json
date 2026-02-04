@@ -4,12 +4,139 @@
     "name": "EU Momentum Rotation",
     "icon": "fa-chart-line",
     "color": "#10b981",
-    "equity": 89299.66,
+    "equity": 89013.21,
     "initial_capital": 89299.66,
     "cash": 0,
-    "positions_count": 0,
-    "positions": [],
-    "pending_count": 12,
+    "positions_count": 9,
+    "positions": [
+      {
+        "symbol": "DBG.PA",
+        "qty": 10,
+        "entry": 8.05,
+        "price": 0,
+        "pnl": 0.4,
+        "pnl_pct": -100.0,
+        "mkt_value": 0,
+        "stop": 7.45,
+        "risk_pct": 0,
+        "change_today": 0,
+        "reason": "BUY DBG.PA @ $8.22 | Score=37 | Risk=9.5% | Size=$0K (0.1% of equity) || Strategy=momentum-rotation, RSI=75.1, ATR=$0.27, Mom=16.5%",
+        "since": "2026-02-02"
+      },
+      {
+        "symbol": "NDX1.DE",
+        "qty": 23,
+        "entry": 34.96,
+        "price": 0,
+        "pnl": -7.36,
+        "pnl_pct": -100.0,
+        "mkt_value": 0,
+        "stop": 32.55,
+        "risk_pct": 0,
+        "change_today": 0,
+        "reason": "BUY NDX1.DE @ $35.72 | Score=31 | Risk=8.9% | Size=$1K (0.9% of equity) || Strategy=momentum-rotation, RSI=65.0, ATR=$1.07, Mom=10.6%",
+        "since": "2026-02-02"
+      },
+      {
+        "symbol": "EXA.PA",
+        "qty": 66,
+        "entry": 120.8,
+        "price": 0,
+        "pnl": -145.2,
+        "pnl_pct": -100.0,
+        "mkt_value": 0,
+        "stop": 108.3,
+        "risk_pct": 0,
+        "change_today": 0,
+        "reason": "BUY EXA.PA @ $121.13 | Score=31 | Risk=11.2% | Size=$8K (9.0% of equity) || Strategy=momentum-rotation, RSI=69.0, ATR=$5.00, Mom=20.2%",
+        "since": "2026-02-02"
+      },
+      {
+        "symbol": "VK.PA",
+        "qty": 2,
+        "entry": 18.64,
+        "price": 0,
+        "pnl": -0.07,
+        "pnl_pct": -100.0,
+        "mkt_value": 0,
+        "stop": 17.03,
+        "risk_pct": 0,
+        "change_today": 0,
+        "reason": "BUY VK.PA @ $18.65 | Score=16 | Risk=9.0% | Size=$0K (0.0% of equity) || Strategy=momentum-rotation, RSI=62.0, ATR=$0.57, Mom=11.3%",
+        "since": "2026-02-02"
+      },
+      {
+        "symbol": "AMC.DE",
+        "qty": 1,
+        "entry": 144.96,
+        "price": 0,
+        "pnl": -0.18,
+        "pnl_pct": -100.0,
+        "mkt_value": 0,
+        "stop": 123.06,
+        "risk_pct": 0,
+        "change_today": 0,
+        "reason": "BUY AMC.DE @ $145.91 | Score=44 | Risk=15.7% | Size=$0K (0.2% of equity) || Strategy=momentum-rotation, RSI=41.0, ATR=$9.30, Mom=13.1%",
+        "since": "2026-02-02"
+      },
+      {
+        "symbol": "LOM.DE",
+        "qty": 1,
+        "entry": 533.5,
+        "price": 0,
+        "pnl": -0.5,
+        "pnl_pct": -100.0,
+        "mkt_value": 0,
+        "stop": 500.23,
+        "risk_pct": 0,
+        "change_today": 0,
+        "reason": "",
+        "since": "2026-02-04"
+      },
+      {
+        "symbol": "VBK.DE",
+        "qty": 311,
+        "entry": 25.52,
+        "price": 0,
+        "pnl": 180.38,
+        "pnl_pct": -100.0,
+        "mkt_value": 0,
+        "stop": 23.77,
+        "risk_pct": 0,
+        "change_today": 0,
+        "reason": "BUY VBK.DE @ $26.64 | Score=64 | Risk=10.8% | Size=$8K (9.3% of equity) || Strategy=momentum-rotation, RSI=55.4, ATR=$1.04, Mom=10.8%",
+        "since": "2026-02-03"
+      },
+      {
+        "symbol": "TKA.DE",
+        "qty": 70,
+        "entry": 11.54,
+        "price": 0,
+        "pnl": -5.25,
+        "pnl_pct": -100.0,
+        "mkt_value": 0,
+        "stop": 10.87,
+        "risk_pct": 0,
+        "change_today": 0,
+        "reason": "BUY TKA.DE @ $12.19 | Score=29 | Risk=10.8% | Size=$1K (1.0% of equity) || Strategy=momentum-rotation, RSI=73.1, ATR=$0.48, Mom=23.4%",
+        "since": "2026-02-03"
+      },
+      {
+        "symbol": "8TRA.DE",
+        "qty": 2,
+        "entry": 35.6,
+        "price": 0,
+        "pnl": 0.48,
+        "pnl_pct": -100.0,
+        "mkt_value": 0,
+        "stop": 33.16,
+        "risk_pct": 0,
+        "change_today": 0,
+        "reason": "BUY 8TRA.DE @ $36.19 | Score=20 | Risk=8.4% | Size=$0K (0.1% of equity) || Strategy=momentum-rotation, RSI=74.7, ATR=$0.99, Mom=10.6%",
+        "since": "2026-02-03"
+      }
+    ],
+    "pending_count": 6,
     "pending_orders": [
       {
         "symbol": "OHB.DE",
@@ -30,30 +157,12 @@
         "reason": ""
       },
       {
-        "symbol": "EXA.PA",
-        "qty": 66,
-        "limit_price": 121.2,
-        "stop_price": 0,
-        "order_type": "",
-        "value": 7999.2,
-        "reason": ""
-      },
-      {
         "symbol": "ENR.DE",
         "qty": 52,
         "limit_price": 152,
         "stop_price": 0,
         "order_type": "",
         "value": 7904,
-        "reason": ""
-      },
-      {
-        "symbol": "NDX1.DE",
-        "qty": 23,
-        "limit_price": 35.72,
-        "stop_price": 0,
-        "order_type": "",
-        "value": 821.56,
         "reason": ""
       },
       {
@@ -66,39 +175,12 @@
         "reason": ""
       },
       {
-        "symbol": "LOM.DE",
-        "qty": 1,
-        "limit_price": 557,
-        "stop_price": 0,
-        "order_type": "",
-        "value": 557,
-        "reason": ""
-      },
-      {
         "symbol": "FPMB.DE",
         "qty": 7,
         "limit_price": 53,
         "stop_price": 0,
         "order_type": "",
         "value": 371,
-        "reason": ""
-      },
-      {
-        "symbol": "AMC.DE",
-        "qty": 1,
-        "limit_price": 145.9,
-        "stop_price": 0,
-        "order_type": "",
-        "value": 145.9,
-        "reason": ""
-      },
-      {
-        "symbol": "DBG.PA",
-        "qty": 10,
-        "limit_price": 8.22,
-        "stop_price": 0,
-        "order_type": "",
-        "value": 82.2,
         "reason": ""
       },
       {
@@ -109,24 +191,15 @@
         "order_type": "",
         "value": 81.01,
         "reason": ""
-      },
-      {
-        "symbol": "VK.PA",
-        "qty": 2,
-        "limit_price": 18.64,
-        "stop_price": 0,
-        "order_type": "",
-        "value": 37.28,
-        "reason": ""
       }
     ],
-    "date": "2026-02-02",
-    "timestamp": "2026-02-03T21:45:08+01:00",
+    "date": "2026-02-03",
+    "timestamp": "2026-02-04T09:38:15+01:00",
     "currency": "EUR",
-    "ret": 0.0,
-    "max_dd": 0,
-    "sharpe": 0,
-    "vol": 0.0,
+    "ret": -0.0032077389768336976,
+    "max_dd": -0.002581868732758867,
+    "sharpe": -5.612486080160912,
+    "vol": 0.012880624287477188,
     "peak_equity": 89299.66,
     "equity_curve": [
       89299.66,
@@ -137,7 +210,8 @@
       89299.66,
       89299.66,
       89299.66,
-      89299.66
+      89299.66,
+      89069.1
     ],
     "equity_curve_dates": [
       "2026-02-02T08:00:00+01:00",
@@ -148,7 +222,8 @@
       "2026-02-02T09:00:00+01:00",
       "2026-02-02T09:00:00+01:00",
       "2026-02-02T09:00:00+01:00",
-      "2026-02-02T09:00:00+01:00"
+      "2026-02-02T09:00:00+01:00",
+      "2026-02-03T09:00:00+01:00"
     ]
   },
   {
