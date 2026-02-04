@@ -76,16 +76,15 @@
         }
 
         .portfolios {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
-            gap: 1.5rem;
-            align-items: start; /* Prevent portfolios from stretching to match height */
+            column-count: 2;
+            column-gap: 1.5rem;
         }
-        @media (max-width: 560px) {
-            .portfolios { grid-template-columns: 1fr; }
+        @media (max-width: 1100px) {
+            .portfolios { column-count: 1; }
         }
-
         .portfolio-section {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
             background: var(--bg-card);
             border-radius: 16px;
             overflow: hidden;
@@ -357,6 +356,26 @@
         .chart-cell img:hover {
             transform: scale(1.05);
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .chart-placeholder {
+            width: 120px;
+            height: 45px;
+            border-radius: 6px;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .chart-placeholder i { font-size: 1rem; }
+        .chart-placeholder:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
         }
 
         .price-cell {
@@ -678,6 +697,7 @@
             </div>
             <div class="chart-dialog-body">
                 <img id="chartDialogImage" class="chart-dialog-image" src="" alt="Chart">
+                <div id="chartDialogWidget" class="chart-dialog-widget" style="display:none;width:100%;height:500px;"></div>
             </div>
         </div>
     </div>
@@ -687,7 +707,7 @@
     </footer>
 
     <script>
-    const INITIAL_CAPITAL = 100000;
+    const DEFAULT_INITIAL_CAPITAL = 100000;
 
     function formatCurrency(val, decimals = 0) {
         return '$' + val.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
@@ -717,14 +737,17 @@
         }
     }
 
-    function createEquitySparkline(canvasId, data, color) {
+    function createEquitySparkline(canvasId, data, color, initialCapital) {
         const canvas = document.getElementById(canvasId);
         if (!canvas) return;
 
-        // If no data or single point, show flat line at current value
+        // Use portfolio's initial capital or default
+        const startCapital = initialCapital || DEFAULT_INITIAL_CAPITAL;
+
+        // If no data or single point, show flat line at initial capital
         let chartData = data;
         if (!data || data.length < 2) {
-            chartData = [INITIAL_CAPITAL, INITIAL_CAPITAL];
+            chartData = [startCapital, startCapital];
         }
 
         new Chart(canvas, {
@@ -751,27 +774,80 @@
         });
     }
 
-    function getFinvizChartUrl(symbol) {
-        return `https://charts2.finviz.com/chart.ashx?t=${symbol}&ty=c&ta=0&p=d&s=m`;
+    // Check if symbol is US (no dot suffix) or non-US (.DE, .PA, .L, etc.)
+    function isUSSymbol(symbol) {
+        return !symbol.includes('.');
     }
 
-    function getFinvizChartUrlLarge(symbol) {
-        // Large chart for dialog (l = large)
-        return `https://charts2.finviz.com/chart.ashx?t=${symbol}&ty=c&ta=1&p=d&s=l`;
+    // Convert symbol to TradingView format (e.g., "SAP.DE" -> "XETR:SAP")
+    function getTradingViewSymbol(symbol) {
+        if (isUSSymbol(symbol)) return symbol;
+        const parts = symbol.split('.');
+        const ticker = parts[0];
+        const suffix = parts[1]?.toUpperCase();
+        const exchangeMap = {
+            'DE': 'XETR', 'F': 'FWB',
+            'PA': 'EURONEXT', 'AS': 'EURONEXT', 'BR': 'EURONEXT', 'LS': 'EURONEXT',
+            'MI': 'MIL', 'MC': 'BME',
+            'L': 'LSE', 'SW': 'SIX', 'VX': 'SIX',
+            'ST': 'STO', 'CO': 'CSE', 'HE': 'HEL', 'OL': 'OSL',
+            'TO': 'TSX', 'AX': 'ASX',
+            'HK': 'HKEX', 'T': 'TSE',
+            'SS': 'SSE', 'SZ': 'SZSE'
+        };
+        const exchange = exchangeMap[suffix] || suffix;
+        return `${exchange}:${ticker}`;
+    }
+
+    function getChartUrl(symbol) {
+        if (isUSSymbol(symbol)) {
+            // Finviz for US stocks (better charts with indicators)
+            return `https://charts2.finviz.com/chart.ashx?t=${symbol}&ty=c&ta=0&p=d&s=m`;
+        }
+        // TradingView mini chart for non-US (via their chart image API)
+        const tvSymbol = getTradingViewSymbol(symbol);
+        return `https://s3.tradingview.com/snapshots/m/mWbWXfKf.png`; // Placeholder - TV doesn't have simple image API
+    }
+
+    function getChartUrlLarge(symbol) {
+        if (isUSSymbol(symbol)) {
+            return `https://charts2.finviz.com/chart.ashx?t=${symbol}&ty=c&ta=1&p=d&s=l`;
+        }
+        // For non-US, we'll show TradingView widget in dialog instead
+        return null;
     }
 
     function openChartDialog(symbol) {
         const dialog = document.getElementById('chartDialog');
         const img = document.getElementById('chartDialogImage');
+        const tvWidget = document.getElementById('chartDialogWidget');
         const symbolEl = document.getElementById('chartDialogSymbol');
         const yahooLink = document.getElementById('chartDialogYahoo');
         const tvLink = document.getElementById('chartDialogTV');
         const finvizLink = document.getElementById('chartDialogFinviz');
 
         symbolEl.textContent = symbol;
-        img.src = getFinvizChartUrlLarge(symbol);
+
+        if (isUSSymbol(symbol)) {
+            // US: Show Finviz image
+            img.src = getChartUrlLarge(symbol);
+            img.style.display = 'block';
+            if (tvWidget) tvWidget.style.display = 'none';
+            finvizLink.style.display = 'flex';
+        } else {
+            // Non-US: Show TradingView widget
+            img.style.display = 'none';
+            if (tvWidget) {
+                tvWidget.style.display = 'block';
+                const tvSymbol = getTradingViewSymbol(symbol);
+                tvWidget.innerHTML = `<iframe src="https://s.tradingview.com/widgetembed/?symbol=${encodeURIComponent(tvSymbol)}&interval=D&theme=dark&style=1&locale=en&toolbar_bg=%23f1f3f6&enable_publishing=false&hide_top_toolbar=false&hide_legend=false&save_image=false&height=100%25&width=100%25" style="width:100%;height:100%;border:none;"></iframe>`;
+            }
+            finvizLink.style.display = 'none';
+        }
+
         yahooLink.href = `https://finance.yahoo.com/quote/${symbol}`;
-        tvLink.href = `https://www.tradingview.com/chart/?symbol=${symbol}`;
+        const tvSymbol = isUSSymbol(symbol) ? symbol : getTradingViewSymbol(symbol);
+        tvLink.href = `https://www.tradingview.com/chart/?symbol=${tvSymbol}`;
         finvizLink.href = `https://finviz.com/quote.ashx?t=${symbol}`;
 
         dialog.classList.add('visible');
@@ -1010,8 +1086,10 @@
                 </td>
                 <td class="chart-cell">
                     <div onclick="openChartDialog('${symbol}')" style="cursor: pointer;">
-                        <img src="${getFinvizChartUrl(symbol)}" alt="${symbol}" loading="lazy"
-                             onerror="this.style.opacity='0.3'">
+                        ${isUSSymbol(symbol)
+                            ? `<img src="${getChartUrl(symbol)}" alt="${symbol}" loading="lazy" onerror="this.style.opacity='0.3'">`
+                            : `<div class="chart-placeholder" title="Click for TradingView chart"><i class="fas fa-chart-line"></i><span>TV</span></div>`
+                        }
                     </div>
                 </td>
                 <td class="text-right price-cell">${formatCurrency(item.price, 2)}</td>
@@ -1184,9 +1262,10 @@
 
                 renderWatchlistTable(allItems, 'tbody-' + p.id, p.id);
 
-                // Render equity sparkline
+                // Render equity sparkline (pass initial_capital for proper scaling)
                 const curve = p.equity_curve || [];
-                createEquitySparkline('spark-' + p.id, curve, p.ret >= 0 ? '#10b981' : '#ef4444');
+                const initialCapital = p.initial_capital || DEFAULT_INITIAL_CAPITAL;
+                createEquitySparkline('spark-' + p.id, curve, p.ret >= 0 ? '#10b981' : '#ef4444', initialCapital);
             });
 
             // Start real-time price updates
