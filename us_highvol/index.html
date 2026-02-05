@@ -863,17 +863,25 @@
             html += '<div class="table-wrap"><table><thead><tr><th>Symbol</th><th>Qty</th><th>Entry</th><th>Price</th><th>Stop</th><th>P&L</th><th>%</th></tr></thead><tbody>';
             sorted.forEach(p => {
                 const pnl = p.UnrealizedPnL || 0;
-                const pct = p.AvgEntry > 0 ? ((p.CurrentPrice - p.AvgEntry) / p.AvgEntry * 100) : 0;
+                const hasPrice = p.CurrentPrice > 0;
+                const hasEntry = p.AvgEntry > 0;
+                const pct = (hasEntry && hasPrice) ? ((p.CurrentPrice - p.AvgEntry) / p.AvgEntry * 100) : 0;
                 const stop = stopMap[p.Symbol] || 0;
-                const riskPct = (stop > 0 && p.CurrentPrice > 0) ? ((p.CurrentPrice - stop) / p.CurrentPrice * 100).toFixed(1) : '';
+                const riskPct = (stop > 0 && hasPrice) ? ((p.CurrentPrice - stop) / p.CurrentPrice * 100).toFixed(1) : '-';
+
+                // Price display: show "-" if 0, otherwise format
+                const priceDisplay = hasPrice ? fmtMoney(p.CurrentPrice) : '<span class="cell-muted">-</span>';
+                const pctDisplay = hasPrice ? pct.toFixed(1) + '%' : '-';
+                const stopDisplay = stop > 0 ? fmtMoney(stop) + ' <span class="cell-muted">(' + riskPct + '%)</span>' : '-';
+
                 html += '<tr>';
                 html += '<td class="cell-symbol">' + p.Symbol + '</td>';
                 html += '<td>' + (p.Qty || 0) + '</td>';
                 html += '<td>' + fmtMoney(p.AvgEntry) + '</td>';
-                html += '<td>' + fmtMoney(p.CurrentPrice) + '</td>';
-                html += '<td>' + (stop > 0 ? fmtMoney(stop) + ' <span class="cell-muted">(' + riskPct + '%)</span>' : '-') + '</td>';
+                html += '<td>' + priceDisplay + '</td>';
+                html += '<td>' + stopDisplay + '</td>';
                 html += '<td class="' + pnlCls(pnl) + '">' + fmtMoney(pnl) + '</td>';
-                html += '<td class="' + pnlCls(pct) + '">' + pct.toFixed(1) + '%</td>';
+                html += '<td class="' + (hasPrice ? pnlCls(pct) : '') + '">' + pctDisplay + '</td>';
                 html += '</tr>';
             });
             html += '</tbody></table></div>';
@@ -1000,6 +1008,52 @@
     }
 
     // ─── ACTIONS ───
+    // Merge CANCEL+CREATE pairs for trailing stops into a single UPDATE action
+    function mergeTrailingStopActions(actions) {
+        const result = [];
+        const usedIndexes = new Set();
+
+        for (let i = 0; i < actions.length; i++) {
+            if (usedIndexes.has(i)) continue;
+            const a = actions[i];
+
+            // Check if this is a CANCEL for trailing stop update
+            const isTrailingCancel = a.type === 'CANCEL' && a.reason &&
+                (a.reason.includes('TRAILING') || a.reason.includes('UPDATE') || a.reason.includes('CONSOLIDATE') || a.reason.includes('QTY_MISMATCH'));
+
+            if (isTrailingCancel) {
+                // Look for matching CREATE on same symbol (same timestamp)
+                let matchedCreate = null;
+                let matchedIdx = -1;
+                for (let j = 0; j < actions.length; j++) {
+                    if (i === j || usedIndexes.has(j)) continue;
+                    const b = actions[j];
+                    if (b.type === 'CREATE' && b.symbol === a.symbol && b._ts === a._ts && b.side === 'SELL') {
+                        matchedCreate = b;
+                        matchedIdx = j;
+                        break;
+                    }
+                }
+
+                if (matchedCreate) {
+                    // Merge into UPDATE
+                    usedIndexes.add(i);
+                    usedIndexes.add(matchedIdx);
+                    result.push({
+                        ...matchedCreate,
+                        type: 'UPDATE',
+                        reason: matchedCreate.reason // Use CREATE's reason (more informative)
+                    });
+                    continue;
+                }
+            }
+
+            result.push(a);
+        }
+
+        return result;
+    }
+
     function renderActions() {
         const showAll = document.getElementById('showAllActions')?.checked || false;
         let actions = [];
@@ -1023,6 +1077,9 @@
                 actions = s.actions.map(a => ({...a, _ts: ts}));
             }
         }
+
+        // Merge CANCEL+CREATE pairs into UPDATE for trailing stops
+        actions = mergeTrailingStopActions(actions);
 
         let html = '';
         if(actions.length > 0) {

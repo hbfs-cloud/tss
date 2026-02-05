@@ -1,11 +1,11 @@
 [
   {
-    "timestamp": "2026-02-05T10:25:08+01:00",
+    "timestamp": "2026-02-05T10:54:28+01:00",
     "date": "2026-02-04",
     "portfolio": "usa_highvol",
     "allocation": "usa_highvol",
     "currency": "USD",
-    "git_sha1": "cc4e1ac8",
+    "git_sha1": "db82479d",
     "git_branch": "20260115",
     "config_path": "config/portfolio_us_highvol.yaml",
     "config_hash": "e1b5bffde4b4b346",
@@ -26,9 +26,9 @@
         "Symbol": "ALLO",
         "Qty": 3260,
         "AvgEntry": 1.735025,
-        "CurrentPrice": 1.81,
-        "UnrealizedPnL": 244.42,
-        "ChangeToday": 0.00556,
+        "CurrentPrice": 1.82,
+        "UnrealizedPnL": 277.02,
+        "ChangeToday": 0.01111,
         "Currency": "USD",
         "Timestamp": "2026-02-02T14:32:49.28697Z",
         "BrokerSource": ""
@@ -37,9 +37,9 @@
         "Symbol": "ALM",
         "Qty": 629,
         "AvgEntry": 13.131335,
-        "CurrentPrice": 13.35,
-        "UnrealizedPnL": 137.54,
-        "ChangeToday": -0.00075,
+        "CurrentPrice": 13.21,
+        "UnrealizedPnL": 49.48,
+        "ChangeToday": -0.01123,
         "Currency": "USD",
         "Timestamp": "2026-02-04T14:33:32.688452Z",
         "BrokerSource": ""
@@ -81,9 +81,9 @@
         "Symbol": "RMBS",
         "Qty": 73,
         "AvgEntry": 108.054521,
-        "CurrentPrice": 101,
-        "UnrealizedPnL": -514.98,
-        "ChangeToday": 0.00154,
+        "CurrentPrice": 100.8,
+        "UnrealizedPnL": -529.58,
+        "ChangeToday": -0.00045,
         "Currency": "USD",
         "Timestamp": "2026-02-03T14:32:10.554753Z",
         "BrokerSource": ""
@@ -125,9 +125,9 @@
         "Symbol": "WULF",
         "Qty": 569,
         "AvgEntry": 14.15,
-        "CurrentPrice": 13.79,
-        "UnrealizedPnL": -204.84,
-        "ChangeToday": -0.00648,
+        "CurrentPrice": 13.81,
+        "UnrealizedPnL": -193.46,
+        "ChangeToday": -0.00504,
         "Currency": "USD",
         "Timestamp": "2026-02-04T14:30:25.176512Z",
         "BrokerSource": ""
@@ -316,8 +316,8 @@
       "CashByCurrency": {
         "USD": 16866.47
       },
-      "MarginUsed": 80681.58,
-      "TotalEquity": 97548.05,
+      "MarginUsed": 80622.9,
+      "TotalEquity": 97489.37,
       "Timestamp": "0001-01-01T00:00:00Z",
       "BrokerSource": "alpaca"
     },
@@ -347,7 +347,8 @@
           97753.28,
           97736.21,
           97736.21,
-          97548.05
+          97548.05,
+          97489.37
         ],
         "equity_curve_dates": [
           "2026-01-30T15:30:00+01:00",
@@ -368,6 +369,7 @@
           "2026-02-02T15:30:00+01:00",
           "2026-02-02T15:30:00+01:00",
           "2026-02-03T15:30:00+01:00",
+          "2026-02-04T15:30:00+01:00",
           "2026-02-04T15:30:00+01:00",
           "2026-02-04T15:30:00+01:00",
           "2026-02-04T15:30:00+01:00",

@@ -227,32 +227,33 @@
 
         /* Table */
         .table-wrapper {
-            overflow-x: auto;
+            overflow-x: hidden;
         }
         table {
             width: 100%;
             border-collapse: collapse;
             font-size: 0.8rem;
+            table-layout: fixed;
         }
         th {
             background: var(--bg-table);
-            padding: 0.6rem 0.5rem;
+            padding: 0.4rem 0.35rem;
             text-align: left;
             font-weight: 600;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
             color: var(--text-muted);
             cursor: pointer;
             white-space: nowrap;
             border-bottom: 1px solid var(--border);
         }
         th:hover { color: var(--text); }
-        th .sort-icon { margin-left: 0.2rem; opacity: 0.4; font-size: 0.55rem; }
+        th .sort-icon { margin-left: 0.15rem; opacity: 0.4; font-size: 0.5rem; }
         th.sorted .sort-icon { opacity: 1; color: var(--blue); }
 
         td {
-            padding: 0.4rem 0.5rem;
+            padding: 0.35rem 0.35rem;
             border-bottom: 1px solid var(--border);
             white-space: nowrap;
             vertical-align: middle;
@@ -267,28 +268,28 @@
         .symbol-cell {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            min-width: 160px;
+            gap: 0.5rem;
+            min-width: 120px;
         }
         .symbol-logo {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: 800;
-            font-size: 0.85rem;
+            font-size: 0.7rem;
             flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.25);
             overflow: hidden;
         }
         .symbol-logo img {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
             object-fit: cover;
         }
         .symbol-info {
@@ -297,8 +298,8 @@
             gap: 0.2rem;
         }
         .symbol-name {
-            font-weight: 800;
-            font-size: 1.05rem;
+            font-weight: 700;
+            font-size: 0.9rem;
             color: var(--text);
             letter-spacing: -0.02em;
         }
@@ -340,15 +341,15 @@
         }
 
         .chart-cell {
-            width: 120px;
-            padding: 4px;
+            width: 90px;
+            padding: 2px;
         }
         .chart-cell > div { display: block; }
         .chart-cell img {
-            width: 120px;
-            height: 45px;
+            width: 90px;
+            height: 36px;
             object-fit: contain;
-            border-radius: 6px;
+            border-radius: 4px;
             background: #fff;
             border: 1px solid var(--border);
             transition: transform 0.2s, box-shadow 0.2s;
@@ -358,28 +359,28 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
         .chart-placeholder {
-            width: 120px;
-            height: 45px;
-            border-radius: 6px;
+            width: 90px;
+            height: 36px;
+            border-radius: 4px;
             background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
             border: 1px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.4rem;
+            gap: 0.3rem;
             color: white;
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             font-weight: 600;
             transition: transform 0.2s, box-shadow 0.2s;
         }
-        .chart-placeholder i { font-size: 1rem; }
+        .chart-placeholder i { font-size: 0.8rem; }
         .chart-placeholder:hover {
             transform: scale(1.05);
             box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
         }
 
         .price-cell {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 700;
             color: var(--text);
             transition: background-color 0.3s ease;
@@ -402,7 +403,7 @@
         }
 
         .change-cell {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 700;
             transition: background-color 0.3s ease;
         }
@@ -427,19 +428,34 @@
         }
 
         .since-cell {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
             color: var(--text-muted);
+            white-space: nowrap;
         }
+        .pnl-cell {
+            font-size: 0.75rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .pnl-positive { color: var(--green); }
+        .pnl-negative { color: var(--red); }
 
         /* Responsive table */
-        @media (max-width: 700px) {
+        @media (max-width: 900px) {
             .chart-cell { display: none; }
-            .symbol-logo { width: 36px; height: 36px; }
-            .symbol-logo img { width: 36px; height: 36px; }
-            .symbol-name { font-size: 0.9rem; }
-            .price-cell { font-size: 0.8rem; }
-            .change-cell { font-size: 0.75rem; }
+        }
+        @media (max-width: 700px) {
+            .symbol-logo { width: 28px; height: 28px; }
+            .symbol-logo img { width: 28px; height: 28px; }
+            .symbol-name { font-size: 0.85rem; }
+            .symbol-links { display: none; }
+            .price-cell { font-size: 0.75rem; }
+            .change-cell { font-size: 0.7rem; }
+            .pnl-cell { font-size: 0.7rem; }
+            .since-cell { font-size: 0.65rem; }
+            td { padding: 0.3rem 0.25rem; }
+            th { padding: 0.4rem 0.25rem; font-size: 0.6rem; }
         }
 
         /* Reason expandable - Simple checklist */
@@ -447,14 +463,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 26px;
-            height: 26px;
-            border-radius: 6px;
+            width: 22px;
+            height: 22px;
+            border-radius: 4px;
             background: var(--bg-table);
             border: none;
             cursor: pointer;
             color: var(--text-muted);
-            font-size: 0.65rem;
+            font-size: 0.55rem;
             transition: all 0.2s;
         }
         .reason-toggle:hover {
@@ -483,20 +499,25 @@
         .reason-content {
             background: #f8fafc;
             margin: 0;
-            padding: 0.75rem 1rem;
+            padding: 0.6rem 0.75rem;
             border-left: 3px solid var(--green);
+            max-width: 100%;
+            overflow: hidden;
         }
         .reason-title {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
             color: var(--text);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.3rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
         .reason-title i {
             color: var(--green);
+            flex-shrink: 0;
         }
         .reason-list {
             list-style: none;
@@ -506,10 +527,12 @@
         .reason-list li {
             display: flex;
             align-items: flex-start;
-            gap: 0.5rem;
-            padding: 0.25rem 0;
-            font-size: 0.8rem;
+            gap: 0.4rem;
+            padding: 0.15rem 0;
+            font-size: 0.7rem;
             color: var(--text);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
         .reason-list li::before {
             content: "✓";
@@ -520,9 +543,11 @@
         .reason-list .label {
             color: var(--text-muted);
             font-weight: 500;
+            flex-shrink: 0;
         }
         .reason-list .value {
             font-weight: 600;
+            word-break: break-word;
         }
 
         .text-right { text-align: right; }
@@ -1129,7 +1154,7 @@
         const container = document.getElementById(containerId);
         if (!container) return;
         if (!items || !items.length) {
-            container.innerHTML = '<tr><td colspan="6" class="no-data">No holdings</td></tr>';
+            container.innerHTML = '<tr><td colspan="7" class="no-data">No holdings</td></tr>';
             return;
         }
 
@@ -1140,26 +1165,35 @@
             const marketStatus = getMarketStatus(symbol);
 
             // Only show 24H change if market is open OR we have valid data
-            // When market is closed, show last close-to-close change (stored in cache) or "Closed"
             let changeDisplay, changeClass;
             if (marketStatus.isOpen) {
-                // Market open: show real-time change with colors
                 changeClass = hasChange ? (changePct >= 0 ? 'change-positive' : 'change-negative') : '';
                 const changeIcon = hasChange ? (changePct >= 0 ? '▲' : '▼') : '';
-                // Show spinner only briefly while loading - data will come from Yahoo fetch
-                changeDisplay = hasChange ? changeIcon + ' ' + formatPct(changePct) : '<i class="fas fa-spinner fa-spin" style="font-size:0.7rem;color:var(--text-muted)" title="Loading..."></i>';
+                changeDisplay = hasChange ? changeIcon + ' ' + formatPct(changePct) : '<i class="fas fa-spinner fa-spin" style="font-size:0.6rem;color:var(--text-muted)"></i>';
             } else {
-                // Market closed: show last known change in muted style or "Closed"
                 if (hasChange) {
                     const changeIcon = changePct >= 0 ? '▲' : '▼';
-                    changeDisplay = `<span style="opacity:0.5" title="Market closed - last session">${changeIcon} ${formatPct(changePct)}</span>`;
+                    changeDisplay = `<span style="opacity:0.5">${changeIcon} ${formatPct(changePct)}</span>`;
                     changeClass = changePct >= 0 ? 'change-positive' : 'change-negative';
                 } else {
-                    // No data and market closed: show "Closed" instead of spinner
-                    changeDisplay = '<span class="market-closed-badge" title="' + marketStatus.exchange + ' closed">Closed</span>';
+                    changeDisplay = '<span class="market-closed-badge">—</span>';
                     changeClass = '';
                 }
             }
+
+            // P&L since entry: (price - entry) / entry * 100
+            const entry = item.entry || 0;
+            const price = item.price || 0;
+            let pnlDisplay = '-';
+            let pnlClass = '';
+            if (entry > 0 && price > 0) {
+                const pnlPct = ((price - entry) / entry) * 100;
+                item.pnl_pct = pnlPct; // Store for sorting
+                pnlClass = pnlPct >= 0 ? 'pnl-positive' : 'pnl-negative';
+                const pnlIcon = pnlPct >= 0 ? '▲' : '▼';
+                pnlDisplay = pnlIcon + ' ' + formatPct(pnlPct);
+            }
+
             const [grad1, grad2] = getLogoFallback(symbol);
             const logoUrl = getLogoUrl(symbol);
             const initials = symbol.substring(0, 2);
@@ -1180,7 +1214,7 @@
                             <span class="symbol-name">${symbol}</span>
                             <div class="symbol-links">
                                 <a href="https://finance.yahoo.com/quote/${symbol}" target="_blank" class="symbol-link" title="Yahoo">Y</a>
-                                <a href="https://www.tradingview.com/chart/?symbol=${symbol}" target="_blank" class="symbol-link" title="TradingView">TV</a>
+                                <a href="https://www.tradingview.com/chart/?symbol=${symbol}" target="_blank" class="symbol-link" title="TV">TV</a>
                             </div>
                         </div>
                     </div>
@@ -1189,22 +1223,23 @@
                     <div onclick="openChartDialog('${symbol}')" style="cursor: pointer;">
                         ${isUSSymbol(symbol)
                             ? `<img src="${getChartUrl(symbol)}" alt="${symbol}" loading="lazy" onerror="this.style.opacity='0.3'">`
-                            : `<div class="chart-placeholder" title="Click for TradingView chart"><i class="fas fa-chart-line"></i><span>TV</span></div>`
+                            : `<div class="chart-placeholder"><i class="fas fa-chart-line"></i></div>`
                         }
                     </div>
                 </td>
                 <td class="text-right price-cell">${formatCurrency(item.price, 2)}</td>
                 <td class="text-right change-cell ${changeClass}">${changeDisplay}</td>
+                <td class="text-right pnl-cell ${pnlClass}">${pnlDisplay}</td>
                 <td class="since-cell">${sinceDisplay}</td>
-                <td style="text-align: center; width: 40px;">
-                    ${hasReason ? `<button class="reason-toggle" onclick="toggleReason(this, '${reasonId}')" title="Why this position?"><i class="fas fa-info"></i></button>` : ''}
+                <td style="text-align: center;">
+                    ${hasReason ? `<button class="reason-toggle" onclick="toggleReason(this, '${reasonId}')" title="Why?"><i class="fas fa-info"></i></button>` : ''}
                 </td>
             </tr>`;
 
             // Add expandable reason row
             if (hasReason) {
                 html += `<tr class="reason-row" id="${reasonId}">
-                    <td colspan="6">${renderReasonChecklist(reason)}</td>
+                    <td colspan="7">${renderReasonChecklist(reason)}</td>
                 </tr>`;
             }
 
@@ -1293,12 +1328,13 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th onclick="sortColumn('${p.id}', 'symbol', this)">Symbol <i class="fas fa-sort sort-icon"></i></th>
-                                        <th>Chart</th>
-                                        <th class="text-right" onclick="sortColumn('${p.id}', 'price', this)">Price <span class="live-dot" id="live-dot-${p.id}" title="Real-time"></span> <i class="fas fa-sort sort-icon"></i></th>
-                                        <th class="text-right" onclick="sortColumn('${p.id}', 'change_pct', this)">24h <i class="fas fa-sort sort-icon"></i></th>
-                                        <th onclick="sortColumn('${p.id}', 'since', this)">Since <i class="fas fa-sort sort-icon"></i></th>
-                                        <th style="width: 40px; text-align: center;">Why</th>
+                                        <th style="width: 25%;" onclick="sortColumn('${p.id}', 'symbol', this)">Symbol <i class="fas fa-sort sort-icon"></i></th>
+                                        <th style="width: 90px;" class="chart-cell">Chart</th>
+                                        <th style="width: 12%;" class="text-right" onclick="sortColumn('${p.id}', 'price', this)">Price <span class="live-dot" id="live-dot-${p.id}" title="Real-time"></span></th>
+                                        <th style="width: 11%;" class="text-right" onclick="sortColumn('${p.id}', 'change_pct', this)">24h</th>
+                                        <th style="width: 11%;" class="text-right" onclick="sortColumn('${p.id}', 'pnl_pct', this)">P&L</th>
+                                        <th style="width: 10%;" onclick="sortColumn('${p.id}', 'since', this)">Since</th>
+                                        <th style="width: 36px; text-align: center;">Why</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tbody-${p.id}"></tbody>
@@ -1655,7 +1691,6 @@
                                 }
 
                                 // Update 24h cell (4th td) with icon - from Yahoo data
-                                // But respect market status (don't flash changes when market closed)
                                 if (cells[3] && changePct !== null) {
                                     const marketStatus = getMarketStatus(symbol);
                                     const icon = changePct >= 0 ? '▲' : '▼';
@@ -1664,17 +1699,23 @@
                                         cells[3].innerHTML = icon + ' ' + formatPct(changePct);
                                         cells[3].className = 'text-right change-cell ' + (changePct >= 0 ? 'change-positive' : 'change-negative');
 
-                                        // Flash animation on change update (only when market open)
                                         if (priceChanged) {
                                             cells[3].classList.remove('flash-up', 'flash-down');
                                             void cells[3].offsetWidth;
                                             cells[3].classList.add(priceDirection === 'up' ? 'flash-up' : 'flash-down');
                                         }
                                     } else {
-                                        // Market closed: show muted change
-                                        cells[3].innerHTML = `<span style="opacity:0.5" title="Market closed">${icon} ${formatPct(changePct)}</span>`;
+                                        cells[3].innerHTML = `<span style="opacity:0.5">${icon} ${formatPct(changePct)}</span>`;
                                         cells[3].className = 'text-right change-cell ' + (changePct >= 0 ? 'change-positive' : 'change-negative');
                                     }
+                                }
+
+                                // Update P&L cell (5th td) - recalculate from entry price
+                                if (cells[4] && item.entry && item.entry > 0) {
+                                    const pnlPct = ((price - item.entry) / item.entry) * 100;
+                                    const pnlIcon = pnlPct >= 0 ? '▲' : '▼';
+                                    cells[4].innerHTML = pnlIcon + ' ' + formatPct(pnlPct);
+                                    cells[4].className = 'text-right pnl-cell ' + (pnlPct >= 0 ? 'pnl-positive' : 'pnl-negative');
                                 }
                             }
                         });

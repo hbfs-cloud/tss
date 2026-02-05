@@ -1,126 +1,15 @@
 [
   {
-    "timestamp": "2026-02-05T10:24:53+01:00",
+    "timestamp": "2026-02-05T10:54:15+01:00",
     "date": "2026-02-04",
     "portfolio": "usa",
     "allocation": "usa",
     "currency": "USD",
-    "git_sha1": "cc4e1ac8",
+    "git_sha1": "db82479d",
     "git_branch": "20260115",
     "config_path": "config/portfolio_us.yaml",
     "config_hash": "ccd240fb23f59d88",
-    "actions": [
-      {
-        "type": "CREATE",
-        "symbol": "BW",
-        "side": "SELL",
-        "order_type": "STOP",
-        "qty": 214,
-        "stop_price": 9.27,
-        "reason": "MISSING_STOP: 214 shares @ $9.27 | P&L: -18.0%, Risk: 0.0%"
-      },
-      {
-        "type": "CREATE",
-        "symbol": "CVX",
-        "side": "SELL",
-        "order_type": "STOP",
-        "qty": 1,
-        "stop_price": 175.1,
-        "reason": "MISSING_STOP: 1 shares @ $175.10 | P&L: 4.4%, Risk: 3.4%"
-      },
-      {
-        "type": "CREATE",
-        "symbol": "DVAX",
-        "side": "SELL",
-        "order_type": "STOP",
-        "qty": 752,
-        "stop_price": 15.38,
-        "reason": "MISSING_STOP: 752 shares @ $15.38 | P&L: 0.1%, Risk: 0.8%"
-      },
-      {
-        "type": "CREATE",
-        "symbol": "ERAS",
-        "side": "SELL",
-        "order_type": "STOP",
-        "qty": 1113,
-        "stop_price": 9.54,
-        "reason": "MISSING_STOP: 1113 shares @ $9.54 | P&L: 5.6%, Risk: 15.1%"
-      },
-      {
-        "type": "CREATE",
-        "symbol": "FDX",
-        "side": "SELL",
-        "order_type": "STOP",
-        "qty": 36,
-        "stop_price": 345.45,
-        "reason": "MISSING_STOP: 36 shares @ $345.45 | P&L: 12.0%, Risk: 4.7%"
-      },
-      {
-        "type": "CREATE",
-        "symbol": "IAUX",
-        "side": "SELL",
-        "order_type": "STOP",
-        "qty": 13,
-        "stop_price": 1.57,
-        "reason": "MISSING_STOP: 13 shares @ $1.57 | P&L: -1.6%, Risk: 13.7%"
-      },
-      {
-        "type": "CREATE",
-        "symbol": "IRWD",
-        "side": "SELL",
-        "order_type": "STOP",
-        "qty": 50,
-        "stop_price": 3.93,
-        "reason": "MISSING_STOP: 50 shares @ $3.93 | P&L: -6.4%, Risk: 12.5%"
-      },
-      {
-        "type": "CREATE",
-        "symbol": "MSGS",
-        "side": "SELL",
-        "order_type": "STOP",
-        "qty": 1,
-        "stop_price": 272.73,
-        "reason": "MISSING_STOP: 1 shares @ $272.73 | P&L: -0.3%, Risk: 5.1%"
-      },
-      {
-        "type": "CREATE",
-        "symbol": "TAK",
-        "side": "SELL",
-        "order_type": "STOP",
-        "qty": 677,
-        "stop_price": 17.13,
-        "reason": "MISSING_STOP: 677 shares @ $17.13 | P&L: 2.3%, Risk: 3.4%"
-      },
-      {
-        "type": "CREATE",
-        "symbol": "TTC",
-        "side": "SELL",
-        "order_type": "STOP",
-        "qty": 127,
-        "stop_price": 92.36,
-        "reason": "MISSING_STOP: 127 shares @ $92.36 | P&L: 4.6%, Risk: 3.6%"
-      },
-      {
-        "type": "CREATE",
-        "symbol": "AG",
-        "side": "BUY",
-        "order_type": "LIMIT",
-        "qty": 26,
-        "limit_price": 23.102900314331055,
-        "stop_loss": 17.274643353053502,
-        "reason": "BUY AG @ $23.10 | Score=114 | Risk=25.2% | Size=$1K (0.6% of equity) || TREND: Perfect uptrend - Price $22.43 > SMA20 $21.97 > SMA50 $18.25 > SMA200 $11.55 | MOMENTUM: accelerating explosive - 10d=1.0%, 60d=105.8%, 120d=150.9% | RSI: 58.8 - healthy momentum - room to run | VOLUME: 1.07x avg - above average (confirmation) | VOLATILITY: 5.6% daily, ATR=9.2% - elevated - wider stops needed | REGIME: RECOVERY - trend following works well | SCORE: Quality=95, Reward=206, Timing=30"
-      },
-      {
-        "type": "CREATE",
-        "symbol": "ERO",
-        "side": "BUY",
-        "order_type": "LIMIT",
-        "qty": 2,
-        "limit_price": 36.2972017288208,
-        "stop_loss": 29.444287845066615,
-        "reason": "BUY ERO @ $36.30 | Score=104 | Risk=18.9% | Size=$0K (0.1% of equity) || TREND: Perfect uptrend - Price $35.24 > SMA20 $32.34 > SMA50 $28.53 > SMA200 $19.50 | MOMENTUM: accelerating explosive - 10d=13.2%, 60d=62.5%, 120d=151.7% | RSI: 61.9 - healthy momentum - room to run | VOLUME: 0.90x avg - normal (quiet accumulation) | VOLATILITY: 4.7% daily, ATR=6.6% - normal range | REGIME: RECOVERY - trend following works well | SCORE: Quality=80, Reward=187, Timing=30"
-      }
-    ],
+    "actions": null,
     "positions": [
       {
         "Symbol": "BW",
@@ -137,9 +26,9 @@
         "Symbol": "CVX",
         "Qty": 1,
         "AvgEntry": 173.52,
-        "CurrentPrice": 181.0514,
-        "UnrealizedPnL": 7.5314,
-        "ChangeToday": -0.00099,
+        "CurrentPrice": 180.54,
+        "UnrealizedPnL": 7.02,
+        "ChangeToday": -0.00381,
         "Currency": "USD",
         "Timestamp": "2026-02-02T14:30:44.581405Z",
         "BrokerSource": ""
@@ -203,9 +92,9 @@
         "Symbol": "IAUX",
         "Qty": 13,
         "AvgEntry": 1.85,
-        "CurrentPrice": 1.82,
-        "UnrealizedPnL": -0.39,
-        "ChangeToday": 0,
+        "CurrentPrice": 1.76,
+        "UnrealizedPnL": -1.17,
+        "ChangeToday": -0.03297,
         "Currency": "USD",
         "Timestamp": "2026-02-04T14:32:24.074069Z",
         "BrokerSource": ""
@@ -269,9 +158,9 @@
         "Symbol": "TRX",
         "Qty": 7158,
         "AvgEntry": 1.599131,
-        "CurrentPrice": 1.55,
-        "UnrealizedPnL": -351.679999,
-        "ChangeToday": -0.04321,
+        "CurrentPrice": 1.54,
+        "UnrealizedPnL": -423.259999,
+        "ChangeToday": -0.04938,
         "Currency": "USD",
         "Timestamp": "2026-02-02T17:13:18.450967Z",
         "BrokerSource": ""
@@ -301,7 +190,7 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-05T09:24:53.145550839Z",
+        "PlacedDate": "2026-02-05T09:24:53.145551Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
@@ -317,7 +206,7 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-05T09:24:53.13755692Z",
+        "PlacedDate": "2026-02-05T09:24:53.137557Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
@@ -333,7 +222,7 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-05T09:24:53.04631045Z",
+        "PlacedDate": "2026-02-05T09:24:53.04631Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
@@ -349,7 +238,7 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-05T09:24:53.037384022Z",
+        "PlacedDate": "2026-02-05T09:24:53.037384Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
@@ -365,7 +254,7 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-05T09:24:52.947704761Z",
+        "PlacedDate": "2026-02-05T09:24:52.947705Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
@@ -381,7 +270,7 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-05T09:24:52.750670223Z",
+        "PlacedDate": "2026-02-05T09:24:52.75067Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
@@ -397,7 +286,7 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-05T09:24:52.558137445Z",
+        "PlacedDate": "2026-02-05T09:24:52.558137Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
@@ -413,7 +302,7 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-05T09:24:52.367394297Z",
+        "PlacedDate": "2026-02-05T09:24:52.367394Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
@@ -429,7 +318,7 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-05T09:24:52.176681838Z",
+        "PlacedDate": "2026-02-05T09:24:52.176682Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
@@ -1047,8 +936,8 @@
       "CashByCurrency": {
         "USD": 699.72
       },
-      "MarginUsed": 100782.92,
-      "TotalEquity": 101482.64,
+      "MarginUsed": 100710.05,
+      "TotalEquity": 101409.77,
       "Timestamp": "0001-01-01T00:00:00Z",
       "BrokerSource": "alpaca"
     },
@@ -1092,7 +981,8 @@
           101051.59,
           101051.59,
           101051.59,
-          101482.64
+          101482.64,
+          101409.77
         ],
         "equity_curve_dates": [
           "2026-01-30T15:30:00+01:00",
@@ -1128,6 +1018,7 @@
           "2026-02-02T15:30:00+01:00",
           "2026-02-02T15:30:00+01:00",
           "2026-02-03T15:30:00+01:00",
+          "2026-02-04T15:30:00+01:00",
           "2026-02-04T15:30:00+01:00",
           "2026-02-04T15:30:00+01:00",
           "2026-02-04T15:30:00+01:00",
@@ -1232,7 +1123,7 @@
           "ARMN": 16.25624990463257,
           "ASM": 7.692500335829599,
           "BCS": 26.5,
-          "BW": 9.2698704,
+          "BW": 9.27,
           "CFLT": 30.38,
           "CTMX": 4.238750270434789,
           "CVX": 175.10251363632403,
@@ -1255,10 +1146,10 @@
           "RNA": 72.53032344336825,
           "SEMR": 11.84,
           "SNDK": 433.1969473702567,
-          "TAK": 17.127251483733897,
+          "TAK": 17.13,
           "TGB": 6.768213953290667,
           "TRX": 1.32,
-          "TTC": 92.35654118831805,
+          "TTC": 92.36,
           "TTI": 9.716428416115898,
           "TYRA": 25.802500656672887,
           "UNF": 205.78,
