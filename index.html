@@ -415,6 +415,17 @@
         .change-positive { color: #10b981; }
         .change-negative { color: #ef4444; }
 
+        .market-closed-badge {
+            display: inline-block;
+            padding: 0.15rem 0.4rem;
+            background: var(--bg-table);
+            color: var(--text-muted);
+            font-size: 0.65rem;
+            font-weight: 600;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
         .since-cell {
             font-size: 0.75rem;
             font-weight: 600;
@@ -779,6 +790,76 @@
         return !symbol.includes('.');
     }
 
+    // Market hours detection
+    // Returns: { isOpen: bool, exchange: string }
+    function getMarketStatus(symbol) {
+        const now = new Date();
+        const dayOfWeek = now.getDay(); // 0=Sun, 6=Sat
+
+        // Weekend check
+        if (dayOfWeek === 0 || dayOfWeek === 6) {
+            return { isOpen: false, exchange: 'Weekend' };
+        }
+
+        // Get hours in different timezones
+        const utcHour = now.getUTCHours();
+        const utcMinutes = now.getUTCMinutes();
+        const utcTime = utcHour + utcMinutes / 60;
+
+        // Determine exchange from symbol suffix
+        const suffix = symbol.includes('.') ? symbol.split('.').pop().toUpperCase() : 'US';
+
+        // Market hours (UTC) - approximate, doesn't account for DST perfectly
+        // US: NYSE/NASDAQ 14:30-21:00 UTC (9:30-16:00 ET)
+        // UK: LSE 8:00-16:30 UTC
+        // Germany: XETRA 8:00-16:30 UTC (winter) / 7:00-15:30 UTC (summer)
+        // France/Netherlands: Euronext 8:00-16:30 UTC
+        // Japan: TSE 0:00-6:00 UTC (9:00-15:00 JST with lunch break)
+        // Hong Kong: HKEX 1:30-8:00 UTC (9:30-16:00 HKT with lunch break)
+
+        const marketHours = {
+            'US': { open: 14.5, close: 21, name: 'US' },     // NYSE/NASDAQ
+            'L': { open: 8, close: 16.5, name: 'LSE' },      // London
+            'DE': { open: 8, close: 16.5, name: 'XETRA' },   // Germany
+            'F': { open: 8, close: 16.5, name: 'Frankfurt' },
+            'PA': { open: 8, close: 16.5, name: 'Euronext' }, // Paris
+            'AS': { open: 8, close: 16.5, name: 'Euronext' }, // Amsterdam
+            'BR': { open: 8, close: 16.5, name: 'Euronext' }, // Brussels
+            'MI': { open: 8, close: 16.5, name: 'Milan' },    // Italy
+            'MC': { open: 8, close: 16.5, name: 'Madrid' },   // Spain
+            'SW': { open: 8, close: 16.5, name: 'SIX' },      // Switzerland
+            'VX': { open: 8, close: 16.5, name: 'SIX' },
+            'ST': { open: 8, close: 16.5, name: 'Stockholm' },
+            'CO': { open: 8, close: 16.5, name: 'Copenhagen' },
+            'HE': { open: 8, close: 16.5, name: 'Helsinki' },
+            'OL': { open: 8, close: 16.5, name: 'Oslo' },
+            'T': { open: 0, close: 6, name: 'Tokyo' },        // Japan
+            'HK': { open: 1.5, close: 8, name: 'Hong Kong' }, // HK
+            'AX': { open: 23, close: 6, name: 'ASX' },        // Australia (crosses midnight UTC)
+            'TO': { open: 14.5, close: 21, name: 'TSX' },     // Canada
+            'SA': { open: 13, close: 20, name: 'Bovespa' },   // Brazil
+        };
+
+        const market = marketHours[suffix] || marketHours['US'];
+
+        // Handle markets that cross midnight (like ASX)
+        let isOpen;
+        if (market.open > market.close) {
+            // Market crosses midnight UTC
+            isOpen = utcTime >= market.open || utcTime < market.close;
+        } else {
+            isOpen = utcTime >= market.open && utcTime < market.close;
+        }
+
+        return { isOpen, exchange: market.name };
+    }
+
+    // Check if ANY market is currently open (for header display)
+    function isAnyMarketOpen() {
+        const symbols = getAllSymbols();
+        return symbols.some(s => getMarketStatus(s).isOpen);
+    }
+
     // Convert symbol to TradingView format (e.g., "SAP.DE" -> "XETR:SAP")
     function getTradingViewSymbol(symbol) {
         if (isUSSymbol(symbol)) return symbol;
@@ -1056,9 +1137,29 @@
             const symbol = item.symbol;
             const changePct = item.change_pct;
             const hasChange = changePct !== null && changePct !== undefined;
-            const changeClass = hasChange ? (changePct >= 0 ? 'change-positive' : 'change-negative') : '';
-            const changeIcon = hasChange ? (changePct >= 0 ? '▲' : '▼') : '';
-            const changeDisplay = hasChange ? changeIcon + ' ' + formatPct(changePct) : '<i class="fas fa-spinner fa-spin" style="font-size:0.7rem;color:var(--text-muted)"></i>';
+            const marketStatus = getMarketStatus(symbol);
+
+            // Only show 24H change if market is open OR we have valid data
+            // When market is closed, show last close-to-close change (stored in cache) or "Closed"
+            let changeDisplay, changeClass;
+            if (marketStatus.isOpen) {
+                // Market open: show real-time change with colors
+                changeClass = hasChange ? (changePct >= 0 ? 'change-positive' : 'change-negative') : '';
+                const changeIcon = hasChange ? (changePct >= 0 ? '▲' : '▼') : '';
+                // Show spinner only briefly while loading - data will come from Yahoo fetch
+                changeDisplay = hasChange ? changeIcon + ' ' + formatPct(changePct) : '<i class="fas fa-spinner fa-spin" style="font-size:0.7rem;color:var(--text-muted)" title="Loading..."></i>';
+            } else {
+                // Market closed: show last known change in muted style or "Closed"
+                if (hasChange) {
+                    const changeIcon = changePct >= 0 ? '▲' : '▼';
+                    changeDisplay = `<span style="opacity:0.5" title="Market closed - last session">${changeIcon} ${formatPct(changePct)}</span>`;
+                    changeClass = changePct >= 0 ? 'change-positive' : 'change-negative';
+                } else {
+                    // No data and market closed: show "Closed" instead of spinner
+                    changeDisplay = '<span class="market-closed-badge" title="' + marketStatus.exchange + ' closed">Closed</span>';
+                    changeClass = '';
+                }
+            }
             const [grad1, grad2] = getLogoFallback(symbol);
             const logoUrl = getLogoUrl(symbol);
             const initials = symbol.substring(0, 2);
@@ -1554,16 +1655,25 @@
                                 }
 
                                 // Update 24h cell (4th td) with icon - from Yahoo data
+                                // But respect market status (don't flash changes when market closed)
                                 if (cells[3] && changePct !== null) {
+                                    const marketStatus = getMarketStatus(symbol);
                                     const icon = changePct >= 0 ? '▲' : '▼';
-                                    cells[3].innerHTML = icon + ' ' + formatPct(changePct);
-                                    cells[3].className = 'text-right change-cell ' + (changePct >= 0 ? 'change-positive' : 'change-negative');
 
-                                    // Flash animation on change update
-                                    if (priceChanged) {
-                                        cells[3].classList.remove('flash-up', 'flash-down');
-                                        void cells[3].offsetWidth;
-                                        cells[3].classList.add(priceDirection === 'up' ? 'flash-up' : 'flash-down');
+                                    if (marketStatus.isOpen) {
+                                        cells[3].innerHTML = icon + ' ' + formatPct(changePct);
+                                        cells[3].className = 'text-right change-cell ' + (changePct >= 0 ? 'change-positive' : 'change-negative');
+
+                                        // Flash animation on change update (only when market open)
+                                        if (priceChanged) {
+                                            cells[3].classList.remove('flash-up', 'flash-down');
+                                            void cells[3].offsetWidth;
+                                            cells[3].classList.add(priceDirection === 'up' ? 'flash-up' : 'flash-down');
+                                        }
+                                    } else {
+                                        // Market closed: show muted change
+                                        cells[3].innerHTML = `<span style="opacity:0.5" title="Market closed">${icon} ${formatPct(changePct)}</span>`;
+                                        cells[3].className = 'text-right change-cell ' + (changePct >= 0 ? 'change-positive' : 'change-negative');
                                     }
                                 }
                             }
