@@ -1,0 +1,265 @@
+{
+  "allocation": "ca",
+  "balance": {
+    "cash": 47.91,
+    "margin_used": 0,
+    "total_equity": 88611.61
+  },
+  "cagr_pct": 212.93,
+  "end_date": "2026-02-05",
+  "equity_dates": [
+    "2026-01-02",
+    "2026-01-05",
+    "2026-01-06",
+    "2026-01-07",
+    "2026-01-08",
+    "2026-01-09",
+    "2026-01-12",
+    "2026-01-13",
+    "2026-01-14",
+    "2026-01-15",
+    "2026-01-16",
+    "2026-01-19",
+    "2026-01-20",
+    "2026-01-21",
+    "2026-01-22",
+    "2026-01-23",
+    "2026-01-26",
+    "2026-01-27",
+    "2026-01-28",
+    "2026-01-29",
+    "2026-01-30",
+    "2026-02-02",
+    "2026-02-03",
+    "2026-02-04"
+  ],
+  "equity_values": [
+    100000,
+    99987.31,
+    99533.97,
+    99072.3,
+    101572.38,
+    103293.08,
+    104935.39,
+    105812.89,
+    106638.36,
+    107898.19,
+    108856.7,
+    108554.05,
+    108711.53,
+    111534.39,
+    110886.94,
+    111129.73,
+    111556.34,
+    112551.85,
+    112660.46,
+    111372.9,
+    108263.75,
+    107232.57,
+    110958.56,
+    110367.89
+  ],
+  "final_equity": 110367.89,
+  "initial_capital": 100000,
+  "losers": 10,
+  "max_dd_pct": 4.82,
+  "pending_orders": [
+    {
+      "limit": 30.53,
+      "order_type": "LIMIT",
+      "qty": 6.899018758625647,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "ABBV.TO"
+    },
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 295.8495768189281,
+      "side": "SELL",
+      "stop": 0,
+      "symbol": "AMZN.TO"
+    },
+    {
+      "limit": 28.77,
+      "order_type": "LIMIT",
+      "qty": 366.0093399888143,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "NGEX.TO"
+    },
+    {
+      "limit": 19.46,
+      "order_type": "LIMIT",
+      "qty": 565.9891872353587,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "T.TO"
+    }
+  ],
+  "positions": [
+    {
+      "current": 39.41,
+      "entry": 35.16,
+      "qty": 4.132496207849211,
+      "symbol": "AAPL.TO",
+      "unrealized_pnl": 17.57
+    },
+    {
+      "current": 11.01,
+      "entry": 11.23,
+      "qty": 4.6072882405620295,
+      "symbol": "AAV.TO",
+      "unrealized_pnl": -1
+    },
+    {
+      "current": 20.63,
+      "entry": 20.63,
+      "qty": 379.18857339208193,
+      "symbol": "AC.TO",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 27,
+      "entry": 27,
+      "qty": 295.8495768189281,
+      "symbol": "AMZN.TO",
+      "unrealized_pnl": 1.21
+    },
+    {
+      "current": 35.43,
+      "entry": 34,
+      "qty": 166.32283585770398,
+      "symbol": "ARE.TO",
+      "unrealized_pnl": 237.84
+    },
+    {
+      "current": 67.17,
+      "entry": 61.37,
+      "qty": 5.587385287449249,
+      "symbol": "BIPC.TO",
+      "unrealized_pnl": 32.41
+    },
+    {
+      "current": 7.31,
+      "entry": 7.24,
+      "qty": 3.4816756673477425,
+      "symbol": "BIR.TO",
+      "unrealized_pnl": 0.26
+    },
+    {
+      "current": 33.74,
+      "entry": 34.31,
+      "qty": 311.9039071125689,
+      "symbol": "CGG.TO",
+      "unrealized_pnl": -178.17
+    },
+    {
+      "current": 9.42,
+      "entry": 8.71,
+      "qty": 1136.3636117336184,
+      "symbol": "CJ.TO",
+      "unrealized_pnl": 806.82
+    },
+    {
+      "current": 28.86,
+      "entry": 30.25,
+      "qty": 78.7374634682499,
+      "symbol": "ELE.V",
+      "unrealized_pnl": -109.45
+    },
+    {
+      "current": 6.07,
+      "entry": 6.24,
+      "qty": 1012.6417629083526,
+      "symbol": "FOM.TO",
+      "unrealized_pnl": -169.62
+    },
+    {
+      "current": 46.7,
+      "entry": 42.69,
+      "qty": 250.7847055016945,
+      "symbol": "GMIN.TO",
+      "unrealized_pnl": 1005.65
+    },
+    {
+      "current": 18.1,
+      "entry": 18.16,
+      "qty": 4.162757719634663,
+      "symbol": "GOOS.TO",
+      "unrealized_pnl": -0.25
+    },
+    {
+      "current": 25.64,
+      "entry": 25.83,
+      "qty": 411.3325037011265,
+      "symbol": "IE.TO",
+      "unrealized_pnl": -78.15
+    },
+    {
+      "current": 17.66,
+      "entry": 17.68,
+      "qty": 1.5444479932746433,
+      "symbol": "IVN.TO",
+      "unrealized_pnl": -0.04
+    },
+    {
+      "current": 45.1,
+      "entry": 45.95,
+      "qty": 205.4533948265995,
+      "symbol": "K.TO",
+      "unrealized_pnl": -174.64
+    },
+    {
+      "current": 15.05,
+      "entry": 14.81,
+      "qty": 8.529664357279046,
+      "symbol": "MDI.TO",
+      "unrealized_pnl": 2.04
+    },
+    {
+      "current": 36,
+      "entry": 38.39,
+      "qty": 1.2447512513568226,
+      "symbol": "META.TO",
+      "unrealized_pnl": -2.97
+    },
+    {
+      "current": 19.04,
+      "entry": 17.95,
+      "qty": 6.342014071584256,
+      "symbol": "NVA.TO",
+      "unrealized_pnl": 6.89
+    },
+    {
+      "current": 5.05,
+      "entry": 5.3,
+      "qty": 35.7455678582623,
+      "symbol": "ODV.V",
+      "unrealized_pnl": -8.91
+    },
+    {
+      "current": 6.47,
+      "entry": 6.47,
+      "qty": 24.190826598376397,
+      "symbol": "PMET.TO",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 104.93,
+      "entry": 92.18,
+      "qty": 41.375180688701874,
+      "symbol": "WFG.TO",
+      "unrealized_pnl": 527.73
+    }
+  ],
+  "r2": 0.72,
+  "return_pct": 10.37,
+  "sharpe": 5.05,
+  "start_date": "2026-01-05",
+  "strategy": "ca-composite",
+  "total_pnl": 8480.41,
+  "total_trades": 24,
+  "win_rate": 58.33,
+  "winners": 14
+}

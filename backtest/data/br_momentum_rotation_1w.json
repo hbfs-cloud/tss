@@ -1,0 +1,138 @@
+{
+  "allocation": "momentum",
+  "balance": {
+    "cash": 39734.83,
+    "margin_used": 0,
+    "total_equity": 470777.2
+  },
+  "cagr_pct": -94.43,
+  "end_date": "2026-02-05",
+  "equity_dates": [
+    "2026-01-28",
+    "2026-01-29",
+    "2026-01-30",
+    "2026-02-02",
+    "2026-02-03",
+    "2026-02-04"
+  ],
+  "equity_values": [
+    500000,
+    499834.57,
+    468787.78,
+    471798.92,
+    476868.02,
+    470777.2
+  ],
+  "final_equity": 470777.2,
+  "initial_capital": 500000,
+  "losers": 5,
+  "max_dd_pct": 6.24,
+  "pending_orders": null,
+  "positions": [
+    {
+      "current": 36.87,
+      "entry": 36.3,
+      "qty": 982,
+      "stop_price": 31.98,
+      "symbol": "A1LB34.SA",
+      "unrealized_pnl": 559.74
+    },
+    {
+      "current": 109.51,
+      "entry": 111.06,
+      "qty": 319,
+      "stop_price": 100.01,
+      "symbol": "AURA33.SA",
+      "unrealized_pnl": -494.45
+    },
+    {
+      "current": 42,
+      "entry": 44.9,
+      "qty": 878,
+      "stop_price": 40.53,
+      "symbol": "BPAC3.SA",
+      "unrealized_pnl": -2546.2
+    },
+    {
+      "current": 18.89,
+      "entry": 19.17,
+      "qty": 2048,
+      "stop_price": 18.11,
+      "symbol": "BRSR3.SA",
+      "unrealized_pnl": -573.44
+    },
+    {
+      "current": 242.4,
+      "entry": 232.3,
+      "qty": 78,
+      "stop_price": 220.35,
+      "symbol": "CATP34.SA",
+      "unrealized_pnl": 787.8
+    },
+    {
+      "current": 10.22,
+      "entry": 10.17,
+      "qty": 3826,
+      "stop_price": 9.15,
+      "symbol": "CBAV3.SA",
+      "unrealized_pnl": 191.3
+    },
+    {
+      "current": 10.23,
+      "entry": 11.16,
+      "qty": 3566,
+      "stop_price": 9.76,
+      "symbol": "CSNA3.SA",
+      "unrealized_pnl": -3316.38
+    },
+    {
+      "current": 32.4,
+      "entry": 33.06,
+      "qty": 1174,
+      "stop_price": 29.9,
+      "symbol": "E1CO34.SA",
+      "unrealized_pnl": -774.84
+    },
+    {
+      "current": 107.5,
+      "entry": 113.73,
+      "qty": 351,
+      "stop_price": 102.22,
+      "symbol": "FCXO34.SA",
+      "unrealized_pnl": -2187.64
+    },
+    {
+      "current": 45.05,
+      "entry": 44.02,
+      "qty": 827,
+      "stop_price": 36.68,
+      "symbol": "S1BS34.SA",
+      "unrealized_pnl": 851.81
+    },
+    {
+      "current": 6.58,
+      "entry": 6.8,
+      "qty": 5804,
+      "stop_price": 5.96,
+      "symbol": "SIMH3.SA",
+      "unrealized_pnl": -1276.88
+    },
+    {
+      "current": 89.43,
+      "entry": 86.42,
+      "qty": 432,
+      "stop_price": 82.8,
+      "symbol": "VALE3.SA",
+      "unrealized_pnl": 1300.32
+    }
+  ],
+  "r2": 0.6,
+  "return_pct": -5.84,
+  "sharpe": -6.23,
+  "start_date": "2026-01-29",
+  "strategy": "momentum-rotation",
+  "total_pnl": -21641.89,
+  "total_trades": 5,
+  "win_rate": 0,
+  "winners": 0
+}

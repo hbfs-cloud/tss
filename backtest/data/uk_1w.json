@@ -1,0 +1,150 @@
+{
+  "allocation": "uk",
+  "balance": {
+    "cash": 22.44,
+    "margin_used": 0,
+    "total_equity": 92336.72
+  },
+  "cagr_pct": 120.76,
+  "end_date": "2026-02-05",
+  "equity_dates": [
+    "2026-01-28",
+    "2026-01-29",
+    "2026-01-30",
+    "2026-02-02",
+    "2026-02-03",
+    "2026-02-04"
+  ],
+  "equity_values": [
+    100000,
+    99987.25,
+    100124.95,
+    100849.23,
+    101051,
+    101666.11
+  ],
+  "final_equity": 101666.11,
+  "initial_capital": 100000,
+  "losers": 0,
+  "max_dd_pct": 0.01,
+  "pending_orders": [
+    {
+      "limit": 165.17,
+      "order_type": "LIMIT",
+      "qty": 1.1075273475814096,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "BBOX.L"
+    },
+    {
+      "limit": 2536.92,
+      "order_type": "LIMIT",
+      "qty": 3.605345712524051,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "SMIN.L"
+    }
+  ],
+  "positions": [
+    {
+      "current": 483.25,
+      "entry": 481.45,
+      "qty": 15.050756707086116,
+      "symbol": "BARC.L",
+      "unrealized_pnl": 27.09
+    },
+    {
+      "current": 669,
+      "entry": 673,
+      "qty": 14.749262536873156,
+      "symbol": "BPM.L",
+      "unrealized_pnl": -59
+    },
+    {
+      "current": 6940,
+      "entry": 6616.74,
+      "qty": 1.5082956259426847,
+      "symbol": "CCEP.L",
+      "unrealized_pnl": 487.57
+    },
+    {
+      "current": 2222,
+      "entry": 2238,
+      "qty": 4.1613071207232055,
+      "symbol": "CPG.L",
+      "unrealized_pnl": -66.58
+    },
+    {
+      "current": 10.9,
+      "entry": 10.43,
+      "qty": 15.644666113344934,
+      "symbol": "GAID.L",
+      "unrealized_pnl": 7.37
+    },
+    {
+      "current": 3260,
+      "entry": 3019,
+      "qty": 3.3025099075297226,
+      "symbol": "IMB.L",
+      "unrealized_pnl": 795.9
+    },
+    {
+      "current": 82.65,
+      "entry": 81.64,
+      "qty": 122.24938419223089,
+      "symbol": "ITV.L",
+      "unrealized_pnl": 123.91
+    },
+    {
+      "current": 216,
+      "entry": 216.07,
+      "qty": 37.75675702089412,
+      "symbol": "JUST.L",
+      "unrealized_pnl": -2.53
+    },
+    {
+      "current": 271.9,
+      "entry": 263.8,
+      "qty": 2.7801650876161816,
+      "symbol": "LGEN.L",
+      "unrealized_pnl": 22.52
+    },
+    {
+      "current": 916.16,
+      "entry": 916.16,
+      "qty": 7.876012577656677,
+      "symbol": "POLN.L",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 170.75,
+      "entry": 169,
+      "qty": 52.32979413374919,
+      "symbol": "PSDL.L",
+      "unrealized_pnl": 91.58
+    },
+    {
+      "current": 83.6,
+      "entry": 83.6,
+      "qty": 1.7194244179478033,
+      "symbol": "SUPR.L",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 586,
+      "entry": 569,
+      "qty": 15.72178967861111,
+      "symbol": "UTG.L",
+      "unrealized_pnl": 267.27
+    }
+  ],
+  "r2": 0.91,
+  "return_pct": 1.67,
+  "sharpe": 16.56,
+  "start_date": "2026-01-29",
+  "strategy": "uk-lowvol",
+  "total_pnl": 0,
+  "total_trades": 0,
+  "win_rate": 0,
+  "winners": 0
+}

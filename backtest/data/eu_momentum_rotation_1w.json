@@ -1,0 +1,162 @@
+{
+  "allocation": "momentum",
+  "balance": {
+    "cash": 885.06,
+    "margin_used": 0,
+    "total_equity": 98520.76
+  },
+  "cagr_pct": -51.21,
+  "end_date": "2026-02-05",
+  "equity_dates": [
+    "2026-01-28",
+    "2026-01-29",
+    "2026-01-30",
+    "2026-02-02",
+    "2026-02-03",
+    "2026-02-04"
+  ],
+  "equity_values": [
+    100000,
+    99968.6,
+    95465.73,
+    96181.89,
+    100517.21,
+    98520.76
+  ],
+  "final_equity": 98520.76,
+  "initial_capital": 100000,
+  "losers": 6,
+  "max_dd_pct": 4.53,
+  "pending_orders": null,
+  "positions": [
+    {
+      "current": 141.62,
+      "entry": 132.32,
+      "qty": 51,
+      "stop_price": 125.13,
+      "symbol": "AMC.DE",
+      "unrealized_pnl": 474.3
+    },
+    {
+      "current": 8.1,
+      "entry": 7.95,
+      "qty": 986,
+      "stop_price": 7.57,
+      "symbol": "DBG.PA",
+      "unrealized_pnl": 147.9
+    },
+    {
+      "current": 148.4,
+      "entry": 146.6,
+      "qty": 54,
+      "stop_price": 139.97,
+      "symbol": "ENR.DE",
+      "unrealized_pnl": 97.2
+    },
+    {
+      "current": 115,
+      "entry": 111,
+      "qty": 71,
+      "stop_price": 108.3,
+      "symbol": "EXA.PA",
+      "unrealized_pnl": 284
+    },
+    {
+      "current": 18.34,
+      "entry": 16.4,
+      "qty": 393,
+      "stop_price": 15.7,
+      "symbol": "FMV.DE",
+      "unrealized_pnl": 764.38
+    },
+    {
+      "current": 121.7,
+      "entry": 122.8,
+      "qty": 63,
+      "stop_price": 115.16,
+      "symbol": "GBF.DE",
+      "unrealized_pnl": -69.3
+    },
+    {
+      "current": 19.35,
+      "entry": 17.63,
+      "qty": 370,
+      "stop_price": 16.06,
+      "symbol": "HCL.DE",
+      "unrealized_pnl": 638.25
+    },
+    {
+      "current": 511.2,
+      "entry": 499.2,
+      "qty": 15,
+      "stop_price": 506.38,
+      "symbol": "LOM.DE",
+      "unrealized_pnl": 180
+    },
+    {
+      "current": 47.56,
+      "entry": 44.8,
+      "qty": 122,
+      "stop_price": 44.9,
+      "symbol": "MTS.MC",
+      "unrealized_pnl": 336.72
+    },
+    {
+      "current": 166.9,
+      "entry": 166,
+      "qty": 18,
+      "stop_price": 153.35,
+      "symbol": "NDA.DE",
+      "unrealized_pnl": 16.2
+    },
+    {
+      "current": 263,
+      "entry": 256,
+      "qty": 29,
+      "stop_price": 209.92,
+      "symbol": "OHB.DE",
+      "unrealized_pnl": 203
+    },
+    {
+      "current": 81.06,
+      "entry": 80,
+      "qty": 99,
+      "stop_price": 76.18,
+      "symbol": "RIO1.DE",
+      "unrealized_pnl": 104.94
+    },
+    {
+      "current": 66.8,
+      "entry": 69.4,
+      "qty": 6,
+      "stop_price": 64.91,
+      "symbol": "SLYG.DE",
+      "unrealized_pnl": -15.6
+    },
+    {
+      "current": 25.1,
+      "entry": 25.4,
+      "qty": 304,
+      "stop_price": 23.25,
+      "symbol": "VBK.DE",
+      "unrealized_pnl": -91.2
+    },
+    {
+      "current": 26,
+      "entry": 25.61,
+      "qty": 156,
+      "stop_price": 24.32,
+      "symbol": "VWSB.DE",
+      "unrealized_pnl": 60.84
+    }
+  ],
+  "r2": 0.02,
+  "return_pct": -1.48,
+  "sharpe": -1.2,
+  "start_date": "2026-01-29",
+  "strategy": "momentum-rotation",
+  "total_pnl": -4580.63,
+  "total_trades": 6,
+  "win_rate": 0,
+  "winners": 0
+}

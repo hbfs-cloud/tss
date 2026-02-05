@@ -1,0 +1,147 @@
+{
+  "allocation": "ca",
+  "balance": {
+    "cash": 0.39,
+    "margin_used": 0,
+    "total_equity": 101318.11
+  },
+  "cagr_pct": 87.89,
+  "end_date": "2026-02-05",
+  "equity_dates": [
+    "2026-01-28",
+    "2026-01-29",
+    "2026-01-30",
+    "2026-02-02",
+    "2026-02-03",
+    "2026-02-04"
+  ],
+  "equity_values": [
+    100000,
+    99984.03,
+    99554.13,
+    99257.37,
+    101119.16,
+    101318.11
+  ],
+  "final_equity": 101318.11,
+  "initial_capital": 100000,
+  "losers": 0,
+  "max_dd_pct": 0.74,
+  "pending_orders": null,
+  "positions": [
+    {
+      "current": 7.31,
+      "entry": 7.24,
+      "qty": 1379.3103448275863,
+      "symbol": "BIR.TO",
+      "unrealized_pnl": 102.76
+    },
+    {
+      "current": 192.46,
+      "entry": 188.33,
+      "qty": 52.96329712041165,
+      "symbol": "BMO.TO",
+      "unrealized_pnl": 218.74
+    },
+    {
+      "current": 9.42,
+      "entry": 9,
+      "qty": 994.5196888198261,
+      "symbol": "CJ.TO",
+      "unrealized_pnl": 417.7
+    },
+    {
+      "current": 28.86,
+      "entry": 30.25,
+      "qty": 1.0348934729659773,
+      "symbol": "ELE.V",
+      "unrealized_pnl": -1.44
+    },
+    {
+      "current": 17.26,
+      "entry": 17.42,
+      "qty": 573.0658775235205,
+      "symbol": "ELF.TO",
+      "unrealized_pnl": -88.88
+    },
+    {
+      "current": 46.7,
+      "entry": 42.69,
+      "qty": 36.486170032361066,
+      "symbol": "GMIN.TO",
+      "unrealized_pnl": 146.31
+    },
+    {
+      "current": 25.64,
+      "entry": 25.83,
+      "qty": 332.4862753962232,
+      "symbol": "IE.TO",
+      "unrealized_pnl": -63.17
+    },
+    {
+      "current": 17.11,
+      "entry": 17.11,
+      "qty": 1.0202765716320439,
+      "symbol": "IVN.TO",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 35.56,
+      "entry": 34.95,
+      "qty": 285.551109916764,
+      "symbol": "JWEL.TO",
+      "unrealized_pnl": 174.2
+    },
+    {
+      "current": 45.1,
+      "entry": 45.95,
+      "qty": 182.48993165451157,
+      "symbol": "K.TO",
+      "unrealized_pnl": -155.12
+    },
+    {
+      "current": 12.01,
+      "entry": 12.17,
+      "qty": 716.0225610200276,
+      "symbol": "MARI.TO",
+      "unrealized_pnl": -114.56
+    },
+    {
+      "current": 28.83,
+      "entry": 29.07,
+      "qty": 129.77709510100541,
+      "symbol": "NGEX.TO",
+      "unrealized_pnl": -31.15
+    },
+    {
+      "current": 5.05,
+      "entry": 4.9,
+      "qty": 15.483406527314203,
+      "symbol": "ODV.V",
+      "unrealized_pnl": 2.32
+    },
+    {
+      "current": 25.43,
+      "entry": 24.25,
+      "qty": 411.522646665303,
+      "symbol": "PRL.TO",
+      "unrealized_pnl": 485.02
+    },
+    {
+      "current": 27.17,
+      "entry": 26.49,
+      "qty": 376.7897383209756,
+      "symbol": "SCR.TO",
+      "unrealized_pnl": 257.38
+    }
+  ],
+  "r2": 0.38,
+  "return_pct": 1.32,
+  "sharpe": 4.52,
+  "start_date": "2026-01-29",
+  "strategy": "ca-composite",
+  "total_pnl": 0,
+  "total_trades": 0,
+  "win_rate": 0,
+  "winners": 0
+}

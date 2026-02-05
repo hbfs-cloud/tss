@@ -1,0 +1,193 @@
+{
+  "allocation": "etf-us",
+  "balance": {
+    "cash": 24915.04,
+    "margin_used": 0,
+    "total_equity": 80369.82
+  },
+  "cagr_pct": -100,
+  "end_date": "2026-02-05",
+  "equity_dates": [
+    "2026-01-28",
+    "2026-01-29",
+    "2026-01-30",
+    "2026-02-02",
+    "2026-02-03",
+    "2026-02-04"
+  ],
+  "equity_values": [
+    100000,
+    100000,
+    82253.61,
+    81493.46,
+    81802.52,
+    80369.82
+  ],
+  "final_equity": 80369.82,
+  "initial_capital": 100000,
+  "losers": 11,
+  "max_dd_pct": 19.63,
+  "pending_orders": [
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 33,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "ARKW"
+    },
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 117,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "BETE"
+    },
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 111,
+      "side": "SELL",
+      "stop": 0,
+      "symbol": "BOTT"
+    },
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 288,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "DFII"
+    },
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 125,
+      "side": "SELL",
+      "stop": 0,
+      "symbol": "EPU"
+    },
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 223,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "EZPZ"
+    },
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 17,
+      "side": "SELL",
+      "stop": 0,
+      "symbol": "KDEF"
+    },
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 23,
+      "side": "SELL",
+      "stop": 0,
+      "symbol": "MKOR"
+    },
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 217,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "OWNB"
+    },
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 263,
+      "side": "SELL",
+      "stop": 0,
+      "symbol": "YBTC"
+    }
+  ],
+  "positions": [
+    {
+      "current": 39.36,
+      "entry": 42.69,
+      "qty": 257,
+      "symbol": "ARKF",
+      "unrealized_pnl": -855.81
+    },
+    {
+      "current": 10.85,
+      "entry": 11.15,
+      "qty": 88,
+      "symbol": "BDRY",
+      "unrealized_pnl": -26.4
+    },
+    {
+      "current": 56.55,
+      "entry": 56.55,
+      "qty": 111,
+      "symbol": "BOTT",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 28.47,
+      "entry": 31.81,
+      "qty": 31,
+      "symbol": "CONY",
+      "unrealized_pnl": -103.54
+    },
+    {
+      "current": 88.38,
+      "entry": 89.85,
+      "qty": 125,
+      "symbol": "EPU",
+      "unrealized_pnl": -183.75
+    },
+    {
+      "current": 57.32,
+      "entry": 55.7,
+      "qty": 17,
+      "symbol": "KDEF",
+      "unrealized_pnl": 27.54
+    },
+    {
+      "current": 42.65,
+      "entry": 42.07,
+      "qty": 23,
+      "symbol": "MKOR",
+      "unrealized_pnl": 13.45
+    },
+    {
+      "current": 29.74,
+      "entry": 29.74,
+      "qty": 216,
+      "symbol": "PYPY",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 54.15,
+      "entry": 51.38,
+      "qty": 216,
+      "symbol": "SETH",
+      "unrealized_pnl": 599.4
+    },
+    {
+      "current": 23.2,
+      "entry": 23.2,
+      "qty": 263,
+      "symbol": "YBTC",
+      "unrealized_pnl": 0
+    }
+  ],
+  "r2": 0.74,
+  "return_pct": -19.63,
+  "sharpe": -8.24,
+  "start_date": "2026-01-29",
+  "strategy": "etf-momentum",
+  "total_pnl": -19101.08,
+  "total_trades": 14,
+  "win_rate": 21.43,
+  "winners": 3
+}

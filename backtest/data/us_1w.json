@@ -1,0 +1,219 @@
+{
+  "allocation": "usa",
+  "balance": {
+    "cash": 16.61,
+    "margin_used": 0,
+    "total_equity": 87496.34
+  },
+  "cagr_pct": -6.67,
+  "end_date": "2026-02-05",
+  "equity_dates": [
+    "2026-01-28",
+    "2026-01-29",
+    "2026-01-30",
+    "2026-02-02",
+    "2026-02-03",
+    "2026-02-04"
+  ],
+  "equity_values": [
+    100000,
+    100000,
+    98192.72,
+    99413.69,
+    101402.47,
+    99855.95
+  ],
+  "final_equity": 99855.95,
+  "initial_capital": 100000,
+  "losers": 6,
+  "max_dd_pct": 1.81,
+  "pending_orders": [
+    {
+      "limit": 5.84,
+      "order_type": "LIMIT",
+      "qty": 1,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "CTMX"
+    },
+    {
+      "limit": 29.86,
+      "order_type": "LIMIT",
+      "qty": 17,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "FLNC"
+    },
+    {
+      "limit": 479.51,
+      "order_type": "LIMIT",
+      "qty": 2,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "LITE"
+    },
+    {
+      "limit": 49.58,
+      "order_type": "LIMIT",
+      "qty": 1,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "MAZE"
+    },
+    {
+      "limit": 602.09,
+      "order_type": "LIMIT",
+      "qty": 18,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "SNDK"
+    }
+  ],
+  "positions": [
+    {
+      "current": 14.43,
+      "entry": 14.03,
+      "qty": 15,
+      "stop_price": 13.51,
+      "symbol": "AMRX",
+      "unrealized_pnl": 6
+    },
+    {
+      "current": 8.9,
+      "entry": 8.25,
+      "qty": 4,
+      "stop_price": 8.42,
+      "symbol": "ARCO",
+      "unrealized_pnl": 2.6
+    },
+    {
+      "current": 11.2,
+      "entry": 11.2,
+      "qty": 91,
+      "stop_price": 9.18,
+      "symbol": "BW",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 5.1,
+      "entry": 4.39,
+      "qty": 507,
+      "stop_price": 3.88,
+      "symbol": "CATX",
+      "unrealized_pnl": 361.09
+    },
+    {
+      "current": 15.51,
+      "entry": 15.49,
+      "qty": 752,
+      "stop_price": 15.38,
+      "symbol": "DVAX",
+      "unrealized_pnl": 15.04
+    },
+    {
+      "current": 10.58,
+      "entry": 10.58,
+      "qty": 957,
+      "stop_price": 9.54,
+      "symbol": "ERAS",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 14.27,
+      "entry": 14.28,
+      "qty": 815,
+      "stop_price": 14.21,
+      "symbol": "FOLD",
+      "unrealized_pnl": -8.15
+    },
+    {
+      "current": 1.87,
+      "entry": 1.87,
+      "qty": 6,
+      "stop_price": 1.57,
+      "symbol": "IAUX",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 30.64,
+      "entry": 29.83,
+      "qty": 119,
+      "stop_price": 29.67,
+      "symbol": "ING",
+      "unrealized_pnl": 96.39
+    },
+    {
+      "current": 4.8,
+      "entry": 4.8,
+      "qty": 22,
+      "stop_price": 3.94,
+      "symbol": "IRWD",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 9.29,
+      "entry": 8.94,
+      "qty": 43,
+      "stop_price": 8.89,
+      "symbol": "MFG",
+      "unrealized_pnl": 15.05
+    },
+    {
+      "current": 22.33,
+      "entry": 21.17,
+      "qty": 551,
+      "stop_price": 21.12,
+      "symbol": "NBBK",
+      "unrealized_pnl": 639.16
+    },
+    {
+      "current": 6.71,
+      "entry": 7.35,
+      "qty": 1568,
+      "stop_price": 6.26,
+      "symbol": "PDYN",
+      "unrealized_pnl": -1003.52
+    },
+    {
+      "current": 33.59,
+      "entry": 33.84,
+      "qty": 351,
+      "stop_price": 32.47,
+      "symbol": "PUK",
+      "unrealized_pnl": -87.75
+    },
+    {
+      "current": 17.74,
+      "entry": 17.21,
+      "qty": 582,
+      "stop_price": 17.13,
+      "symbol": "TAK",
+      "unrealized_pnl": 308.46
+    },
+    {
+      "current": 1.62,
+      "entry": 1.52,
+      "qty": 621,
+      "stop_price": 1.32,
+      "symbol": "TRX",
+      "unrealized_pnl": 62.1
+    },
+    {
+      "current": 95.78,
+      "entry": 91.5,
+      "qty": 1,
+      "stop_price": 92.36,
+      "symbol": "TTC",
+      "unrealized_pnl": 4.28
+    }
+  ],
+  "r2": 0.06,
+  "return_pct": -0.14,
+  "sharpe": -0.17,
+  "start_date": "2026-01-29",
+  "strategy": "trend-hybrid-af",
+  "total_pnl": -554.79,
+  "total_trades": 6,
+  "win_rate": 0,
+  "winners": 0
+}

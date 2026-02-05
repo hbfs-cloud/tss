@@ -1,0 +1,140 @@
+{
+  "allocation": "in",
+  "balance": {
+    "cash": 837097.54,
+    "margin_used": 0,
+    "total_equity": 8503748.43
+  },
+  "cagr_pct": 219.76,
+  "end_date": "2026-02-05",
+  "equity_dates": [
+    "2026-01-28",
+    "2026-01-29",
+    "2026-01-30",
+    "2026-02-02",
+    "2026-02-03",
+    "2026-02-04"
+  ],
+  "equity_values": [
+    8300000,
+    8299990.66,
+    8215255.1,
+    8123067.74,
+    8342339.82,
+    8503748.43
+  ],
+  "final_equity": 8503748.43,
+  "initial_capital": 8300000,
+  "losers": 1,
+  "max_dd_pct": 2.13,
+  "pending_orders": null,
+  "positions": [
+    {
+      "current": 294.85,
+      "entry": 294.85,
+      "qty": 2455.591097455544,
+      "symbol": "506590.BO",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 3509.55,
+      "entry": 3110,
+      "qty": 183.83481133807615,
+      "symbol": "522275.BO",
+      "unrealized_pnl": 73451.21
+    },
+    {
+      "current": 614.45,
+      "entry": 601.1,
+      "qty": 940.7053992800726,
+      "symbol": "532181.BO",
+      "unrealized_pnl": 12558.45
+    },
+    {
+      "current": 507.2,
+      "entry": 482.58,
+      "qty": 1679.8816976856642,
+      "symbol": "533106.BO",
+      "unrealized_pnl": 41353.86
+    },
+    {
+      "current": 307.7,
+      "entry": 325.05,
+      "qty": 1779.6390681910245,
+      "symbol": "533272.BO",
+      "unrealized_pnl": -30876.69
+    },
+    {
+      "current": 821.2,
+      "entry": 730.49,
+      "qty": 896.0413952028533,
+      "symbol": "533553.BO",
+      "unrealized_pnl": 81283.41
+    },
+    {
+      "current": 2544.05,
+      "entry": 2589.31,
+      "qty": 319.90749662748124,
+      "symbol": "534091.BO",
+      "unrealized_pnl": -14479.32
+    },
+    {
+      "current": 1143.15,
+      "entry": 970,
+      "qty": 589.1262577609036,
+      "symbol": "538666.BO",
+      "unrealized_pnl": 102007.23
+    },
+    {
+      "current": 2522.25,
+      "entry": 2528,
+      "qty": 234.64843801917223,
+      "symbol": "542011.BO",
+      "unrealized_pnl": -1349.23
+    },
+    {
+      "current": 228.66,
+      "entry": 232.03,
+      "qty": 376.25076631803,
+      "symbol": "AEGISVOPAK.NS",
+      "unrealized_pnl": -1266.09
+    },
+    {
+      "current": 963.3,
+      "entry": 994.6,
+      "qty": 12.956022788578773,
+      "symbol": "ASAHIINDIA.NS",
+      "unrealized_pnl": -405.52
+    },
+    {
+      "current": 614.55,
+      "entry": 602.9,
+      "qty": 940.4012104640271,
+      "symbol": "GMDCLTD.NS",
+      "unrealized_pnl": 10955.64
+    },
+    {
+      "current": 168.84,
+      "entry": 167,
+      "qty": 1.4662611798077034,
+      "symbol": "GROWW.NS",
+      "unrealized_pnl": 2.7
+    },
+    {
+      "current": 1188.2,
+      "entry": 1188,
+      "qty": 696.9518708410224,
+      "symbol": "HOMEFIRST.NS",
+      "unrealized_pnl": 139.36
+    }
+  ],
+  "r2": 0.19,
+  "return_pct": 2.45,
+  "sharpe": 4.55,
+  "start_date": "2026-01-29",
+  "strategy": "in-composite",
+  "total_pnl": -69569.02,
+  "total_trades": 1,
+  "win_rate": 0,
+  "winners": 0
+}

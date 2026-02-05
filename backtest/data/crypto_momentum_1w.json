@@ -1,0 +1,54 @@
+{
+  "allocation": "crypto",
+  "balance": {
+    "cash": 95999.6,
+    "margin_used": 0,
+    "total_equity": 99879.6
+  },
+  "cagr_pct": -5.64,
+  "end_date": "2026-02-05",
+  "equity_dates": [
+    "2026-01-29",
+    "2026-01-30",
+    "2026-01-31",
+    "2026-02-01",
+    "2026-02-02",
+    "2026-02-03",
+    "2026-02-04",
+    "2026-02-05"
+  ],
+  "equity_values": [
+    100000,
+    99996,
+    99879.6,
+    99879.6,
+    99879.6,
+    99879.6,
+    99879.6,
+    99879.6
+  ],
+  "final_equity": 99879.6,
+  "initial_capital": 100000,
+  "losers": 0,
+  "max_dd_pct": 0.12,
+  "pending_orders": null,
+  "positions": [
+    {
+      "current": 3.88,
+      "entry": 4,
+      "qty": 1000,
+      "stop_price": 3.28,
+      "symbol": "OMNI-USDC",
+      "unrealized_pnl": -116.4
+    }
+  ],
+  "r2": 0.57,
+  "return_pct": -0.12,
+  "sharpe": -6.24,
+  "start_date": "2026-01-29",
+  "strategy": "momentum-rotation",
+  "total_pnl": 0,
+  "total_trades": 0,
+  "win_rate": 0,
+  "winners": 0
+}

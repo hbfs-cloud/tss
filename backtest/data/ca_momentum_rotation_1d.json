@@ -1,0 +1,155 @@
+{
+  "allocation": "momentum",
+  "balance": {
+    "cash": 158.98,
+    "margin_used": 0,
+    "total_equity": 86955.93
+  },
+  "cagr_pct": -96.96,
+  "end_date": "2026-02-05",
+  "equity_dates": [
+    "2026-02-03",
+    "2026-02-04"
+  ],
+  "equity_values": [
+    100000,
+    98463.89
+  ],
+  "final_equity": 98463.89,
+  "initial_capital": 100000,
+  "losers": 1,
+  "max_dd_pct": 1.54,
+  "pending_orders": [
+    {
+      "limit": 6.02,
+      "order_type": "LIMIT",
+      "qty": 1723,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "ASCU.TO"
+    },
+    {
+      "limit": 10.38,
+      "order_type": "LIMIT",
+      "qty": 99,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "DSV.TO"
+    },
+    {
+      "limit": 12.62,
+      "order_type": "LIMIT",
+      "qty": 8,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "PDN.TO"
+    },
+    {
+      "limit": 14.98,
+      "order_type": "LIMIT",
+      "qty": 1,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "SVM.TO"
+    }
+  ],
+  "positions": [
+    {
+      "current": 30.98,
+      "entry": 30.98,
+      "qty": 387,
+      "stop_price": 25.41,
+      "symbol": "AG.TO",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 18.1,
+      "entry": 18.1,
+      "qty": 635,
+      "stop_price": 15.56,
+      "symbol": "AII.TO",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 14.98,
+      "entry": 14.98,
+      "qty": 799,
+      "stop_price": 12.28,
+      "symbol": "ASM.TO",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 33.45,
+      "entry": 33.45,
+      "qty": 101,
+      "stop_price": 27.43,
+      "symbol": "EFR.TO",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 50.71,
+      "entry": 50.71,
+      "qty": 7,
+      "stop_price": 44.88,
+      "symbol": "ERO.TO",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 2.56,
+      "entry": 2.56,
+      "qty": 2,
+      "stop_price": 2.17,
+      "symbol": "IAU.TO",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 13.18,
+      "entry": 13.18,
+      "qty": 897,
+      "stop_price": 11.5,
+      "symbol": "III.TO",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 2.76,
+      "entry": 2.76,
+      "qty": 4283,
+      "stop_price": 2.36,
+      "symbol": "ORE.TO",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 12.38,
+      "entry": 12.38,
+      "qty": 969,
+      "stop_price": 10.6,
+      "symbol": "TKO.TO",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 8,
+      "entry": 8,
+      "qty": 6,
+      "stop_price": 6.56,
+      "symbol": "TMQ.TO",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 10.65,
+      "entry": 10.65,
+      "qty": 1119,
+      "stop_price": 8.73,
+      "symbol": "USA.TO",
+      "unrealized_pnl": 0
+    }
+  ],
+  "r2": 0,
+  "return_pct": -1.54,
+  "sharpe": 0,
+  "start_date": "2026-02-04",
+  "strategy": "momentum-rotation",
+  "total_pnl": -1508.33,
+  "total_trades": 1,
+  "win_rate": 0,
+  "winners": 0
+}

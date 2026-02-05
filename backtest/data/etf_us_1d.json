@@ -1,0 +1,153 @@
+{
+  "allocation": "etf-us",
+  "balance": {
+    "cash": 5684.1,
+    "margin_used": 0,
+    "total_equity": 100000
+  },
+  "cagr_pct": 0,
+  "end_date": "2026-02-05",
+  "equity_dates": [
+    "2026-02-03",
+    "2026-02-04"
+  ],
+  "equity_values": [
+    100000,
+    100000
+  ],
+  "final_equity": 100000,
+  "initial_capital": 100000,
+  "losers": 0,
+  "max_dd_pct": 0,
+  "pending_orders": [
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 1,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "ARKW"
+    },
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 6,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "BETE"
+    },
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 166,
+      "side": "SELL",
+      "stop": 0,
+      "symbol": "BOTT"
+    },
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 163,
+      "side": "SELL",
+      "stop": 0,
+      "symbol": "KDEF"
+    },
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 11,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "OWNB"
+    },
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 393,
+      "side": "SELL",
+      "stop": 0,
+      "symbol": "YBTC"
+    }
+  ],
+  "positions": [
+    {
+      "current": 40.48,
+      "entry": 40.48,
+      "qty": 231,
+      "symbol": "ARKF",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 56.55,
+      "entry": 56.55,
+      "qty": 166,
+      "symbol": "BOTT",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 29.68,
+      "entry": 29.68,
+      "qty": 313,
+      "symbol": "CONY",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 14.76,
+      "entry": 14.76,
+      "qty": 629,
+      "symbol": "DFII",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 19.09,
+      "entry": 19.09,
+      "qty": 486,
+      "symbol": "EZPZ",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 24.87,
+      "entry": 24.87,
+      "qty": 379,
+      "symbol": "FINX",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 59.45,
+      "entry": 59.45,
+      "qty": 163,
+      "symbol": "KDEF",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 29.74,
+      "entry": 29.74,
+      "qty": 323,
+      "symbol": "PYPY",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 53.44,
+      "entry": 53.44,
+      "qty": 185,
+      "symbol": "SETH",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 23.2,
+      "entry": 23.2,
+      "qty": 393,
+      "symbol": "YBTC",
+      "unrealized_pnl": 0
+    }
+  ],
+  "r2": 0,
+  "return_pct": 0,
+  "sharpe": 0,
+  "start_date": "2026-02-04",
+  "strategy": "etf-momentum",
+  "total_pnl": 0,
+  "total_trades": 0,
+  "win_rate": 0,
+  "winners": 0
+}

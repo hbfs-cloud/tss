@@ -1,0 +1,62 @@
+{
+  "allocation": "crypto",
+  "balance": {
+    "cash": 99831.61,
+    "margin_used": 0,
+    "total_equity": 99916.18
+  },
+  "cagr_pct": -3.94,
+  "end_date": "2026-02-05",
+  "equity_dates": [
+    "2026-01-29",
+    "2026-01-30",
+    "2026-01-31",
+    "2026-02-01",
+    "2026-02-02",
+    "2026-02-03",
+    "2026-02-04",
+    "2026-02-05"
+  ],
+  "equity_values": [
+    100000,
+    99999.5,
+    99938.03,
+    99921.68,
+    99923.62,
+    99921.63,
+    99919.54,
+    99916.18
+  ],
+  "final_equity": 99916.18,
+  "initial_capital": 100000,
+  "losers": 4,
+  "max_dd_pct": 0.08,
+  "pending_orders": [
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 9.07441,
+      "side": "SELL",
+      "stop": 0,
+      "symbol": "AVAX-USDC"
+    }
+  ],
+  "positions": [
+    {
+      "current": 9.32,
+      "entry": 11.03,
+      "qty": 9.074410163339383,
+      "symbol": "AVAX-USDC",
+      "unrealized_pnl": -15.52
+    }
+  ],
+  "r2": 0.71,
+  "return_pct": -0.08,
+  "sharpe": -8.41,
+  "start_date": "2026-01-29",
+  "strategy": "crypto-dca",
+  "total_pnl": -68.2,
+  "total_trades": 4,
+  "win_rate": 0,
+  "winners": 0
+}

@@ -1,0 +1,106 @@
+{
+  "allocation": "momentum",
+  "balance": {
+    "cash": 151500.36,
+    "margin_used": 0,
+    "total_equity": 499917.07
+  },
+  "cagr_pct": -3.67,
+  "end_date": "2026-02-05",
+  "equity_dates": [
+    "2026-02-03",
+    "2026-02-04"
+  ],
+  "equity_values": [
+    500000,
+    499917.07
+  ],
+  "final_equity": 499917.07,
+  "initial_capital": 500000,
+  "losers": 0,
+  "max_dd_pct": 0.02,
+  "pending_orders": null,
+  "positions": [
+    {
+      "current": 113.71,
+      "entry": 113.71,
+      "qty": 350,
+      "stop_price": 95.69,
+      "symbol": "AURA33.SA",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 21.5,
+      "entry": 21.5,
+      "qty": 1797,
+      "stop_price": 20.37,
+      "symbol": "BRAP3.SA",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 231.44,
+      "entry": 231.44,
+      "qty": 164,
+      "stop_price": 220.62,
+      "symbol": "CATP34.SA",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 10.19,
+      "entry": 10.19,
+      "qty": 3807,
+      "stop_price": 9.23,
+      "symbol": "CBAV3.SA",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 10.25,
+      "entry": 10.25,
+      "qty": 3744,
+      "stop_price": 9.19,
+      "symbol": "CSNA3.SA",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 113.66,
+      "entry": 113.66,
+      "qty": 341,
+      "stop_price": 103.87,
+      "symbol": "FCXO34.SA",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 514.88,
+      "entry": 514.88,
+      "qty": 76,
+      "stop_price": 477.54,
+      "symbol": "RIOT34.SA",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 6.72,
+      "entry": 6.72,
+      "qty": 5711,
+      "stop_price": 6.01,
+      "symbol": "SIMH3.SA",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 88.51,
+      "entry": 88.51,
+      "qty": 436,
+      "stop_price": 83.81,
+      "symbol": "VALE3.SA",
+      "unrealized_pnl": 0
+    }
+  ],
+  "r2": 0,
+  "return_pct": -0.02,
+  "sharpe": 0,
+  "start_date": "2026-02-04",
+  "strategy": "momentum-rotation",
+  "total_pnl": 0,
+  "total_trades": 0,
+  "win_rate": 0,
+  "winners": 0
+}

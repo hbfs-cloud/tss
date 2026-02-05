@@ -1,0 +1,122 @@
+{
+  "allocation": "hk-codex",
+  "balance": {
+    "cash": 5439.7,
+    "margin_used": 0,
+    "total_equity": 100074.87
+  },
+  "cagr_pct": 3.65,
+  "end_date": "2026-02-05",
+  "equity_dates": [
+    "2026-01-28",
+    "2026-01-29",
+    "2026-01-30",
+    "2026-02-02",
+    "2026-02-03",
+    "2026-02-04"
+  ],
+  "equity_values": [
+    100000,
+    100000,
+    99570.8,
+    97077.56,
+    100421.43,
+    100074.87
+  ],
+  "final_equity": 100074.87,
+  "initial_capital": 100000,
+  "losers": 3,
+  "max_dd_pct": 2.92,
+  "pending_orders": null,
+  "positions": [
+    {
+      "current": 1.32,
+      "entry": 1.24,
+      "qty": 7685,
+      "stop_price": 1.08,
+      "symbol": "0321.HK",
+      "unrealized_pnl": 644.39
+    },
+    {
+      "current": 12.85,
+      "entry": 12.85,
+      "qty": 684,
+      "stop_price": 10.94,
+      "symbol": "0631.HK",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 20.2,
+      "entry": 20.38,
+      "qty": 463,
+      "stop_price": 17.81,
+      "symbol": "1133.HK",
+      "unrealized_pnl": -83.34
+    },
+    {
+      "current": 6.98,
+      "entry": 6.48,
+      "qty": 1443,
+      "stop_price": 5.5,
+      "symbol": "1286.HK",
+      "unrealized_pnl": 721.5
+    },
+    {
+      "current": 3.77,
+      "entry": 3.5,
+      "qty": 2640,
+      "stop_price": 2.97,
+      "symbol": "1645.HK",
+      "unrealized_pnl": 712.8
+    },
+    {
+      "current": 7.5,
+      "entry": 7.5,
+      "qty": 1167,
+      "stop_price": 5.31,
+      "symbol": "1757.HK",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 5.7,
+      "entry": 5.02,
+      "qty": 1890,
+      "stop_price": 4.21,
+      "symbol": "2339.HK",
+      "unrealized_pnl": 1275.75
+    },
+    {
+      "current": 2.42,
+      "entry": 2.48,
+      "qty": 3796,
+      "stop_price": 2.14,
+      "symbol": "2722.HK",
+      "unrealized_pnl": -227.76
+    },
+    {
+      "current": 6.2,
+      "entry": 6.2,
+      "qty": 1361,
+      "stop_price": 5.04,
+      "symbol": "8603.HK",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 6.6,
+      "entry": 6.8,
+      "qty": 1390,
+      "stop_price": 5.87,
+      "symbol": "9900.HK",
+      "unrealized_pnl": -278
+    }
+  ],
+  "r2": 0,
+  "return_pct": 0.07,
+  "sharpe": 0.25,
+  "start_date": "2026-01-29",
+  "strategy": "hk-codex",
+  "total_pnl": -2690.47,
+  "total_trades": 3,
+  "win_rate": 0,
+  "winners": 0
+}

@@ -1,0 +1,127 @@
+{
+  "allocation": "ca",
+  "balance": {
+    "cash": 83.45,
+    "margin_used": 0,
+    "total_equity": 40003.45
+  },
+  "cagr_pct": -2.9,
+  "end_date": "2026-02-05",
+  "equity_dates": [
+    "2026-02-03",
+    "2026-02-04"
+  ],
+  "equity_values": [
+    100000,
+    99987.23
+  ],
+  "final_equity": 99987.23,
+  "initial_capital": 100000,
+  "losers": 0,
+  "max_dd_pct": 0.01,
+  "pending_orders": [
+    {
+      "limit": 38.33,
+      "order_type": "LIMIT",
+      "qty": 260.3488685166906,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "AAPL.TO"
+    },
+    {
+      "limit": 28.77,
+      "order_type": "LIMIT",
+      "qty": 277.5831627186235,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "NGEX.TO"
+    },
+    {
+      "limit": 19.46,
+      "order_type": "LIMIT",
+      "qty": 410.39602871794875,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "T.TO"
+    },
+    {
+      "limit": 45.18,
+      "order_type": "LIMIT",
+      "qty": 3.505371580547128,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "WPK.TO"
+    },
+    {
+      "limit": 38.65,
+      "order_type": "LIMIT",
+      "qty": 258.1977825508279,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "ATS.TO"
+    },
+    {
+      "limit": 30.53,
+      "order_type": "LIMIT",
+      "qty": 261.6123739810762,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "ABBV.TO"
+    },
+    {
+      "limit": 53.94,
+      "order_type": "LIMIT",
+      "qty": 146.79757196665415,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "GOOG.TO"
+    },
+    {
+      "limit": 35.93,
+      "order_type": "LIMIT",
+      "qty": 222.29784888888892,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "META.TO"
+    }
+  ],
+  "positions": [
+    {
+      "current": 20.63,
+      "entry": 20.63,
+      "qty": 483.79293483742276,
+      "symbol": "AC.TO",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 105.01,
+      "entry": 105.01,
+      "qty": 95.03896487346168,
+      "symbol": "ATRL.TO",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 6.47,
+      "entry": 6.47,
+      "qty": 1543.2098720008653,
+      "symbol": "PMET.TO",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 26.77,
+      "entry": 26.77,
+      "qty": 372.8560817966684,
+      "symbol": "SCR.TO",
+      "unrealized_pnl": 0
+    }
+  ],
+  "r2": 0,
+  "return_pct": -0.01,
+  "sharpe": 0,
+  "start_date": "2026-02-04",
+  "strategy": "ca-composite",
+  "total_pnl": 0,
+  "total_trades": 0,
+  "win_rate": 0,
+  "winners": 0
+}

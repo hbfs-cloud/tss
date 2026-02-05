@@ -1,0 +1,110 @@
+{
+  "allocation": "in",
+  "balance": {
+    "cash": 48971.88,
+    "margin_used": 0,
+    "total_equity": 4158279.66
+  },
+  "cagr_pct": -0.11,
+  "end_date": "2026-02-05",
+  "equity_dates": [
+    "2026-02-03",
+    "2026-02-04"
+  ],
+  "equity_values": [
+    8300000,
+    8299959.39
+  ],
+  "final_equity": 8299959.39,
+  "initial_capital": 8300000,
+  "losers": 0,
+  "max_dd_pct": 0,
+  "pending_orders": [
+    {
+      "limit": 795.66,
+      "order_type": "LIMIT",
+      "qty": 1041.0736148006351,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "CENTURYPLY.NS"
+    },
+    {
+      "limit": 1281.43,
+      "order_type": "LIMIT",
+      "qty": 646.414283021656,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "512455.BO"
+    },
+    {
+      "limit": 506.19,
+      "order_type": "LIMIT",
+      "qty": 1636.4272859303771,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "533106.BO"
+    },
+    {
+      "limit": 11658.04,
+      "order_type": "LIMIT",
+      "qty": 71.0527772051993,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "540699.BO"
+    },
+    {
+      "limit": 228.27,
+      "order_type": "LIMIT",
+      "qty": 3628.7148817529355,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "ACMESOLAR.NS"
+    }
+  ],
+  "positions": [
+    {
+      "current": 294.85,
+      "entry": 294.85,
+      "qty": 2771.285475792988,
+      "symbol": "506590.BO",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 954,
+      "entry": 954,
+      "qty": 864.0433282269496,
+      "symbol": "512573.BO",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 296.05,
+      "entry": 296.05,
+      "qty": 2782.4339053478298,
+      "symbol": "532210.BO",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 968.85,
+      "entry": 968.85,
+      "qty": 851.6314598725463,
+      "symbol": "539254.BO",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 961.55,
+      "entry": 961.55,
+      "qty": 851.8062183948581,
+      "symbol": "ADANIENSOL.NS",
+      "unrealized_pnl": 0
+    }
+  ],
+  "r2": 0,
+  "return_pct": -0,
+  "sharpe": 0,
+  "start_date": "2026-02-04",
+  "strategy": "in-composite",
+  "total_pnl": 0,
+  "total_trades": 0,
+  "win_rate": 0,
+  "winners": 0
+}

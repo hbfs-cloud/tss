@@ -1,0 +1,154 @@
+{
+  "allocation": "momentum",
+  "balance": {
+    "cash": 31424.73,
+    "margin_used": 0,
+    "total_equity": 699952.26
+  },
+  "cagr_pct": -1.53,
+  "end_date": "2026-02-05",
+  "equity_dates": [
+    "2026-02-03",
+    "2026-02-04"
+  ],
+  "equity_values": [
+    700000,
+    699952.26
+  ],
+  "final_equity": 699952.26,
+  "initial_capital": 700000,
+  "losers": 0,
+  "max_dd_pct": 0.01,
+  "pending_orders": null,
+  "positions": [
+    {
+      "current": 154,
+      "entry": 154,
+      "qty": 343,
+      "stop_price": 136.79,
+      "symbol": "001270.SZ",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 15.05,
+      "entry": 15.05,
+      "qty": 19,
+      "stop_price": 12.34,
+      "symbol": "002716.SZ",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 78.5,
+      "entry": 78.5,
+      "qty": 692,
+      "stop_price": 66.51,
+      "symbol": "002718.SZ",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 23.4,
+      "entry": 23.4,
+      "qty": 2285,
+      "stop_price": 20.71,
+      "symbol": "002969.SZ",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 41.04,
+      "entry": 41.04,
+      "qty": 1282,
+      "stop_price": 35.05,
+      "symbol": "300102.SZ",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 87.72,
+      "entry": 87.72,
+      "qty": 27,
+      "stop_price": 74.36,
+      "symbol": "300136.SZ",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 66.86,
+      "entry": 66.86,
+      "qty": 837,
+      "stop_price": 54.82,
+      "symbol": "300139.SZ",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 56.15,
+      "entry": 56.15,
+      "qty": 968,
+      "stop_price": 46.04,
+      "symbol": "300342.SZ",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 337,
+      "entry": 337,
+      "qty": 162,
+      "stop_price": 276.34,
+      "symbol": "300751.SZ",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 41.21,
+      "entry": 41.21,
+      "qty": 1285,
+      "stop_price": 33.79,
+      "symbol": "300986.SZ",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 182.5,
+      "entry": 182.5,
+      "qty": 292,
+      "stop_price": 149.65,
+      "symbol": "301005.SZ",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 229,
+      "entry": 229,
+      "qty": 227,
+      "stop_price": 187.78,
+      "symbol": "301232.SZ",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 195.84,
+      "entry": 195.84,
+      "qty": 273,
+      "stop_price": 160.59,
+      "symbol": "688031.SS",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 200,
+      "entry": 200,
+      "qty": 265,
+      "stop_price": 165.5,
+      "symbol": "688270.SS",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 274.38,
+      "entry": 274.38,
+      "qty": 84,
+      "stop_price": 235.72,
+      "symbol": "688766.SS",
+      "unrealized_pnl": 0
+    }
+  ],
+  "r2": 0,
+  "return_pct": -0.01,
+  "sharpe": 0,
+  "start_date": "2026-02-04",
+  "strategy": "momentum-rotation",
+  "total_pnl": 0,
+  "total_trades": 0,
+  "win_rate": 0,
+  "winners": 0
+}

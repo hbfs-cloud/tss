@@ -1,0 +1,89 @@
+{
+  "allocation": "uk",
+  "balance": {
+    "cash": 45086.36,
+    "margin_used": 0,
+    "total_equity": 65036.86
+  },
+  "cagr_pct": -1.43,
+  "end_date": "2026-02-05",
+  "equity_dates": [
+    "2026-02-03",
+    "2026-02-04"
+  ],
+  "equity_values": [
+    100000,
+    99993.62
+  ],
+  "final_equity": 99993.62,
+  "initial_capital": 100000,
+  "losers": 0,
+  "max_dd_pct": 0.01,
+  "pending_orders": [
+    {
+      "limit": 584.83,
+      "order_type": "LIMIT",
+      "qty": 11.95454195213789,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "UTG.L"
+    },
+    {
+      "limit": 165.17,
+      "order_type": "LIMIT",
+      "qty": 42.32846878521331,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "BBOX.L"
+    },
+    {
+      "limit": 1289.42,
+      "order_type": "LIMIT",
+      "qty": 5.4221064891275566,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "JTC.L"
+    },
+    {
+      "limit": 202,
+      "order_type": "LIMIT",
+      "qty": 34.61147132018014,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "LMP.L"
+    },
+    {
+      "limit": 2536.92,
+      "order_type": "LIMIT",
+      "qty": 2.7558464138287975,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "SMIN.L"
+    }
+  ],
+  "positions": [
+    {
+      "current": 6760,
+      "entry": 6760,
+      "qty": 1.4749262536873156,
+      "symbol": "CCEP.L",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 916.16,
+      "entry": 916.16,
+      "qty": 10.893246187363834,
+      "symbol": "POLN.L",
+      "unrealized_pnl": 0
+    }
+  ],
+  "r2": 0,
+  "return_pct": -0.01,
+  "sharpe": 0,
+  "start_date": "2026-02-04",
+  "strategy": "uk-lowvol",
+  "total_pnl": 0,
+  "total_trades": 0,
+  "win_rate": 0,
+  "winners": 0
+}

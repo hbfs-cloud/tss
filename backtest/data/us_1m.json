@@ -1,0 +1,341 @@
+{
+  "allocation": "usa",
+  "balance": {
+    "cash": 14.13,
+    "margin_used": 0,
+    "total_equity": 108452.32
+  },
+  "cagr_pct": 159.23,
+  "end_date": "2026-02-05",
+  "equity_dates": [
+    "2026-01-02",
+    "2026-01-05",
+    "2026-01-06",
+    "2026-01-07",
+    "2026-01-08",
+    "2026-01-09",
+    "2026-01-12",
+    "2026-01-13",
+    "2026-01-14",
+    "2026-01-15",
+    "2026-01-16",
+    "2026-01-20",
+    "2026-01-21",
+    "2026-01-22",
+    "2026-01-23",
+    "2026-01-26",
+    "2026-01-27",
+    "2026-01-28",
+    "2026-01-29",
+    "2026-01-30",
+    "2026-02-02",
+    "2026-02-03",
+    "2026-02-04"
+  ],
+  "equity_values": [
+    100000,
+    100000,
+    99569.98,
+    99070.46,
+    100951.74,
+    102865.08,
+    103587.72,
+    104124.15,
+    106883.06,
+    108921.11,
+    107186.1,
+    111215.67,
+    110861.88,
+    113343.19,
+    113653.49,
+    111775.81,
+    113420.78,
+    117537.83,
+    117007.02,
+    107372.53,
+    108249.71,
+    109090.41,
+    108598
+  ],
+  "final_equity": 108598,
+  "initial_capital": 100000,
+  "losers": 34,
+  "max_dd_pct": 8.65,
+  "pending_orders": [
+    {
+      "limit": 29.86,
+      "order_type": "LIMIT",
+      "qty": 4,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "FLNC"
+    },
+    {
+      "limit": 1.87,
+      "order_type": "LIMIT",
+      "qty": 14,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "IAUX"
+    }
+  ],
+  "positions": [
+    {
+      "current": 26.35,
+      "entry": 16.72,
+      "qty": 653,
+      "stop_price": 20.41,
+      "symbol": "ALMS",
+      "unrealized_pnl": 6290.41
+    },
+    {
+      "current": 14.43,
+      "entry": 14.03,
+      "qty": 15,
+      "stop_price": 13.51,
+      "symbol": "AMRX",
+      "unrealized_pnl": 6
+    },
+    {
+      "current": 8.9,
+      "entry": 8.25,
+      "qty": 42,
+      "stop_price": 8.42,
+      "symbol": "ARCO",
+      "unrealized_pnl": 27.3
+    },
+    {
+      "current": 21.57,
+      "entry": 21.49,
+      "qty": 17,
+      "stop_price": 21.46,
+      "symbol": "AVDL",
+      "unrealized_pnl": 1.36
+    },
+    {
+      "current": 9.27,
+      "entry": 7.65,
+      "qty": 1,
+      "stop_price": 7.87,
+      "symbol": "BW",
+      "unrealized_pnl": 1.62
+    },
+    {
+      "current": 24.78,
+      "entry": 24.78,
+      "qty": 1,
+      "stop_price": 21.94,
+      "symbol": "CAPR",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 5.1,
+      "entry": 4.39,
+      "qty": 508,
+      "stop_price": 3.88,
+      "symbol": "CATX",
+      "unrealized_pnl": 361.8
+    },
+    {
+      "current": 5.67,
+      "entry": 5.46,
+      "qty": 3,
+      "stop_price": 5.04,
+      "symbol": "CTMX",
+      "unrealized_pnl": 0.63
+    },
+    {
+      "current": 15.51,
+      "entry": 15.49,
+      "qty": 1,
+      "stop_price": 15.38,
+      "symbol": "DVAX",
+      "unrealized_pnl": 0.02
+    },
+    {
+      "current": 27.82,
+      "entry": 23.58,
+      "qty": 8,
+      "stop_price": 24.95,
+      "symbol": "ELVN",
+      "unrealized_pnl": 33.92
+    },
+    {
+      "current": 11.24,
+      "entry": 4.35,
+      "qty": 230,
+      "stop_price": 9.02,
+      "symbol": "ERAS",
+      "unrealized_pnl": 1583.78
+    },
+    {
+      "current": 102.27,
+      "entry": 101.61,
+      "qty": 114,
+      "stop_price": 101.91,
+      "symbol": "EXAS",
+      "unrealized_pnl": 75.24
+    },
+    {
+      "current": 362.54,
+      "entry": 343.34,
+      "qty": 3,
+      "stop_price": 345.45,
+      "symbol": "FDX",
+      "unrealized_pnl": 57.6
+    },
+    {
+      "current": 14.27,
+      "entry": 14.27,
+      "qty": 29,
+      "stop_price": 14.21,
+      "symbol": "FOLD",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 56.54,
+      "entry": 56.69,
+      "qty": 216,
+      "stop_price": 54.34,
+      "symbol": "FTI",
+      "unrealized_pnl": -32.4
+    },
+    {
+      "current": 4.8,
+      "entry": 4.8,
+      "qty": 127,
+      "stop_price": 3.94,
+      "symbol": "IRWD",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 6.16,
+      "entry": 5.48,
+      "qty": 1,
+      "stop_price": 6.03,
+      "symbol": "LYG",
+      "unrealized_pnl": 0.68
+    },
+    {
+      "current": 9.29,
+      "entry": 8.94,
+      "qty": 1426,
+      "stop_price": 8.89,
+      "symbol": "MFG",
+      "unrealized_pnl": 499.1
+    },
+    {
+      "current": 287.25,
+      "entry": 290.58,
+      "qty": 2,
+      "stop_price": 277.69,
+      "symbol": "MSGS",
+      "unrealized_pnl": -6.66
+    },
+    {
+      "current": 20.45,
+      "entry": 15.99,
+      "qty": 737,
+      "stop_price": 18.83,
+      "symbol": "NESR",
+      "unrealized_pnl": 3287.02
+    },
+    {
+      "current": 5.8,
+      "entry": 5.65,
+      "qty": 14,
+      "stop_price": 5.61,
+      "symbol": "NUAI",
+      "unrealized_pnl": 2.03
+    },
+    {
+      "current": 6.71,
+      "entry": 7.35,
+      "qty": 20,
+      "stop_price": 6.26,
+      "symbol": "PDYN",
+      "unrealized_pnl": -12.8
+    },
+    {
+      "current": 72.72,
+      "entry": 72.04,
+      "qty": 161,
+      "stop_price": 72.53,
+      "symbol": "RNA",
+      "unrealized_pnl": 109.48
+    },
+    {
+      "current": 3.76,
+      "entry": 3.01,
+      "qty": 1,
+      "stop_price": 3.39,
+      "symbol": "SATL",
+      "unrealized_pnl": 0.75
+    },
+    {
+      "current": 29.82,
+      "entry": 25.16,
+      "qty": 105,
+      "stop_price": 26.36,
+      "symbol": "SKYT",
+      "unrealized_pnl": 489.3
+    },
+    {
+      "current": 584.55,
+      "entry": 341.6,
+      "qty": 1,
+      "stop_price": 560.11,
+      "symbol": "SNDK",
+      "unrealized_pnl": 242.95
+    },
+    {
+      "current": 17.74,
+      "entry": 17.21,
+      "qty": 132,
+      "stop_price": 17.13,
+      "symbol": "TAK",
+      "unrealized_pnl": 69.96
+    },
+    {
+      "current": 38.16,
+      "entry": 38.16,
+      "qty": 1,
+      "stop_price": 33.66,
+      "symbol": "TERN",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 95.78,
+      "entry": 91.5,
+      "qty": 2,
+      "stop_price": 92.36,
+      "symbol": "TTC",
+      "unrealized_pnl": 8.56
+    },
+    {
+      "current": 14.36,
+      "entry": 13.18,
+      "qty": 2,
+      "stop_price": 13.66,
+      "symbol": "VTRS",
+      "unrealized_pnl": 2.36
+    },
+    {
+      "current": 13.91,
+      "entry": 13.76,
+      "qty": 840,
+      "stop_price": 13.85,
+      "symbol": "VTYX",
+      "unrealized_pnl": 126
+    }
+  ],
+  "r2": 0.61,
+  "return_pct": 8.6,
+  "sharpe": 2.64,
+  "start_date": "2026-01-05",
+  "strategy": "trend-hybrid-af",
+  "total_pnl": -4628.02,
+  "total_trades": 41,
+  "win_rate": 17.07,
+  "winners": 7
+}

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backtest Report | Market Watch</title>
+    <link rel="icon" href="https://market-watch.xyz/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 { text-align: center; color: #1e293b; margin-bottom: 10px; }
+        .subtitle { text-align: center; color: #64748b; margin-bottom: 30px; }
+        .loading { text-align: center; padding: 50px; color: #64748b; }
+        .error { text-align: center; padding: 50px; color: #dc2626; }
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .period-btn {
+            padding: 8px 16px;
+            border: 1px solid #e2e8f0;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.15s;
+        }
+        .period-btn.active { background: #2563eb; color: white; border-color: #2563eb; }
+        .period-btn:hover:not(.active) { background: #f1f5f9; }
+        .period-group { margin-right: 20px; display: flex; gap: 5px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px 16px;
+            text-align: right;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #475569;
+            cursor: pointer;
+            user-select: none;
+        }
+        th:hover { background: #f1f5f9; }
+        th:first-child, td:first-child { text-align: left; }
+        tr:hover { background: #f8fafc; }
+        tr.expanded { background: #f1f5f9; }
+        .positive { color: #16a34a; }
+        .negative { color: #dc2626; }
+        .neutral { color: #64748b; }
+        .chart-cell { width: 200px; padding: 4px; }
+        .chart-container { width: 180px; height: 40px; }
+        .expand-btn {
+            cursor: pointer;
+            margin-right: 8px;
+            color: #64748b;
+            font-size: 0.8rem;
+        }
+        .expand-btn:hover { color: #2563eb; }
+        .details-row { display: none; }
+        .details-row.show { display: table-row; }
+        .details-cell {
+            padding: 20px;
+            background: #f8fafc;
+            text-align: left;
+        }
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .details-section {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .details-section h4 {
+            margin: 0 0 10px 0;
+            color: #475569;
+            font-size: 0.85rem;
+        }
+        .details-table {
+            width: 100%;
+            font-size: 0.8rem;
+        }
+        .details-table td, .details-table th {
+            padding: 4px 8px;
+            border: none;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+        .sort-arrow { margin-left: 4px; font-size: 0.7em; }
+        @media (max-width: 1200px) { .chart-cell { display: none; } }
+        @media (max-width: 900px) { .details-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <h1>Backtest Report</h1>
+    <p class="subtitle">All Portfolio Strategies Performance</p>
+
+    <div id="loading" class="loading">Loading data...</div>
+    <div id="error" class="error" style="display: none;"></div>
+
+    <div id="main-content" style="display: none;">
+        <div class="controls">
+            <div class="period-group">
+                <button class="period-btn" data-period="1d">1D</button>
+                <button class="period-btn" data-period="1w">1W</button>
+                <button class="period-btn" data-period="1m">1M</button>
+            </div>
+            <div class="period-group">
+                <button class="period-btn active" data-period="5y">5Y</button>
+            </div>
+            <div class="period-group">
+                <button class="period-btn" data-period="2021">2021</button>
+                <button class="period-btn" data-period="2022">2022</button>
+                <button class="period-btn" data-period="2023">2023</button>
+                <button class="period-btn" data-period="2024">2024</button>
+                <button class="period-btn" data-period="2025">2025</button>
+            </div>
+        </div>
+
+        <table id="results-table">
+            <thead>
+                <tr>
+                    <th data-sort="name">Portfolio <span class="sort-arrow"></span></th>
+                    <th data-sort="cagr">CAGR % <span class="sort-arrow"></span></th>
+                    <th data-sort="max_dd">MaxDD % <span class="sort-arrow"></span></th>
+                    <th data-sort="sharpe">Sharpe <span class="sort-arrow"></span></th>
+                    <th data-sort="r2">R2 <span class="sort-arrow"></span></th>
+                    <th data-sort="win_rate">Win % <span class="sort-arrow"></span></th>
+                    <th data-sort="trades">Trades <span class="sort-arrow"></span></th>
+                    <th class="chart-cell">Equity Curve</th>
+                </tr>
+            </thead>
+            <tbody id="results-body">
+            </tbody>
+        </table>
+
+        <div class="footer">
+            Generated: <span id="timestamp"></span>
+        </div>
+    </div>
+
+    <script>
+        let allData = [];
+        let currentPeriod = '5y';
+        let sortColumn = 'cagr';
+        let sortDirection = 'desc';
+        const charts = {};
+        let expandedRows = new Set();
+
+        function formatNumber(n, decimals=2) {
+            if (n === null || n === undefined || isNaN(n)) return '-';
+            return n.toFixed(decimals);
+        }
+
+        function formatMoney(n) {
+            if (n === null || n === undefined || isNaN(n)) return '-';
+            return n.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        }
+
+        function getColorClass(value, type) {
+            if (type === 'cagr' || type === 'sharpe' || type === 'r2' || type === 'win_rate') {
+                return value > 0 ? 'positive' : value < 0 ? 'negative' : 'neutral';
+            }
+            if (type === 'max_dd') {
+                return value > 30 ? 'negative' : value > 20 ? 'neutral' : 'positive';
+            }
+            return 'neutral';
+        }
+
+        function toggleDetails(idx, portfolioName) {
+            const detailsRow = document.getElementById(`details-${idx}`);
+            const expandBtn = document.getElementById(`expand-${idx}`);
+            const mainRow = document.getElementById(`row-${idx}`);
+
+            if (expandedRows.has(idx)) {
+                expandedRows.delete(idx);
+                detailsRow.classList.remove('show');
+                mainRow.classList.remove('expanded');
+                expandBtn.textContent = '+';
+            } else {
+                expandedRows.add(idx);
+                detailsRow.classList.add('show');
+                mainRow.classList.add('expanded');
+                expandBtn.textContent = '-';
+            }
+        }
+
+        function renderDetailsContent(portfolio, periodData) {
+            const balance = periodData.balance || {};
+            const positions = periodData.positions || [];
+            const orders = periodData.pending_orders || [];
+
+            let positionsHtml = positions.length === 0 ? '<em>No positions</em>' :
+                `<table class="details-table">
+                    <tr><th>Symbol</th><th>Qty</th><th>Entry</th><th>Current</th><th>Stop</th><th>P&L</th></tr>
+                    ${positions.map(p => `
+                        <tr>
+                            <td>${p.symbol}</td>
+                            <td>${p.qty}</td>
+                            <td>${formatMoney(p.entry)}</td>
+                            <td>${formatMoney(p.current)}</td>
+                            <td class="negative">${p.stop_price ? formatMoney(p.stop_price) : '-'}</td>
+                            <td class="${p.unrealized_pnl >= 0 ? 'positive' : 'negative'}">${formatMoney(p.unrealized_pnl)}</td>
+                        </tr>
+                    `).join('')}
+                </table>`;
+
+            let ordersHtml = orders.length === 0 ? '<em>No pending orders</em>' :
+                `<table class="details-table">
+                    <tr><th>Symbol</th><th>Side</th><th>Qty</th><th>Limit</th><th>Stop</th></tr>
+                    ${orders.map(o => `
+                        <tr>
+                            <td>${o.symbol}</td>
+                            <td>${o.side}</td>
+                            <td>${o.qty}</td>
+                            <td>${o.limit > 0 ? formatMoney(o.limit) : '-'}</td>
+                            <td>${o.stop > 0 ? formatMoney(o.stop) : '-'}</td>
+                        </tr>
+                    `).join('')}
+                </table>`;
+
+            return `
+                <div class="details-grid">
+                    <div class="details-section">
+                        <h4>Balance</h4>
+                        <table class="details-table">
+                            <tr><td>Total Equity</td><td>${formatMoney(balance.total_equity)}</td></tr>
+                            <tr><td>Cash</td><td>${formatMoney(balance.cash)}</td></tr>
+                            <tr><td>Margin Used</td><td>${formatMoney(balance.margin_used)}</td></tr>
+                        </table>
+                    </div>
+                    <div class="details-section">
+                        <h4>Positions (${positions.length})</h4>
+                        ${positionsHtml}
+                    </div>
+                    <div class="details-section">
+                        <h4>Pending Buy Orders (${orders.length})</h4>
+                        ${ordersHtml}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('results-body');
+
+            // Sort data
+            const sortedData = [...allData].sort((a, b) => {
+                const aVal = a.periods[currentPeriod]?.[sortColumn] ?? (sortColumn === 'name' ? a.name : -Infinity);
+                const bVal = b.periods[currentPeriod]?.[sortColumn] ?? (sortColumn === 'name' ? b.name : -Infinity);
+
+                if (sortColumn === 'name') {
+                    return sortDirection === 'asc' ?
+                        aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
+                }
+                return sortDirection === 'asc' ? aVal - bVal : bVal - aVal;
+            });
+
+            // Clear existing
+            tbody.innerHTML = '';
+            Object.values(charts).forEach(c => c.destroy());
+
+            // Render rows
+            sortedData.forEach((portfolio, idx) => {
+                const p = portfolio.periods[currentPeriod] || {};
+
+                // Main row
+                const tr = document.createElement('tr');
+                tr.id = `row-${idx}`;
+                if (expandedRows.has(idx)) tr.classList.add('expanded');
+
+                tr.innerHTML = `
+                    <td>
+                        <span id="expand-${idx}" class="expand-btn" onclick="toggleDetails(${idx}, '${portfolio.name}')">${expandedRows.has(idx) ? '-' : '+'}</span>
+                        <strong>${portfolio.name}</strong>
+                    </td>
+                    <td class="${getColorClass(p.cagr, 'cagr')}">${formatNumber(p.cagr)}</td>
+                    <td class="${getColorClass(p.max_dd, 'max_dd')}">${formatNumber(p.max_dd)}</td>
+                    <td class="${getColorClass(p.sharpe, 'sharpe')}">${formatNumber(p.sharpe)}</td>
+                    <td class="${getColorClass(p.r2, 'r2')}">${formatNumber(p.r2)}</td>
+                    <td class="${getColorClass(p.win_rate, 'win_rate')}">${formatNumber(p.win_rate)}</td>
+                    <td>${p.trades || '-'}</td>
+                    <td class="chart-cell">
+                        <div class="chart-container">
+                            <canvas id="chart-${idx}"></canvas>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+
+                // Details row (hidden by default)
+                const detailsTr = document.createElement('tr');
+                detailsTr.id = `details-${idx}`;
+                detailsTr.className = 'details-row' + (expandedRows.has(idx) ? ' show' : '');
+                detailsTr.innerHTML = `<td colspan="8" class="details-cell">${renderDetailsContent(portfolio, p)}</td>`;
+                tbody.appendChild(detailsTr);
+
+                // Draw mini chart
+                if (p.equity_dates && p.equity_dates.length > 0) {
+                    const ctx = document.getElementById(`chart-${idx}`).getContext('2d');
+                    charts[idx] = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: p.equity_dates,
+                            datasets: [{
+                                data: p.equity_values,
+                                borderColor: p.cagr >= 0 ? '#16a34a' : '#dc2626',
+                                borderWidth: 1.5,
+                                pointRadius: 0,
+                                fill: false,
+                                tension: 0.1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { display: false } },
+                            scales: {
+                                x: { display: false },
+                                y: { display: false }
+                            },
+                            animation: false
+                        }
+                    });
+                }
+            });
+
+            // Update sort arrows
+            document.querySelectorAll('th').forEach(th => {
+                const arrow = th.querySelector('.sort-arrow');
+                if (arrow) {
+                    if (th.dataset.sort === sortColumn) {
+                        arrow.textContent = sortDirection === 'asc' ? '\u25B2' : '\u25BC';
+                    } else {
+                        arrow.textContent = '';
+                    }
+                }
+            });
+        }
+
+        // Load data and initialize
+        async function init() {
+            try {
+                const response = await fetch('data/all_results.json');
+                if (!response.ok) throw new Error('Failed to load data');
+
+                const data = await response.json();
+                allData = data.portfolios;
+                document.getElementById('timestamp').textContent = data.timestamp;
+
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+
+                // Period buttons
+                document.querySelectorAll('.period-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        currentPeriod = btn.dataset.period;
+                        renderTable();
+                    });
+                });
+
+                // Sortable headers
+                document.querySelectorAll('th[data-sort]').forEach(th => {
+                    th.addEventListener('click', () => {
+                        const col = th.dataset.sort;
+                        if (sortColumn === col) {
+                            sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+                        } else {
+                            sortColumn = col;
+                            sortDirection = col === 'name' ? 'asc' : 'desc';
+                        }
+                        renderTable();
+                    });
+                });
+
+                // Initial render
+                renderTable();
+            } catch (err) {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('error').textContent = 'Error loading data: ' + err.message;
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "allocation": "usa_highvol",
+  "balance": {
+    "cash": 100000,
+    "margin_used": 0,
+    "total_equity": 100000
+  },
+  "cagr_pct": 0,
+  "end_date": "2026-02-05",
+  "equity_dates": [
+    "2026-02-03",
+    "2026-02-04"
+  ],
+  "equity_values": [
+    100000,
+    100000
+  ],
+  "final_equity": 100000,
+  "initial_capital": 100000,
+  "losers": 0,
+  "max_dd_pct": 0,
+  "pending_orders": null,
+  "positions": null,
+  "r2": 0,
+  "return_pct": 0,
+  "sharpe": 0,
+  "start_date": "2026-02-04",
+  "strategy": "highvol-breakout",
+  "total_pnl": 0,
+  "total_trades": 0,
+  "win_rate": 0,
+  "winners": 0
+}

@@ -1,0 +1,155 @@
+{
+  "allocation": "momentum",
+  "balance": {
+    "cash": 463.22,
+    "margin_used": 0,
+    "total_equity": 98077.79
+  },
+  "cagr_pct": -6.95,
+  "end_date": "2026-02-05",
+  "equity_dates": [
+    "2026-02-03",
+    "2026-02-04"
+  ],
+  "equity_values": [
+    100000,
+    99968.76
+  ],
+  "final_equity": 99968.76,
+  "initial_capital": 100000,
+  "losers": 0,
+  "max_dd_pct": 0.03,
+  "pending_orders": [
+    {
+      "limit": 171.91,
+      "order_type": "LIMIT",
+      "qty": 11,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "NDA.DE"
+    }
+  ],
+  "positions": [
+    {
+      "current": 35.58,
+      "entry": 35.58,
+      "qty": 111,
+      "stop_price": 33.79,
+      "symbol": "8TRA.DE",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 8.02,
+      "entry": 8.02,
+      "qty": 972,
+      "stop_price": 7.47,
+      "symbol": "DBG.PA",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 120.4,
+      "entry": 120.4,
+      "qty": 64,
+      "stop_price": 110.8,
+      "symbol": "EXA.PA",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 19.34,
+      "entry": 19.34,
+      "qty": 413,
+      "stop_price": 15.86,
+      "symbol": "FMV.DE",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 55.14,
+      "entry": 55.14,
+      "qty": 141,
+      "stop_price": 49.76,
+      "symbol": "FPMB.DE",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 533.5,
+      "entry": 533.5,
+      "qty": 14,
+      "stop_price": 507.21,
+      "symbol": "LOM.DE",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 48.44,
+      "entry": 48.44,
+      "qty": 159,
+      "stop_price": 45.66,
+      "symbol": "MTS.MC",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 35,
+      "entry": 35,
+      "qty": 222,
+      "stop_price": 32.87,
+      "symbol": "NDX1.DE",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 277,
+      "entry": 277,
+      "qty": 28,
+      "stop_price": 227.14,
+      "symbol": "OHB.DE",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 81.83,
+      "entry": 81.83,
+      "qty": 95,
+      "stop_price": 77.25,
+      "symbol": "RIO1.DE",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 119.4,
+      "entry": 119.4,
+      "qty": 66,
+      "stop_price": 103.76,
+      "symbol": "SII.DE",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 12.06,
+      "entry": 12.06,
+      "qty": 656,
+      "stop_price": 10.87,
+      "symbol": "TKA.DE",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 25.78,
+      "entry": 25.78,
+      "qty": 300,
+      "stop_price": 23.77,
+      "symbol": "VBK.DE",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 18.61,
+      "entry": 18.61,
+      "qty": 22,
+      "stop_price": 17.33,
+      "symbol": "VK.PA",
+      "unrealized_pnl": 0
+    }
+  ],
+  "r2": 0,
+  "return_pct": -0.03,
+  "sharpe": 0,
+  "start_date": "2026-02-04",
+  "strategy": "momentum-rotation",
+  "total_pnl": 0,
+  "total_trades": 0,
+  "win_rate": 0,
+  "winners": 0
+}

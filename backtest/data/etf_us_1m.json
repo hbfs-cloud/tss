@@ -1,0 +1,227 @@
+{
+  "allocation": "etf-us",
+  "balance": {
+    "cash": 27679.27,
+    "margin_used": 0,
+    "total_equity": 98713.4
+  },
+  "cagr_pct": -13.89,
+  "end_date": "2026-02-05",
+  "equity_dates": [
+    "2026-01-02",
+    "2026-01-05",
+    "2026-01-06",
+    "2026-01-07",
+    "2026-01-08",
+    "2026-01-09",
+    "2026-01-12",
+    "2026-01-13",
+    "2026-01-14",
+    "2026-01-15",
+    "2026-01-16",
+    "2026-01-20",
+    "2026-01-21",
+    "2026-01-22",
+    "2026-01-23",
+    "2026-01-26",
+    "2026-01-27",
+    "2026-01-28",
+    "2026-01-29",
+    "2026-01-30",
+    "2026-02-02",
+    "2026-02-03",
+    "2026-02-04"
+  ],
+  "equity_values": [
+    100000,
+    100000,
+    101808.81,
+    100877,
+    100430.61,
+    101809.38,
+    103988.48,
+    105211.83,
+    107177.53,
+    106675.89,
+    105877.65,
+    106529.61,
+    107434.77,
+    108774.51,
+    110056.59,
+    111657.8,
+    113252.18,
+    117360.28,
+    116628.95,
+    100747.53,
+    99638.66,
+    100352,
+    98713.4
+  ],
+  "final_equity": 98713.4,
+  "initial_capital": 100000,
+  "losers": 20,
+  "max_dd_pct": 15.89,
+  "pending_orders": [
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 36,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "ARKW"
+    },
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 127,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "BETE"
+    },
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 136,
+      "side": "SELL",
+      "stop": 0,
+      "symbol": "BOTT"
+    },
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 314,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "DFII"
+    },
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 128,
+      "side": "SELL",
+      "stop": 0,
+      "symbol": "EPU"
+    },
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 243,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "EZPZ"
+    },
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 147,
+      "side": "SELL",
+      "stop": 0,
+      "symbol": "KDEF"
+    },
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 49,
+      "side": "SELL",
+      "stop": 0,
+      "symbol": "MKOR"
+    },
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 237,
+      "side": "BUY",
+      "stop": 0,
+      "symbol": "OWNB"
+    },
+    {
+      "limit": 0,
+      "order_type": "MARKET",
+      "qty": 321,
+      "side": "SELL",
+      "stop": 0,
+      "symbol": "YBTC"
+    }
+  ],
+  "positions": [
+    {
+      "current": 39.36,
+      "entry": 42.69,
+      "qty": 264,
+      "symbol": "ARKF",
+      "unrealized_pnl": -879.12
+    },
+    {
+      "current": 10.85,
+      "entry": 11.15,
+      "qty": 185,
+      "symbol": "BDRY",
+      "unrealized_pnl": -55.5
+    },
+    {
+      "current": 56.55,
+      "entry": 56.55,
+      "qty": 136,
+      "symbol": "BOTT",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 28.47,
+      "entry": 31.81,
+      "qty": 65,
+      "symbol": "CONY",
+      "unrealized_pnl": -217.1
+    },
+    {
+      "current": 88.38,
+      "entry": 89.85,
+      "qty": 128,
+      "symbol": "EPU",
+      "unrealized_pnl": -188.16
+    },
+    {
+      "current": 57.32,
+      "entry": 56.19,
+      "qty": 147,
+      "symbol": "KDEF",
+      "unrealized_pnl": 166.11
+    },
+    {
+      "current": 42.65,
+      "entry": 42.07,
+      "qty": 49,
+      "symbol": "MKOR",
+      "unrealized_pnl": 28.66
+    },
+    {
+      "current": 29.74,
+      "entry": 29.74,
+      "qty": 264,
+      "symbol": "PYPY",
+      "unrealized_pnl": 0
+    },
+    {
+      "current": 54.15,
+      "entry": 51.38,
+      "qty": 221,
+      "symbol": "SETH",
+      "unrealized_pnl": 613.28
+    },
+    {
+      "current": 23.2,
+      "entry": 23.2,
+      "qty": 321,
+      "symbol": "YBTC",
+      "unrealized_pnl": 0
+    }
+  ],
+  "r2": 0.1,
+  "return_pct": -1.29,
+  "sharpe": -0.01,
+  "start_date": "2026-01-05",
+  "strategy": "etf-momentum",
+  "total_pnl": -754.77,
+  "total_trades": 37,
+  "win_rate": 45.95,
+  "winners": 17
+}

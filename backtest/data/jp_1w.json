@@ -1,0 +1,39 @@
+{
+  "allocation": "jp",
+  "balance": {
+    "cash": 10000000,
+    "margin_used": 0,
+    "total_equity": 10000000
+  },
+  "cagr_pct": 0,
+  "end_date": "2026-02-05",
+  "equity_dates": [
+    "2026-01-29",
+    "2026-01-30",
+    "2026-02-02",
+    "2026-02-03",
+    "2026-02-04"
+  ],
+  "equity_values": [
+    10000000,
+    10000000,
+    10000000,
+    10000000,
+    10000000
+  ],
+  "final_equity": 10000000,
+  "initial_capital": 10000000,
+  "losers": 0,
+  "max_dd_pct": 0,
+  "pending_orders": null,
+  "positions": null,
+  "r2": 0,
+  "return_pct": 0,
+  "sharpe": 0,
+  "start_date": "2026-01-29",
+  "strategy": "jp-recovery",
+  "total_pnl": 0,
+  "total_trades": 0,
+  "win_rate": 0,
+  "winners": 0
+}

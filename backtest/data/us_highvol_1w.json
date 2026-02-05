@@ -1,0 +1,138 @@
+{
+  "allocation": "usa_highvol",
+  "balance": {
+    "cash": 22796.76,
+    "margin_used": 0,
+    "total_equity": 94906.02
+  },
+  "cagr_pct": -91.82,
+  "end_date": "2026-02-05",
+  "equity_dates": [
+    "2026-01-28",
+    "2026-01-29",
+    "2026-01-30",
+    "2026-02-02",
+    "2026-02-03",
+    "2026-02-04"
+  ],
+  "equity_values": [
+    100000,
+    100000,
+    98664.86,
+    96733.66,
+    102224.22,
+    94906.02
+  ],
+  "final_equity": 94906.02,
+  "initial_capital": 100000,
+  "losers": 1,
+  "max_dd_pct": 7.16,
+  "pending_orders": null,
+  "positions": [
+    {
+      "current": 39.9,
+      "entry": 42.93,
+      "qty": 142,
+      "stop_price": 34.43,
+      "symbol": "AAOI",
+      "unrealized_pnl": -430.26
+    },
+    {
+      "current": 1.8,
+      "entry": 1.81,
+      "qty": 3902,
+      "stop_price": 1.41,
+      "symbol": "ALLO",
+      "unrealized_pnl": -39.02
+    },
+    {
+      "current": 5.13,
+      "entry": 5.15,
+      "qty": 1255,
+      "stop_price": 3.75,
+      "symbol": "ALT",
+      "unrealized_pnl": -19.58
+    },
+    {
+      "current": 12.4,
+      "entry": 13.25,
+      "qty": 477,
+      "stop_price": 10.57,
+      "symbol": "AMPX",
+      "unrealized_pnl": -405.45
+    },
+    {
+      "current": 20.75,
+      "entry": 21.54,
+      "qty": 263,
+      "stop_price": 19.36,
+      "symbol": "CDE",
+      "unrealized_pnl": -207.77
+    },
+    {
+      "current": 211,
+      "entry": 208.79,
+      "qty": 33,
+      "stop_price": 165.29,
+      "symbol": "COHR",
+      "unrealized_pnl": 72.93
+    },
+    {
+      "current": 4.36,
+      "entry": 4.25,
+      "qty": 1491,
+      "stop_price": 3.2,
+      "symbol": "HUYA",
+      "unrealized_pnl": 164.01
+    },
+    {
+      "current": 2.06,
+      "entry": 2.47,
+      "qty": 2613,
+      "stop_price": 1.87,
+      "symbol": "NAK",
+      "unrealized_pnl": -1077.34
+    },
+    {
+      "current": 27.81,
+      "entry": 34.01,
+      "qty": 186,
+      "stop_price": 25.07,
+      "symbol": "NNE",
+      "unrealized_pnl": -1152.27
+    },
+    {
+      "current": 5.14,
+      "entry": 5.61,
+      "qty": 1078,
+      "stop_price": 4.33,
+      "symbol": "TMQ",
+      "unrealized_pnl": -506.66
+    },
+    {
+      "current": 96.22,
+      "entry": 96.35,
+      "qty": 67,
+      "stop_price": 74.45,
+      "symbol": "TTMI",
+      "unrealized_pnl": -8.71
+    },
+    {
+      "current": 16.1,
+      "entry": 17.69,
+      "qty": 348,
+      "stop_price": 14.02,
+      "symbol": "UEC",
+      "unrealized_pnl": -553.32
+    }
+  ],
+  "r2": 0.19,
+  "return_pct": -5.09,
+  "sharpe": -3.3,
+  "start_date": "2026-01-29",
+  "strategy": "highvol-breakout",
+  "total_pnl": -930.54,
+  "total_trades": 2,
+  "win_rate": 50,
+  "winners": 1
+}
