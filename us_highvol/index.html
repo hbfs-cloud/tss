@@ -210,6 +210,8 @@
             <div class="nav-left">
                 <a href="../" class="nav-back"><i class="fa-solid fa-arrow-left"></i></a>
                 <span class="nav-title" id="nav-title">Live Trading</span>
+                <span id="mode-badge" class="ml-2 px-2 py-1 text-xs font-bold bg-green-600 text-white rounded" style="margin-left:8px;padding:2px 8px;font-size:0.7rem;font-weight:700;background:#16a34a;color:white;border-radius:4px;">LIVE</span>
+                <a id="backtest-link" href="backtest/" class="nav-link" style="margin-left:12px;padding:4px 12px;font-size:0.75rem;background:#7c3aed;color:white;border-radius:4px;text-decoration:none;">View Backtest 5Y</a>
                 <select id="currency-selector" class="nav-select" onchange="setGlobalCurrency(this.value)">
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
@@ -595,12 +597,14 @@
 
     // ─── KPIs ───
     function getInitialCapital() {
-        // Get initial capital from oldest snapshot's equity (first data point)
+        // Get initial capital: prefer explicit field, then oldest snapshot's equity
         // Snapshots are sorted newest-first, so last element is oldest
         if (!snapshots.length) return 100000;
         const oldest = snapshots[snapshots.length - 1];
+        // Use explicit initial_capital if available (backtest mode)
+        if (oldest?.initial_capital > 0) return oldest.initial_capital;
+        // Fallback to oldest equity (live mode)
         const eq = oldest?.balance?.TotalEquity || 0;
-        // If oldest equity is available and reasonable, use it; otherwise fallback
         if (eq > 0) return eq;
         return 100000;
     }

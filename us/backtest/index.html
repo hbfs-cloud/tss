@@ -4,7 +4,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Trading — Time Machine | Market Watch</title>
+    <title>US Trend Hybrid (35 pos) — Backtest 5Y | Market Watch</title>
     <link rel="icon" href="https://market-watch.xyz/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -210,8 +210,8 @@
             <div class="nav-left">
                 <a href="../" class="nav-back"><i class="fa-solid fa-arrow-left"></i></a>
                 <span class="nav-title" id="nav-title">Live Trading</span>
-                <span id="mode-badge" class="ml-2 px-2 py-1 text-xs font-bold bg-green-600 text-white rounded" style="margin-left:8px;padding:2px 8px;font-size:0.7rem;font-weight:700;background:#16a34a;color:white;border-radius:4px;">LIVE</span>
-                <a id="backtest-link" href="backtest/" class="nav-link" style="margin-left:12px;padding:4px 12px;font-size:0.75rem;background:#7c3aed;color:white;border-radius:4px;text-decoration:none;">View Backtest 5Y</a>
+                <span id="mode-badge" class="ml-2 px-2 py-1 text-xs font-bold bg-green-600 text-white rounded" style="margin-left:8px;padding:2px 8px;font-size:0.7rem;font-weight:700;background:#7c3aed;color:white;border-radius:4px;">BACKTEST 5Y</span>
+                <a id="backtest-link" href="../" class="nav-link" style="margin-left:12px;padding:4px 12px;font-size:0.75rem;background:#16a34a;color:white;border-radius:4px;text-decoration:none;">View Live</a>
                 <select id="currency-selector" class="nav-select" onchange="setGlobalCurrency(this.value)">
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
@@ -350,7 +350,7 @@
             const currencies = ['USD', 'EUR', 'GBP', 'CHF', 'JPY', 'CAD', 'CNY', 'HKD', 'PLN', 'BRL', 'INR', 'ZAR', 'RUB'];
             await Promise.all(currencies.map(async (ccy) => {
                 try {
-                    const res = await fetch('../fx-' + ccy.toLowerCase() + '.json');
+                    const res = await fetch('../../fx-' + ccy.toLowerCase() + '.json');
                     const data = await res.json();
                     Object.assign(fxHistory, data); // Merge {CCY: {date: rate}}
                 } catch (e) {
@@ -651,7 +651,7 @@
         const mainCash = bal.CashByCurrency ? (bal.CashByCurrency[getNativeCcy()] || 0) : 0;
         document.getElementById('kpi-cash').textContent = fmtMoneyFx(mainCash, date);
 
-        document.getElementById('nav-title').textContent = 'Live — ' + (s.portfolio || '').toUpperCase();
+        document.getElementById('nav-title').textContent = 'Backtest — ' + (s.portfolio || '').toUpperCase();
 
         // Execution metrics (slippage & fill rate) up to current date
         const metrics = getExecutionMetricsUpToDate(date);
