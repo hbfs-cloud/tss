@@ -1,14 +1,14 @@
 [
   {
-    "timestamp": "2026-02-09T15:27:44+01:00",
+    "timestamp": "2026-02-09T16:43:40+01:00",
     "date": "2026-02-06",
     "portfolio": "usa",
     "allocation": "usa",
     "currency": "USD",
-    "git_sha1": "66dd82d2",
+    "git_sha1": "aba2dce2",
     "git_branch": "20260205",
     "config_path": "config/portfolio_us_t212.yaml",
-    "config_hash": "912aa6d971815471",
+    "config_hash": "880fff958623d417",
     "actions": [
       {
         "type": "CREATE",
@@ -17,6 +17,7 @@
         "order_type": "STOP",
         "qty": 2,
         "stop_price": 266.11,
+        "order_id": "manual-1770651819958067000",
         "reason": "MISSING_STOP: 2 shares @ $266.11 | P&L: 7.3%, Risk: 4.3%"
       }
     ],
@@ -25,8 +26,8 @@
         "Symbol": "AAPL",
         "Qty": 2,
         "AvgEntry": 259.16,
-        "CurrentPrice": 277.56,
-        "UnrealizedPnL": 31.38,
+        "CurrentPrice": 273.41,
+        "UnrealizedPnL": 24.81,
         "ChangeToday": 0,
         "Currency": "EUR",
         "Timestamp": "2026-01-27T16:30:01.033+02:00",
@@ -40,7 +41,7 @@
         "": 9481.63
       },
       "MarginUsed": 0,
-      "TotalEquity": 9947.45,
+      "TotalEquity": 9940.88,
       "Timestamp": "0001-01-01T00:00:00Z",
       "BrokerSource": "trading212"
     },
@@ -48,9 +49,11 @@
       "pm_state": {
         "equity_curve": [
           9948.88,
-          9947.42
+          9947.42,
+          9940.73
         ],
         "equity_curve_dates": [
+          "2026-02-06T15:30:00+01:00",
           "2026-02-06T15:30:00+01:00",
           "2026-02-06T15:30:00+01:00"
         ],
@@ -123,6 +126,7 @@
           "TYRA": 25.778928756713867
         },
         "regime_score_history": [
+          0.578173836391308,
           0.578173836391308,
           0.578173836391308
         ],

@@ -336,7 +336,17 @@
         if (snapshots === null) {
             try {
                 const snapRes = await fetch('data/snapshots.json');
-                snapshots = await snapRes.json();
+                const data = await snapRes.json();
+                if (Array.isArray(data)) {
+                    snapshots = data;
+                } else if (data.parts) {
+                    const partArrays = await Promise.all(
+                        data.parts.map(p => fetch('data/' + p).then(r => r.json()))
+                    );
+                    snapshots = partArrays.flat();
+                } else {
+                    snapshots = [];
+                }
             } catch (e) {
                 console.error('Failed to load snapshots:', e);
                 document.querySelector('.container').innerHTML = '<div class="card"><div class="card-body"><p class="empty">Failed to load data files.</p></div></div>';
@@ -901,7 +911,14 @@
         const s = snapshots[currentIdx];
         const pending = s?.pending_orders || [];
         const positions = s?.positions || [];
+        const actions = s?.actions || [];
         const posSymbols = new Set(positions.map(p => p.Symbol));
+
+        // Detect manual actions: order_id starts with "manual-", OR
+        // CREATE actions when there are 0 broker pending orders (manual broker)
+        const hasBrokerPending = pending.length > 0;
+        const manualActions = actions.filter(a => a.type === 'CREATE' &&
+            ((a.order_id || '').startsWith('manual-') || !hasBrokerPending));
 
         // Build map of STOP orders by symbol (for bracket order display)
         const stopsBySymbol = {};
@@ -923,8 +940,31 @@
             return true;
         });
 
-        let html = '<div class="card-header"><div class="card-title"><i class="fas fa-clock" style="color:var(--accent-orange);"></i> Pending Orders</div><span class="card-badge">' + filtered.length + '</span></div>';
+        const totalCount = filtered.length + manualActions.length;
+        let html = '<div class="card-header"><div class="card-title"><i class="fas fa-clock" style="color:var(--accent-orange);"></i> Pending Orders</div><span class="card-badge">' + totalCount + '</span></div>';
         html += '<div class="card-body">';
+
+        // Manual instructions section (prominent, shown first)
+        if(manualActions.length > 0) {
+            html += '<div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:8px;padding:12px;margin-bottom:12px;">';
+            html += '<div style="font-weight:600;color:#f59e0b;margin-bottom:8px;"><i class="fas fa-hand-pointer"></i> Manual Instructions (' + manualActions.length + ')</div>';
+            html += '<div class="table-wrap"><table><thead><tr><th>Symbol</th><th>Side</th><th>Type</th><th>Qty</th><th>Limit</th><th>Stop Loss</th><th>Reason</th></tr></thead><tbody>';
+            manualActions.forEach(a => {
+                const sideCls = a.side === 'BUY' ? 'cell-positive' : 'cell-negative';
+                const price = a.limit_price > 0 ? fmtMoney(a.limit_price) : (a.stop_price > 0 ? fmtMoney(a.stop_price) : '-');
+                const stopLoss = a.stop_loss > 0 ? fmtMoney(a.stop_loss) : '-';
+                html += '<tr>';
+                html += '<td class="cell-symbol">' + a.symbol + '</td>';
+                html += '<td class="' + sideCls + '">' + (a.side || '-') + '</td>';
+                html += '<td>' + (a.order_type || '-') + '</td>';
+                html += '<td>' + (a.qty > 0 ? a.qty : '-') + '</td>';
+                html += '<td>' + price + '</td>';
+                html += '<td class="cell-negative">' + stopLoss + '</td>';
+                html += '<td class="cell-reason">' + formatReason(a.reason) + '</td>';
+                html += '</tr>';
+            });
+            html += '</tbody></table></div></div>';
+        }
 
         if(filtered.length > 0) {
             html += '<div class="table-wrap"><table><thead><tr><th>Symbol</th><th>Side</th><th>Type</th><th>Qty</th><th>Limit</th><th>Stop Loss</th></tr></thead><tbody>';
@@ -944,7 +984,7 @@
                 html += '</tr>';
             });
             html += '</tbody></table></div>';
-        } else {
+        } else if(manualActions.length === 0) {
             html += '<p class="empty">No pending orders</p>';
         }
         html += '</div>';

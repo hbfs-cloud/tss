@@ -1,21 +1,21 @@
 [
   {
-    "timestamp": "2026-02-09T15:27:02+01:00",
+    "timestamp": "2026-02-09T16:43:03+01:00",
     "date": "2026-02-06",
     "portfolio": "jp",
     "allocation": "jp",
     "currency": "JPY",
-    "git_sha1": "66dd82d2",
+    "git_sha1": "aba2dce2",
     "git_branch": "20260205",
     "config_path": "config/portfolio_jp.yaml",
-    "config_hash": "35fd60ff7d8025f2",
+    "config_hash": "00284c7f7b888653",
     "actions": null,
     "positions": [],
     "pending_orders": [],
     "balance": {
       "BaseCurrency": "EUR",
       "CashByCurrency": {
-        "EUR": 1028580.18
+        "EUR": 1028580.19
       },
       "MarginUsed": 0,
       "TotalEquity": 1028783.43,
@@ -26,9 +26,11 @@
       "pm_state": {
         "equity_curve": [
           1028783.38,
+          1028783.43,
           1028783.43
         ],
         "equity_curve_dates": [
+          "2026-02-06T01:00:00+01:00",
           "2026-02-06T01:00:00+01:00",
           "2026-02-06T01:00:00+01:00"
         ],
@@ -81,6 +83,7 @@
           "7184.T": 2478
         },
         "regime_score_history": [
+          0.6837908068051184,
           0.6837908068051184,
           0.6837908068051184
         ],
