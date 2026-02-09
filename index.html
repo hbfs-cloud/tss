@@ -1212,7 +1212,6 @@
                         </div>
                         <div class="symbol-info">
                             <span class="symbol-name">${symbol}</span>
-                            ${item.manual ? `<span style="font-size:0.6rem;background:${item.side === 'SELL' ? '#ef4444' : '#f59e0b'};color:#fff;padding:1px 4px;border-radius:3px;margin-left:4px;vertical-align:middle;">${item.side || 'MANUAL'}</span>` : ''}
                             <div class="symbol-links">
                                 <a href="https://finance.yahoo.com/quote/${symbol}" target="_blank" class="symbol-link" title="Yahoo">Y</a>
                                 <a href="https://www.tradingview.com/chart/?symbol=${symbol}" target="_blank" class="symbol-link" title="TV">TV</a>
@@ -1393,22 +1392,25 @@
                     };
                 });
 
-                // Add manual actions (for semi-manual brokers)
-                const manualActions = (p.manual_actions || []).map(action => {
-                    const price = action.limit_price || action.stop_price || 0;
-                    return {
-                        symbol: action.symbol,
-                        price: price,
-                        change_pct: null,
-                        previousClose: null,
-                        reason: action.reason || '',
-                        since: p.date || '',
-                        manual: true,
-                        side: action.side
-                    };
-                });
+                // Add manual actions only for symbols NOT already in watchlist
+                const existingSymbols = new Set([...positions, ...pending].map(i => i.symbol));
+                const manualNew = (p.manual_actions || [])
+                    .filter(a => !existingSymbols.has(a.symbol))
+                    .map(action => {
+                        const price = action.limit_price || action.stop_price || 0;
+                        return {
+                            symbol: action.symbol,
+                            price: price,
+                            change_pct: null,
+                            previousClose: null,
+                            reason: action.reason || '',
+                            since: p.date || '',
+                            manual: true,
+                            side: action.side
+                        };
+                    });
 
-                const allItems = [...positions, ...pending, ...manualActions];
+                const allItems = [...positions, ...pending, ...manualNew];
                 allItems.sort((a, b) => a.symbol.localeCompare(b.symbol));
 
                 window.portfolioData[p.id] = allItems;

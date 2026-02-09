@@ -1129,13 +1129,14 @@
         if(actions.length > 0) {
             html += '<div class="table-wrap"><table><thead><tr><th>Date</th><th>Type</th><th>Symbol</th><th>Side</th><th>Qty</th><th>Price</th><th>Stop Loss</th><th>Reason</th></tr></thead><tbody>';
             actions.forEach(a => {
+                const isManual = (a.order_id || '').startsWith('manual-');
                 const badge = a.type === 'CREATE' ? 'badge-create' : a.type === 'UPDATE' ? 'badge-update' : 'badge-cancel';
                 const sideCls = a.side === 'BUY' ? 'cell-positive' : (a.side === 'SELL' ? 'cell-negative' : '');
                 const price = a.limit_price > 0 ? fmtMoney(a.limit_price) : (a.stop_price > 0 ? fmtMoney(a.stop_price) : '-');
                 const stopLoss = a.stop_loss > 0 ? fmtMoney(a.stop_loss) : '-';
-                html += '<tr>';
+                html += '<tr' + (isManual ? ' style="background:rgba(245,158,11,0.08);"' : '') + '>';
                 html += '<td class="cell-muted">' + a._ts + '</td>';
-                html += '<td><span class="badge ' + badge + '">' + a.type + '</span></td>';
+                html += '<td><span class="badge ' + badge + '">' + a.type + '</span>' + (isManual ? ' <span style="font-size:0.65rem;background:#f59e0b;color:#fff;padding:1px 5px;border-radius:3px;font-weight:600;">MANUAL</span>' : '') + '</td>';
                 html += '<td class="cell-symbol">' + a.symbol + '</td>';
                 html += '<td class="' + sideCls + '">' + (a.side || '-') + '</td>';
                 html += '<td>' + (a.qty > 0 ? a.qty : '-') + '</td>';
