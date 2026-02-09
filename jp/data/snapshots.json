@@ -1,3 +1,94 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:0ca7cef203d714e3035325b55a5f6cce1b2a7c99e1cdb5bbd896de168ea422d5
-size 4247
+[
+  {
+    "timestamp": "2026-02-09T15:27:02+01:00",
+    "date": "2026-02-06",
+    "portfolio": "jp",
+    "allocation": "jp",
+    "currency": "JPY",
+    "git_sha1": "66dd82d2",
+    "git_branch": "20260205",
+    "config_path": "config/portfolio_jp.yaml",
+    "config_hash": "35fd60ff7d8025f2",
+    "actions": null,
+    "positions": [],
+    "pending_orders": [],
+    "balance": {
+      "BaseCurrency": "EUR",
+      "CashByCurrency": {
+        "EUR": 1028580.18
+      },
+      "MarginUsed": 0,
+      "TotalEquity": 1028783.43,
+      "Timestamp": "0001-01-01T00:00:00Z",
+      "BrokerSource": "ibkr"
+    },
+    "state": {
+      "pm_state": {
+        "equity_curve": [
+          1028783.38,
+          1028783.43
+        ],
+        "equity_curve_dates": [
+          "2026-02-06T01:00:00+01:00",
+          "2026-02-06T01:00:00+01:00"
+        ],
+        "global_pause_until": "0001-01-01T00:00:00Z",
+        "is_in_grace_period": false,
+        "last_entry_creation_date": "2026-02-06T01:00:00+01:00",
+        "last_liquidation_date": "0001-01-01T00:00:00Z",
+        "last_streak_reset_date": "0001-01-01T00:00:00Z",
+        "peak_equity": 1028783.43,
+        "position_clusters": null,
+        "position_entries": {
+          "1515.T": 1,
+          "1723.T": 1,
+          "186A.T": 1,
+          "285A.T": 1,
+          "6330.T": 1,
+          "6366.T": 1,
+          "6590.T": 1,
+          "7184.T": 1
+        },
+        "position_highs": {},
+        "position_last_dca": {
+          "1515.T": "2026-02-06T01:00:00+01:00",
+          "1723.T": "2026-02-06T01:00:00+01:00",
+          "186A.T": "2026-02-06T01:00:00+01:00",
+          "285A.T": "2026-02-06T01:00:00+01:00",
+          "6330.T": "2026-02-06T01:00:00+01:00",
+          "6366.T": "2026-02-06T01:00:00+01:00",
+          "6590.T": "2026-02-06T01:00:00+01:00",
+          "7184.T": "2026-02-06T01:00:00+01:00"
+        },
+        "position_open_dates": {
+          "1515.T": "2026-02-06T01:00:00+01:00",
+          "1723.T": "2026-02-06T01:00:00+01:00",
+          "186A.T": "2026-02-06T01:00:00+01:00",
+          "285A.T": "2026-02-06T01:00:00+01:00",
+          "6330.T": "2026-02-06T01:00:00+01:00",
+          "6366.T": "2026-02-06T01:00:00+01:00",
+          "6590.T": "2026-02-06T01:00:00+01:00",
+          "7184.T": "2026-02-06T01:00:00+01:00"
+        },
+        "position_stops": {
+          "1515.T": 3434.714285714286,
+          "1723.T": 10614.285714285714,
+          "186A.T": 982.5714285714286,
+          "285A.T": 15884.285714285714,
+          "6330.T": 5529.285714285714,
+          "6366.T": 1185.2857142857142,
+          "6590.T": 21497.14285714286,
+          "7184.T": 2478
+        },
+        "regime_score_history": [
+          0.6837908068051184,
+          0.6837908068051184
+        ],
+        "stop_history": [],
+        "stop_streak_count": 0,
+        "stopped_symbols": {}
+      },
+      "prev_regime": "RECOVERY"
+    }
+  }
+]

@@ -336,7 +336,17 @@
         if (snapshots === null) {
             try {
                 const snapRes = await fetch('data/snapshots.json');
-                snapshots = await snapRes.json();
+                const data = await snapRes.json();
+                if (Array.isArray(data)) {
+                    snapshots = data;
+                } else if (data.parts) {
+                    const partArrays = await Promise.all(
+                        data.parts.map(p => fetch('data/' + p).then(r => r.json()))
+                    );
+                    snapshots = partArrays.flat();
+                } else {
+                    snapshots = [];
+                }
             } catch (e) {
                 console.error('Failed to load snapshots:', e);
                 document.querySelector('.container').innerHTML = '<div class="card"><div class="card-body"><p class="empty">Failed to load data files.</p></div></div>';

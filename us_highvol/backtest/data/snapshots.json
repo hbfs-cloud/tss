@@ -1,3 +1,1 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:4d9bfb0db96bed8463bd5d8e4f9e10f7e5ccde2c5ac521f44b79abeee7bc6d67
-size 133181141
+{"parts":["snapshots-part1.json","snapshots-part2.json","snapshots-part3.json"]}

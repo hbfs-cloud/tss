@@ -1,3 +1,136 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:d94d17bd195c55c539b4c2fdb6fb5a789967623fe3a99a4dc5e3e1277536193e
-size 10388
+[
+  {
+    "timestamp": "2026-02-09T15:27:44+01:00",
+    "date": "2026-02-06",
+    "portfolio": "usa",
+    "allocation": "usa",
+    "currency": "USD",
+    "git_sha1": "66dd82d2",
+    "git_branch": "20260205",
+    "config_path": "config/portfolio_us_t212.yaml",
+    "config_hash": "912aa6d971815471",
+    "actions": [
+      {
+        "type": "CREATE",
+        "symbol": "AAPL",
+        "side": "SELL",
+        "order_type": "STOP",
+        "qty": 2,
+        "stop_price": 266.11,
+        "reason": "MISSING_STOP: 2 shares @ $266.11 | P&L: 7.3%, Risk: 4.3%"
+      }
+    ],
+    "positions": [
+      {
+        "Symbol": "AAPL",
+        "Qty": 2,
+        "AvgEntry": 259.16,
+        "CurrentPrice": 277.56,
+        "UnrealizedPnL": 31.38,
+        "ChangeToday": 0,
+        "Currency": "EUR",
+        "Timestamp": "2026-01-27T16:30:01.033+02:00",
+        "BrokerSource": ""
+      }
+    ],
+    "pending_orders": [],
+    "balance": {
+      "BaseCurrency": "",
+      "CashByCurrency": {
+        "": 9481.63
+      },
+      "MarginUsed": 0,
+      "TotalEquity": 9947.45,
+      "Timestamp": "0001-01-01T00:00:00Z",
+      "BrokerSource": "trading212"
+    },
+    "state": {
+      "pm_state": {
+        "equity_curve": [
+          9948.88,
+          9947.42
+        ],
+        "equity_curve_dates": [
+          "2026-02-06T15:30:00+01:00",
+          "2026-02-06T15:30:00+01:00"
+        ],
+        "global_pause_until": "0001-01-01T00:00:00Z",
+        "is_in_grace_period": false,
+        "last_entry_creation_date": "2026-02-06T15:30:00+01:00",
+        "last_liquidation_date": "0001-01-01T00:00:00Z",
+        "last_streak_reset_date": "0001-01-01T00:00:00Z",
+        "peak_equity": 9948.88,
+        "position_clusters": null,
+        "position_entries": {
+          "ALMS": 1,
+          "AXTI": 1,
+          "BIOA": 1,
+          "CAPR": 1,
+          "ERAS": 1,
+          "MAZE": 1,
+          "PACS": 1,
+          "PRAX": 1,
+          "SNDK": 1,
+          "TERN": 1,
+          "TTI": 1,
+          "TYRA": 1
+        },
+        "position_highs": {
+          "AAPL": 278.1199951171875
+        },
+        "position_last_dca": {
+          "ALMS": "2026-02-06T15:30:00+01:00",
+          "AXTI": "2026-02-06T15:30:00+01:00",
+          "BIOA": "2026-02-06T15:30:00+01:00",
+          "CAPR": "2026-02-06T15:30:00+01:00",
+          "ERAS": "2026-02-06T15:30:00+01:00",
+          "MAZE": "2026-02-06T15:30:00+01:00",
+          "PACS": "2026-02-06T15:30:00+01:00",
+          "PRAX": "2026-02-06T15:30:00+01:00",
+          "SNDK": "2026-02-06T15:30:00+01:00",
+          "TERN": "2026-02-06T15:30:00+01:00",
+          "TTI": "2026-02-06T15:30:00+01:00",
+          "TYRA": "2026-02-06T15:30:00+01:00"
+        },
+        "position_open_dates": {
+          "AAPL": "2026-01-27T16:30:01.033+02:00",
+          "ALMS": "2026-02-06T15:30:00+01:00",
+          "AXTI": "2026-02-06T15:30:00+01:00",
+          "BIOA": "2026-02-06T15:30:00+01:00",
+          "CAPR": "2026-02-06T15:30:00+01:00",
+          "ERAS": "2026-02-06T15:30:00+01:00",
+          "MAZE": "2026-02-06T15:30:00+01:00",
+          "PACS": "2026-02-06T15:30:00+01:00",
+          "PRAX": "2026-02-06T15:30:00+01:00",
+          "SNDK": "2026-02-06T15:30:00+01:00",
+          "TERN": "2026-02-06T15:30:00+01:00",
+          "TTI": "2026-02-06T15:30:00+01:00",
+          "TYRA": "2026-02-06T15:30:00+01:00"
+        },
+        "position_stops": {
+          "AAPL": 266.10567630436856,
+          "ALMS": 21.056607382638113,
+          "AXTI": 17.006428037370952,
+          "BIOA": 17.279821123395646,
+          "CAPR": 20.99678530011858,
+          "ERAS": 10.213571344103132,
+          "MAZE": 36.070713588169646,
+          "PACS": 34.24053532736642,
+          "PRAX": 273.7512642996652,
+          "SNDK": 441.36304364885603,
+          "TERN": 32.65928568158831,
+          "TTI": 9.803928852081299,
+          "TYRA": 25.778928756713867
+        },
+        "regime_score_history": [
+          0.578173836391308,
+          0.578173836391308
+        ],
+        "stop_history": [],
+        "stop_streak_count": 0,
+        "stopped_symbols": {}
+      },
+      "prev_regime": "NEUTRAL"
+    }
+  }
+]

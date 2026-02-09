@@ -1,3 +1,170 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:86356e3926bbd4b8f40ec95b7bd5847e5ab10b039bda96e7589a912ce10fd7a4
-size 4411
+[
+  {
+    "timestamp": "2026-02-09T15:26:34+01:00",
+    "date": "2026-02-06",
+    "portfolio": "etf_us",
+    "allocation": "etf_us",
+    "currency": "USD",
+    "git_sha1": "66dd82d2",
+    "git_branch": "20260205",
+    "config_path": "config/portfolio_etf_us.yaml",
+    "config_hash": "c16ece9c325008e0",
+    "actions": null,
+    "positions": [],
+    "pending_orders": [
+      {
+        "OrderID": "50347ff6-439f-4aa8-bb27-1a7c246d4b22",
+        "Symbol": "ARKF",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 358,
+        "FilledQty": 0,
+        "LimitPrice": 39.81,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-09T12:07:36.23236712Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "6e59febe-15e5-4598-bfb2-09a878cf8471",
+        "Symbol": "CBTA",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 604,
+        "FilledQty": 0,
+        "LimitPrice": 23.64,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-09T12:07:36.138826441Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "45fd70f1-82c1-491d-baa7-a646059db90e",
+        "Symbol": "FEAT",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 701,
+        "FilledQty": 0,
+        "LimitPrice": 20.37,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-09T12:07:36.047067662Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "7c72b6d7-56ec-44ac-86df-e9034385001f",
+        "Symbol": "YBIT",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 550,
+        "FilledQty": 0,
+        "LimitPrice": 25.97,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-09T12:07:35.952827413Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "530703e5-6da5-4218-8294-bb01385e3ffc",
+        "Symbol": "BTCC",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 860,
+        "FilledQty": 0,
+        "LimitPrice": 16.6,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-09T12:07:35.857109684Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "651a8fcd-e54f-461a-9d6f-4192e57d6101",
+        "Symbol": "PYPY",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 493,
+        "FilledQty": 0,
+        "LimitPrice": 28.92,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-09T12:07:35.761796385Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "6ca34091-3970-4056-a7f0-1b4248b2a062",
+        "Symbol": "BOTT",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 246,
+        "FilledQty": 0,
+        "LimitPrice": 57.98,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-09T12:07:35.667346616Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      }
+    ],
+    "balance": {
+      "BaseCurrency": "USD",
+      "CashByCurrency": {
+        "USD": 100000
+      },
+      "MarginUsed": 0,
+      "TotalEquity": 100000,
+      "Timestamp": "0001-01-01T00:00:00Z",
+      "BrokerSource": "alpaca"
+    },
+    "state": {
+      "pm_state": {
+        "equity_curve": [],
+        "equity_curve_dates": null,
+        "global_pause_until": "0001-01-01T00:00:00Z",
+        "is_in_grace_period": false,
+        "last_entry_creation_date": "2026-02-06T15:30:00+01:00",
+        "last_liquidation_date": "0001-01-01T00:00:00Z",
+        "last_streak_reset_date": "0001-01-01T00:00:00Z",
+        "peak_equity": 0,
+        "position_clusters": null,
+        "position_entries": {},
+        "position_highs": null,
+        "position_last_dca": {},
+        "position_open_dates": {
+          "ARKF": "2026-02-06T15:30:00+01:00",
+          "BOTT": "2026-02-06T15:30:00+01:00",
+          "BTCC": "2026-02-06T15:30:00+01:00",
+          "CBTA": "2026-02-06T15:30:00+01:00",
+          "FEAT": "2026-02-06T15:30:00+01:00",
+          "PYPY": "2026-02-06T15:30:00+01:00",
+          "YBIT": "2026-02-06T15:30:00+01:00"
+        },
+        "position_stops": {},
+        "regime_score_history": null,
+        "stop_history": [],
+        "stop_streak_count": 0,
+        "stopped_symbols": {}
+      },
+      "prev_regime": "NEUTRAL"
+    }
+  }
+]
