@@ -1,11 +1,11 @@
 [
   {
-    "timestamp": "2026-02-11T00:20:35+01:00",
+    "timestamp": "2026-02-11T13:33:45+01:00",
     "date": "2026-02-10",
     "portfolio": "usa_highvol",
     "allocation": "usa_highvol",
     "currency": "USD",
-    "git_sha1": "30eab01a",
+    "git_sha1": "5f83ba9f",
     "git_branch": "20260205",
     "config_path": "config/portfolio_us_highvol.yaml",
     "config_hash": "ff06379afb2dbb18",
@@ -15,9 +15,9 @@
         "Symbol": "AAOI",
         "Qty": 192,
         "AvgEntry": 43.586194,
-        "CurrentPrice": 48.4866,
-        "UnrealizedPnL": 940.877952,
-        "ChangeToday": 0.01204,
+        "CurrentPrice": 48.5,
+        "UnrealizedPnL": 943.450752,
+        "ChangeToday": 0.00021,
         "Currency": "USD",
         "Timestamp": "2026-02-02T20:35:42.459218Z",
         "BrokerSource": ""
@@ -26,9 +26,9 @@
         "Symbol": "ALAB",
         "Qty": 20,
         "AvgEntry": 186.827,
-        "CurrentPrice": 163.91,
-        "UnrealizedPnL": -458.34,
-        "ChangeToday": -0.12661,
+        "CurrentPrice": 161.57,
+        "UnrealizedPnL": -505.14,
+        "ChangeToday": -0.11643,
         "Currency": "USD",
         "Timestamp": "2026-02-10T14:33:15.962745Z",
         "BrokerSource": ""
@@ -37,9 +37,9 @@
         "Symbol": "ALLO",
         "Qty": 3260,
         "AvgEntry": 1.735025,
-        "CurrentPrice": 1.6907,
-        "UnrealizedPnL": -144.498,
-        "ChangeToday": 0.00041,
+        "CurrentPrice": 1.73,
+        "UnrealizedPnL": -16.38,
+        "ChangeToday": 0.02367,
         "Currency": "USD",
         "Timestamp": "2026-02-02T14:32:49.28697Z",
         "BrokerSource": ""
@@ -48,9 +48,9 @@
         "Symbol": "ALM",
         "Qty": 629,
         "AvgEntry": 13.131335,
-        "CurrentPrice": 14.07,
-        "UnrealizedPnL": 590.42,
-        "ChangeToday": -0.05125,
+        "CurrentPrice": 14.59,
+        "UnrealizedPnL": 917.5,
+        "ChangeToday": 0.03037,
         "Currency": "USD",
         "Timestamp": "2026-02-04T14:33:32.688452Z",
         "BrokerSource": ""
@@ -59,9 +59,9 @@
         "Symbol": "ELE",
         "Qty": 268,
         "AvgEntry": 21.951045,
-        "CurrentPrice": 20.85,
-        "UnrealizedPnL": -295.08,
-        "ChangeToday": 0.00096,
+        "CurrentPrice": 21.31,
+        "UnrealizedPnL": -171.8,
+        "ChangeToday": 0,
         "Currency": "USD",
         "Timestamp": "2026-02-02T14:34:14.236426Z",
         "BrokerSource": ""
@@ -70,9 +70,9 @@
         "Symbol": "MBX",
         "Qty": 215,
         "AvgEntry": 39.31,
-        "CurrentPrice": 37.67,
-        "UnrealizedPnL": -352.6,
-        "ChangeToday": 0.01728,
+        "CurrentPrice": 37.9,
+        "UnrealizedPnL": -303.15,
+        "ChangeToday": 0.00584,
         "Currency": "USD",
         "Timestamp": "2026-02-04T15:34:48.174996Z",
         "BrokerSource": ""
@@ -81,9 +81,9 @@
         "Symbol": "RMBS",
         "Qty": 73,
         "AvgEntry": 108.054521,
-        "CurrentPrice": 102.99,
-        "UnrealizedPnL": -369.71,
-        "ChangeToday": -0.07149,
+        "CurrentPrice": 104.3,
+        "UnrealizedPnL": -274.08,
+        "ChangeToday": -0.02514,
         "Currency": "USD",
         "Timestamp": "2026-02-03T14:32:10.554753Z",
         "BrokerSource": ""
@@ -92,9 +92,9 @@
         "Symbol": "TNGX",
         "Qty": 672,
         "AvgEntry": 12.59,
-        "CurrentPrice": 12.63,
-        "UnrealizedPnL": 26.88,
-        "ChangeToday": -0.02017,
+        "CurrentPrice": 12.85,
+        "UnrealizedPnL": 174.72,
+        "ChangeToday": 0.01261,
         "Currency": "USD",
         "Timestamp": "2026-02-04T14:34:54.405493Z",
         "BrokerSource": ""
@@ -103,9 +103,9 @@
         "Symbol": "WRN",
         "Qty": 2279,
         "AvgEntry": 3.71,
-        "CurrentPrice": 3.2517,
-        "UnrealizedPnL": -1044.4657,
-        "ChangeToday": -0.02934,
+        "CurrentPrice": 3.25,
+        "UnrealizedPnL": -1048.34,
+        "ChangeToday": 0.00619,
         "Currency": "USD",
         "Timestamp": "2026-02-04T14:30:48.536667Z",
         "BrokerSource": ""
@@ -114,9 +114,9 @@
         "Symbol": "WULF",
         "Qty": 569,
         "AvgEntry": 14.15,
-        "CurrentPrice": 16.5514,
-        "UnrealizedPnL": 1366.3966,
-        "ChangeToday": -0.00592,
+        "CurrentPrice": 16.53,
+        "UnrealizedPnL": 1354.22,
+        "ChangeToday": -0.00601,
         "Currency": "USD",
         "Timestamp": "2026-02-04T14:30:25.176512Z",
         "BrokerSource": ""
@@ -135,7 +135,7 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-10T23:17:12.911926705Z",
+        "PlacedDate": "2026-02-11T09:00:31.680268Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
@@ -151,7 +151,7 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-10T23:17:12.911926705Z",
+        "PlacedDate": "2026-02-10T23:17:12.911927Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
@@ -167,7 +167,7 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-10T23:17:12.815844935Z",
+        "PlacedDate": "2026-02-11T09:00:30.455822Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
@@ -183,7 +183,7 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-10T23:17:12.815844935Z",
+        "PlacedDate": "2026-02-10T23:17:12.815845Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
@@ -351,10 +351,10 @@
     "balance": {
       "BaseCurrency": "USD",
       "CashByCurrency": {
-        "USD": 25676.45
+        "USD": 25676.44
       },
-      "MarginUsed": 73470.19,
-      "TotalEquity": 99146.64,
+      "MarginUsed": 74281.31,
+      "TotalEquity": 99957.75,
       "Timestamp": "0001-01-01T00:00:00Z",
       "BrokerSource": "alpaca"
     },
@@ -392,7 +392,8 @@
           99116.15,
           100715.65,
           99111.2,
-          99146.64
+          99146.64,
+          99957.75
         ],
         "equity_curve_dates": [
           "2026-01-30T15:30:00+01:00",
@@ -426,7 +427,8 @@
           "2026-02-06T15:30:00+01:00",
           "2026-02-09T15:30:00+01:00",
           "2026-02-10T22:00:02+01:00",
-          "2026-02-10T22:00:04+01:00"
+          "2026-02-10T22:00:04+01:00",
+          "2026-02-10T22:00:02+01:00"
         ],
         "global_pause_until": "0001-01-01T00:00:00Z",
         "is_in_grace_period": false,

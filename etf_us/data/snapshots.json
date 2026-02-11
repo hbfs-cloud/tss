@@ -1,11 +1,11 @@
 [
   {
-    "timestamp": "2026-02-11T00:20:54+01:00",
+    "timestamp": "2026-02-11T13:34:05+01:00",
     "date": "2026-02-10",
     "portfolio": "etf_us",
     "allocation": "etf_us",
     "currency": "USD",
-    "git_sha1": "30eab01a",
+    "git_sha1": "5f83ba9f",
     "git_branch": "20260205",
     "config_path": "config/portfolio_etf_us.yaml",
     "config_hash": "ead332039cf0b124",
@@ -16,7 +16,7 @@
         "side": "SELL",
         "order_type": "MARKET",
         "qty": 358,
-        "order_id": "532e542d-74bc-4f15-a18e-b9224dff8834",
+        "order_id": "8631c714-d6e1-4376-ae2a-8af96f6f3092",
         "reason": "ROTATION_OUT"
       },
       {
@@ -25,7 +25,7 @@
         "side": "SELL",
         "order_type": "MARKET",
         "qty": 604,
-        "order_id": "14ad461d-3e18-4e21-af58-c17371feb679",
+        "order_id": "ea9b8846-ab36-4d72-8d94-0e8326d25791",
         "reason": "ROTATION_OUT"
       }
     ],
@@ -36,7 +36,7 @@
         "AvgEntry": 38.889693,
         "CurrentPrice": 40.39,
         "UnrealizedPnL": 537.11,
-        "ChangeToday": 0.00623,
+        "ChangeToday": 0,
         "Currency": "USD",
         "Timestamp": "2026-02-09T14:35:37.634308Z",
         "BrokerSource": ""
@@ -47,7 +47,7 @@
         "AvgEntry": 11.1,
         "CurrentPrice": 11.18,
         "UnrealizedPnL": 20.16,
-        "ChangeToday": 0.021,
+        "ChangeToday": 0,
         "Currency": "USD",
         "Timestamp": "2026-02-10T14:32:09.03036Z",
         "BrokerSource": ""
@@ -58,7 +58,7 @@
         "AvgEntry": 57.231626,
         "CurrentPrice": 59.01,
         "UnrealizedPnL": 437.48,
-        "ChangeToday": 0.00238,
+        "ChangeToday": 0,
         "Currency": "USD",
         "Timestamp": "2026-02-09T14:35:49.768329Z",
         "BrokerSource": ""
@@ -69,7 +69,7 @@
         "AvgEntry": 16.155279,
         "CurrentPrice": 16.18,
         "UnrealizedPnL": 21.26,
-        "ChangeToday": -0.00308,
+        "ChangeToday": 0,
         "Currency": "USD",
         "Timestamp": "2026-02-09T14:34:32.707629Z",
         "BrokerSource": ""
@@ -80,7 +80,7 @@
         "AvgEntry": 22.726556,
         "CurrentPrice": 22.6089,
         "UnrealizedPnL": -71.0644,
-        "ChangeToday": -0.01922,
+        "ChangeToday": 0,
         "Currency": "USD",
         "Timestamp": "2026-02-09T14:33:40.707123Z",
         "BrokerSource": ""
@@ -91,7 +91,7 @@
         "AvgEntry": 28.1,
         "CurrentPrice": 28.93,
         "UnrealizedPnL": 409.19,
-        "ChangeToday": 0.01109,
+        "ChangeToday": 0,
         "Currency": "USD",
         "Timestamp": "2026-02-09T14:30:59.20158Z",
         "BrokerSource": ""
@@ -102,7 +102,7 @@
         "AvgEntry": 24.991455,
         "CurrentPrice": 24.94,
         "UnrealizedPnL": -28.3,
-        "ChangeToday": -0.02426,
+        "ChangeToday": 0,
         "Currency": "USD",
         "Timestamp": "2026-02-09T14:33:20.417304Z",
         "BrokerSource": ""
@@ -110,7 +110,7 @@
     ],
     "pending_orders": [
       {
-        "OrderID": "14ad461d-3e18-4e21-af58-c17371feb679",
+        "OrderID": "ea9b8846-ab36-4d72-8d94-0e8326d25791",
         "Symbol": "CBTA",
         "Side": "SELL",
         "OrderType": "MARKET",
@@ -121,12 +121,12 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-10T23:20:54.281479813Z",
+        "PlacedDate": "2026-02-11T12:34:05.272655334Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
       {
-        "OrderID": "532e542d-74bc-4f15-a18e-b9224dff8834",
+        "OrderID": "8631c714-d6e1-4376-ae2a-8af96f6f3092",
         "Symbol": "ARKF",
         "Side": "SELL",
         "OrderType": "MARKET",
@@ -137,23 +137,7 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-10T23:20:54.013643097Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": "alpaca"
-      },
-      {
-        "OrderID": "77d4c89d-2253-42bd-8deb-4cf58eb580d0",
-        "Symbol": "FIAT",
-        "Side": "BUY",
-        "OrderType": "LIMIT",
-        "Qty": 214,
-        "FilledQty": 0,
-        "LimitPrice": 33.48,
-        "StopPrice": 0,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "",
-        "PlacedDate": "2026-02-10T23:18:04.559667988Z",
+        "PlacedDate": "2026-02-11T12:34:05.009863508Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
@@ -169,39 +153,23 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-10T23:18:04.46558311Z",
+        "PlacedDate": "2026-02-11T09:00:25.358085Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
       {
-        "OrderID": "cb1b599c-7e8a-4a9c-850c-e9d670fb91b1",
-        "Symbol": "CBTA",
-        "Side": "SELL",
-        "OrderType": "MARKET",
-        "Qty": 604,
+        "OrderID": "77d4c89d-2253-42bd-8deb-4cf58eb580d0",
+        "Symbol": "FIAT",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 214,
         "FilledQty": 0,
-        "LimitPrice": 0,
+        "LimitPrice": 33.48,
         "StopPrice": 0,
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-10T23:18:04.373686Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": "alpaca"
-      },
-      {
-        "OrderID": "8209acbc-43e6-41e6-bcb6-998a3131c512",
-        "Symbol": "ARKF",
-        "Side": "SELL",
-        "OrderType": "MARKET",
-        "Qty": 358,
-        "FilledQty": 0,
-        "LimitPrice": 0,
-        "StopPrice": 0,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "",
-        "PlacedDate": "2026-02-10T23:18:04.188552Z",
+        "PlacedDate": "2026-02-11T09:00:24.802169Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       }
@@ -209,10 +177,10 @@
     "balance": {
       "BaseCurrency": "USD",
       "CashByCurrency": {
-        "USD": 14339.73
+        "USD": 14339.58
       },
-      "MarginUsed": 87343.51000000001,
-      "TotalEquity": 101683.24,
+      "MarginUsed": 87343.51,
+      "TotalEquity": 101683.09,
       "Timestamp": "0001-01-01T00:00:00Z",
       "BrokerSource": "alpaca"
     },
