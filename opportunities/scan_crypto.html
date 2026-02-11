@@ -1,0 +1,2415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oracle Scan Results | Market Watch Expert</title>
+    <link rel="icon" href="https://market-watch.xyz/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            margin: 0;
+            padding-bottom: 3rem;
+        }
+
+        /* Reusing MW-Card and other styles based on existing template */
+        .mw-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 2rem;
+        }
+
+        .hero-stat {
+            text-align: center;
+            padding: 1.25rem;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Header */
+        nav {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #1e293b;
+            letter-spacing: -0.5px;
+        }
+
+        .highlight {
+            color: #2563eb;
+        }
+
+        /* Strategy Grid */
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Cluster Card Specifics */
+        .cluster-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .cluster-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .cluster-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .metric-label {
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .metric-val {
+            font-weight: 700;
+            color: #334155;
+            font-family: monospace;
+        }
+
+        .metric-val.green {
+            color: #16a34a;
+        }
+
+        .metric-val.red {
+            color: #dc2626;
+        }
+
+        .rule-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .rule-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+
+        .rule-text {
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #334155;
+            line-height: 1.5;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.25rem 0;
+            border-bottom: 1px dashed #e2e8f0;
+            font-size: 0.85rem;
+        }
+
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+
+        .feature-name {
+            color: #475569;
+        }
+
+        .feature-val {
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .strategy-badge {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            background: #f0fdf4;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: #166534;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* Charts */
+        .chart-container {
+            position: relative;
+            height: 200px;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        /* Intro Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Responsive Container */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            main {
+                padding: 1rem;
+            }
+
+            .stats-grid {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <nav
+        style="display: flex; flex-direction: column; align-items: stretch; padding: 0.5rem 1.5rem; gap: 0.5rem; background: white; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 50; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+        <!-- Global Nav -->
+        <div
+            style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #f1f5f9;padding-bottom:0.5rem;">
+            <a href="/"
+                style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;color:#1e293b;font-weight:800;font-size:1rem;">
+                <i class="fas fa-broadcast-tower" style="color:#10b981;"></i> Market Watch
+            </a>
+            <div style="display:flex;gap:0.4rem;">
+                <a href="/"
+                    style="color:#64748b;text-decoration:none;padding:0.25rem 0.6rem;border-radius:6px;font-size:0.7rem;font-weight:500;"><i
+                        class="fas fa-chart-line"></i> Portfolios</a>
+                <a href="/opportunities/"
+                    style="color:#2563eb;background:rgba(37,99,235,0.08);text-decoration:none;padding:0.25rem 0.6rem;border-radius:6px;font-size:0.7rem;font-weight:600;"><i
+                        class="fas fa-crosshairs"></i> Opportunities</a>
+                <a href="/backtest/"
+                    style="color:#64748b;text-decoration:none;padding:0.25rem 0.6rem;border-radius:6px;font-size:0.7rem;font-weight:500;"><i
+                        class="fas fa-flask"></i> Backtests</a>
+            </div>
+        </div>
+
+        <!-- Local Nav -->
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <a href="/opportunities/"
+                    style="text-decoration: none; color: #64748b; font-size: 0.8rem; font-weight: 600;">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+                <div class="logo-text">ORACLE <span class="highlight">SCAN</span>: Crypto Scan</div>
+            </div>
+            <div style="font-size: 0.75rem; font-weight: 600; color: #64748b;">Generated on 2026-02-11 00:27</div>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- INTRO STATS -->
+        <div class="stats-grid">
+            <div class="hero-stat">
+                <div class="text-xs uppercase font-bold text-slate-400 mb-1">Total Opportunities</div>
+                <div class="text-2xl font-black text-slate-800">73662</div>
+            </div>
+            <div class="hero-stat">
+                <div class="text-xs uppercase font-bold text-slate-400 mb-1">Assets Scanned</div>
+                <div class="text-2xl font-black text-blue-600">732</div>
+            </div>
+            <div class="hero-stat">
+                <div class="text-xs uppercase font-bold text-slate-400 mb-1">Clusters Found</div>
+                <div class="text-2xl font-black text-purple-600">8</div>
+            </div>
+            <div class="hero-stat">
+                <div class="text-xs uppercase font-bold text-slate-400 mb-1">Best Accuracy</div>
+                <div class="text-2xl font-black text-emerald-600">96.59%</div>
+            </div>
+        </div>
+
+        <!-- STRATEGIES -->
+        <h2 class="text-xl font-bold text-slate-800 mb-6"
+            style="margin-bottom: 2rem; font-size: 1.5rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">
+            Discovered Strategies (Blueprints)</h2>
+
+        <div class="strategy-grid">
+            
+            <div class="mw-card">
+                <div class="cluster-header">
+                    <span class="cluster-title">Strategy #1</span>
+                    <span class="cluster-badge">15856 Patterns</span>
+                </div>
+
+                <div class="metric-row">
+                    <span class="metric-label">Avg Return</span>
+                    <span class="metric-val green">+33.1%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Avg Drawdown</span>
+                    <span class="metric-val red">-1.0%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Win Rate (>10%)</span>
+                    <span class="metric-val"
+                        style="color: #16a34a">90.82996972754793%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Avg Hold</span>
+                    <span class="metric-val">9 Days</span>
+                </div>
+
+                <div class="strategy-badge">
+                    Target: +28.1% | Hold: 9d
+                </div>
+
+                <div class="rule-box" style="border-left: 4px solid #2563eb;">
+                    <div class="rule-title">📥 Entry Rules <span
+                            style="display: inline-block; background: #2563eb; color: white; font-size: 0.65rem; padding: 1px 6px; border-radius: 3px; margin-left: 6px; font-weight: 700;">AND</span>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #6b7280; margin-bottom: 8px;">All conditions must be true
+                        simultaneously</div>
+                    <ul class="feature-list" style="list-style: none; padding: 0; margin: 0;">
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">Is_Stock_Downtrend</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">= True</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">MAAlignment</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< 0.14</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">SPY_AboveMA50</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< 0.19</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">OBVSlope</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< -0.21</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">Slope MA50</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< -0.030</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">SmoothMomentum</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< -0.15</span>
+                        </li>
+                        
+                    </ul>
+                </div>
+
+                <div class="rule-box" style="border-left: 4px solid #7c3aed; background-color: #f5f3ff;">
+                    <div class="rule-title" style="color: #7c3aed; font-size: 0.85rem;">📤 Exit Targets <span
+                            style="display: inline-block; background: #7c3aed; color: white; font-size: 0.65rem; padding: 1px 6px; border-radius: 3px; margin-left: 6px; font-weight: 700;">OR</span>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #6b7280; margin-bottom: 6px;">Sell when ANY target is reached
+                    </div>
+                </div>
+                <table style="width: 100%; font-size: 0.8rem; margin-top: 6px; border-collapse: collapse;">
+                    <thead>
+                        <tr style="color: #6b7280; border-bottom: 1px solid #e5e7eb;">
+                            <th style="text-align: left; padding: 3px 4px;">Feature</th>
+                            <th style="text-align: center; padding: 3px 4px;">Entry</th>
+                            <th style="text-align: center; padding: 3px 4px;">Exit</th>
+                            <th style="text-align: center; padding: 3px 4px;">Shift</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">RSI(14)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-35</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">66</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Bollinger %B</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-0.37</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">0.88</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Price vs MA(10)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">+1.5%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+9.3%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Price vs MA(20)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-20.8%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+12.6%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Price vs MA(50)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-47.0%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+6.9%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Rel. Volume</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-0.2x</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">2.6x</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">ROC(5)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">+1.1%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+12.1%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">ATR(14)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-0.4%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">6.7%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #e5e7eb; background: #ede9fe;">
+                            <td style="padding: 4px; font-weight: 700; color: #7c3aed;" colspan="2">⏱ Hold Duration
+                            </td>
+                            <td style="text-align: center; padding: 4px; font-weight: 700; color: #7c3aed;">9 days</td>
+                            <td></td>
+                        </tr>
+                        
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mini Chart for Equity Curve Simulation? -->
+            <div class="chart-container">
+                <canvas id="chart-1"></canvas>
+            </div>
+            <script>
+                (function () {
+                    const ctx = document.getElementById('chart-1').getContext('2d');
+
+                    // Parse values from Go template - use pre-formatted string 'WinRateStr'
+                    const winRate = parseFloat("90.83") / 100.0;
+
+                    // MFR and MDD are strings in the struct (formatted), so parse them
+                    const avgWin = parseFloat("33.1") / 100.0;
+                    const avgLoss = parseFloat("-1.0") / 100.0;
+
+                    const points = [];
+                    let equity = 100;
+                    points.push(equity);
+
+                    for (let i = 0; i < 20; i++) {
+                        // Random walk biased by winrate
+                        if (Math.random() < winRate) {
+                            equity = equity * (1 + avgWin);
+                        } else {
+                            equity = equity * (1 - Math.abs(avgLoss));
+                        }
+                        points.push(equity);
+                    }
+
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: Array.from({ length: 21 }, (_, i) => i),
+                            datasets: [{
+                                label: 'Simulated Equity',
+                                data: points,
+                                borderColor: '#2563eb',
+                                borderWidth: 2,
+                                pointRadius: 0,
+                                fill: true,
+                                backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                                tension: 0.4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { display: false } },
+                            scales: { x: { display: false }, y: { display: false } }
+                        }
+                    });
+                })();
+            </script>
+
+        </div>
+        
+            <div class="mw-card">
+                <div class="cluster-header">
+                    <span class="cluster-title">Strategy #2</span>
+                    <span class="cluster-badge">10926 Patterns</span>
+                </div>
+
+                <div class="metric-row">
+                    <span class="metric-label">Avg Return</span>
+                    <span class="metric-val green">+35.7%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Avg Drawdown</span>
+                    <span class="metric-val red">-0.9%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Win Rate (>10%)</span>
+                    <span class="metric-val"
+                        style="color: #16a34a">91.45158337909574%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Avg Hold</span>
+                    <span class="metric-val">8 Days</span>
+                </div>
+
+                <div class="strategy-badge">
+                    Target: +30.3% | Hold: 8d
+                </div>
+
+                <div class="rule-box" style="border-left: 4px solid #2563eb;">
+                    <div class="rule-title">📥 Entry Rules <span
+                            style="display: inline-block; background: #2563eb; color: white; font-size: 0.65rem; padding: 1px 6px; border-radius: 3px; margin-left: 6px; font-weight: 700;">AND</span>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #6b7280; margin-bottom: 8px;">All conditions must be true
+                        simultaneously</div>
+                    <ul class="feature-list" style="list-style: none; padding: 0; margin: 0;">
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">PriceEfficiency</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< 0.11</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">OBVSlope</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.27</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">SPY_AboveMA200</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< 0.25</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">UpVolRatio</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.60</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">vs 52w High</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< -68%</span>
+                        </li>
+                        
+                    </ul>
+                </div>
+
+                <div class="rule-box" style="border-left: 4px solid #7c3aed; background-color: #f5f3ff;">
+                    <div class="rule-title" style="color: #7c3aed; font-size: 0.85rem;">📤 Exit Targets <span
+                            style="display: inline-block; background: #7c3aed; color: white; font-size: 0.65rem; padding: 1px 6px; border-radius: 3px; margin-left: 6px; font-weight: 700;">OR</span>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #6b7280; margin-bottom: 6px;">Sell when ANY target is reached
+                    </div>
+                </div>
+                <table style="width: 100%; font-size: 0.8rem; margin-top: 6px; border-collapse: collapse;">
+                    <thead>
+                        <tr style="color: #6b7280; border-bottom: 1px solid #e5e7eb;">
+                            <th style="text-align: left; padding: 3px 4px;">Feature</th>
+                            <th style="text-align: center; padding: 3px 4px;">Entry</th>
+                            <th style="text-align: center; padding: 3px 4px;">Exit</th>
+                            <th style="text-align: center; padding: 3px 4px;">Shift</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">RSI(14)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">28</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">66</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Bollinger %B</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">0.20</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">0.90</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Price vs MA(10)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-5.6%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+9.3%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Price vs MA(50)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">+13.0%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+18.2%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Rel. Volume</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-0.3x</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">2.6x</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">ROC(5)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-13.7%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+12.4%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">ATR(14)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-0.4%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">7.8%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #e5e7eb; background: #ede9fe;">
+                            <td style="padding: 4px; font-weight: 700; color: #7c3aed;" colspan="2">⏱ Hold Duration
+                            </td>
+                            <td style="text-align: center; padding: 4px; font-weight: 700; color: #7c3aed;">8 days</td>
+                            <td></td>
+                        </tr>
+                        
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mini Chart for Equity Curve Simulation? -->
+            <div class="chart-container">
+                <canvas id="chart-2"></canvas>
+            </div>
+            <script>
+                (function () {
+                    const ctx = document.getElementById('chart-2').getContext('2d');
+
+                    // Parse values from Go template - use pre-formatted string 'WinRateStr'
+                    const winRate = parseFloat("91.45") / 100.0;
+
+                    // MFR and MDD are strings in the struct (formatted), so parse them
+                    const avgWin = parseFloat("35.7") / 100.0;
+                    const avgLoss = parseFloat("-0.9") / 100.0;
+
+                    const points = [];
+                    let equity = 100;
+                    points.push(equity);
+
+                    for (let i = 0; i < 20; i++) {
+                        // Random walk biased by winrate
+                        if (Math.random() < winRate) {
+                            equity = equity * (1 + avgWin);
+                        } else {
+                            equity = equity * (1 - Math.abs(avgLoss));
+                        }
+                        points.push(equity);
+                    }
+
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: Array.from({ length: 21 }, (_, i) => i),
+                            datasets: [{
+                                label: 'Simulated Equity',
+                                data: points,
+                                borderColor: '#2563eb',
+                                borderWidth: 2,
+                                pointRadius: 0,
+                                fill: true,
+                                backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                                tension: 0.4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { display: false } },
+                            scales: { x: { display: false }, y: { display: false } }
+                        }
+                    });
+                })();
+            </script>
+
+        </div>
+        
+            <div class="mw-card">
+                <div class="cluster-header">
+                    <span class="cluster-title">Strategy #3</span>
+                    <span class="cluster-badge">10008 Patterns</span>
+                </div>
+
+                <div class="metric-row">
+                    <span class="metric-label">Avg Return</span>
+                    <span class="metric-val green">+44.5%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Avg Drawdown</span>
+                    <span class="metric-val red">-1.0%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Win Rate (>10%)</span>
+                    <span class="metric-val"
+                        style="color: #16a34a">92.09632294164668%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Avg Hold</span>
+                    <span class="metric-val">8 Days</span>
+                </div>
+
+                <div class="strategy-badge">
+                    Target: +37.9% | Hold: 8d
+                </div>
+
+                <div class="rule-box" style="border-left: 4px solid #2563eb;">
+                    <div class="rule-title">📥 Entry Rules <span
+                            style="display: inline-block; background: #2563eb; color: white; font-size: 0.65rem; padding: 1px 6px; border-radius: 3px; margin-left: 6px; font-weight: 700;">AND</span>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #6b7280; margin-bottom: 8px;">All conditions must be true
+                        simultaneously</div>
+                    <ul class="feature-list" style="list-style: none; padding: 0; margin: 0;">
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">BB %B</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.92</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">RSI(14)</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 69</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">SmoothMomentum</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.25</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">Price vs MA20</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> +12.4%</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">TrendConsist20</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.60</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">MFI14</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.72</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">TrendConsist10</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.64</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">UpVolRatio</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.65</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">Price vs MA10</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> +7.5%</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">HigherHighs10</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.60</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">RangeContraction</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 1.26</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">MAAlignment</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.64</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">ROC(20d)</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> +21.0%</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">Price vs MA50</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> +14.4%</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">ROC(5d)</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> +9.6%</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">VolTrend</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 1.33</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">MomentumBreadth</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.24</span>
+                        </li>
+                        
+                    </ul>
+                </div>
+
+                <div class="rule-box" style="border-left: 4px solid #7c3aed; background-color: #f5f3ff;">
+                    <div class="rule-title" style="color: #7c3aed; font-size: 0.85rem;">📤 Exit Targets <span
+                            style="display: inline-block; background: #7c3aed; color: white; font-size: 0.65rem; padding: 1px 6px; border-radius: 3px; margin-left: 6px; font-weight: 700;">OR</span>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #6b7280; margin-bottom: 6px;">Sell when ANY target is reached
+                    </div>
+                </div>
+                <table style="width: 100%; font-size: 0.8rem; margin-top: 6px; border-collapse: collapse;">
+                    <thead>
+                        <tr style="color: #6b7280; border-bottom: 1px solid #e5e7eb;">
+                            <th style="text-align: left; padding: 3px 4px;">Feature</th>
+                            <th style="text-align: center; padding: 3px 4px;">Entry</th>
+                            <th style="text-align: center; padding: 3px 4px;">Exit</th>
+                            <th style="text-align: center; padding: 3px 4px;">Shift</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">RSI(14)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">137</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">75</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">drops to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Bollinger %B</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">1.48</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">1.00</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">drops to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Price vs MA(10)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">+103.2%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+14.9%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">drops to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Price vs MA(20)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">+116.7%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+24.7%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">drops to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Price vs MA(50)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">+89.0%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+39.0%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">drops to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Rel. Volume</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">0.7x</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">2.6x</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">ROC(5)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">+86.2%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+19.4%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">drops to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">ATR(14)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-0.4%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">8.0%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #e5e7eb; background: #ede9fe;">
+                            <td style="padding: 4px; font-weight: 700; color: #7c3aed;" colspan="2">⏱ Hold Duration
+                            </td>
+                            <td style="text-align: center; padding: 4px; font-weight: 700; color: #7c3aed;">8 days</td>
+                            <td></td>
+                        </tr>
+                        
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mini Chart for Equity Curve Simulation? -->
+            <div class="chart-container">
+                <canvas id="chart-3"></canvas>
+            </div>
+            <script>
+                (function () {
+                    const ctx = document.getElementById('chart-3').getContext('2d');
+
+                    // Parse values from Go template - use pre-formatted string 'WinRateStr'
+                    const winRate = parseFloat("92.10") / 100.0;
+
+                    // MFR and MDD are strings in the struct (formatted), so parse them
+                    const avgWin = parseFloat("44.5") / 100.0;
+                    const avgLoss = parseFloat("-1.0") / 100.0;
+
+                    const points = [];
+                    let equity = 100;
+                    points.push(equity);
+
+                    for (let i = 0; i < 20; i++) {
+                        // Random walk biased by winrate
+                        if (Math.random() < winRate) {
+                            equity = equity * (1 + avgWin);
+                        } else {
+                            equity = equity * (1 - Math.abs(avgLoss));
+                        }
+                        points.push(equity);
+                    }
+
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: Array.from({ length: 21 }, (_, i) => i),
+                            datasets: [{
+                                label: 'Simulated Equity',
+                                data: points,
+                                borderColor: '#2563eb',
+                                borderWidth: 2,
+                                pointRadius: 0,
+                                fill: true,
+                                backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                                tension: 0.4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { display: false } },
+                            scales: { x: { display: false }, y: { display: false } }
+                        }
+                    });
+                })();
+            </script>
+
+        </div>
+        
+            <div class="mw-card">
+                <div class="cluster-header">
+                    <span class="cluster-title">Strategy #4</span>
+                    <span class="cluster-badge">9930 Patterns</span>
+                </div>
+
+                <div class="metric-row">
+                    <span class="metric-label">Avg Return</span>
+                    <span class="metric-val green">+36.6%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Avg Drawdown</span>
+                    <span class="metric-val red">-1.0%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Win Rate (>10%)</span>
+                    <span class="metric-val"
+                        style="color: #16a34a">91.067472306143%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Avg Hold</span>
+                    <span class="metric-val">9 Days</span>
+                </div>
+
+                <div class="strategy-badge">
+                    Target: +31.1% | Hold: 9d
+                </div>
+
+                <div class="rule-box" style="border-left: 4px solid #2563eb;">
+                    <div class="rule-title">📥 Entry Rules <span
+                            style="display: inline-block; background: #2563eb; color: white; font-size: 0.65rem; padding: 1px 6px; border-radius: 3px; margin-left: 6px; font-weight: 700;">AND</span>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #6b7280; margin-bottom: 8px;">All conditions must be true
+                        simultaneously</div>
+                    <ul class="feature-list" style="list-style: none; padding: 0; margin: 0;">
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">Is_Regime_RiskOn</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">= True</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">SPY_AboveMA50</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.99</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">SPY_AboveMA200</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.98</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">PriceEfficiency</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< 0.12</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">VIX</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< -0.3</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">BB Width</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< 20.6%</span>
+                        </li>
+                        
+                    </ul>
+                </div>
+
+                <div class="rule-box" style="border-left: 4px solid #7c3aed; background-color: #f5f3ff;">
+                    <div class="rule-title" style="color: #7c3aed; font-size: 0.85rem;">📤 Exit Targets <span
+                            style="display: inline-block; background: #7c3aed; color: white; font-size: 0.65rem; padding: 1px 6px; border-radius: 3px; margin-left: 6px; font-weight: 700;">OR</span>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #6b7280; margin-bottom: 6px;">Sell when ANY target is reached
+                    </div>
+                </div>
+                <table style="width: 100%; font-size: 0.8rem; margin-top: 6px; border-collapse: collapse;">
+                    <thead>
+                        <tr style="color: #6b7280; border-bottom: 1px solid #e5e7eb;">
+                            <th style="text-align: left; padding: 3px 4px;">Feature</th>
+                            <th style="text-align: center; padding: 3px 4px;">Entry</th>
+                            <th style="text-align: center; padding: 3px 4px;">Exit</th>
+                            <th style="text-align: center; padding: 3px 4px;">Shift</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">RSI(14)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">10</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">67</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Bollinger %B</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">0.10</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">0.92</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Price vs MA(10)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">+12.3%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+10.2%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">drops to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Price vs MA(20)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">+8.4%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+14.5%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Price vs MA(50)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">+6.8%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+18.2%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Rel. Volume</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-0.1x</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">2.9x</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">ATR(14)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-0.4%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">7.0%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #e5e7eb; background: #ede9fe;">
+                            <td style="padding: 4px; font-weight: 700; color: #7c3aed;" colspan="2">⏱ Hold Duration
+                            </td>
+                            <td style="text-align: center; padding: 4px; font-weight: 700; color: #7c3aed;">9 days</td>
+                            <td></td>
+                        </tr>
+                        
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mini Chart for Equity Curve Simulation? -->
+            <div class="chart-container">
+                <canvas id="chart-4"></canvas>
+            </div>
+            <script>
+                (function () {
+                    const ctx = document.getElementById('chart-4').getContext('2d');
+
+                    // Parse values from Go template - use pre-formatted string 'WinRateStr'
+                    const winRate = parseFloat("91.07") / 100.0;
+
+                    // MFR and MDD are strings in the struct (formatted), so parse them
+                    const avgWin = parseFloat("36.6") / 100.0;
+                    const avgLoss = parseFloat("-1.0") / 100.0;
+
+                    const points = [];
+                    let equity = 100;
+                    points.push(equity);
+
+                    for (let i = 0; i < 20; i++) {
+                        // Random walk biased by winrate
+                        if (Math.random() < winRate) {
+                            equity = equity * (1 + avgWin);
+                        } else {
+                            equity = equity * (1 - Math.abs(avgLoss));
+                        }
+                        points.push(equity);
+                    }
+
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: Array.from({ length: 21 }, (_, i) => i),
+                            datasets: [{
+                                label: 'Simulated Equity',
+                                data: points,
+                                borderColor: '#2563eb',
+                                borderWidth: 2,
+                                pointRadius: 0,
+                                fill: true,
+                                backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                                tension: 0.4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { display: false } },
+                            scales: { x: { display: false }, y: { display: false } }
+                        }
+                    });
+                })();
+            </script>
+
+        </div>
+        
+            <div class="mw-card">
+                <div class="cluster-header">
+                    <span class="cluster-title">Strategy #5</span>
+                    <span class="cluster-badge">9218 Patterns</span>
+                </div>
+
+                <div class="metric-row">
+                    <span class="metric-label">Avg Return</span>
+                    <span class="metric-val green">+5462.1%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Avg Drawdown</span>
+                    <span class="metric-val red">-1.0%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Win Rate (>10%)</span>
+                    <span class="metric-val"
+                        style="color: #16a34a">93.44760251681492%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Avg Hold</span>
+                    <span class="metric-val">9 Days</span>
+                </div>
+
+                <div class="strategy-badge">
+                    Target: +4642.8% | Hold: 9d
+                </div>
+
+                <div class="rule-box" style="border-left: 4px solid #2563eb;">
+                    <div class="rule-title">📥 Entry Rules <span
+                            style="display: inline-block; background: #2563eb; color: white; font-size: 0.65rem; padding: 1px 6px; border-radius: 3px; margin-left: 6px; font-weight: 700;">AND</span>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #6b7280; margin-bottom: 8px;">All conditions must be true
+                        simultaneously</div>
+                    <ul class="feature-list" style="list-style: none; padding: 0; margin: 0;">
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">Price vs MA20</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< -17.7%</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">RSI(14)</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< 26</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">SmoothMomentum</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< -0.30</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">DrawdownFromHigh10</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< -0.24</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">Price vs MA10</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< -10.7%</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">BB %B</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< 0.07</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">PriceEfficiency</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.40</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">Price vs MA50</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< -26.5%</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">MFI14</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< 0.34</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">MAAlignment</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< 0.07</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">TrendConsist10</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< 0.33</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">TrendConsist20</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< 0.37</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">UpVolRatio</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< 0.37</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">ROC(5d)</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< -12.0%</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">ROC(20d)</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< -26.6%</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">HigherHighs10</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< 0.29</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">Is_Stock_Downtrend</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">= True</span>
+                        </li>
+                        
+                    </ul>
+                </div>
+
+                <div class="rule-box" style="border-left: 4px solid #7c3aed; background-color: #f5f3ff;">
+                    <div class="rule-title" style="color: #7c3aed; font-size: 0.85rem;">📤 Exit Targets <span
+                            style="display: inline-block; background: #7c3aed; color: white; font-size: 0.65rem; padding: 1px 6px; border-radius: 3px; margin-left: 6px; font-weight: 700;">OR</span>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #6b7280; margin-bottom: 6px;">Sell when ANY target is reached
+                    </div>
+                </div>
+                <table style="width: 100%; font-size: 0.8rem; margin-top: 6px; border-collapse: collapse;">
+                    <thead>
+                        <tr style="color: #6b7280; border-bottom: 1px solid #e5e7eb;">
+                            <th style="text-align: left; padding: 3px 4px;">Feature</th>
+                            <th style="text-align: center; padding: 3px 4px;">Entry</th>
+                            <th style="text-align: center; padding: 3px 4px;">Exit</th>
+                            <th style="text-align: center; padding: 3px 4px;">Shift</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">RSI(14)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-128</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">54</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Bollinger %B</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-1.17</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">0.68</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Price vs MA(10)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-119.2%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+7.6%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Price vs MA(20)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-129.0%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+6.4%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Price vs MA(50)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-107.4%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">-4.1%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Rel. Volume</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">0.3x</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">2.5x</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">ROC(5)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-96.5%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+10.9%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">ATR(14)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">2.6%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">10.6%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #e5e7eb; background: #ede9fe;">
+                            <td style="padding: 4px; font-weight: 700; color: #7c3aed;" colspan="2">⏱ Hold Duration
+                            </td>
+                            <td style="text-align: center; padding: 4px; font-weight: 700; color: #7c3aed;">9 days</td>
+                            <td></td>
+                        </tr>
+                        
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mini Chart for Equity Curve Simulation? -->
+            <div class="chart-container">
+                <canvas id="chart-5"></canvas>
+            </div>
+            <script>
+                (function () {
+                    const ctx = document.getElementById('chart-5').getContext('2d');
+
+                    // Parse values from Go template - use pre-formatted string 'WinRateStr'
+                    const winRate = parseFloat("93.45") / 100.0;
+
+                    // MFR and MDD are strings in the struct (formatted), so parse them
+                    const avgWin = parseFloat("5462.1") / 100.0;
+                    const avgLoss = parseFloat("-1.0") / 100.0;
+
+                    const points = [];
+                    let equity = 100;
+                    points.push(equity);
+
+                    for (let i = 0; i < 20; i++) {
+                        // Random walk biased by winrate
+                        if (Math.random() < winRate) {
+                            equity = equity * (1 + avgWin);
+                        } else {
+                            equity = equity * (1 - Math.abs(avgLoss));
+                        }
+                        points.push(equity);
+                    }
+
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: Array.from({ length: 21 }, (_, i) => i),
+                            datasets: [{
+                                label: 'Simulated Equity',
+                                data: points,
+                                borderColor: '#2563eb',
+                                borderWidth: 2,
+                                pointRadius: 0,
+                                fill: true,
+                                backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                                tension: 0.4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { display: false } },
+                            scales: { x: { display: false }, y: { display: false } }
+                        }
+                    });
+                })();
+            </script>
+
+        </div>
+        
+            <div class="mw-card">
+                <div class="cluster-header">
+                    <span class="cluster-title">Strategy #6</span>
+                    <span class="cluster-badge">9169 Patterns</span>
+                </div>
+
+                <div class="metric-row">
+                    <span class="metric-label">Avg Return</span>
+                    <span class="metric-val green">+27.9%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Avg Drawdown</span>
+                    <span class="metric-val red">-1.0%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Win Rate (>10%)</span>
+                    <span class="metric-val"
+                        style="color: #16a34a">88.19936743374413%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Avg Hold</span>
+                    <span class="metric-val">8 Days</span>
+                </div>
+
+                <div class="strategy-badge">
+                    Target: +23.7% | Hold: 8d
+                </div>
+
+                <div class="rule-box" style="border-left: 4px solid #2563eb;">
+                    <div class="rule-title">📥 Entry Rules <span
+                            style="display: inline-block; background: #2563eb; color: white; font-size: 0.65rem; padding: 1px 6px; border-radius: 3px; margin-left: 6px; font-weight: 700;">AND</span>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #6b7280; margin-bottom: 8px;">All conditions must be true
+                        simultaneously</div>
+                    <ul class="feature-list" style="list-style: none; padding: 0; margin: 0;">
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">Is_Setup_DipBuy</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">= True</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">Is_Regime_Recovery</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">= True</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">BB %B</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< 0.23</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">Slope MA200</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> +0.012</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">SmoothMomentum</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">< -0.16</span>
+                        </li>
+                        
+                    </ul>
+                </div>
+
+                <div class="rule-box" style="border-left: 4px solid #7c3aed; background-color: #f5f3ff;">
+                    <div class="rule-title" style="color: #7c3aed; font-size: 0.85rem;">📤 Exit Targets <span
+                            style="display: inline-block; background: #7c3aed; color: white; font-size: 0.65rem; padding: 1px 6px; border-radius: 3px; margin-left: 6px; font-weight: 700;">OR</span>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #6b7280; margin-bottom: 6px;">Sell when ANY target is reached
+                    </div>
+                </div>
+                <table style="width: 100%; font-size: 0.8rem; margin-top: 6px; border-collapse: collapse;">
+                    <thead>
+                        <tr style="color: #6b7280; border-bottom: 1px solid #e5e7eb;">
+                            <th style="text-align: left; padding: 3px 4px;">Feature</th>
+                            <th style="text-align: center; padding: 3px 4px;">Entry</th>
+                            <th style="text-align: center; padding: 3px 4px;">Exit</th>
+                            <th style="text-align: center; padding: 3px 4px;">Shift</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">RSI(14)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-58</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">57</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Bollinger %B</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-0.68</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">0.74</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Price vs MA(10)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-40.7%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+7.3%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Price vs MA(20)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-55.1%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+7.4%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Price vs MA(50)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-48.0%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+2.1%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Rel. Volume</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-0.2x</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">2.0x</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">ROC(5)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-27.5%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+10.0%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">ATR(14)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-0.4%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">7.7%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #e5e7eb; background: #ede9fe;">
+                            <td style="padding: 4px; font-weight: 700; color: #7c3aed;" colspan="2">⏱ Hold Duration
+                            </td>
+                            <td style="text-align: center; padding: 4px; font-weight: 700; color: #7c3aed;">8 days</td>
+                            <td></td>
+                        </tr>
+                        
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mini Chart for Equity Curve Simulation? -->
+            <div class="chart-container">
+                <canvas id="chart-6"></canvas>
+            </div>
+            <script>
+                (function () {
+                    const ctx = document.getElementById('chart-6').getContext('2d');
+
+                    // Parse values from Go template - use pre-formatted string 'WinRateStr'
+                    const winRate = parseFloat("88.20") / 100.0;
+
+                    // MFR and MDD are strings in the struct (formatted), so parse them
+                    const avgWin = parseFloat("27.9") / 100.0;
+                    const avgLoss = parseFloat("-1.0") / 100.0;
+
+                    const points = [];
+                    let equity = 100;
+                    points.push(equity);
+
+                    for (let i = 0; i < 20; i++) {
+                        // Random walk biased by winrate
+                        if (Math.random() < winRate) {
+                            equity = equity * (1 + avgWin);
+                        } else {
+                            equity = equity * (1 - Math.abs(avgLoss));
+                        }
+                        points.push(equity);
+                    }
+
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: Array.from({ length: 21 }, (_, i) => i),
+                            datasets: [{
+                                label: 'Simulated Equity',
+                                data: points,
+                                borderColor: '#2563eb',
+                                borderWidth: 2,
+                                pointRadius: 0,
+                                fill: true,
+                                backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                                tension: 0.4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { display: false } },
+                            scales: { x: { display: false }, y: { display: false } }
+                        }
+                    });
+                })();
+            </script>
+
+        </div>
+        
+            <div class="mw-card">
+                <div class="cluster-header">
+                    <span class="cluster-title">Strategy #7</span>
+                    <span class="cluster-badge">7675 Patterns</span>
+                </div>
+
+                <div class="metric-row">
+                    <span class="metric-label">Avg Return</span>
+                    <span class="metric-val green">+45.1%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Avg Drawdown</span>
+                    <span class="metric-val red">-1.0%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Win Rate (>10%)</span>
+                    <span class="metric-val"
+                        style="color: #16a34a">89.87622149837134%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Avg Hold</span>
+                    <span class="metric-val">8 Days</span>
+                </div>
+
+                <div class="strategy-badge">
+                    Target: +38.4% | Hold: 8d
+                </div>
+
+                <div class="rule-box" style="border-left: 4px solid #2563eb;">
+                    <div class="rule-title">📥 Entry Rules <span
+                            style="display: inline-block; background: #2563eb; color: white; font-size: 0.65rem; padding: 1px 6px; border-radius: 3px; margin-left: 6px; font-weight: 700;">AND</span>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #6b7280; margin-bottom: 8px;">All conditions must be true
+                        simultaneously</div>
+                    <ul class="feature-list" style="list-style: none; padding: 0; margin: 0;">
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">Is_Stock_Uptrend</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">= True</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">vs 52w High</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> -28%</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">MAAlignment</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.77</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">Price vs MA200</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> +48.4%</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">Slope MA50</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> +0.032</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">Slope MA200</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> +0.029</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">Price vs MA50</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> +14.1%</span>
+                        </li>
+                        
+                    </ul>
+                </div>
+
+                <div class="rule-box" style="border-left: 4px solid #7c3aed; background-color: #f5f3ff;">
+                    <div class="rule-title" style="color: #7c3aed; font-size: 0.85rem;">📤 Exit Targets <span
+                            style="display: inline-block; background: #7c3aed; color: white; font-size: 0.65rem; padding: 1px 6px; border-radius: 3px; margin-left: 6px; font-weight: 700;">OR</span>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #6b7280; margin-bottom: 6px;">Sell when ANY target is reached
+                    </div>
+                </div>
+                <table style="width: 100%; font-size: 0.8rem; margin-top: 6px; border-collapse: collapse;">
+                    <thead>
+                        <tr style="color: #6b7280; border-bottom: 1px solid #e5e7eb;">
+                            <th style="text-align: left; padding: 3px 4px;">Feature</th>
+                            <th style="text-align: center; padding: 3px 4px;">Entry</th>
+                            <th style="text-align: center; padding: 3px 4px;">Exit</th>
+                            <th style="text-align: center; padding: 3px 4px;">Shift</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">RSI(14)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">47</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">68</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Bollinger %B</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">0.47</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">0.93</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Price vs MA(10)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">+16.0%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+12.7%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">drops to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Price vs MA(20)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">+35.6%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+19.6%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">drops to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Price vs MA(50)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">+87.5%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+36.7%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">drops to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Rel. Volume</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-0.2x</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">2.1x</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">ROC(5)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">+9.5%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+16.9%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">ATR(14)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-0.4%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">8.4%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #e5e7eb; background: #ede9fe;">
+                            <td style="padding: 4px; font-weight: 700; color: #7c3aed;" colspan="2">⏱ Hold Duration
+                            </td>
+                            <td style="text-align: center; padding: 4px; font-weight: 700; color: #7c3aed;">8 days</td>
+                            <td></td>
+                        </tr>
+                        
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mini Chart for Equity Curve Simulation? -->
+            <div class="chart-container">
+                <canvas id="chart-7"></canvas>
+            </div>
+            <script>
+                (function () {
+                    const ctx = document.getElementById('chart-7').getContext('2d');
+
+                    // Parse values from Go template - use pre-formatted string 'WinRateStr'
+                    const winRate = parseFloat("89.88") / 100.0;
+
+                    // MFR and MDD are strings in the struct (formatted), so parse them
+                    const avgWin = parseFloat("45.1") / 100.0;
+                    const avgLoss = parseFloat("-1.0") / 100.0;
+
+                    const points = [];
+                    let equity = 100;
+                    points.push(equity);
+
+                    for (let i = 0; i < 20; i++) {
+                        // Random walk biased by winrate
+                        if (Math.random() < winRate) {
+                            equity = equity * (1 + avgWin);
+                        } else {
+                            equity = equity * (1 - Math.abs(avgLoss));
+                        }
+                        points.push(equity);
+                    }
+
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: Array.from({ length: 21 }, (_, i) => i),
+                            datasets: [{
+                                label: 'Simulated Equity',
+                                data: points,
+                                borderColor: '#2563eb',
+                                borderWidth: 2,
+                                pointRadius: 0,
+                                fill: true,
+                                backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                                tension: 0.4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { display: false } },
+                            scales: { x: { display: false }, y: { display: false } }
+                        }
+                    });
+                })();
+            </script>
+
+        </div>
+        
+            <div class="mw-card">
+                <div class="cluster-header">
+                    <span class="cluster-title">Strategy #8</span>
+                    <span class="cluster-badge">880 Patterns</span>
+                </div>
+
+                <div class="metric-row">
+                    <span class="metric-label">Avg Return</span>
+                    <span class="metric-val green">+90.3%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Avg Drawdown</span>
+                    <span class="metric-val red">-1.0%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Win Rate (>10%)</span>
+                    <span class="metric-val"
+                        style="color: #16a34a">96.5909090909091%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Avg Hold</span>
+                    <span class="metric-val">6 Days</span>
+                </div>
+
+                <div class="strategy-badge">
+                    Target: +76.7% | Hold: 6d
+                </div>
+
+                <div class="rule-box" style="border-left: 4px solid #2563eb;">
+                    <div class="rule-title">📥 Entry Rules <span
+                            style="display: inline-block; background: #2563eb; color: white; font-size: 0.65rem; padding: 1px 6px; border-radius: 3px; margin-left: 6px; font-weight: 700;">AND</span>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #6b7280; margin-bottom: 8px;">All conditions must be true
+                        simultaneously</div>
+                    <ul class="feature-list" style="list-style: none; padding: 0; margin: 0;">
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">RS_vs_SPY_20</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 1.09</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">ROC(20d)</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> +120.9%</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">RS_vs_SPY_50</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 2.24</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">Price vs MA50</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> +91.3%</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">Price vs MA200</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> +197.7%</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">Price vs MA20</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> +43.5%</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">BB Width</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 108.1%</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">Slope MA50</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> +0.127</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">MaxDailyMove20</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.47</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">Slope MA200</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> +0.099</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">Price vs MA10</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> +20.6%</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">ROC(5d)</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> +29.6%</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">Is_Stock_Uptrend</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">= True</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">SmoothMomentum</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.39</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">MAAlignment</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.92</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">RangeContraction</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 1.50</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">vs 52w High</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> -23%</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">RSI(14)</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 74</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">BBWidthChange</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 2.44</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">PriceEfficiency</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.47</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">ReturnSkew20</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 1.35</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">BB %B</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.90</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">UpVolRatio</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.69</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">MFI14</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.76</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">TrendConsist20</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.60</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">CMF20</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.10</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">MomentumBreadth</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.25</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">TrendConsist10</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 0.61</span>
+                        </li>
+                        
+                        <li
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                            <span class="feature-name">VolTrend</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">> 1.35</span>
+                        </li>
+                        
+                    </ul>
+                </div>
+
+                <div class="rule-box" style="border-left: 4px solid #7c3aed; background-color: #f5f3ff;">
+                    <div class="rule-title" style="color: #7c3aed; font-size: 0.85rem;">📤 Exit Targets <span
+                            style="display: inline-block; background: #7c3aed; color: white; font-size: 0.65rem; padding: 1px 6px; border-radius: 3px; margin-left: 6px; font-weight: 700;">OR</span>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #6b7280; margin-bottom: 6px;">Sell when ANY target is reached
+                    </div>
+                </div>
+                <table style="width: 100%; font-size: 0.8rem; margin-top: 6px; border-collapse: collapse;">
+                    <thead>
+                        <tr style="color: #6b7280; border-bottom: 1px solid #e5e7eb;">
+                            <th style="text-align: left; padding: 3px 4px;">Feature</th>
+                            <th style="text-align: center; padding: 3px 4px;">Entry</th>
+                            <th style="text-align: center; padding: 3px 4px;">Exit</th>
+                            <th style="text-align: center; padding: 3px 4px;">Shift</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">RSI(14)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">168</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">77</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">drops to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Bollinger %B</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">1.43</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">0.98</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">drops to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Price vs MA(10)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">+263.0%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+34.3%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">drops to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Price vs MA(20)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">+370.8%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+65.8%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">drops to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Price vs MA(50)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">+458.4%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+140.5%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">drops to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">Rel. Volume</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">0.5x</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">1.9x</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">ROC(5)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">+255.8%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">+51.4%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">drops to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding: 3px 4px; font-weight: 600; color: #374151;">ATR(14)</td>
+                            <td style="text-align: center; padding: 3px 4px; color: #6b7280;">-0.4%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-weight: 700; color: #059669;">13.8%</td>
+                            <td style="text-align: center; padding: 3px 4px; font-size: 0.75rem; color: #6b7280;">rises to</td>
+                        </tr>
+                        
+                        
+                        
+                        <tr style="border-bottom: 1px solid #e5e7eb; background: #ede9fe;">
+                            <td style="padding: 4px; font-weight: 700; color: #7c3aed;" colspan="2">⏱ Hold Duration
+                            </td>
+                            <td style="text-align: center; padding: 4px; font-weight: 700; color: #7c3aed;">6 days</td>
+                            <td></td>
+                        </tr>
+                        
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mini Chart for Equity Curve Simulation? -->
+            <div class="chart-container">
+                <canvas id="chart-8"></canvas>
+            </div>
+            <script>
+                (function () {
+                    const ctx = document.getElementById('chart-8').getContext('2d');
+
+                    // Parse values from Go template - use pre-formatted string 'WinRateStr'
+                    const winRate = parseFloat("96.59") / 100.0;
+
+                    // MFR and MDD are strings in the struct (formatted), so parse them
+                    const avgWin = parseFloat("90.3") / 100.0;
+                    const avgLoss = parseFloat("-1.0") / 100.0;
+
+                    const points = [];
+                    let equity = 100;
+                    points.push(equity);
+
+                    for (let i = 0; i < 20; i++) {
+                        // Random walk biased by winrate
+                        if (Math.random() < winRate) {
+                            equity = equity * (1 + avgWin);
+                        } else {
+                            equity = equity * (1 - Math.abs(avgLoss));
+                        }
+                        points.push(equity);
+                    }
+
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: Array.from({ length: 21 }, (_, i) => i),
+                            datasets: [{
+                                label: 'Simulated Equity',
+                                data: points,
+                                borderColor: '#2563eb',
+                                borderWidth: 2,
+                                pointRadius: 0,
+                                fill: true,
+                                backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                                tension: 0.4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { display: false } },
+                            scales: { x: { display: false }, y: { display: false } }
+                        }
+                    });
+                })();
+            </script>
+
+        </div>
+        
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer style="text-align: center; padding: 2rem; color: #94a3b8; font-size: 0.8rem;">
+        Generated by Systematic TSS | Oracle Engine v2.0
+    </footer>
+
+</body>
+
+</html>

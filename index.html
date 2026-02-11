@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta charset="UTF-8">
@@ -7,7 +8,8 @@
     <title>Market Watch | Live Portfolios</title>
     <link rel="icon" href="https://market-watch.xyz/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <style>
         :root {
@@ -22,11 +24,31 @@
             --blue: #3b82f6;
             --amber: #f59e0b;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
 
-        header { text-align: center; margin-bottom: 2.5rem; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
         header h1 {
             font-size: 2rem;
             font-weight: 800;
@@ -40,6 +62,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+
         header h1 i {
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             -webkit-background-clip: text;
@@ -47,6 +70,7 @@
             background-clip: text;
             animation: pulse 2s infinite;
         }
+
         header p {
             color: var(--text-muted);
             font-size: 0.9rem;
@@ -55,6 +79,7 @@
             justify-content: center;
             gap: 0.5rem;
         }
+
         header .realtime-badge {
             display: inline-flex;
             align-items: center;
@@ -67,6 +92,7 @@
             font-weight: 600;
             color: var(--green);
         }
+
         header .realtime-badge .dot {
             width: 6px;
             height: 6px;
@@ -79,9 +105,13 @@
             column-count: 2;
             column-gap: 1.5rem;
         }
+
         @media (max-width: 1100px) {
-            .portfolios { column-count: 1; }
+            .portfolios {
+                column-count: 1;
+            }
         }
+
         .portfolio-section {
             break-inside: avoid;
             margin-bottom: 1.5rem;
@@ -89,11 +119,12 @@
             border-radius: 16px;
             overflow: hidden;
             border: 1px solid var(--border);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
         }
+
         .portfolio-section:hover {
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
             transform: translateY(-2px);
         }
 
@@ -114,8 +145,16 @@
             align-items: center;
             gap: 0.5rem;
         }
-        .portfolio-title i { font-size: 1rem; }
-        .portfolio-title h2 { font-size: 1rem; font-weight: 700; }
+
+        .portfolio-title i {
+            font-size: 1rem;
+        }
+
+        .portfolio-title h2 {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
         .portfolio-title .badge {
             font-size: 0.55rem;
             font-weight: 700;
@@ -128,9 +167,17 @@
             animation: livePulse 2s infinite;
             box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
         }
+
         @keyframes livePulse {
-            0%, 100% { box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3); }
-            50% { box-shadow: 0 2px 16px rgba(16, 185, 129, 0.5); }
+
+            0%,
+            100% {
+                box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 2px 16px rgba(16, 185, 129, 0.5);
+            }
         }
 
         .view-btn {
@@ -146,7 +193,10 @@
             font-size: 0.7rem;
             transition: all 0.2s;
         }
-        .view-btn:hover { background: #2563eb; }
+
+        .view-btn:hover {
+            background: #2563eb;
+        }
 
         .portfolio-metrics {
             display: flex;
@@ -161,11 +211,27 @@
             background: var(--bg-table);
             border-radius: 6px;
         }
-        .metric-value { font-size: 0.9rem; font-weight: 700; }
-        .metric-label { font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-top: 0.1rem; }
 
-        .positive { color: var(--green); }
-        .negative { color: var(--red); }
+        .metric-value {
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .metric-label {
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-top: 0.1rem;
+        }
+
+        .positive {
+            color: var(--green);
+        }
+
+        .negative {
+            color: var(--red);
+        }
 
         .equity-spark {
             flex: 1.5;
@@ -187,10 +253,12 @@
             transition: all 0.3s ease;
             border-left: 3px solid transparent;
         }
+
         .watchlist-header:hover {
             background: linear-gradient(90deg, #e2e8f0 0%, #f1f5f9 100%);
             border-left-color: var(--blue);
         }
+
         .watchlist-header h3 {
             font-size: 0.85rem;
             font-weight: 700;
@@ -199,9 +267,11 @@
             align-items: center;
             gap: 0.6rem;
         }
+
         .watchlist-header h3 i {
             color: var(--blue);
         }
+
         .watchlist-toggle {
             background: none;
             border: none;
@@ -210,7 +280,8 @@
             font-size: 0.9rem;
             transition: transform 0.3s;
         }
-        .watchlist-content.expanded + .watchlist-header .watchlist-toggle,
+
+        .watchlist-content.expanded+.watchlist-header .watchlist-toggle,
         .watchlist-header.expanded .watchlist-toggle {
             transform: rotate(180deg);
         }
@@ -219,22 +290,35 @@
             display: none;
             animation: slideDown 0.3s ease;
         }
-        .watchlist-content.expanded { display: block; }
+
+        .watchlist-content.expanded {
+            display: block;
+        }
+
         @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Table */
         .table-wrapper {
             overflow-x: hidden;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
             font-size: 0.8rem;
             table-layout: fixed;
         }
+
         th {
             background: var(--bg-table);
             padding: 0.4rem 0.35rem;
@@ -248,9 +332,21 @@
             white-space: nowrap;
             border-bottom: 1px solid var(--border);
         }
-        th:hover { color: var(--text); }
-        th .sort-icon { margin-left: 0.15rem; opacity: 0.4; font-size: 0.5rem; }
-        th.sorted .sort-icon { opacity: 1; color: var(--blue); }
+
+        th:hover {
+            color: var(--text);
+        }
+
+        th .sort-icon {
+            margin-left: 0.15rem;
+            opacity: 0.4;
+            font-size: 0.5rem;
+        }
+
+        th.sorted .sort-icon {
+            opacity: 1;
+            color: var(--blue);
+        }
 
         td {
             padding: 0.35rem 0.35rem;
@@ -258,10 +354,17 @@
             white-space: nowrap;
             vertical-align: middle;
         }
-        tr:last-child td { border-bottom: none; }
-        tr { transition: all 0.2s ease; }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr {
+            transition: all 0.2s ease;
+        }
+
         tr:hover {
-            background: linear-gradient(90deg, rgba(59,130,246,0.05) 0%, rgba(59,130,246,0.02) 100%);
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.05) 0%, rgba(59, 130, 246, 0.02) 100%);
             transform: scale(1.005);
         }
 
@@ -271,6 +374,7 @@
             gap: 0.5rem;
             min-width: 120px;
         }
+
         .symbol-logo {
             width: 32px;
             height: 32px;
@@ -286,27 +390,32 @@
             box-shadow: 0 2px 8px rgba(102, 126, 234, 0.25);
             overflow: hidden;
         }
+
         .symbol-logo img {
             width: 32px;
             height: 32px;
             border-radius: 8px;
             object-fit: cover;
         }
+
         .symbol-info {
             display: flex;
             flex-direction: column;
             gap: 0.2rem;
         }
+
         .symbol-name {
             font-weight: 700;
             font-size: 0.9rem;
             color: var(--text);
             letter-spacing: -0.02em;
         }
+
         .symbol-links {
             display: flex;
             gap: 0.3rem;
         }
+
         .symbol-link {
             display: inline-flex;
             align-items: center;
@@ -321,7 +430,12 @@
             text-decoration: none;
             transition: all 0.15s;
         }
-        .symbol-link:hover { background: var(--blue); color: white; transform: scale(1.1); }
+
+        .symbol-link:hover {
+            background: var(--blue);
+            color: white;
+            transform: scale(1.1);
+        }
 
         .pending-tag {
             display: inline-flex;
@@ -335,16 +449,28 @@
             border-radius: 4px;
             animation: pendingPulse 2s infinite;
         }
+
         @keyframes pendingPulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
         }
 
         .chart-cell {
             width: 90px;
             padding: 2px;
         }
-        .chart-cell > div { display: block; }
+
+        .chart-cell>div {
+            display: block;
+        }
+
         .chart-cell img {
             width: 90px;
             height: 36px;
@@ -354,10 +480,12 @@
             border: 1px solid var(--border);
             transition: transform 0.2s, box-shadow 0.2s;
         }
+
         .chart-cell img:hover {
             transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
+
         .chart-placeholder {
             width: 90px;
             height: 36px;
@@ -373,7 +501,11 @@
             font-weight: 600;
             transition: transform 0.2s, box-shadow 0.2s;
         }
-        .chart-placeholder i { font-size: 0.8rem; }
+
+        .chart-placeholder i {
+            font-size: 0.8rem;
+        }
+
         .chart-placeholder:hover {
             transform: scale(1.05);
             box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
@@ -385,21 +517,41 @@
             color: var(--text);
             transition: background-color 0.3s ease;
         }
+
         .price-cell.flash-up {
             animation: flashUp 0.6s ease;
         }
+
         .price-cell.flash-down {
             animation: flashDown 0.6s ease;
         }
+
         @keyframes flashUp {
-            0% { background-color: transparent; }
-            20% { background-color: rgba(16, 185, 129, 0.25); }
-            100% { background-color: transparent; }
+            0% {
+                background-color: transparent;
+            }
+
+            20% {
+                background-color: rgba(16, 185, 129, 0.25);
+            }
+
+            100% {
+                background-color: transparent;
+            }
         }
+
         @keyframes flashDown {
-            0% { background-color: transparent; }
-            20% { background-color: rgba(239, 68, 68, 0.25); }
-            100% { background-color: transparent; }
+            0% {
+                background-color: transparent;
+            }
+
+            20% {
+                background-color: rgba(239, 68, 68, 0.25);
+            }
+
+            100% {
+                background-color: transparent;
+            }
         }
 
         .change-cell {
@@ -407,14 +559,22 @@
             font-weight: 700;
             transition: background-color 0.3s ease;
         }
+
         .change-cell.flash-up {
             animation: flashUp 0.6s ease;
         }
+
         .change-cell.flash-down {
             animation: flashDown 0.6s ease;
         }
-        .change-positive { color: #10b981; }
-        .change-negative { color: #ef4444; }
+
+        .change-positive {
+            color: #10b981;
+        }
+
+        .change-negative {
+            color: #ef4444;
+        }
 
         .market-closed-badge {
             display: inline-block;
@@ -433,29 +593,71 @@
             color: var(--text-muted);
             white-space: nowrap;
         }
+
         .pnl-cell {
             font-size: 0.75rem;
             font-weight: 700;
             white-space: nowrap;
         }
-        .pnl-positive { color: var(--green); }
-        .pnl-negative { color: var(--red); }
+
+        .pnl-positive {
+            color: var(--green);
+        }
+
+        .pnl-negative {
+            color: var(--red);
+        }
 
         /* Responsive table */
         @media (max-width: 900px) {
-            .chart-cell { display: none; }
+            .chart-cell {
+                display: none;
+            }
         }
+
         @media (max-width: 700px) {
-            .symbol-logo { width: 28px; height: 28px; }
-            .symbol-logo img { width: 28px; height: 28px; }
-            .symbol-name { font-size: 0.85rem; }
-            .symbol-links { display: none; }
-            .price-cell { font-size: 0.75rem; }
-            .change-cell { font-size: 0.7rem; }
-            .pnl-cell { font-size: 0.7rem; }
-            .since-cell { font-size: 0.65rem; }
-            td { padding: 0.3rem 0.25rem; }
-            th { padding: 0.4rem 0.25rem; font-size: 0.6rem; }
+            .symbol-logo {
+                width: 28px;
+                height: 28px;
+            }
+
+            .symbol-logo img {
+                width: 28px;
+                height: 28px;
+            }
+
+            .symbol-name {
+                font-size: 0.85rem;
+            }
+
+            .symbol-links {
+                display: none;
+            }
+
+            .price-cell {
+                font-size: 0.75rem;
+            }
+
+            .change-cell {
+                font-size: 0.7rem;
+            }
+
+            .pnl-cell {
+                font-size: 0.7rem;
+            }
+
+            .since-cell {
+                font-size: 0.65rem;
+            }
+
+            td {
+                padding: 0.3rem 0.25rem;
+            }
+
+            th {
+                padding: 0.4rem 0.25rem;
+                font-size: 0.6rem;
+            }
         }
 
         /* Reason expandable - Simple checklist */
@@ -473,29 +675,41 @@
             font-size: 0.55rem;
             transition: all 0.2s;
         }
+
         .reason-toggle:hover {
             background: var(--blue);
             color: white;
         }
+
         .reason-toggle.expanded {
             background: var(--blue);
             color: white;
         }
+
         .reason-row {
             display: none;
         }
+
         .reason-row.visible {
             display: table-row;
             animation: reasonSlide 0.2s ease;
         }
+
         @keyframes reasonSlide {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
+
         .reason-row td {
             padding: 0 !important;
             border-bottom: 1px solid var(--border);
         }
+
         .reason-content {
             background: #f8fafc;
             margin: 0;
@@ -504,6 +718,7 @@
             max-width: 100%;
             overflow: hidden;
         }
+
         .reason-title {
             font-size: 0.75rem;
             font-weight: 700;
@@ -515,15 +730,18 @@
             word-wrap: break-word;
             overflow-wrap: break-word;
         }
+
         .reason-title i {
             color: var(--green);
             flex-shrink: 0;
         }
+
         .reason-list {
             list-style: none;
             margin: 0;
             padding: 0;
         }
+
         .reason-list li {
             display: flex;
             align-items: flex-start;
@@ -534,24 +752,33 @@
             word-wrap: break-word;
             overflow-wrap: break-word;
         }
+
         .reason-list li::before {
             content: "✓";
             color: var(--green);
             font-weight: 700;
             flex-shrink: 0;
         }
+
         .reason-list .label {
             color: var(--text-muted);
             font-weight: 500;
             flex-shrink: 0;
         }
+
         .reason-list .value {
             font-weight: 600;
             word-break: break-word;
         }
 
-        .text-right { text-align: right; }
-        .font-mono { font-family: 'SF Mono', Monaco, 'Courier New', monospace; font-size: 0.75rem; }
+        .text-right {
+            text-align: right;
+        }
+
+        .font-mono {
+            font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+            font-size: 0.75rem;
+        }
 
         .live-dot {
             display: inline-block;
@@ -562,13 +789,22 @@
             margin-left: 4px;
             vertical-align: middle;
         }
+
         .live-dot.connected {
             background: var(--green);
             animation: pulse 2s infinite;
         }
+
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
         }
 
         /* Fullscreen Chart Dialog */
@@ -584,15 +820,23 @@
             animation: fadeIn 0.2s ease;
             padding: 1rem;
         }
+
         .chart-dialog-overlay.visible {
             display: flex;
             align-items: center;
             justify-content: center;
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
+
         .chart-dialog {
             background: #0f172a;
             border-radius: 20px;
@@ -607,37 +851,50 @@
             display: flex;
             flex-direction: column;
         }
+
         @keyframes scaleIn {
-            from { transform: scale(0.95); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
+
         .chart-dialog-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1.25rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
+
         .chart-dialog-title {
             display: flex;
             align-items: center;
             gap: 1rem;
         }
+
         .chart-dialog-title h3 {
             font-size: 1.75rem;
             font-weight: 800;
             color: white;
             letter-spacing: -0.02em;
         }
+
         .chart-dialog-links {
             display: flex;
             gap: 0.6rem;
         }
+
         .chart-dialog-links a {
             padding: 0.5rem 1rem;
-            background: rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.8);
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
             border-radius: 8px;
             font-size: 0.8rem;
@@ -647,18 +904,20 @@
             align-items: center;
             gap: 0.4rem;
         }
+
         .chart-dialog-links a:hover {
             background: var(--blue);
             color: white;
             transform: translateY(-2px);
         }
+
         .chart-dialog-close {
             width: 44px;
             height: 44px;
             border-radius: 12px;
             border: none;
-            background: rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.6);
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -666,11 +925,13 @@
             font-size: 1.25rem;
             transition: all 0.2s;
         }
+
         .chart-dialog-close:hover {
             background: var(--red);
             color: white;
             transform: rotate(90deg) scale(1.05);
         }
+
         .chart-dialog-body {
             flex: 1;
             display: flex;
@@ -678,6 +939,7 @@
             justify-content: center;
             overflow: hidden;
         }
+
         .chart-dialog-image {
             width: 100%;
             max-height: calc(95vh - 120px);
@@ -695,11 +957,40 @@
             border-top: 1px solid var(--border);
         }
 
-        .loading { text-align: center; padding: 4rem; color: var(--text-muted); }
-        .no-data { text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: 0.8rem; }
+        .loading {
+            text-align: center;
+            padding: 4rem;
+            color: var(--text-muted);
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
     </style>
 </head>
+
 <body>
+    <nav
+        style="display:flex;align-items:center;justify-content:space-between;padding:0.75rem 2rem;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+        <a href="/"
+            style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;color:var(--text);font-weight:800;font-size:1.1rem;">
+            <i class="fas fa-broadcast-tower" style="color:var(--green);"></i> Market Watch
+        </a>
+        <div style="display:flex;gap:0.4rem;">
+            <a href="/"
+                style="color:var(--blue);background:rgba(59,130,246,0.08);text-decoration:none;padding:0.4rem 0.8rem;border-radius:6px;font-size:0.8rem;font-weight:600;"><i
+                    class="fas fa-chart-line"></i> Portfolios</a>
+            <a href="/opportunities/"
+                style="color:var(--text-muted);text-decoration:none;padding:0.4rem 0.8rem;border-radius:6px;font-size:0.8rem;font-weight:500;"><i
+                    class="fas fa-crosshairs"></i> Opportunities</a>
+            <a href="/backtest/"
+                style="color:var(--text-muted);text-decoration:none;padding:0.4rem 0.8rem;border-radius:6px;font-size:0.8rem;font-weight:500;"><i
+                    class="fas fa-flask"></i> Backtests</a>
+        </div>
+    </nav>
     <div class="container">
         <header>
             <h1><i class="fas fa-broadcast-tower"></i> Live Portfolios</h1>
@@ -724,7 +1015,8 @@
                 <div class="chart-dialog-title">
                     <h3 id="chartDialogSymbol">AAPL</h3>
                     <div class="chart-dialog-links">
-                        <a id="chartDialogYahoo" href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Yahoo</a>
+                        <a id="chartDialogYahoo" href="#" target="_blank"><i class="fas fa-external-link-alt"></i>
+                            Yahoo</a>
                         <a id="chartDialogTV" href="#" target="_blank"><i class="fas fa-chart-line"></i> TradingView</a>
                         <a id="chartDialogFinviz" href="#" target="_blank"><i class="fas fa-chart-area"></i> Finviz</a>
                     </div>
@@ -733,7 +1025,8 @@
             </div>
             <div class="chart-dialog-body">
                 <img id="chartDialogImage" class="chart-dialog-image" src="" alt="Chart">
-                <div id="chartDialogWidget" class="chart-dialog-widget" style="display:none;width:100%;height:500px;"></div>
+                <div id="chartDialogWidget" class="chart-dialog-widget" style="display:none;width:100%;height:500px;">
+                </div>
             </div>
         </div>
     </div>
@@ -743,467 +1036,467 @@
     </footer>
 
     <script>
-    const DEFAULT_INITIAL_CAPITAL = 100000;
+        const DEFAULT_INITIAL_CAPITAL = 100000;
 
-    function formatCurrency(val, decimals = 0) {
-        return '$' + val.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
-    }
+        function formatCurrency(val, decimals = 0) {
+            return '$' + val.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+        }
 
-    function formatPct(val, decimals = 1) {
-        const sign = val >= 0 ? '+' : '';
-        return sign + val.toFixed(decimals) + '%';
-    }
+        function formatPct(val, decimals = 1) {
+            const sign = val >= 0 ? '+' : '';
+            return sign + val.toFixed(decimals) + '%';
+        }
 
-    function formatSinceDate(dateStr) {
-        if (!dateStr) return '-';
-        try {
-            const date = new Date(dateStr);
+        function formatSinceDate(dateStr) {
+            if (!dateStr) return '-';
+            try {
+                const date = new Date(dateStr);
+                const now = new Date();
+                const diffMs = now - date;
+                const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+                if (diffDays === 0) return 'Today';
+                if (diffDays === 1) return '1d ago';
+                if (diffDays < 7) return diffDays + 'd ago';
+                if (diffDays < 30) return Math.floor(diffDays / 7) + 'w ago';
+                if (diffDays < 365) return Math.floor(diffDays / 30) + 'mo ago';
+                return Math.floor(diffDays / 365) + 'y ago';
+            } catch (e) {
+                return dateStr.substring(5, 10); // MM-DD fallback
+            }
+        }
+
+        function createEquitySparkline(canvasId, data, color, initialCapital) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+
+            // Use portfolio's initial capital or default
+            const startCapital = initialCapital || DEFAULT_INITIAL_CAPITAL;
+
+            // If no data or single point, show flat line at initial capital
+            let chartData = data;
+            if (!data || data.length < 2) {
+                chartData = [startCapital, startCapital];
+            }
+
+            new Chart(canvas, {
+                type: 'line',
+                data: {
+                    labels: chartData.map((_, i) => i),
+                    datasets: [{
+                        data: chartData,
+                        borderColor: color,
+                        borderWidth: 2,
+                        fill: true,
+                        backgroundColor: color + '15',
+                        pointRadius: 0,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false }, tooltip: { enabled: false } },
+                    scales: { x: { display: false }, y: { display: false } },
+                    animation: false
+                }
+            });
+        }
+
+        // Check if symbol is US (no dot suffix) or non-US (.DE, .PA, .L, etc.)
+        function isUSSymbol(symbol) {
+            return !symbol.includes('.');
+        }
+
+        // Market hours detection
+        // Returns: { isOpen: bool, exchange: string }
+        function getMarketStatus(symbol) {
             const now = new Date();
-            const diffMs = now - date;
-            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            const dayOfWeek = now.getDay(); // 0=Sun, 6=Sat
 
-            if (diffDays === 0) return 'Today';
-            if (diffDays === 1) return '1d ago';
-            if (diffDays < 7) return diffDays + 'd ago';
-            if (diffDays < 30) return Math.floor(diffDays / 7) + 'w ago';
-            if (diffDays < 365) return Math.floor(diffDays / 30) + 'mo ago';
-            return Math.floor(diffDays / 365) + 'y ago';
-        } catch (e) {
-            return dateStr.substring(5, 10); // MM-DD fallback
-        }
-    }
-
-    function createEquitySparkline(canvasId, data, color, initialCapital) {
-        const canvas = document.getElementById(canvasId);
-        if (!canvas) return;
-
-        // Use portfolio's initial capital or default
-        const startCapital = initialCapital || DEFAULT_INITIAL_CAPITAL;
-
-        // If no data or single point, show flat line at initial capital
-        let chartData = data;
-        if (!data || data.length < 2) {
-            chartData = [startCapital, startCapital];
-        }
-
-        new Chart(canvas, {
-            type: 'line',
-            data: {
-                labels: chartData.map((_, i) => i),
-                datasets: [{
-                    data: chartData,
-                    borderColor: color,
-                    borderWidth: 2,
-                    fill: true,
-                    backgroundColor: color + '15',
-                    pointRadius: 0,
-                    tension: 0.3
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false }, tooltip: { enabled: false } },
-                scales: { x: { display: false }, y: { display: false } },
-                animation: false
+            // Weekend check
+            if (dayOfWeek === 0 || dayOfWeek === 6) {
+                return { isOpen: false, exchange: 'Weekend' };
             }
-        });
-    }
 
-    // Check if symbol is US (no dot suffix) or non-US (.DE, .PA, .L, etc.)
-    function isUSSymbol(symbol) {
-        return !symbol.includes('.');
-    }
+            // Get hours in different timezones
+            const utcHour = now.getUTCHours();
+            const utcMinutes = now.getUTCMinutes();
+            const utcTime = utcHour + utcMinutes / 60;
 
-    // Market hours detection
-    // Returns: { isOpen: bool, exchange: string }
-    function getMarketStatus(symbol) {
-        const now = new Date();
-        const dayOfWeek = now.getDay(); // 0=Sun, 6=Sat
+            // Determine exchange from symbol suffix
+            const suffix = symbol.includes('.') ? symbol.split('.').pop().toUpperCase() : 'US';
 
-        // Weekend check
-        if (dayOfWeek === 0 || dayOfWeek === 6) {
-            return { isOpen: false, exchange: 'Weekend' };
-        }
+            // Market hours (UTC) - approximate, doesn't account for DST perfectly
+            // US: NYSE/NASDAQ 14:30-21:00 UTC (9:30-16:00 ET)
+            // UK: LSE 8:00-16:30 UTC
+            // Germany: XETRA 8:00-16:30 UTC (winter) / 7:00-15:30 UTC (summer)
+            // France/Netherlands: Euronext 8:00-16:30 UTC
+            // Japan: TSE 0:00-6:00 UTC (9:00-15:00 JST with lunch break)
+            // Hong Kong: HKEX 1:30-8:00 UTC (9:30-16:00 HKT with lunch break)
 
-        // Get hours in different timezones
-        const utcHour = now.getUTCHours();
-        const utcMinutes = now.getUTCMinutes();
-        const utcTime = utcHour + utcMinutes / 60;
-
-        // Determine exchange from symbol suffix
-        const suffix = symbol.includes('.') ? symbol.split('.').pop().toUpperCase() : 'US';
-
-        // Market hours (UTC) - approximate, doesn't account for DST perfectly
-        // US: NYSE/NASDAQ 14:30-21:00 UTC (9:30-16:00 ET)
-        // UK: LSE 8:00-16:30 UTC
-        // Germany: XETRA 8:00-16:30 UTC (winter) / 7:00-15:30 UTC (summer)
-        // France/Netherlands: Euronext 8:00-16:30 UTC
-        // Japan: TSE 0:00-6:00 UTC (9:00-15:00 JST with lunch break)
-        // Hong Kong: HKEX 1:30-8:00 UTC (9:30-16:00 HKT with lunch break)
-
-        const marketHours = {
-            'US': { open: 14.5, close: 21, name: 'US' },     // NYSE/NASDAQ
-            'L': { open: 8, close: 16.5, name: 'LSE' },      // London
-            'DE': { open: 8, close: 16.5, name: 'XETRA' },   // Germany
-            'F': { open: 8, close: 16.5, name: 'Frankfurt' },
-            'PA': { open: 8, close: 16.5, name: 'Euronext' }, // Paris
-            'AS': { open: 8, close: 16.5, name: 'Euronext' }, // Amsterdam
-            'BR': { open: 8, close: 16.5, name: 'Euronext' }, // Brussels
-            'MI': { open: 8, close: 16.5, name: 'Milan' },    // Italy
-            'MC': { open: 8, close: 16.5, name: 'Madrid' },   // Spain
-            'SW': { open: 8, close: 16.5, name: 'SIX' },      // Switzerland
-            'VX': { open: 8, close: 16.5, name: 'SIX' },
-            'ST': { open: 8, close: 16.5, name: 'Stockholm' },
-            'CO': { open: 8, close: 16.5, name: 'Copenhagen' },
-            'HE': { open: 8, close: 16.5, name: 'Helsinki' },
-            'OL': { open: 8, close: 16.5, name: 'Oslo' },
-            'T': { open: 0, close: 6, name: 'Tokyo' },        // Japan
-            'HK': { open: 1.5, close: 8, name: 'Hong Kong' }, // HK
-            'AX': { open: 23, close: 6, name: 'ASX' },        // Australia (crosses midnight UTC)
-            'TO': { open: 14.5, close: 21, name: 'TSX' },     // Canada
-            'SA': { open: 13, close: 20, name: 'Bovespa' },   // Brazil
-        };
-
-        const market = marketHours[suffix] || marketHours['US'];
-
-        // Handle markets that cross midnight (like ASX)
-        let isOpen;
-        if (market.open > market.close) {
-            // Market crosses midnight UTC
-            isOpen = utcTime >= market.open || utcTime < market.close;
-        } else {
-            isOpen = utcTime >= market.open && utcTime < market.close;
-        }
-
-        return { isOpen, exchange: market.name };
-    }
-
-    // Check if ANY market is currently open (for header display)
-    function isAnyMarketOpen() {
-        const symbols = getAllSymbols();
-        return symbols.some(s => getMarketStatus(s).isOpen);
-    }
-
-    // Convert symbol to TradingView format (e.g., "SAP.DE" -> "XETR:SAP")
-    function getTradingViewSymbol(symbol) {
-        if (isUSSymbol(symbol)) return symbol;
-        const parts = symbol.split('.');
-        const ticker = parts[0];
-        const suffix = parts[1]?.toUpperCase();
-        const exchangeMap = {
-            'DE': 'XETR', 'F': 'FWB',
-            'PA': 'EURONEXT', 'AS': 'EURONEXT', 'BR': 'EURONEXT', 'LS': 'EURONEXT',
-            'MI': 'MIL', 'MC': 'BME',
-            'L': 'LSE', 'SW': 'SIX', 'VX': 'SIX',
-            'ST': 'STO', 'CO': 'CSE', 'HE': 'HEL', 'OL': 'OSL',
-            'TO': 'TSX', 'AX': 'ASX',
-            'HK': 'HKEX', 'T': 'TSE',
-            'SS': 'SSE', 'SZ': 'SZSE'
-        };
-        const exchange = exchangeMap[suffix] || suffix;
-        return `${exchange}:${ticker}`;
-    }
-
-    function getChartUrl(symbol) {
-        if (isUSSymbol(symbol)) {
-            // Finviz for US stocks (better charts with indicators)
-            return `https://charts2.finviz.com/chart.ashx?t=${symbol}&ty=c&ta=0&p=d&s=m`;
-        }
-        // TradingView mini chart for non-US (via their chart image API)
-        const tvSymbol = getTradingViewSymbol(symbol);
-        return `https://s3.tradingview.com/snapshots/m/mWbWXfKf.png`; // Placeholder - TV doesn't have simple image API
-    }
-
-    function getChartUrlLarge(symbol) {
-        if (isUSSymbol(symbol)) {
-            return `https://charts2.finviz.com/chart.ashx?t=${symbol}&ty=c&ta=1&p=d&s=l`;
-        }
-        // For non-US, we'll show TradingView widget in dialog instead
-        return null;
-    }
-
-    function openChartDialog(symbol) {
-        const dialog = document.getElementById('chartDialog');
-        const img = document.getElementById('chartDialogImage');
-        const tvWidget = document.getElementById('chartDialogWidget');
-        const symbolEl = document.getElementById('chartDialogSymbol');
-        const yahooLink = document.getElementById('chartDialogYahoo');
-        const tvLink = document.getElementById('chartDialogTV');
-        const finvizLink = document.getElementById('chartDialogFinviz');
-
-        symbolEl.textContent = symbol;
-
-        if (isUSSymbol(symbol)) {
-            // US: Show Finviz image
-            img.src = getChartUrlLarge(symbol);
-            img.style.display = 'block';
-            if (tvWidget) tvWidget.style.display = 'none';
-            finvizLink.style.display = 'flex';
-        } else {
-            // Non-US: Show TradingView widget
-            img.style.display = 'none';
-            if (tvWidget) {
-                tvWidget.style.display = 'block';
-                const tvSymbol = getTradingViewSymbol(symbol);
-                tvWidget.innerHTML = `<iframe src="https://s.tradingview.com/widgetembed/?symbol=${encodeURIComponent(tvSymbol)}&interval=D&theme=dark&style=1&locale=en&toolbar_bg=%23f1f3f6&enable_publishing=false&hide_top_toolbar=false&hide_legend=false&save_image=false&height=100%25&width=100%25" style="width:100%;height:100%;border:none;"></iframe>`;
-            }
-            finvizLink.style.display = 'none';
-        }
-
-        yahooLink.href = `https://finance.yahoo.com/quote/${symbol}`;
-        const tvSymbol = isUSSymbol(symbol) ? symbol : getTradingViewSymbol(symbol);
-        tvLink.href = `https://www.tradingview.com/chart/?symbol=${tvSymbol}`;
-        finvizLink.href = `https://finviz.com/quote.ashx?t=${symbol}`;
-
-        dialog.classList.add('visible');
-        document.body.style.overflow = 'hidden';
-
-        // Close on Escape key
-        document.addEventListener('keydown', handleEscKey);
-    }
-
-    function closeChartDialog(event) {
-        if (event && event.target !== document.getElementById('chartDialog')) return;
-        const dialog = document.getElementById('chartDialog');
-        dialog.classList.remove('visible');
-        document.body.style.overflow = '';
-        document.removeEventListener('keydown', handleEscKey);
-    }
-
-    function handleEscKey(e) {
-        if (e.key === 'Escape') closeChartDialog();
-    }
-
-    function sortData(data, column, direction) {
-        return [...data].sort((a, b) => {
-            let valA = a[column];
-            let valB = b[column];
-            if (typeof valA === 'string') {
-                return direction === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
-            }
-            return direction === 'asc' ? valA - valB : valB - valA;
-        });
-    }
-
-    function getLogoUrl(symbol) {
-        // Try multiple logo sources
-        const clean = symbol.replace(/[^A-Za-z]/g, '').toUpperCase();
-        return `https://assets.parqet.com/logos/symbol/${symbol}?format=jpg`;
-    }
-
-    function getLogoFallback(symbol) {
-        // Generate gradient color based on symbol
-        const colors = [
-            ['#667eea', '#764ba2'], ['#f093fb', '#f5576c'], ['#4facfe', '#00f2fe'],
-            ['#43e97b', '#38f9d7'], ['#fa709a', '#fee140'], ['#a8edea', '#fed6e3'],
-            ['#ff9a9e', '#fecfef'], ['#a18cd1', '#fbc2eb'], ['#ffecd2', '#fcb69f'],
-            ['#ff8177', '#b12a5b'], ['#c471f5', '#fa71cd'], ['#48c6ef', '#6f86d6']
-        ];
-        const idx = symbol.charCodeAt(0) % colors.length;
-        return colors[idx];
-    }
-
-    // Parse reason string into structured checklist items
-    // Supports multiple formats:
-    // 1. Pipe format: "Main Action | Key=Val | Key2=Val2"
-    // 2. Sentence format: "ACTION: Description with $price, -X% change, etc."
-    function parseReason(reason) {
-        if (!reason) return { main: null, items: [] };
-
-        const items = [];
-        let main = null;
-
-        // Check if it's a sentence format (e.g., "DCA_ADD: ..." or "STOP_LOSS: ...")
-        const sentenceMatch = reason.match(/^([A-Z_]+):\s*(.+)$/);
-        if (sentenceMatch) {
-            const actionType = sentenceMatch[1];
-            const description = sentenceMatch[2];
-
-            // Format main action nicely
-            const actionLabels = {
-                'DCA_ADD': 'DCA - Adding Position',
-                'STOP_LOSS': 'Stop Loss Triggered',
-                'TAKE_PROFIT': 'Take Profit',
-                'FRACTAL_BUY': 'Fractal Breakout',
-                'TREND_ENTRY': 'Trend Entry',
-                'MOMENTUM': 'Momentum Signal'
+            const marketHours = {
+                'US': { open: 14.5, close: 21, name: 'US' },     // NYSE/NASDAQ
+                'L': { open: 8, close: 16.5, name: 'LSE' },      // London
+                'DE': { open: 8, close: 16.5, name: 'XETRA' },   // Germany
+                'F': { open: 8, close: 16.5, name: 'Frankfurt' },
+                'PA': { open: 8, close: 16.5, name: 'Euronext' }, // Paris
+                'AS': { open: 8, close: 16.5, name: 'Euronext' }, // Amsterdam
+                'BR': { open: 8, close: 16.5, name: 'Euronext' }, // Brussels
+                'MI': { open: 8, close: 16.5, name: 'Milan' },    // Italy
+                'MC': { open: 8, close: 16.5, name: 'Madrid' },   // Spain
+                'SW': { open: 8, close: 16.5, name: 'SIX' },      // Switzerland
+                'VX': { open: 8, close: 16.5, name: 'SIX' },
+                'ST': { open: 8, close: 16.5, name: 'Stockholm' },
+                'CO': { open: 8, close: 16.5, name: 'Copenhagen' },
+                'HE': { open: 8, close: 16.5, name: 'Helsinki' },
+                'OL': { open: 8, close: 16.5, name: 'Oslo' },
+                'T': { open: 0, close: 6, name: 'Tokyo' },        // Japan
+                'HK': { open: 1.5, close: 8, name: 'Hong Kong' }, // HK
+                'AX': { open: 23, close: 6, name: 'ASX' },        // Australia (crosses midnight UTC)
+                'TO': { open: 14.5, close: 21, name: 'TSX' },     // Canada
+                'SA': { open: 13, close: 20, name: 'Bovespa' },   // Brazil
             };
-            main = actionLabels[actionType] || actionType.replace(/_/g, ' ');
 
-            // Extract key metrics from sentence
-            // Price: $X.XX
-            const priceMatch = description.match(/price\s+\$?([\d.]+)/i);
-            if (priceMatch) items.push({ key: 'Price', val: '$' + priceMatch[1], type: 'info' });
+            const market = marketHours[suffix] || marketHours['US'];
 
-            // Percent change: -X.X% or +X.X%
-            const pctMatch = description.match(/([+-]?\d+\.?\d*)%\s*(below|above)?/i);
-            if (pctMatch) {
-                const pct = parseFloat(pctMatch[1]);
-                const dir = pctMatch[2] || '';
-                items.push({
-                    key: dir ? `${dir.charAt(0).toUpperCase() + dir.slice(1)} Avg` : 'Change',
-                    val: (pct >= 0 ? '+' : '') + pct + '%',
-                    type: pct < 0 ? 'good' : 'warn'  // Below avg is good for DCA
-                });
+            // Handle markets that cross midnight (like ASX)
+            let isOpen;
+            if (market.open > market.close) {
+                // Market crosses midnight UTC
+                isOpen = utcTime >= market.open || utcTime < market.close;
+            } else {
+                isOpen = utcTime >= market.open && utcTime < market.close;
             }
 
-            // Shares: X shares or X total shares
-            const sharesMatch = description.match(/([\d,]+)\s+(?:total\s+)?shares/i);
-            if (sharesMatch) items.push({ key: 'Shares', val: sharesMatch[1], type: 'info' });
+            return { isOpen, exchange: market.name };
+        }
 
-            // Position size: $XK position or ($XK)
-            const posMatch = description.match(/\$(\d+K?)\s*(?:position)?/i);
-            if (posMatch && !priceMatch) items.push({ key: 'Position', val: '$' + posMatch[1], type: 'info' });
+        // Check if ANY market is currently open (for header display)
+        function isAnyMarketOpen() {
+            const symbols = getAllSymbols();
+            return symbols.some(s => getMarketStatus(s).isOpen);
+        }
 
-            // Tranche: X/Y
-            const trancheMatch = description.match(/tranche\s+(\d+\/\d+)/i);
-            if (trancheMatch) items.push({ key: 'Tranche', val: trancheMatch[1], type: 'info' });
+        // Convert symbol to TradingView format (e.g., "SAP.DE" -> "XETR:SAP")
+        function getTradingViewSymbol(symbol) {
+            if (isUSSymbol(symbol)) return symbol;
+            const parts = symbol.split('.');
+            const ticker = parts[0];
+            const suffix = parts[1]?.toUpperCase();
+            const exchangeMap = {
+                'DE': 'XETR', 'F': 'FWB',
+                'PA': 'EURONEXT', 'AS': 'EURONEXT', 'BR': 'EURONEXT', 'LS': 'EURONEXT',
+                'MI': 'MIL', 'MC': 'BME',
+                'L': 'LSE', 'SW': 'SIX', 'VX': 'SIX',
+                'ST': 'STO', 'CO': 'CSE', 'HE': 'HEL', 'OL': 'OSL',
+                'TO': 'TSX', 'AX': 'ASX',
+                'HK': 'HKEX', 'T': 'TSE',
+                'SS': 'SSE', 'SZ': 'SZSE'
+            };
+            const exchange = exchangeMap[suffix] || suffix;
+            return `${exchange}:${ticker}`;
+        }
 
-            // Avg entry
-            const avgMatch = description.match(/avg\s+(?:entry\s+)?\$?([\d.]+)/i);
-            if (avgMatch) items.push({ key: 'Avg Entry', val: '$' + avgMatch[1], type: 'info' });
+        function getChartUrl(symbol) {
+            if (isUSSymbol(symbol)) {
+                // Finviz for US stocks (better charts with indicators)
+                return `https://charts2.finviz.com/chart.ashx?t=${symbol}&ty=c&ta=0&p=d&s=m`;
+            }
+            // TradingView mini chart for non-US (via their chart image API)
+            const tvSymbol = getTradingViewSymbol(symbol);
+            return `https://s3.tradingview.com/snapshots/m/mWbWXfKf.png`; // Placeholder - TV doesn't have simple image API
+        }
+
+        function getChartUrlLarge(symbol) {
+            if (isUSSymbol(symbol)) {
+                return `https://charts2.finviz.com/chart.ashx?t=${symbol}&ty=c&ta=1&p=d&s=l`;
+            }
+            // For non-US, we'll show TradingView widget in dialog instead
+            return null;
+        }
+
+        function openChartDialog(symbol) {
+            const dialog = document.getElementById('chartDialog');
+            const img = document.getElementById('chartDialogImage');
+            const tvWidget = document.getElementById('chartDialogWidget');
+            const symbolEl = document.getElementById('chartDialogSymbol');
+            const yahooLink = document.getElementById('chartDialogYahoo');
+            const tvLink = document.getElementById('chartDialogTV');
+            const finvizLink = document.getElementById('chartDialogFinviz');
+
+            symbolEl.textContent = symbol;
+
+            if (isUSSymbol(symbol)) {
+                // US: Show Finviz image
+                img.src = getChartUrlLarge(symbol);
+                img.style.display = 'block';
+                if (tvWidget) tvWidget.style.display = 'none';
+                finvizLink.style.display = 'flex';
+            } else {
+                // Non-US: Show TradingView widget
+                img.style.display = 'none';
+                if (tvWidget) {
+                    tvWidget.style.display = 'block';
+                    const tvSymbol = getTradingViewSymbol(symbol);
+                    tvWidget.innerHTML = `<iframe src="https://s.tradingview.com/widgetembed/?symbol=${encodeURIComponent(tvSymbol)}&interval=D&theme=dark&style=1&locale=en&toolbar_bg=%23f1f3f6&enable_publishing=false&hide_top_toolbar=false&hide_legend=false&save_image=false&height=100%25&width=100%25" style="width:100%;height:100%;border:none;"></iframe>`;
+                }
+                finvizLink.style.display = 'none';
+            }
+
+            yahooLink.href = `https://finance.yahoo.com/quote/${symbol}`;
+            const tvSymbol = isUSSymbol(symbol) ? symbol : getTradingViewSymbol(symbol);
+            tvLink.href = `https://www.tradingview.com/chart/?symbol=${tvSymbol}`;
+            finvizLink.href = `https://finviz.com/quote.ashx?t=${symbol}`;
+
+            dialog.classList.add('visible');
+            document.body.style.overflow = 'hidden';
+
+            // Close on Escape key
+            document.addEventListener('keydown', handleEscKey);
+        }
+
+        function closeChartDialog(event) {
+            if (event && event.target !== document.getElementById('chartDialog')) return;
+            const dialog = document.getElementById('chartDialog');
+            dialog.classList.remove('visible');
+            document.body.style.overflow = '';
+            document.removeEventListener('keydown', handleEscKey);
+        }
+
+        function handleEscKey(e) {
+            if (e.key === 'Escape') closeChartDialog();
+        }
+
+        function sortData(data, column, direction) {
+            return [...data].sort((a, b) => {
+                let valA = a[column];
+                let valB = b[column];
+                if (typeof valA === 'string') {
+                    return direction === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
+                }
+                return direction === 'asc' ? valA - valB : valB - valA;
+            });
+        }
+
+        function getLogoUrl(symbol) {
+            // Try multiple logo sources
+            const clean = symbol.replace(/[^A-Za-z]/g, '').toUpperCase();
+            return `https://assets.parqet.com/logos/symbol/${symbol}?format=jpg`;
+        }
+
+        function getLogoFallback(symbol) {
+            // Generate gradient color based on symbol
+            const colors = [
+                ['#667eea', '#764ba2'], ['#f093fb', '#f5576c'], ['#4facfe', '#00f2fe'],
+                ['#43e97b', '#38f9d7'], ['#fa709a', '#fee140'], ['#a8edea', '#fed6e3'],
+                ['#ff9a9e', '#fecfef'], ['#a18cd1', '#fbc2eb'], ['#ffecd2', '#fcb69f'],
+                ['#ff8177', '#b12a5b'], ['#c471f5', '#fa71cd'], ['#48c6ef', '#6f86d6']
+            ];
+            const idx = symbol.charCodeAt(0) % colors.length;
+            return colors[idx];
+        }
+
+        // Parse reason string into structured checklist items
+        // Supports multiple formats:
+        // 1. Pipe format: "Main Action | Key=Val | Key2=Val2"
+        // 2. Sentence format: "ACTION: Description with $price, -X% change, etc."
+        function parseReason(reason) {
+            if (!reason) return { main: null, items: [] };
+
+            const items = [];
+            let main = null;
+
+            // Check if it's a sentence format (e.g., "DCA_ADD: ..." or "STOP_LOSS: ...")
+            const sentenceMatch = reason.match(/^([A-Z_]+):\s*(.+)$/);
+            if (sentenceMatch) {
+                const actionType = sentenceMatch[1];
+                const description = sentenceMatch[2];
+
+                // Format main action nicely
+                const actionLabels = {
+                    'DCA_ADD': 'DCA - Adding Position',
+                    'STOP_LOSS': 'Stop Loss Triggered',
+                    'TAKE_PROFIT': 'Take Profit',
+                    'FRACTAL_BUY': 'Fractal Breakout',
+                    'TREND_ENTRY': 'Trend Entry',
+                    'MOMENTUM': 'Momentum Signal'
+                };
+                main = actionLabels[actionType] || actionType.replace(/_/g, ' ');
+
+                // Extract key metrics from sentence
+                // Price: $X.XX
+                const priceMatch = description.match(/price\s+\$?([\d.]+)/i);
+                if (priceMatch) items.push({ key: 'Price', val: '$' + priceMatch[1], type: 'info' });
+
+                // Percent change: -X.X% or +X.X%
+                const pctMatch = description.match(/([+-]?\d+\.?\d*)%\s*(below|above)?/i);
+                if (pctMatch) {
+                    const pct = parseFloat(pctMatch[1]);
+                    const dir = pctMatch[2] || '';
+                    items.push({
+                        key: dir ? `${dir.charAt(0).toUpperCase() + dir.slice(1)} Avg` : 'Change',
+                        val: (pct >= 0 ? '+' : '') + pct + '%',
+                        type: pct < 0 ? 'good' : 'warn'  // Below avg is good for DCA
+                    });
+                }
+
+                // Shares: X shares or X total shares
+                const sharesMatch = description.match(/([\d,]+)\s+(?:total\s+)?shares/i);
+                if (sharesMatch) items.push({ key: 'Shares', val: sharesMatch[1], type: 'info' });
+
+                // Position size: $XK position or ($XK)
+                const posMatch = description.match(/\$(\d+K?)\s*(?:position)?/i);
+                if (posMatch && !priceMatch) items.push({ key: 'Position', val: '$' + posMatch[1], type: 'info' });
+
+                // Tranche: X/Y
+                const trancheMatch = description.match(/tranche\s+(\d+\/\d+)/i);
+                if (trancheMatch) items.push({ key: 'Tranche', val: trancheMatch[1], type: 'info' });
+
+                // Avg entry
+                const avgMatch = description.match(/avg\s+(?:entry\s+)?\$?([\d.]+)/i);
+                if (avgMatch) items.push({ key: 'Avg Entry', val: '$' + avgMatch[1], type: 'info' });
+
+                return { main, items };
+            }
+
+            // Pipe format: "Main | Key=Val | Key2=Val2 || Section"
+            const parts = reason.split('||').map(s => s.trim());
+            parts.forEach((section, idx) => {
+                const subParts = section.split('|').map(s => s.trim()).filter(s => s);
+
+                subParts.forEach((part, i) => {
+                    if (idx === 0 && i === 0) {
+                        main = part;
+                        return;
+                    }
+
+                    const kvMatch = part.match(/^([^=:]+)[=:](.+)$/);
+                    if (kvMatch) {
+                        const key = kvMatch[1].trim();
+                        const val = kvMatch[2].trim();
+                        let type = 'info';
+                        const keyLower = key.toLowerCase();
+                        const valNum = parseFloat(val);
+
+                        if (keyLower.includes('score') && valNum >= 50) type = 'good';
+                        else if (keyLower.includes('risk')) type = 'warn';
+                        else if (keyLower.includes('rsi') && valNum > 70) type = 'warn';
+                        else if (keyLower.includes('rsi') && valNum < 30) type = 'good';
+                        else if (keyLower.includes('mom') && valNum > 0) type = 'good';
+                        else if (keyLower.includes('dist') && valNum > 0) type = 'good';
+
+                        items.push({ key, val, type });
+                    } else {
+                        let type = 'neutral';
+                        const lower = part.toLowerCase();
+                        if (lower.includes('bullish') || lower.includes('breakout')) type = 'good';
+                        else if (lower.includes('bearish') || lower.includes('overbought')) type = 'warn';
+                        items.push({ text: part, type });
+                    }
+                });
+            });
 
             return { main, items };
         }
 
-        // Pipe format: "Main | Key=Val | Key2=Val2 || Section"
-        const parts = reason.split('||').map(s => s.trim());
-        parts.forEach((section, idx) => {
-            const subParts = section.split('|').map(s => s.trim()).filter(s => s);
+        function renderReasonChecklist(reason) {
+            const { main, items } = parseReason(reason);
 
-            subParts.forEach((part, i) => {
-                if (idx === 0 && i === 0) {
-                    main = part;
-                    return;
-                }
-
-                const kvMatch = part.match(/^([^=:]+)[=:](.+)$/);
-                if (kvMatch) {
-                    const key = kvMatch[1].trim();
-                    const val = kvMatch[2].trim();
-                    let type = 'info';
-                    const keyLower = key.toLowerCase();
-                    const valNum = parseFloat(val);
-
-                    if (keyLower.includes('score') && valNum >= 50) type = 'good';
-                    else if (keyLower.includes('risk')) type = 'warn';
-                    else if (keyLower.includes('rsi') && valNum > 70) type = 'warn';
-                    else if (keyLower.includes('rsi') && valNum < 30) type = 'good';
-                    else if (keyLower.includes('mom') && valNum > 0) type = 'good';
-                    else if (keyLower.includes('dist') && valNum > 0) type = 'good';
-
-                    items.push({ key, val, type });
-                } else {
-                    let type = 'neutral';
-                    const lower = part.toLowerCase();
-                    if (lower.includes('bullish') || lower.includes('breakout')) type = 'good';
-                    else if (lower.includes('bearish') || lower.includes('overbought')) type = 'warn';
-                    items.push({ text: part, type });
-                }
-            });
-        });
-
-        return { main, items };
-    }
-
-    function renderReasonChecklist(reason) {
-        const { main, items } = parseReason(reason);
-
-        if (!main && items.length === 0) {
-            return '<div class="reason-content"><span style="color: var(--text-muted); font-size: 0.8rem;">No details</span></div>';
-        }
-
-        let html = '<div class="reason-content">';
-
-        if (main) {
-            html += `<div class="reason-title"><i class="fas fa-check-circle"></i> ${escapeHtml(main)}</div>`;
-        }
-
-        if (items.length > 0) {
-            html += '<ul class="reason-list">';
-            items.forEach(item => {
-                if (item.key) {
-                    html += `<li><span class="label">${escapeHtml(item.key)}:</span> <span class="value">${escapeHtml(item.val)}</span></li>`;
-                } else if (item.text) {
-                    html += `<li>${escapeHtml(item.text)}</li>`;
-                }
-            });
-            html += '</ul>';
-        }
-
-        html += '</div>';
-        return html;
-    }
-
-    function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    }
-
-    function toggleReason(btn, rowId) {
-        const reasonRow = document.getElementById(rowId);
-        if (reasonRow) {
-            reasonRow.classList.toggle('visible');
-            btn.classList.toggle('expanded');
-        }
-    }
-
-    function renderWatchlistTable(items, containerId, portfolioId) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        if (!items || !items.length) {
-            container.innerHTML = '<tr><td colspan="7" class="no-data">No holdings</td></tr>';
-            return;
-        }
-
-        const rows = items.map((item, idx) => {
-            const symbol = item.symbol;
-            const changePct = item.change_pct;
-            const hasChange = changePct !== null && changePct !== undefined;
-            const marketStatus = getMarketStatus(symbol);
-
-            // Only show 24H change if market is open OR we have valid data
-            let changeDisplay, changeClass;
-            if (marketStatus.isOpen) {
-                changeClass = hasChange ? (changePct >= 0 ? 'change-positive' : 'change-negative') : '';
-                const changeIcon = hasChange ? (changePct >= 0 ? '▲' : '▼') : '';
-                changeDisplay = hasChange ? changeIcon + ' ' + formatPct(changePct) : '<i class="fas fa-spinner fa-spin" style="font-size:0.6rem;color:var(--text-muted)"></i>';
-            } else {
-                if (hasChange) {
-                    const changeIcon = changePct >= 0 ? '▲' : '▼';
-                    changeDisplay = `<span style="opacity:0.5">${changeIcon} ${formatPct(changePct)}</span>`;
-                    changeClass = changePct >= 0 ? 'change-positive' : 'change-negative';
-                } else {
-                    changeDisplay = '<span class="market-closed-badge">—</span>';
-                    changeClass = '';
-                }
+            if (!main && items.length === 0) {
+                return '<div class="reason-content"><span style="color: var(--text-muted); font-size: 0.8rem;">No details</span></div>';
             }
 
-            // P&L since entry: (price - entry) / entry * 100
-            const entry = item.entry || 0;
-            const price = item.price || 0;
-            let pnlDisplay = '-';
-            let pnlClass = '';
-            if (entry > 0 && price > 0) {
-                const pnlPct = ((price - entry) / entry) * 100;
-                item.pnl_pct = pnlPct; // Store for sorting
-                pnlClass = pnlPct >= 0 ? 'pnl-positive' : 'pnl-negative';
-                const pnlIcon = pnlPct >= 0 ? '▲' : '▼';
-                pnlDisplay = pnlIcon + ' ' + formatPct(pnlPct);
+            let html = '<div class="reason-content">';
+
+            if (main) {
+                html += `<div class="reason-title"><i class="fas fa-check-circle"></i> ${escapeHtml(main)}</div>`;
             }
 
-            const [grad1, grad2] = getLogoFallback(symbol);
-            const logoUrl = getLogoUrl(symbol);
-            const initials = symbol.substring(0, 2);
-            const reason = item.reason || '';
-            const reasonId = `reason-${portfolioId}-${idx}`;
-            const hasReason = reason && reason.length > 0;
-            const since = item.since || '';
-            const sinceDisplay = since ? formatSinceDate(since) : '-';
+            if (items.length > 0) {
+                html += '<ul class="reason-list">';
+                items.forEach(item => {
+                    if (item.key) {
+                        html += `<li><span class="label">${escapeHtml(item.key)}:</span> <span class="value">${escapeHtml(item.val)}</span></li>`;
+                    } else if (item.text) {
+                        html += `<li>${escapeHtml(item.text)}</li>`;
+                    }
+                });
+                html += '</ul>';
+            }
 
-            let html = `<tr>
+            html += '</div>';
+            return html;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function toggleReason(btn, rowId) {
+            const reasonRow = document.getElementById(rowId);
+            if (reasonRow) {
+                reasonRow.classList.toggle('visible');
+                btn.classList.toggle('expanded');
+            }
+        }
+
+        function renderWatchlistTable(items, containerId, portfolioId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            if (!items || !items.length) {
+                container.innerHTML = '<tr><td colspan="7" class="no-data">No holdings</td></tr>';
+                return;
+            }
+
+            const rows = items.map((item, idx) => {
+                const symbol = item.symbol;
+                const changePct = item.change_pct;
+                const hasChange = changePct !== null && changePct !== undefined;
+                const marketStatus = getMarketStatus(symbol);
+
+                // Only show 24H change if market is open OR we have valid data
+                let changeDisplay, changeClass;
+                if (marketStatus.isOpen) {
+                    changeClass = hasChange ? (changePct >= 0 ? 'change-positive' : 'change-negative') : '';
+                    const changeIcon = hasChange ? (changePct >= 0 ? '▲' : '▼') : '';
+                    changeDisplay = hasChange ? changeIcon + ' ' + formatPct(changePct) : '<i class="fas fa-spinner fa-spin" style="font-size:0.6rem;color:var(--text-muted)"></i>';
+                } else {
+                    if (hasChange) {
+                        const changeIcon = changePct >= 0 ? '▲' : '▼';
+                        changeDisplay = `<span style="opacity:0.5">${changeIcon} ${formatPct(changePct)}</span>`;
+                        changeClass = changePct >= 0 ? 'change-positive' : 'change-negative';
+                    } else {
+                        changeDisplay = '<span class="market-closed-badge">—</span>';
+                        changeClass = '';
+                    }
+                }
+
+                // P&L since entry: (price - entry) / entry * 100
+                const entry = item.entry || 0;
+                const price = item.price || 0;
+                let pnlDisplay = '-';
+                let pnlClass = '';
+                if (entry > 0 && price > 0) {
+                    const pnlPct = ((price - entry) / entry) * 100;
+                    item.pnl_pct = pnlPct; // Store for sorting
+                    pnlClass = pnlPct >= 0 ? 'pnl-positive' : 'pnl-negative';
+                    const pnlIcon = pnlPct >= 0 ? '▲' : '▼';
+                    pnlDisplay = pnlIcon + ' ' + formatPct(pnlPct);
+                }
+
+                const [grad1, grad2] = getLogoFallback(symbol);
+                const logoUrl = getLogoUrl(symbol);
+                const initials = symbol.substring(0, 2);
+                const reason = item.reason || '';
+                const reasonId = `reason-${portfolioId}-${idx}`;
+                const hasReason = reason && reason.length > 0;
+                const since = item.since || '';
+                const sinceDisplay = since ? formatSinceDate(since) : '-';
+
+                let html = `<tr>
                 <td>
                     <div class="symbol-cell">
                         <div class="symbol-logo" style="background: linear-gradient(135deg, ${grad1} 0%, ${grad2} 100%);">
@@ -1222,9 +1515,9 @@
                 <td class="chart-cell">
                     <div onclick="openChartDialog('${symbol}')" style="cursor: pointer;">
                         ${isUSSymbol(symbol)
-                            ? `<img src="${getChartUrl(symbol)}" alt="${symbol}" loading="lazy" onerror="this.style.opacity='0.3'">`
-                            : `<div class="chart-placeholder"><i class="fas fa-chart-line"></i></div>`
-                        }
+                        ? `<img src="${getChartUrl(symbol)}" alt="${symbol}" loading="lazy" onerror="this.style.opacity='0.3'">`
+                        : `<div class="chart-placeholder"><i class="fas fa-chart-line"></i></div>`
+                    }
                     </div>
                 </td>
                 <td class="text-right price-cell">${formatCurrency(item.price, 2)}</td>
@@ -1236,46 +1529,46 @@
                 </td>
             </tr>`;
 
-            // Add expandable reason row
-            if (hasReason) {
-                html += `<tr class="reason-row" id="${reasonId}">
+                // Add expandable reason row
+                if (hasReason) {
+                    html += `<tr class="reason-row" id="${reasonId}">
                     <td colspan="7">${renderReasonChecklist(reason)}</td>
                 </tr>`;
-            }
+                }
 
-            return html;
-        }).join('');
+                return html;
+            }).join('');
 
-        container.innerHTML = rows;
-    }
+            container.innerHTML = rows;
+        }
 
-    (async function() {
-        const container = document.getElementById('portfolios');
+        (async function () {
+            const container = document.getElementById('portfolios');
 
-        try {
-            const res = await fetch('live-portfolios.json?t=' + Date.now());
-            if (!res.ok) throw new Error('Not found');
-            const portfolios = await res.json();
+            try {
+                const res = await fetch('live-portfolios.json?t=' + Date.now());
+                if (!res.ok) throw new Error('Not found');
+                const portfolios = await res.json();
 
-            if (!portfolios.length) {
-                container.innerHTML = '<div class="no-data">No live portfolios available.</div>';
-                return;
-            }
+                if (!portfolios.length) {
+                    container.innerHTML = '<div class="no-data">No live portfolios available.</div>';
+                    return;
+                }
 
-            container.innerHTML = portfolios.map((p, idx) => {
-                const ret = (p.ret || 0) * 100;
-                const retClass = ret >= 0 ? 'positive' : 'negative';
-                const maxDD = Math.abs(p.max_dd || 0) * 100;
-                const vol = (p.vol || 0) * 100;
-                const sharpe = (p.sharpe || 0).toFixed(2);
-                const equity = p.equity || 0;
-                const positionsCount = p.positions_count || 0;
-                const pendingCount = p.pending_count || 0;
-                const manualCount = p.manual_count || 0;
-                const totalCount = positionsCount + pendingCount + manualCount;
-                const sparkColor = ret >= 0 ? '#10b981' : '#ef4444';
+                container.innerHTML = portfolios.map((p, idx) => {
+                    const ret = (p.ret || 0) * 100;
+                    const retClass = ret >= 0 ? 'positive' : 'negative';
+                    const maxDD = Math.abs(p.max_dd || 0) * 100;
+                    const vol = (p.vol || 0) * 100;
+                    const sharpe = (p.sharpe || 0).toFixed(2);
+                    const equity = p.equity || 0;
+                    const positionsCount = p.positions_count || 0;
+                    const pendingCount = p.pending_count || 0;
+                    const manualCount = p.manual_count || 0;
+                    const totalCount = positionsCount + pendingCount + manualCount;
+                    const sparkColor = ret >= 0 ? '#10b981' : '#ef4444';
 
-                return `
+                    return `
                 <div class="portfolio-section">
                     <div class="portfolio-header">
                         <div class="portfolio-top">
@@ -1343,445 +1636,446 @@
                         </div>
                     </div>
                 </div>`;
-            }).join('');
+                }).join('');
 
-            // Store data and render
-            window.portfolioData = {};
-            window.sortState = {};
+                // Store data and render
+                window.portfolioData = {};
+                window.sortState = {};
 
-            portfolios.forEach(p => {
-                // Build reason map from positions_reasons if available
-                const reasonMap = {};
-                if (p.positions_reasons) {
-                    Object.entries(p.positions_reasons).forEach(([sym, reason]) => {
-                        reasonMap[sym] = reason;
-                    });
-                }
-
-                // Show all symbols (positions + pending BUY orders) without distinction
-                // Use cached previousClose from localStorage for immediate 24H display
-                const positions = (p.positions || []).map(pos => {
-                    const cachedPrevClose = getSymbolPrevClose(pos.symbol);
-                    let changePct = null;
-                    if (cachedPrevClose && pos.price > 0) {
-                        changePct = ((pos.price - cachedPrevClose) / cachedPrevClose) * 100;
+                portfolios.forEach(p => {
+                    // Build reason map from positions_reasons if available
+                    const reasonMap = {};
+                    if (p.positions_reasons) {
+                        Object.entries(p.positions_reasons).forEach(([sym, reason]) => {
+                            reasonMap[sym] = reason;
+                        });
                     }
-                    return {
-                        ...pos,
-                        change_pct: changePct,
-                        previousClose: cachedPrevClose,
-                        reason: pos.reason || reasonMap[pos.symbol] || ''
-                    };
-                });
 
-                // Add pending BUY orders (use limit_price as price)
-                const pending = (p.pending_orders || []).map(order => {
-                    const cachedPrevClose = getSymbolPrevClose(order.symbol);
-                    let changePct = null;
-                    const price = order.limit_price || 0;
-                    if (cachedPrevClose && price > 0) {
-                        changePct = ((price - cachedPrevClose) / cachedPrevClose) * 100;
-                    }
-                    return {
-                        symbol: order.symbol,
-                        price: price,
-                        change_pct: changePct,
-                        previousClose: cachedPrevClose,
-                        reason: order.reason || '',
-                        since: order.since || p.date || ''
-                    };
-                });
-
-                // Add manual actions only for symbols NOT already in watchlist
-                const existingSymbols = new Set([...positions, ...pending].map(i => i.symbol));
-                const manualNew = (p.manual_actions || [])
-                    .filter(a => !existingSymbols.has(a.symbol))
-                    .map(action => {
-                        const price = action.limit_price || action.stop_price || 0;
+                    // Show all symbols (positions + pending BUY orders) without distinction
+                    // Use cached previousClose from localStorage for immediate 24H display
+                    const positions = (p.positions || []).map(pos => {
+                        const cachedPrevClose = getSymbolPrevClose(pos.symbol);
+                        let changePct = null;
+                        if (cachedPrevClose && pos.price > 0) {
+                            changePct = ((pos.price - cachedPrevClose) / cachedPrevClose) * 100;
+                        }
                         return {
-                            symbol: action.symbol,
-                            price: price,
-                            change_pct: null,
-                            previousClose: null,
-                            reason: action.reason || '',
-                            since: p.date || '',
-                            manual: true,
-                            side: action.side
+                            ...pos,
+                            change_pct: changePct,
+                            previousClose: cachedPrevClose,
+                            reason: pos.reason || reasonMap[pos.symbol] || ''
                         };
                     });
 
-                const allItems = [...positions, ...pending, ...manualNew];
-                allItems.sort((a, b) => a.symbol.localeCompare(b.symbol));
+                    // Add pending BUY orders (use limit_price as price)
+                    const pending = (p.pending_orders || []).map(order => {
+                        const cachedPrevClose = getSymbolPrevClose(order.symbol);
+                        let changePct = null;
+                        const price = order.limit_price || 0;
+                        if (cachedPrevClose && price > 0) {
+                            changePct = ((price - cachedPrevClose) / cachedPrevClose) * 100;
+                        }
+                        return {
+                            symbol: order.symbol,
+                            price: price,
+                            change_pct: changePct,
+                            previousClose: cachedPrevClose,
+                            reason: order.reason || '',
+                            since: order.since || p.date || ''
+                        };
+                    });
 
-                window.portfolioData[p.id] = allItems;
-                window.sortState[p.id] = { column: 'symbol', direction: 'asc' };
+                    // Add manual actions only for symbols NOT already in watchlist
+                    const existingSymbols = new Set([...positions, ...pending].map(i => i.symbol));
+                    const manualNew = (p.manual_actions || [])
+                        .filter(a => !existingSymbols.has(a.symbol))
+                        .map(action => {
+                            const price = action.limit_price || action.stop_price || 0;
+                            return {
+                                symbol: action.symbol,
+                                price: price,
+                                change_pct: null,
+                                previousClose: null,
+                                reason: action.reason || '',
+                                since: p.date || '',
+                                manual: true,
+                                side: action.side
+                            };
+                        });
 
-                renderWatchlistTable(allItems, 'tbody-' + p.id, p.id);
+                    const allItems = [...positions, ...pending, ...manualNew];
+                    allItems.sort((a, b) => a.symbol.localeCompare(b.symbol));
 
-                // Render equity sparkline (pass initial_capital for proper scaling)
-                const curve = p.equity_curve || [];
-                const initialCapital = p.initial_capital || DEFAULT_INITIAL_CAPITAL;
-                createEquitySparkline('spark-' + p.id, curve, p.ret >= 0 ? '#10b981' : '#ef4444', initialCapital);
-            });
+                    window.portfolioData[p.id] = allItems;
+                    window.sortState[p.id] = { column: 'symbol', direction: 'asc' };
 
-            // Start real-time price updates
-            // First do an immediate HTTP fetch for quotes
-            const allSymbols = getAllSymbols();
-            if (allSymbols.length > 0) {
-                fetchYahooQuotes(allSymbols);
-            }
-            // Then connect WebSocket for real-time updates
-            initYahooWebSocket();
-            // Refresh quotes every 30s as fallback
-            setInterval(() => {
-                if (!yahooWS || yahooWS.readyState !== WebSocket.OPEN) {
-                    fetchYahooQuotes(getAllSymbols());
+                    renderWatchlistTable(allItems, 'tbody-' + p.id, p.id);
+
+                    // Render equity sparkline (pass initial_capital for proper scaling)
+                    const curve = p.equity_curve || [];
+                    const initialCapital = p.initial_capital || DEFAULT_INITIAL_CAPITAL;
+                    createEquitySparkline('spark-' + p.id, curve, p.ret >= 0 ? '#10b981' : '#ef4444', initialCapital);
+                });
+
+                // Start real-time price updates
+                // First do an immediate HTTP fetch for quotes
+                const allSymbols = getAllSymbols();
+                if (allSymbols.length > 0) {
+                    fetchYahooQuotes(allSymbols);
                 }
-            }, 30000);
-
-        } catch(e) {
-            console.error(e);
-            container.innerHTML = '<div class="no-data">Failed to load portfolios.</div>';
-        }
-    })();
-
-    // ─── PREVIOUS CLOSE CACHE (localStorage) ───
-    const PREV_CLOSE_KEY = 'mw_prev_close';
-
-    function getCachedPrevClose() {
-        try {
-            const data = localStorage.getItem(PREV_CLOSE_KEY);
-            return data ? JSON.parse(data) : {};
-        } catch (e) {
-            return {};
-        }
-    }
-
-    function setCachedPrevClose(symbol, prevClose) {
-        try {
-            const cache = getCachedPrevClose();
-            cache[symbol] = { price: prevClose, ts: Date.now() };
-            localStorage.setItem(PREV_CLOSE_KEY, JSON.stringify(cache));
-        } catch (e) {
-            // localStorage full or disabled
-        }
-    }
-
-    function getSymbolPrevClose(symbol) {
-        const cache = getCachedPrevClose();
-        const entry = cache[symbol];
-        // Return cached value if less than 24h old
-        if (entry && (Date.now() - entry.ts) < 24 * 60 * 60 * 1000) {
-            return entry.price;
-        }
-        return null;
-    }
-
-    // ─── YAHOO FINANCE WEBSOCKET ───
-    let yahooWS = null;
-    let reconnectAttempts = 0;
-    const MAX_RECONNECT = 5;
-
-    function getAllSymbols() {
-        const symbols = new Set();
-        Object.values(window.portfolioData || {}).forEach(items => {
-            items.forEach(item => {
-                if (item.symbol) symbols.add(item.symbol);
-            });
-        });
-        return [...symbols];
-    }
-
-    function initYahooWebSocket() {
-        const symbols = getAllSymbols();
-        if (symbols.length === 0) return;
-
-        try {
-            yahooWS = new WebSocket('wss://streamer.finance.yahoo.com');
-
-            yahooWS.onopen = () => {
-                console.log('[Yahoo WS] Connected, subscribing to', symbols.length, 'symbols');
-                reconnectAttempts = 0;
-                yahooWS.send(JSON.stringify({ subscribe: symbols }));
-                // Show live indicator
-                document.querySelectorAll('.live-dot').forEach(dot => dot.classList.add('connected'));
-            };
-
-            yahooWS.onmessage = (event) => {
-                try {
-                    const data = decodeYahooMessage(event.data);
-                    if (data && data.id && data.price) {
-                        // Calculate 24h change from Yahoo: (price - previousClose) / previousClose
-                        updateSymbolPrice(data.id, data.price, data.previousClose);
+                // Then connect WebSocket for real-time updates
+                initYahooWebSocket();
+                // Refresh quotes every 30s as fallback
+                setInterval(() => {
+                    if (!yahooWS || yahooWS.readyState !== WebSocket.OPEN) {
+                        fetchYahooQuotes(getAllSymbols());
                     }
-                } catch (e) {
-                    // Silently ignore decode errors
-                }
-            };
+                }, 30000);
 
-            yahooWS.onclose = () => {
-                console.log('[Yahoo WS] Disconnected');
-                document.querySelectorAll('.live-dot').forEach(dot => dot.classList.remove('connected'));
-                if (reconnectAttempts < MAX_RECONNECT) {
-                    reconnectAttempts++;
-                    setTimeout(initYahooWebSocket, 5000 * reconnectAttempts);
-                }
-            };
+            } catch (e) {
+                console.error(e);
+                container.innerHTML = '<div class="no-data">Failed to load portfolios.</div>';
+            }
+        })();
 
-            yahooWS.onerror = (e) => {
-                console.error('[Yahoo WS] Error:', e);
-                // Fallback to HTTP API
-                fetchYahooQuotes(symbols);
-            };
+        // ─── PREVIOUS CLOSE CACHE (localStorage) ───
+        const PREV_CLOSE_KEY = 'mw_prev_close';
 
-        } catch (e) {
-            console.error('[Yahoo WS] Failed to connect:', e);
-            // Fallback to HTTP API
-            fetchYahooQuotes(getAllSymbols());
-        }
-    }
-
-    // Decode Yahoo Finance protobuf message (base64 encoded)
-    function decodeYahooMessage(base64) {
-        const binary = atob(base64);
-        const bytes = new Uint8Array(binary.length);
-        for (let i = 0; i < binary.length; i++) {
-            bytes[i] = binary.charCodeAt(i);
-        }
-
-        // Simple protobuf decoder for Yahoo quote format
-        // Field 1: id (string), Field 2: price (float), Field 4: previousClose (float), Field 7: changePercent (float)
-        let pos = 0;
-        const result = {};
-
-        while (pos < bytes.length) {
-            const tag = bytes[pos++];
-            const fieldNum = tag >> 3;
-            const wireType = tag & 0x07;
-
-            if (wireType === 2) { // Length-delimited (string)
-                let len = 0, shift = 0;
-                while (bytes[pos] & 0x80) {
-                    len |= (bytes[pos++] & 0x7f) << shift;
-                    shift += 7;
-                }
-                len |= bytes[pos++] << shift;
-
-                if (fieldNum === 1) { // id
-                    result.id = String.fromCharCode(...bytes.slice(pos, pos + len));
-                }
-                pos += len;
-            } else if (wireType === 5) { // 32-bit (float)
-                const view = new DataView(bytes.buffer, pos, 4);
-                const val = view.getFloat32(0, true);
-                if (fieldNum === 2) result.price = val;
-                if (fieldNum === 4) result.previousClose = val;
-                if (fieldNum === 7) result.changePercent = val;
-                pos += 4;
-            } else if (wireType === 1) { // 64-bit
-                pos += 8;
-            } else if (wireType === 0) { // Varint
-                while (bytes[pos++] & 0x80);
-            } else {
-                break; // Unknown wire type
+        function getCachedPrevClose() {
+            try {
+                const data = localStorage.getItem(PREV_CLOSE_KEY);
+                return data ? JSON.parse(data) : {};
+            } catch (e) {
+                return {};
             }
         }
 
-        return result.id ? result : null;
-    }
-
-    // Fetch quotes via Yahoo v8/chart API (same as Go code)
-    // Batches requests to avoid rate limiting
-    async function fetchYahooQuotes(symbols) {
-        if (!symbols.length) return;
-
-        let updated = 0;
-        const BATCH_SIZE = 3;  // Fetch 3 at a time
-        const BATCH_DELAY = 600;  // 600ms between batches
-
-        // Helper to fetch a single symbol
-        async function fetchSymbol(symbol) {
+        function setCachedPrevClose(symbol, prevClose) {
             try {
-                const now = Math.floor(Date.now() / 1000);
-                const period1 = now - 86400 * 2;
-                const yahooUrl = `https://query2.finance.yahoo.com/v8/finance/chart/${symbol}?period1=${period1}&period2=${now}&interval=1d`;
+                const cache = getCachedPrevClose();
+                cache[symbol] = { price: prevClose, ts: Date.now() };
+                localStorage.setItem(PREV_CLOSE_KEY, JSON.stringify(cache));
+            } catch (e) {
+                // localStorage full or disabled
+            }
+        }
 
-                const proxies = [
-                    `https://api.allorigins.win/raw?url=${encodeURIComponent(yahooUrl)}`,
-                    `https://corsproxy.io/?${encodeURIComponent(yahooUrl)}`,
-                ];
+        function getSymbolPrevClose(symbol) {
+            const cache = getCachedPrevClose();
+            const entry = cache[symbol];
+            // Return cached value if less than 24h old
+            if (entry && (Date.now() - entry.ts) < 24 * 60 * 60 * 1000) {
+                return entry.price;
+            }
+            return null;
+        }
 
-                for (const proxyUrl of proxies) {
+        // ─── YAHOO FINANCE WEBSOCKET ───
+        let yahooWS = null;
+        let reconnectAttempts = 0;
+        const MAX_RECONNECT = 5;
+
+        function getAllSymbols() {
+            const symbols = new Set();
+            Object.values(window.portfolioData || {}).forEach(items => {
+                items.forEach(item => {
+                    if (item.symbol) symbols.add(item.symbol);
+                });
+            });
+            return [...symbols];
+        }
+
+        function initYahooWebSocket() {
+            const symbols = getAllSymbols();
+            if (symbols.length === 0) return;
+
+            try {
+                yahooWS = new WebSocket('wss://streamer.finance.yahoo.com');
+
+                yahooWS.onopen = () => {
+                    console.log('[Yahoo WS] Connected, subscribing to', symbols.length, 'symbols');
+                    reconnectAttempts = 0;
+                    yahooWS.send(JSON.stringify({ subscribe: symbols }));
+                    // Show live indicator
+                    document.querySelectorAll('.live-dot').forEach(dot => dot.classList.add('connected'));
+                };
+
+                yahooWS.onmessage = (event) => {
                     try {
-                        const res = await fetch(proxyUrl, { signal: AbortSignal.timeout(8000) });
-                        if (res.ok) {
-                            const data = await res.json();
-                            if (data.chart?.result?.[0]?.meta) {
-                                const meta = data.chart.result[0].meta;
-                                const price = meta.regularMarketPrice || 0;
-                                const prevClose = meta.chartPreviousClose || meta.previousClose || 0;
-                                if (price > 0) {
-                                    updateSymbolPrice(symbol, price, prevClose);
-                                    return true;
-                                }
-                            }
+                        const data = decodeYahooMessage(event.data);
+                        if (data && data.id && data.price) {
+                            // Calculate 24h change from Yahoo: (price - previousClose) / previousClose
+                            updateSymbolPrice(data.id, data.price, data.previousClose);
                         }
                     } catch (e) {
-                        // Try next proxy
+                        // Silently ignore decode errors
                     }
-                }
+                };
+
+                yahooWS.onclose = () => {
+                    console.log('[Yahoo WS] Disconnected');
+                    document.querySelectorAll('.live-dot').forEach(dot => dot.classList.remove('connected'));
+                    if (reconnectAttempts < MAX_RECONNECT) {
+                        reconnectAttempts++;
+                        setTimeout(initYahooWebSocket, 5000 * reconnectAttempts);
+                    }
+                };
+
+                yahooWS.onerror = (e) => {
+                    console.error('[Yahoo WS] Error:', e);
+                    // Fallback to HTTP API
+                    fetchYahooQuotes(symbols);
+                };
+
             } catch (e) {
-                console.warn('[Yahoo] Failed for', symbol, e.message);
-            }
-            return false;
-        }
-
-        // Process in batches with delay to avoid rate limiting
-        for (let i = 0; i < symbols.length; i += BATCH_SIZE) {
-            const batch = symbols.slice(i, i + BATCH_SIZE);
-            const results = await Promise.all(batch.map(fetchSymbol));
-            updated += results.filter(Boolean).length;
-
-            // Delay between batches (except for last batch)
-            if (i + BATCH_SIZE < symbols.length) {
-                await new Promise(resolve => setTimeout(resolve, BATCH_DELAY));
+                console.error('[Yahoo WS] Failed to connect:', e);
+                // Fallback to HTTP API
+                fetchYahooQuotes(getAllSymbols());
             }
         }
 
-        if (updated > 0) {
-            console.log('[Yahoo HTTP] Updated', updated, '/', symbols.length, 'quotes via v8/chart API');
-            document.querySelectorAll('.live-dot').forEach(dot => dot.classList.add('connected'));
-        }
-    }
+        // Decode Yahoo Finance protobuf message (base64 encoded)
+        function decodeYahooMessage(base64) {
+            const binary = atob(base64);
+            const bytes = new Uint8Array(binary.length);
+            for (let i = 0; i < binary.length; i++) {
+                bytes[i] = binary.charCodeAt(i);
+            }
 
-    function updateSymbolPrice(symbol, price, previousClose) {
-        if (!price || price <= 0) return;
+            // Simple protobuf decoder for Yahoo quote format
+            // Field 1: id (string), Field 2: price (float), Field 4: previousClose (float), Field 7: changePercent (float)
+            let pos = 0;
+            const result = {};
 
-        // Save previousClose to localStorage for next page load
-        if (previousClose && previousClose > 0) {
-            setCachedPrevClose(symbol, previousClose);
-        }
+            while (pos < bytes.length) {
+                const tag = bytes[pos++];
+                const fieldNum = tag >> 3;
+                const wireType = tag & 0x07;
 
-        // Calculate 24h change from Yahoo: (realtime_price - yesterday_close) / yesterday_close * 100
-        let changePct = null;
-        if (previousClose && previousClose > 0) {
-            changePct = ((price - previousClose) / previousClose) * 100;
-        }
-
-        // Update data and DOM directly (no full re-render to preserve sort order)
-        Object.keys(window.portfolioData || {}).forEach(portfolioId => {
-            const items = window.portfolioData[portfolioId];
-
-            items.forEach((item, idx) => {
-                if (item.symbol === symbol) {
-                    const oldPrice = item.price || 0;
-                    const priceChanged = oldPrice > 0 && Math.abs(price - oldPrice) > 0.001;
-                    const priceDirection = price > oldPrice ? 'up' : 'down';
-
-                    // Update data
-                    item.price = price;
-                    if (previousClose && previousClose > 0) {
-                        item.previousClose = previousClose;
+                if (wireType === 2) { // Length-delimited (string)
+                    let len = 0, shift = 0;
+                    while (bytes[pos] & 0x80) {
+                        len |= (bytes[pos++] & 0x7f) << shift;
+                        shift += 7;
                     }
-                    if (changePct !== null) {
-                        item.change_pct = changePct;
+                    len |= bytes[pos++] << shift;
+
+                    if (fieldNum === 1) { // id
+                        result.id = String.fromCharCode(...bytes.slice(pos, pos + len));
                     }
+                    pos += len;
+                } else if (wireType === 5) { // 32-bit (float)
+                    const view = new DataView(bytes.buffer, pos, 4);
+                    const val = view.getFloat32(0, true);
+                    if (fieldNum === 2) result.price = val;
+                    if (fieldNum === 4) result.previousClose = val;
+                    if (fieldNum === 7) result.changePercent = val;
+                    pos += 4;
+                } else if (wireType === 1) { // 64-bit
+                    pos += 8;
+                } else if (wireType === 0) { // Varint
+                    while (bytes[pos++] & 0x80);
+                } else {
+                    break; // Unknown wire type
+                }
+            }
 
-                    // Find and update the row directly (preserves sort order)
-                    const tbody = document.getElementById('tbody-' + portfolioId);
-                    if (tbody) {
-                        const rows = tbody.querySelectorAll('tr:not(.reason-row)');
-                        rows.forEach(row => {
-                            const symbolCell = row.querySelector('.symbol-name');
-                            if (symbolCell && symbolCell.textContent === symbol) {
-                                const cells = row.querySelectorAll('td');
+            return result.id ? result : null;
+        }
 
-                                // Update price cell (3rd td)
-                                if (cells[2]) {
-                                    cells[2].textContent = formatCurrency(price, 2);
+        // Fetch quotes via Yahoo v8/chart API (same as Go code)
+        // Batches requests to avoid rate limiting
+        async function fetchYahooQuotes(symbols) {
+            if (!symbols.length) return;
 
-                                    // Flash animation on price change
-                                    if (priceChanged) {
-                                        cells[2].classList.remove('flash-up', 'flash-down');
-                                        // Force reflow to restart animation
-                                        void cells[2].offsetWidth;
-                                        cells[2].classList.add(priceDirection === 'up' ? 'flash-up' : 'flash-down');
+            let updated = 0;
+            const BATCH_SIZE = 3;  // Fetch 3 at a time
+            const BATCH_DELAY = 600;  // 600ms between batches
+
+            // Helper to fetch a single symbol
+            async function fetchSymbol(symbol) {
+                try {
+                    const now = Math.floor(Date.now() / 1000);
+                    const period1 = now - 86400 * 2;
+                    const yahooUrl = `https://query2.finance.yahoo.com/v8/finance/chart/${symbol}?period1=${period1}&period2=${now}&interval=1d`;
+
+                    const proxies = [
+                        `https://api.allorigins.win/raw?url=${encodeURIComponent(yahooUrl)}`,
+                        `https://corsproxy.io/?${encodeURIComponent(yahooUrl)}`,
+                    ];
+
+                    for (const proxyUrl of proxies) {
+                        try {
+                            const res = await fetch(proxyUrl, { signal: AbortSignal.timeout(8000) });
+                            if (res.ok) {
+                                const data = await res.json();
+                                if (data.chart?.result?.[0]?.meta) {
+                                    const meta = data.chart.result[0].meta;
+                                    const price = meta.regularMarketPrice || 0;
+                                    const prevClose = meta.chartPreviousClose || meta.previousClose || 0;
+                                    if (price > 0) {
+                                        updateSymbolPrice(symbol, price, prevClose);
+                                        return true;
                                     }
-                                }
-
-                                // Update 24h cell (4th td) with icon - from Yahoo data
-                                if (cells[3] && changePct !== null) {
-                                    const marketStatus = getMarketStatus(symbol);
-                                    const icon = changePct >= 0 ? '▲' : '▼';
-
-                                    if (marketStatus.isOpen) {
-                                        cells[3].innerHTML = icon + ' ' + formatPct(changePct);
-                                        cells[3].className = 'text-right change-cell ' + (changePct >= 0 ? 'change-positive' : 'change-negative');
-
-                                        if (priceChanged) {
-                                            cells[3].classList.remove('flash-up', 'flash-down');
-                                            void cells[3].offsetWidth;
-                                            cells[3].classList.add(priceDirection === 'up' ? 'flash-up' : 'flash-down');
-                                        }
-                                    } else {
-                                        cells[3].innerHTML = `<span style="opacity:0.5">${icon} ${formatPct(changePct)}</span>`;
-                                        cells[3].className = 'text-right change-cell ' + (changePct >= 0 ? 'change-positive' : 'change-negative');
-                                    }
-                                }
-
-                                // Update P&L cell (5th td) - recalculate from entry price
-                                if (cells[4] && item.entry && item.entry > 0) {
-                                    const pnlPct = ((price - item.entry) / item.entry) * 100;
-                                    const pnlIcon = pnlPct >= 0 ? '▲' : '▼';
-                                    cells[4].innerHTML = pnlIcon + ' ' + formatPct(pnlPct);
-                                    cells[4].className = 'text-right pnl-cell ' + (pnlPct >= 0 ? 'pnl-positive' : 'pnl-negative');
                                 }
                             }
-                        });
+                        } catch (e) {
+                            // Try next proxy
+                        }
                     }
+                } catch (e) {
+                    console.warn('[Yahoo] Failed for', symbol, e.message);
                 }
+                return false;
+            }
+
+            // Process in batches with delay to avoid rate limiting
+            for (let i = 0; i < symbols.length; i += BATCH_SIZE) {
+                const batch = symbols.slice(i, i + BATCH_SIZE);
+                const results = await Promise.all(batch.map(fetchSymbol));
+                updated += results.filter(Boolean).length;
+
+                // Delay between batches (except for last batch)
+                if (i + BATCH_SIZE < symbols.length) {
+                    await new Promise(resolve => setTimeout(resolve, BATCH_DELAY));
+                }
+            }
+
+            if (updated > 0) {
+                console.log('[Yahoo HTTP] Updated', updated, '/', symbols.length, 'quotes via v8/chart API');
+                document.querySelectorAll('.live-dot').forEach(dot => dot.classList.add('connected'));
+            }
+        }
+
+        function updateSymbolPrice(symbol, price, previousClose) {
+            if (!price || price <= 0) return;
+
+            // Save previousClose to localStorage for next page load
+            if (previousClose && previousClose > 0) {
+                setCachedPrevClose(symbol, previousClose);
+            }
+
+            // Calculate 24h change from Yahoo: (realtime_price - yesterday_close) / yesterday_close * 100
+            let changePct = null;
+            if (previousClose && previousClose > 0) {
+                changePct = ((price - previousClose) / previousClose) * 100;
+            }
+
+            // Update data and DOM directly (no full re-render to preserve sort order)
+            Object.keys(window.portfolioData || {}).forEach(portfolioId => {
+                const items = window.portfolioData[portfolioId];
+
+                items.forEach((item, idx) => {
+                    if (item.symbol === symbol) {
+                        const oldPrice = item.price || 0;
+                        const priceChanged = oldPrice > 0 && Math.abs(price - oldPrice) > 0.001;
+                        const priceDirection = price > oldPrice ? 'up' : 'down';
+
+                        // Update data
+                        item.price = price;
+                        if (previousClose && previousClose > 0) {
+                            item.previousClose = previousClose;
+                        }
+                        if (changePct !== null) {
+                            item.change_pct = changePct;
+                        }
+
+                        // Find and update the row directly (preserves sort order)
+                        const tbody = document.getElementById('tbody-' + portfolioId);
+                        if (tbody) {
+                            const rows = tbody.querySelectorAll('tr:not(.reason-row)');
+                            rows.forEach(row => {
+                                const symbolCell = row.querySelector('.symbol-name');
+                                if (symbolCell && symbolCell.textContent === symbol) {
+                                    const cells = row.querySelectorAll('td');
+
+                                    // Update price cell (3rd td)
+                                    if (cells[2]) {
+                                        cells[2].textContent = formatCurrency(price, 2);
+
+                                        // Flash animation on price change
+                                        if (priceChanged) {
+                                            cells[2].classList.remove('flash-up', 'flash-down');
+                                            // Force reflow to restart animation
+                                            void cells[2].offsetWidth;
+                                            cells[2].classList.add(priceDirection === 'up' ? 'flash-up' : 'flash-down');
+                                        }
+                                    }
+
+                                    // Update 24h cell (4th td) with icon - from Yahoo data
+                                    if (cells[3] && changePct !== null) {
+                                        const marketStatus = getMarketStatus(symbol);
+                                        const icon = changePct >= 0 ? '▲' : '▼';
+
+                                        if (marketStatus.isOpen) {
+                                            cells[3].innerHTML = icon + ' ' + formatPct(changePct);
+                                            cells[3].className = 'text-right change-cell ' + (changePct >= 0 ? 'change-positive' : 'change-negative');
+
+                                            if (priceChanged) {
+                                                cells[3].classList.remove('flash-up', 'flash-down');
+                                                void cells[3].offsetWidth;
+                                                cells[3].classList.add(priceDirection === 'up' ? 'flash-up' : 'flash-down');
+                                            }
+                                        } else {
+                                            cells[3].innerHTML = `<span style="opacity:0.5">${icon} ${formatPct(changePct)}</span>`;
+                                            cells[3].className = 'text-right change-cell ' + (changePct >= 0 ? 'change-positive' : 'change-negative');
+                                        }
+                                    }
+
+                                    // Update P&L cell (5th td) - recalculate from entry price
+                                    if (cells[4] && item.entry && item.entry > 0) {
+                                        const pnlPct = ((price - item.entry) / item.entry) * 100;
+                                        const pnlIcon = pnlPct >= 0 ? '▲' : '▼';
+                                        cells[4].innerHTML = pnlIcon + ' ' + formatPct(pnlPct);
+                                        cells[4].className = 'text-right pnl-cell ' + (pnlPct >= 0 ? 'pnl-positive' : 'pnl-negative');
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
             });
-        });
-    }
-
-    function toggleWatchlist(id) {
-        const content = document.getElementById('watchlist-' + id);
-        const icon = document.getElementById('toggle-icon-' + id);
-        if (content.classList.contains('expanded')) {
-            content.classList.remove('expanded');
-            icon.className = 'fas fa-chevron-down';
-        } else {
-            content.classList.add('expanded');
-            icon.className = 'fas fa-chevron-up';
-        }
-    }
-
-    function sortColumn(portfolioId, column, headerEl) {
-        const state = window.sortState[portfolioId];
-        const data = window.portfolioData[portfolioId];
-
-        if (state.column === column) {
-            state.direction = state.direction === 'asc' ? 'desc' : 'asc';
-        } else {
-            state.column = column;
-            state.direction = 'desc';
         }
 
-        const headers = headerEl.closest('thead').querySelectorAll('th');
-        headers.forEach(th => {
-            th.classList.remove('sorted');
-            const icon = th.querySelector('.sort-icon');
-            if (icon) icon.className = 'fas fa-sort sort-icon';
-        });
-        headerEl.classList.add('sorted');
-        const sortIcon = headerEl.querySelector('.sort-icon');
-        if (sortIcon) {
-            sortIcon.className = state.direction === 'asc' ? 'fas fa-sort-up sort-icon' : 'fas fa-sort-down sort-icon';
+        function toggleWatchlist(id) {
+            const content = document.getElementById('watchlist-' + id);
+            const icon = document.getElementById('toggle-icon-' + id);
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                icon.className = 'fas fa-chevron-down';
+            } else {
+                content.classList.add('expanded');
+                icon.className = 'fas fa-chevron-up';
+            }
         }
 
-        const sorted = sortData(data, column, state.direction);
-        renderWatchlistTable(sorted, 'tbody-' + portfolioId, portfolioId);
-    }
+        function sortColumn(portfolioId, column, headerEl) {
+            const state = window.sortState[portfolioId];
+            const data = window.portfolioData[portfolioId];
+
+            if (state.column === column) {
+                state.direction = state.direction === 'asc' ? 'desc' : 'asc';
+            } else {
+                state.column = column;
+                state.direction = 'desc';
+            }
+
+            const headers = headerEl.closest('thead').querySelectorAll('th');
+            headers.forEach(th => {
+                th.classList.remove('sorted');
+                const icon = th.querySelector('.sort-icon');
+                if (icon) icon.className = 'fas fa-sort sort-icon';
+            });
+            headerEl.classList.add('sorted');
+            const sortIcon = headerEl.querySelector('.sort-icon');
+            if (sortIcon) {
+                sortIcon.className = state.direction === 'asc' ? 'fas fa-sort-up sort-icon' : 'fas fa-sort-down sort-icon';
+            }
+
+            const sorted = sortData(data, column, state.direction);
+            renderWatchlistTable(sorted, 'tbody-' + portfolioId, portfolioId);
+        }
     </script>
 </body>
+
 </html>
