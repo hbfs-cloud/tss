@@ -1,14 +1,14 @@
 [
   {
-    "timestamp": "2026-02-11T13:34:30+01:00",
+    "timestamp": "2026-02-12T09:03:16+01:00",
     "date": "2026-02-10",
     "portfolio": "jp",
     "allocation": "jp",
     "currency": "JPY",
-    "git_sha1": "5f83ba9f",
+    "git_sha1": "c603efeb",
     "git_branch": "20260205",
     "config_path": "config/portfolio_jp.yaml",
-    "config_hash": "00284c7f7b888653",
+    "config_hash": "ead12eac77e1c2bc",
     "actions": [
       {
         "type": "UPDATE",
@@ -21,40 +21,22 @@
         "reason": "TRAILING_STOP_UPDATE: Replacing stop $15880.00 with $15884.29"
       },
       {
-        "type": "UPDATE",
-        "symbol": "1515.TW",
-        "side": "",
-        "order_type": "",
-        "qty": 0,
-        "stop_price": 3975.565714939662,
-        "order_id": "236",
-        "reason": "TRAILING_STOP_UPDATE: Replacing stop $3435.00 with $3975.57"
-      },
-      {
-        "type": "UPDATE",
-        "symbol": "1723.TW",
-        "side": "",
-        "order_type": "",
-        "qty": 0,
-        "stop_price": 12208.493492085714,
-        "order_id": "238",
-        "reason": "TRAILING_STOP_UPDATE: Replacing stop $10610.00 with $12208.49"
-      },
-      {
         "type": "CREATE",
         "symbol": "1515.TW",
         "side": "SELL",
-        "order_type": "MARKET",
+        "order_type": "STOP",
         "qty": 5600,
-        "reason": "TIMEOUT: Position held 106751 days (max=30) with -99.3% loss ($-22132208). Entry $3978.18 -> $26.00. Cutting dead money to free capital for fresh opportunities."
+        "stop_price": 3975.608571973528,
+        "reason": "MISSING_STOP: 5600 shares @ $3975.61 | P&L: -99.3%, Risk: -15103.1%"
       },
       {
         "type": "CREATE",
         "symbol": "1723.TW",
         "side": "SELL",
-        "order_type": "MARKET",
+        "order_type": "STOP",
         "qty": 1800,
-        "reason": "TIMEOUT: Position held 106751 days (max=30) with -99.4% loss ($-21857054). Entry $12214.21 -> $71.40. Cutting dead money to free capital for fresh opportunities."
+        "stop_price": 12208.436350100503,
+        "reason": "MISSING_STOP: 1800 shares @ $12208.44 | P&L: -99.4%, Risk: -16809.2%"
       }
     ],
     "positions": [
@@ -138,22 +120,6 @@
     ],
     "pending_orders": [
       {
-        "OrderID": "232",
-        "Symbol": "285A.T",
-        "Side": "SELL",
-        "OrderType": "STOP",
-        "Qty": 1100,
-        "FilledQty": 0,
-        "LimitPrice": 0,
-        "StopPrice": 15880,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "",
-        "PlacedDate": "0001-01-01T00:00:00Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": "ibkr"
-      },
-      {
         "OrderID": "242",
         "Symbol": "186A.T",
         "Side": "SELL",
@@ -234,6 +200,22 @@
         "BrokerSource": "ibkr"
       },
       {
+        "OrderID": "245",
+        "Symbol": "285A.T",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 1100,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 15880,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "0001-01-01T00:00:00Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "ibkr"
+      },
+      {
         "OrderID": "220",
         "Symbol": "6366.T",
         "Side": "SELL",
@@ -253,10 +235,10 @@
     "balance": {
       "BaseCurrency": "EUR",
       "CashByCurrency": {
-        "EUR": 196691.87
+        "EUR": 191397.18
       },
       "MarginUsed": 0,
-      "TotalEquity": 999827.28,
+      "TotalEquity": 1030857.56,
       "Timestamp": "0001-01-01T00:00:00Z",
       "BrokerSource": "ibkr"
     },
@@ -283,7 +265,8 @@
           191061547.00222963,
           185353622.33889374,
           183661780.18780366,
-          182776008.7117691
+          182776008.7117691,
+          187326446.9722402
         ],
         "equity_curve_dates": [
           "2026-02-06T01:00:00+01:00",
@@ -306,6 +289,7 @@
           "2026-02-06T01:00:00+01:00",
           "2026-02-09T01:00:00+01:00",
           "2026-02-10T01:00:00+01:00",
+          "2026-02-10T01:00:00+01:00",
           "2026-02-10T01:00:00+01:00"
         ],
         "global_pause_until": "0001-01-01T00:00:00Z",
@@ -326,8 +310,8 @@
           "7184.T": 1
         },
         "position_highs": {
-          "1515.TW": 26,
-          "1723.TW": 71.4000015258789,
+          "1515.TW": 26.149999618530273,
+          "1723.TW": 72.19999694824219,
           "186A.T": 1121,
           "285A.T": 18845,
           "6330.T": 6150,
@@ -363,7 +347,9 @@
         },
         "position_stops": {
           "1515.T": 3434.714285714286,
+          "1515.TW": 3975.608571973528,
           "1723.T": 10614.285714285714,
+          "1723.TW": 12208.436350100503,
           "186A.T": 983,
           "285A.T": 15884.285714285714,
           "6330.T": 5530,
@@ -373,10 +359,10 @@
         },
         "regime_score_history": [
           0.6837908068051184,
-          0.6837908068051184,
           0.7642923591778424,
           0.7427880785527154,
-          0.7427880785527154
+          0.7427880785527154,
+          0.7494684951289223
         ],
         "stop_history": [],
         "stop_streak_count": 0,
