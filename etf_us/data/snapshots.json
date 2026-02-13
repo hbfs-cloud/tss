@@ -1,5 +1,251 @@
 [
   {
+    "timestamp": "2026-02-13T09:03:44+01:00",
+    "date": "2026-02-12",
+    "portfolio": "etf_us",
+    "allocation": "etf_us",
+    "currency": "USD",
+    "git_sha1": "ebef44b3",
+    "git_branch": "20260205",
+    "config_path": "config/portfolio_etf_us.yaml",
+    "config_hash": "024b2494b514ee17",
+    "actions": [
+      {
+        "type": "CREATE",
+        "symbol": "XLE",
+        "side": "SELL",
+        "order_type": "MARKET",
+        "qty": 209,
+        "order_id": "d7b80454-7352-4434-85ee-170d43bc8170",
+        "reason": "ROTATION_OUT"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "REKT",
+        "side": "BUY",
+        "order_type": "LIMIT",
+        "qty": 1089,
+        "limit_price": 20.21220078277588,
+        "order_id": "3c7b325c-609d-45fd-851e-093442a9f399",
+        "reason": "ROTATION_IN"
+      }
+    ],
+    "positions": [
+      {
+        "Symbol": "BDRY",
+        "Qty": 252,
+        "AvgEntry": 11.1,
+        "CurrentPrice": 11.3,
+        "UnrealizedPnL": 50.4,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "2026-02-10T14:32:09.03036Z",
+        "BrokerSource": "",
+        "Name": "Breakwave Dry Bulk Shipping ETF",
+        "Sector": "Miscellaneous Sector",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "investment_management",
+          "shipping"
+        ]
+      },
+      {
+        "Symbol": "BTCC",
+        "Qty": 860,
+        "AvgEntry": 16.155279,
+        "CurrentPrice": 15.6581,
+        "UnrealizedPnL": -427.57394,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "2026-02-09T14:34:32.707629Z",
+        "BrokerSource": "",
+        "Name": "Grayscale Bitcoin Covered Call ETF",
+        "Sector": "Digital Assets",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "blockchain_finance",
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "CBTA",
+        "Qty": 515,
+        "AvgEntry": 22.43,
+        "CurrentPrice": 21.823,
+        "UnrealizedPnL": -312.605,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "2026-02-12T14:30:58.337459Z",
+        "BrokerSource": "",
+        "Name": "Calamos Bitcoin 80 Series Structured Alt Protection ETF - April",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "FIAT",
+        "Qty": 333,
+        "AvgEntry": 34.054595,
+        "CurrentPrice": 35.79,
+        "UnrealizedPnL": 577.889865,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "2026-02-12T14:33:04.810757Z",
+        "BrokerSource": "",
+        "Name": "YieldMax Short COIN Option Income Strategy ETF",
+        "Sector": "Derivative Income",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "PYPY",
+        "Qty": 493,
+        "AvgEntry": 28.1,
+        "CurrentPrice": 28,
+        "UnrealizedPnL": -49.3,
+        "ChangeToday": 0.02339,
+        "Currency": "USD",
+        "Timestamp": "2026-02-09T14:30:59.20158Z",
+        "BrokerSource": "",
+        "Name": "YieldMax PYPL Option Income Strategy ETF",
+        "Sector": "Derivative Income",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "XLE",
+        "Qty": 209,
+        "AvgEntry": 54.920861,
+        "CurrentPrice": 53.76,
+        "UnrealizedPnL": -242.619949,
+        "ChangeToday": -0.00408,
+        "Currency": "USD",
+        "Timestamp": "2026-02-12T14:33:16.181005Z",
+        "BrokerSource": "",
+        "Name": "State Street Energy Select Sector SPDR ETF",
+        "Sector": "Equity Energy",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "YBIT",
+        "Qty": 550,
+        "AvgEntry": 24.991455,
+        "CurrentPrice": 23.55,
+        "UnrealizedPnL": -792.80025,
+        "ChangeToday": -0.01423,
+        "Currency": "USD",
+        "Timestamp": "2026-02-09T14:33:20.417304Z",
+        "BrokerSource": "",
+        "Name": "YieldMax Bitcoin Option Income Strategy ETF",
+        "Sector": "Digital Assets",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "blockchain_finance",
+          "investment_management"
+        ]
+      }
+    ],
+    "pending_orders": [
+      {
+        "OrderID": "3c7b325c-609d-45fd-851e-093442a9f399",
+        "Symbol": "REKT",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 1089,
+        "FilledQty": 0,
+        "LimitPrice": 20.21,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-13T08:03:44.669633022Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "d7b80454-7352-4434-85ee-170d43bc8170",
+        "Symbol": "XLE",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 209,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-13T08:03:44.576159213Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      }
+    ],
+    "balance": {
+      "BaseCurrency": "USD",
+      "CashByCurrency": {
+        "USD": 22032.87
+      },
+      "MarginUsed": 77462.82,
+      "TotalEquity": 99495.69,
+      "Timestamp": "0001-01-01T00:00:00Z",
+      "BrokerSource": "alpaca"
+    },
+    "state": {
+      "pm_state": {
+        "cautious_restart_start": "0001-01-01T00:00:00Z",
+        "cautious_restart_until": "0001-01-01T00:00:00Z",
+        "equity_curve": [],
+        "equity_curve_dates": null,
+        "global_pause_until": "0001-01-01T00:00:00Z",
+        "is_in_grace_period": false,
+        "last_entry_creation_date": "2026-02-12T15:30:00+01:00",
+        "last_liquidation_date": "0001-01-01T00:00:00Z",
+        "last_streak_reset_date": "0001-01-01T00:00:00Z",
+        "peak_equity": 0,
+        "position_clusters": null,
+        "position_entries": {},
+        "position_highs": null,
+        "position_last_dca": {},
+        "position_open_dates": {
+          "BDRY": "2026-02-09T15:30:00+01:00",
+          "BTCC": "2026-02-06T15:30:00+01:00",
+          "CBTA": "2026-02-11T15:30:00+01:00",
+          "FIAT": "2026-02-11T15:30:00+01:00",
+          "PYPY": "2026-02-06T15:30:00+01:00",
+          "REKT": "2026-02-12T15:30:00+01:00",
+          "YBIT": "2026-02-06T15:30:00+01:00"
+        },
+        "position_stops": {
+          "BDRY": 10.089285400935582,
+          "BTCC": 13.790636209614345,
+          "CBTA": 20.625714269365584,
+          "FIAT": 30.04066461114066,
+          "PYPY": 24.578393418448314,
+          "YBIT": 21.206096162327356
+        },
+        "regime_score_history": null,
+        "stop_history": [],
+        "stop_streak_count": 0,
+        "stopped_symbols": {}
+      },
+      "prev_regime": "NEUTRAL"
+    }
+  },
+  {
     "timestamp": "2026-02-12T09:01:06+01:00",
     "date": "2026-02-11",
     "portfolio": "etf_us",

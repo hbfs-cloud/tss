@@ -4,18 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Market Watch | Strategy Opportunities</title>
+    <title>MarketWatch AI | Strategy Opportunities</title>
     <link rel="icon" href="https://market-watch.xyz/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <style>
         :root {
-            --bg: #0f172a;
-            --bg-card: #1e293b;
-            --border: #334155;
-            --text: #f1f5f9;
-            --text-muted: #94a3b8;
+            --bg: #f8fafc;
+            --bg-card: #ffffff;
+            --border: #e2e8f0;
+            --text: #0f172a;
+            --text-muted: #64748b;
             --green: #10b981;
             --red: #ef4444;
             --blue: #3b82f6;
@@ -42,7 +42,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 1rem 2rem;
-            background: rgba(15, 23, 42, 0.95);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
             position: sticky;
@@ -60,8 +60,8 @@
             font-size: 1.1rem;
         }
 
-        .nav-brand i {
-            color: var(--green);
+        .nav-brand img {
+            height: 1.5rem;
         }
 
         .nav-links {
@@ -81,12 +81,12 @@
 
         .nav-links a:hover {
             color: var(--text);
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.04);
         }
 
         .nav-links a.active {
             color: var(--purple);
-            background: rgba(139, 92, 246, 0.1);
+            background: rgba(139, 92, 246, 0.08);
             font-weight: 700;
         }
 
@@ -125,8 +125,8 @@
             gap: 0.4rem;
             margin-top: 1rem;
             padding: 0.4rem 1rem;
-            background: rgba(139, 92, 246, 0.15);
-            border: 1px solid rgba(139, 92, 246, 0.3);
+            background: rgba(139, 92, 246, 0.08);
+            border: 1px solid rgba(139, 92, 246, 0.2);
             border-radius: 20px;
             font-size: 0.8rem;
             color: var(--purple);
@@ -146,12 +146,13 @@
             overflow: hidden;
             transition: all 0.3s;
             position: relative;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
         }
 
         .report-card:hover {
             border-color: var(--purple);
             transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(139, 92, 246, 0.15);
+            box-shadow: 0 12px 40px rgba(139, 92, 246, 0.12);
         }
 
         .report-card-header {
@@ -196,7 +197,7 @@
             border-radius: 6px;
             font-size: 0.7rem;
             font-weight: 600;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.04);
             color: var(--text-muted);
         }
 
@@ -231,6 +232,7 @@
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
         }
 
         .methodology h2 {
@@ -262,9 +264,9 @@
 
         .methodology .step {
             padding: 1rem;
-            background: rgba(255, 255, 255, 0.03);
+            background: var(--bg);
             border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
         }
 
         .methodology .step-num {
@@ -323,7 +325,7 @@
 
 <body>
     <nav class="nav">
-        <a href="/" class="nav-brand"><i class="fas fa-broadcast-tower"></i> Market Watch</a>
+        <a href="/" class="nav-brand"><img src="https://market-watch.xyz/logo.svg" alt="MW"> MarketWatch AI</a>
         <div class="nav-links">
             <a href="/"><i class="fas fa-chart-line"></i> Portfolios</a>
             <a href="/opportunities/" class="active"><i class="fas fa-crosshairs"></i> Opportunities</a>
@@ -346,10 +348,10 @@
             <!-- US Stocks -->
             <div class="report-card">
                 <div class="report-card-header">
-                    <div class="report-card-icon" style="background: rgba(59,130,246,0.15); color: #3b82f6;">
+                    <div class="report-card-icon" style="background: rgba(59,130,246,0.1); color: #3b82f6;">
                         <i class="fas fa-flag-usa"></i>
                     </div>
-                    <h3>🇺🇸 US Stocks</h3>
+                    <h3>US Stocks</h3>
                     <div class="subtitle">S&P 500, NASDAQ, NYSE — Large & Mid Cap</div>
                 </div>
                 <div class="report-card-body">
@@ -367,10 +369,10 @@
             <!-- Crypto -->
             <div class="report-card">
                 <div class="report-card-header">
-                    <div class="report-card-icon" style="background: rgba(139,92,246,0.15); color: #8b5cf6;">
+                    <div class="report-card-icon" style="background: rgba(139,92,246,0.1); color: #8b5cf6;">
                         <i class="fab fa-bitcoin"></i>
                     </div>
-                    <h3>₿ Crypto</h3>
+                    <h3>Crypto</h3>
                     <div class="subtitle">BTC, ETH, SOL, AVAX & Top Altcoins</div>
                 </div>
                 <div class="report-card-body">
@@ -388,10 +390,10 @@
             <!-- EU Stocks -->
             <div class="report-card">
                 <div class="report-card-header">
-                    <div class="report-card-icon" style="background: rgba(99,102,241,0.15); color: #6366f1;">
+                    <div class="report-card-icon" style="background: rgba(99,102,241,0.1); color: #6366f1;">
                         <i class="fas fa-globe-europe"></i>
                     </div>
-                    <h3>🇪🇺 European Stocks</h3>
+                    <h3>European Stocks</h3>
                     <div class="subtitle">CAC 40, DAX, AEX, IBEX, MIB</div>
                 </div>
                 <div class="report-card-body">
@@ -408,10 +410,10 @@
             <!-- Japan -->
             <div class="report-card">
                 <div class="report-card-header">
-                    <div class="report-card-icon" style="background: rgba(239,68,68,0.15); color: #ef4444;">
+                    <div class="report-card-icon" style="background: rgba(239,68,68,0.1); color: #ef4444;">
                         <i class="fas fa-torii-gate"></i>
                     </div>
-                    <h3>🇯🇵 Japan Stocks</h3>
+                    <h3>Japan Stocks</h3>
                     <div class="subtitle">Nikkei 225, TOPIX — Tokyo Exchange</div>
                 </div>
                 <div class="report-card-body">
@@ -428,10 +430,10 @@
             <!-- Hong Kong -->
             <div class="report-card">
                 <div class="report-card-header">
-                    <div class="report-card-icon" style="background: rgba(245,158,11,0.15); color: #f59e0b;">
+                    <div class="report-card-icon" style="background: rgba(245,158,11,0.1); color: #f59e0b;">
                         <i class="fas fa-city"></i>
                     </div>
-                    <h3>🇭🇰 Hong Kong Stocks</h3>
+                    <h3>Hong Kong Stocks</h3>
                     <div class="subtitle">Hang Seng, H-Shares — HKEX</div>
                 </div>
                 <div class="report-card-body">
@@ -448,10 +450,10 @@
             <!-- ETFs -->
             <div class="report-card">
                 <div class="report-card-header">
-                    <div class="report-card-icon" style="background: rgba(16,185,129,0.15); color: #10b981;">
+                    <div class="report-card-icon" style="background: rgba(16,185,129,0.1); color: #10b981;">
                         <i class="fas fa-layer-group"></i>
                     </div>
-                    <h3>📊 ETFs</h3>
+                    <h3>ETFs</h3>
                     <div class="subtitle">US & Global ETFs — Sectors, Themes, Indices</div>
                 </div>
                 <div class="report-card-body">
@@ -493,7 +495,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 Market Watch. For educational purposes only. Not financial advice.</p>
+        <p>&copy; 2026 MarketWatch AI. For educational purposes only. Not financial advice.</p>
     </footer>
 
     <script>

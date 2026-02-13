@@ -5,7 +5,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>US HighVol Breakout / Alpaca — Backtest 5Y | Market Watch</title>
+    <title>US HighVol Breakout / Alpaca — Backtest 5Y | MarketWatch AI</title>
     <link rel="icon" href="https://market-watch.xyz/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
@@ -442,6 +442,251 @@
             background: #fee2e2;
             color: #991b1b;
         }
+
+        /* Allocation charts grid */
+        .alloc-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        @media (max-width:900px) {
+            .alloc-grid { grid-template-columns: 1fr; }
+        }
+        .alloc-chart-wrap {
+            height: 220px;
+            position: relative;
+        }
+        .toggle-btn {
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .toggle-btn.active {
+            background: var(--accent-blue);
+            color: white;
+            border-color: var(--accent-blue);
+        }
+
+        /* Correlation matrix */
+        .corr-cell {
+            text-align: center;
+            font-size: 0.7rem;
+            padding: 0.3rem;
+            font-family: monospace;
+            font-weight: 600;
+        }
+        .corr-high { background: #fecaca; color: #991b1b; }
+        .corr-med { background: #fed7aa; color: #9a3412; }
+        .corr-low { background: #f1f5f9; color: #64748b; }
+        .corr-diag { background: #e2e8f0; color: #94a3b8; }
+        .corr-warning {
+            margin-top: 0.75rem;
+            padding: 0.75rem;
+            background: #fefce8;
+            border: 1px solid #fde68a;
+            border-radius: 8px;
+            color: #92400e;
+            font-size: 0.8rem;
+        }
+
+        /* Best/worst trades */
+        .trade-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 0.4rem;
+        }
+        .trade-best { background: #f0fdf4; border: 1px solid #bbf7d0; }
+        .trade-worst { background: #fef2f2; border: 1px solid #fecaca; }
+        .trade-symbol { font-weight: 700; font-family: monospace; font-size: 0.85rem; }
+        .trade-date { font-size: 0.7rem; color: var(--text-muted); margin-left: 0.5rem; }
+        .trade-pnl { font-weight: 700; font-size: 0.85rem; }
+
+        /* Weight bar */
+        .weight-bar {
+            display: inline-block;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--accent-blue);
+            opacity: 0.6;
+            vertical-align: middle;
+            margin-right: 4px;
+        }
+
+        /* Mode Toggle Pill */
+        .mode-toggle {
+            display: inline-flex;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+        }
+        .mode-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.3rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .mode-live { color: var(--accent-green); }
+        .mode-live.active { background: var(--accent-green); color: white; }
+        .mode-backtest { color: var(--accent-purple); }
+        .mode-backtest.active { background: var(--accent-purple); color: white; }
+        .live-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+        .mode-live.active .live-dot { animation: pulse-dot 2s infinite; }
+        @keyframes pulse-dot { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+
+        /* Tab Bar */
+        .tab-bar {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            padding: 0 1rem;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            overflow-x: auto;
+        }
+        .tab-btn {
+            padding: 0.75rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            border: none;
+            background: none;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            white-space: nowrap;
+            transition: all 0.15s;
+        }
+        .tab-btn:hover { color: var(--text-primary); background: var(--bg-primary); }
+        .tab-btn.active { color: var(--accent-blue); border-bottom-color: var(--accent-blue); }
+        .tab-btn i { margin-right: 0.3rem; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .tab-spacer { flex: 1; }
+        .tab-settings {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .settings-btn {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border: none;
+            background: none;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+        .settings-btn:hover { color: var(--text-primary); background: var(--bg-primary); }
+        .settings-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.75rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            z-index: 200;
+            min-width: 200px;
+        }
+        .settings-dropdown.open { display: block; }
+        .settings-dropdown label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.3rem 0;
+            font-size: 0.75rem;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+        .settings-section {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            margin-top: 0.5rem;
+            margin-bottom: 0.25rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .settings-section:first-child { margin-top: 0; border-top: none; padding-top: 0; }
+        .preset-btns { display: flex; gap: 0.4rem; margin-bottom: 0.5rem; }
+        .preset-btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.65rem;
+            font-weight: 600;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+        .preset-btn:hover { background: var(--accent-blue); color: white; border-color: var(--accent-blue); }
+
+        /* Panel toggle */
+        .panel-toggle {
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            padding: 0.2rem;
+            border-radius: 4px;
+            transition: all 0.15s;
+        }
+        .panel-toggle:hover { color: var(--text-primary); background: var(--bg-primary); }
+        .card.panel-hidden .card-body { display: none; }
+        .card.panel-hidden .card-header { opacity: 0.5; border-bottom: none; }
+
+        /* Monthly Heatmap */
+        .heatmap-table { border-collapse: collapse; width: 100%; }
+        .heatmap-table th, .heatmap-table td {
+            padding: 0.4rem 0.5rem;
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+        }
+        .heatmap-table th {
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            font-size: 0.65rem;
+        }
+        .heatmap-year { font-weight: 700; text-align: left !important; }
+        .heatmap-total { font-weight: 700; }
+
+        /* Rolling window selector */
+        .rolling-select {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.4rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-weight: 600;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -454,7 +699,7 @@
             style="max-width:1400px; margin:0 auto; padding-bottom:0.75rem; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #f1f5f9; margin-bottom:0.75rem;">
             <a href="/"
                 style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;color:var(--text-primary);font-weight:800;font-size:1.1rem;">
-                <i class="fas fa-broadcast-tower" style="color:var(--accent-green);"></i> Market Watch
+                <img src="https://market-watch.xyz/logo.svg" alt="MW" style="height:1.5rem;"> MarketWatch AI
             </a>
             <div style="display:flex;gap:0.4rem;">
                 <a href="/"
@@ -473,11 +718,10 @@
             <div class="nav-left">
                 <a href="../" class="nav-back"><i class="fa-solid fa-arrow-left"></i></a>
                 <span class="nav-title" id="nav-title">Live Trading</span>
-                <span id="mode-badge" class="ml-2 px-2 py-1 text-xs font-bold bg-green-600 text-white rounded"
-                    style="margin-left:8px;padding:2px 8px;font-size:0.7rem;font-weight:700;background:#7c3aed;color:white;border-radius:4px;">BACKTEST 5Y</span>
-                <a id="backtest-link" href="backtest/" class="nav-link"
-                    style="margin-left:12px;padding:4px 12px;font-size:0.75rem;background:#7c3aed;color:white;border-radius:4px;text-decoration:none;">Backtest
-                    5Y</a>
+                <div class="mode-toggle">
+                    <a href="../" class="mode-btn mode-live" id="mode-live"><span class="live-dot"></span> LIVE</a>
+                    <a href="backtest/" class="mode-btn mode-backtest active" id="mode-backtest"><i class="fas fa-flask"></i> BACKTEST 5Y</a>
+                </div>
                 <select id="currency-selector" class="nav-select" onchange="setGlobalCurrency(this.value)">
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
@@ -487,6 +731,8 @@
                     <option value="CNY">CNY</option>
                     <option value="HKD">HKD</option>
                     <option value="PLN">PLN</option>
+                    <option value="BTC">BTC</option>
+                    <option value="GOLD">GOLD</option>
                 </select>
             </div>
             <div class="nav-right">
@@ -499,8 +745,27 @@
         </div>
     </nav>
 
+    <!-- Tab Bar -->
+    <div class="tab-bar">
+        <button class="tab-btn active" data-tab="overview" onclick="switchTab('overview')"><i class="fas fa-chart-area"></i> Overview</button>
+        <button class="tab-btn" data-tab="analytics" onclick="switchTab('analytics')"><i class="fas fa-chart-bar"></i> Analytics</button>
+        <button class="tab-btn" data-tab="allocations" onclick="switchTab('allocations')"><i class="fas fa-pie-chart"></i> Allocations</button>
+        <button class="tab-btn" data-tab="positions" onclick="switchTab('positions')"><i class="fas fa-wallet"></i> Positions</button>
+        <div class="tab-spacer"></div>
+        <div class="tab-settings">
+            <button class="settings-btn" onclick="toggleSettings()" title="Panel settings"><i class="fas fa-cog"></i></button>
+            <div class="settings-dropdown" id="settings-dropdown">
+                <div class="preset-btns">
+                    <button class="preset-btn" onclick="applyPreset('full')">Full View</button>
+                    <button class="preset-btn" onclick="applyPreset('compact')">Compact</button>
+                </div>
+                <div id="settings-panels"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
-        <!-- KPI Cards -->
+        <!-- KPI Cards (always visible, outside tabs) -->
         <div class="kpi-grid">
             <div class="kpi-card">
                 <div class="kpi-label">Total Return</div>
@@ -538,11 +803,14 @@
             </div>
         </div>
 
+        <!-- ═══ OVERVIEW TAB ═══ -->
+        <div class="tab-content active" data-tab="overview">
+
         <!-- Total Return Chart -->
-        <div class="card">
+        <div class="card" data-panel="returnChart">
             <div class="card-header">
-                <div class="card-title"><i class="fas fa-chart-area" style="color:var(--accent-blue);"></i> Total Return
-                </div>
+                <div class="card-title"><i class="fas fa-chart-area" style="color:var(--accent-blue);"></i> Total Return</div>
+                <span class="panel-toggle" onclick="togglePanel(this)"><i class="fas fa-eye"></i></span>
             </div>
             <div class="card-body">
                 <div class="chart-wrap"><canvas id="returnChart"></canvas></div>
@@ -550,10 +818,10 @@
         </div>
 
         <!-- Max Drawdown Chart -->
-        <div class="card">
+        <div class="card" data-panel="maxDdChart">
             <div class="card-header">
-                <div class="card-title"><i class="fas fa-chart-line" style="color:var(--accent-red);"></i> Max Drawdown
-                </div>
+                <div class="card-title"><i class="fas fa-chart-line" style="color:var(--accent-red);"></i> Max Drawdown</div>
+                <span class="panel-toggle" onclick="togglePanel(this)"><i class="fas fa-eye"></i></span>
             </div>
             <div class="card-body">
                 <div class="chart-wrap"><canvas id="maxDdChart"></canvas></div>
@@ -561,13 +829,181 @@
         </div>
 
         <!-- Execution Metrics Chart (Slippage & Fill Rate) -->
-        <div class="card">
+        <div class="card" data-panel="execChart">
             <div class="card-header">
-                <div class="card-title"><i class="fas fa-exchange-alt" style="color:var(--accent-purple);"></i>
-                    Execution Quality</div>
+                <div class="card-title"><i class="fas fa-exchange-alt" style="color:var(--accent-purple);"></i> Execution Quality</div>
+                <span class="panel-toggle" onclick="togglePanel(this)"><i class="fas fa-eye"></i></span>
             </div>
             <div class="card-body">
                 <div class="chart-wrap"><canvas id="execChart"></canvas></div>
+            </div>
+        </div>
+
+        </div><!-- /overview tab -->
+
+        <!-- ═══ ANALYTICS TAB ═══ -->
+        <div class="tab-content" data-tab="analytics">
+
+        <!-- Rolling Window Selector -->
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+            <span style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);">Rolling Window:</span>
+            <select class="rolling-select" id="rollingWindowSelect" onchange="changeRollingWindow(this.value)">
+                <option value="30">30 days</option>
+                <option value="60">60 days</option>
+                <option value="90" selected>90 days</option>
+                <option value="180">180 days</option>
+            </select>
+        </div>
+
+        <div class="grid-2">
+            <!-- Rolling Sharpe -->
+            <div class="card" data-panel="rollingSharpe">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-chart-line" style="color:var(--accent-blue);"></i> Rolling Sharpe Ratio</div>
+                    <span class="panel-toggle" onclick="togglePanel(this)"><i class="fas fa-eye"></i></span>
+                </div>
+                <div class="card-body"><div class="chart-wrap"><canvas id="rollingSharpeChart"></canvas></div></div>
+            </div>
+
+            <!-- Rolling R² -->
+            <div class="card" data-panel="rollingR2">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-bullseye" style="color:var(--accent-green);"></i> Rolling R² (Equity Smoothness)</div>
+                    <span class="panel-toggle" onclick="togglePanel(this)"><i class="fas fa-eye"></i></span>
+                </div>
+                <div class="card-body"><div class="chart-wrap"><canvas id="rollingR2Chart"></canvas></div></div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <!-- Position Count -->
+            <div class="card" data-panel="positionCount">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-layer-group" style="color:var(--accent-purple);"></i> Open Positions Over Time</div>
+                    <span class="panel-toggle" onclick="togglePanel(this)"><i class="fas fa-eye"></i></span>
+                </div>
+                <div class="card-body"><div class="chart-wrap"><canvas id="positionCountChart"></canvas></div></div>
+            </div>
+
+            <!-- Capital Utilization -->
+            <div class="card" data-panel="capitalUtil">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-percentage" style="color:var(--accent-orange);"></i> Capital Utilization</div>
+                    <span class="panel-toggle" onclick="togglePanel(this)"><i class="fas fa-eye"></i></span>
+                </div>
+                <div class="card-body"><div class="chart-wrap"><canvas id="capitalUtilChart"></canvas></div></div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <!-- Rolling Win Rate -->
+            <div class="card" data-panel="rollingWinRate">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-trophy" style="color:var(--accent-green);"></i> Rolling Win Rate</div>
+                    <span class="panel-toggle" onclick="togglePanel(this)"><i class="fas fa-eye"></i></span>
+                </div>
+                <div class="card-body"><div class="chart-wrap"><canvas id="rollingWinRateChart"></canvas></div></div>
+            </div>
+
+            <!-- Trade Count per Month -->
+            <div class="card" data-panel="tradeCount">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-exchange-alt" style="color:var(--accent-purple);"></i> Trades per Month</div>
+                    <span class="panel-toggle" onclick="togglePanel(this)"><i class="fas fa-eye"></i></span>
+                </div>
+                <div class="card-body"><div class="chart-wrap"><canvas id="tradeCountChart"></canvas></div></div>
+            </div>
+        </div>
+
+        <!-- Monthly Returns Heatmap -->
+        <div class="card" data-panel="monthlyHeatmap">
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-th" style="color:var(--accent-orange);"></i> Monthly Returns Heatmap</div>
+                <span class="panel-toggle" onclick="togglePanel(this)"><i class="fas fa-eye"></i></span>
+            </div>
+            <div class="card-body"><div class="table-wrap" id="monthly-heatmap"></div></div>
+        </div>
+
+        </div><!-- /analytics tab -->
+
+        <!-- ═══ ALLOCATIONS TAB ═══ -->
+        <div class="tab-content" data-tab="allocations">
+
+        <!-- Allocation Stacked Area Charts -->
+        <div class="alloc-grid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-industry" style="color:var(--accent-blue);"></i> Sector Allocation</div>
+                    <div><button class="toggle-btn active" onclick="toggleAllocMode('sector','pct',this)">%</button> <button class="toggle-btn" onclick="toggleAllocMode('sector','abs',this)">Val</button></div>
+                </div>
+                <div class="card-body"><div class="alloc-chart-wrap"><canvas id="allocSector"></canvas></div></div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-globe" style="color:#10b981;"></i> Region Allocation</div>
+                    <div><button class="toggle-btn active" onclick="toggleAllocMode('region','pct',this)">%</button> <button class="toggle-btn" onclick="toggleAllocMode('region','abs',this)">Val</button></div>
+                </div>
+                <div class="card-body"><div class="alloc-chart-wrap"><canvas id="allocRegion"></canvas></div></div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-tags" style="color:var(--accent-purple);"></i> Theme Allocation</div>
+                    <div><button class="toggle-btn active" onclick="toggleAllocMode('theme','pct',this)">%</button> <button class="toggle-btn" onclick="toggleAllocMode('theme','abs',this)">Val</button></div>
+                </div>
+                <div class="card-body"><div class="alloc-chart-wrap"><canvas id="allocTheme"></canvas></div></div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-money-bill-wave" style="color:#06b6d4;"></i> Currency Allocation</div>
+                    <div><button class="toggle-btn active" onclick="toggleAllocMode('currency','pct',this)">%</button> <button class="toggle-btn" onclick="toggleAllocMode('currency','abs',this)">Val</button></div>
+                </div>
+                <div class="card-body"><div class="alloc-chart-wrap"><canvas id="allocCurrency"></canvas></div></div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-shapes" style="color:#6366f1;"></i> Asset Class</div>
+                    <div><button class="toggle-btn active" onclick="toggleAllocMode('assetClass','pct',this)">%</button> <button class="toggle-btn" onclick="toggleAllocMode('assetClass','abs',this)">Val</button></div>
+                </div>
+                <div class="card-body"><div class="alloc-chart-wrap"><canvas id="allocAssetClass"></canvas></div></div>
+            </div>
+        </div>
+
+        </div><!-- /allocations tab -->
+
+        <!-- ═══ POSITIONS TAB ═══ -->
+        <div class="tab-content" data-tab="positions">
+
+        <!-- Top Best/Worst Trades -->
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-trophy" style="color:var(--accent-orange);"></i> Top 5 Best Trades</div>
+                </div>
+                <div class="card-body" id="best-trades"></div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-skull-crossbones" style="color:var(--accent-red);"></i> Top 5 Worst Trades</div>
+                </div>
+                <div class="card-body" id="worst-trades"></div>
+            </div>
+        </div>
+
+        <!-- Correlation Matrix -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-table-cells" style="color:var(--accent-purple);"></i> Position Correlation</div>
+                <div style="display:flex;gap:0.5rem;align-items:center;font-size:0.65rem;">
+                    <span style="padding:2px 6px;background:#f1f5f9;border-radius:3px;color:#64748b;">0.5-0.6</span>
+                    <span style="padding:2px 6px;background:#fed7aa;border-radius:3px;color:#9a3412;">0.6-0.8</span>
+                    <span style="padding:2px 6px;background:#fecaca;border-radius:3px;color:#991b1b;">&gt;0.8</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-wrap" id="corr-matrix-wrap"></div>
+                <div id="corr-warning" class="corr-warning" style="display:none;">
+                    <i class="fas fa-triangle-exclamation"></i> <strong>High Correlation Alert:</strong> Some positions have correlation &gt; 0.8, indicating concentrated risk.
+                </div>
             </div>
         </div>
 
@@ -588,6 +1024,8 @@
             </div>
             <div class="card-body" id="actions-content"></div>
         </div>
+
+        </div><!-- /positions tab -->
     </div>
 
     <script>
@@ -626,7 +1064,7 @@
             // This ensures FX is loaded even when snapshots are inline but FX rates are external
             if (fxHistory === null || Object.keys(fxHistory).length === 0) {
                 fxHistory = fxHistory || {};
-                const currencies = ['USD', 'EUR', 'GBP', 'CHF', 'JPY', 'CAD', 'CNY', 'HKD', 'PLN', 'BRL', 'INR', 'ZAR', 'RUB'];
+                const currencies = ['USD', 'EUR', 'GBP', 'CHF', 'JPY', 'CAD', 'CNY', 'HKD', 'PLN', 'BRL', 'INR', 'ZAR', 'RUB', 'BTC', 'GOLD'];
                 await Promise.all(currencies.map(async (ccy) => {
                     try {
                         const res = await fetch('../../fx-' + ccy.toLowerCase() + '.json');
@@ -686,6 +1124,8 @@
         function fmtMoney(v, ccy) {
             if (v == null || isNaN(v)) return '-';
             const c = ccy || getDisplayCcy();
+            if (c === 'BTC') return '\u20bf' + v.toFixed(6);
+            if (c === 'GOLD') return v.toFixed(2) + ' oz';
             try {
                 return new Intl.NumberFormat('en-US', { style: 'currency', currency: c, minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(v);
             } catch (e) { return c + ' ' + v.toFixed(2); }
@@ -705,6 +1145,7 @@
             history.replaceState(null, '', url);
             renderAll();
             updateChartData();
+            addBenchmarksToReturnChart();
         }
         function initCurrencySelector() {
             const sel = document.getElementById('currency-selector');
@@ -739,6 +1180,7 @@
                 renderAll();
                 updateSliderLabel();
                 updateChartData();
+                addBenchmarksToReturnChart();
             });
         }
         function updateSliderLabel() {
@@ -1142,8 +1584,9 @@
             html += '<div class="card-body">';
 
             if (positions.length > 0) {
+                const totalEquity = s.balance?.TotalEquity || 1;
                 const sorted = [...positions].sort((a, b) => (b.UnrealizedPnL || 0) - (a.UnrealizedPnL || 0));
-                html += '<div class="table-wrap"><table><thead><tr><th>Symbol</th><th>Qty</th><th>Entry</th><th>Price</th><th>Stop</th><th>P&L</th><th>%</th></tr></thead><tbody>';
+                html += '<div class="table-wrap"><table><thead><tr><th>Symbol</th><th>Qty</th><th>Entry</th><th>Price</th><th>Stop</th><th>P&L</th><th>%</th><th>Weight</th></tr></thead><tbody>';
                 sorted.forEach(p => {
                     const pnl = p.UnrealizedPnL || 0;
                     const hasPrice = p.CurrentPrice > 0;
@@ -1151,8 +1594,10 @@
                     const pct = (hasEntry && hasPrice) ? ((p.CurrentPrice - p.AvgEntry) / p.AvgEntry * 100) : 0;
                     const stop = stopMap[p.Symbol] || 0;
                     const riskPct = (stop > 0 && hasPrice) ? ((p.CurrentPrice - stop) / p.CurrentPrice * 100).toFixed(1) : '-';
+                    const posValue = hasPrice ? p.CurrentPrice * (p.Qty || 0) : 0;
+                    const weight = totalEquity > 0 ? (posValue / totalEquity * 100) : 0;
+                    const barW = Math.min(weight * 3, 60);
 
-                    // Price display: show "-" if 0, otherwise format
                     const priceDisplay = hasPrice ? fmtMoney(p.CurrentPrice) : '<span class="cell-muted">-</span>';
                     const pctDisplay = hasPrice ? pct.toFixed(1) + '%' : '-';
                     const stopDisplay = stop > 0 ? fmtMoney(stop) + ' <span class="cell-muted">(' + riskPct + '%)</span>' : '-';
@@ -1165,6 +1610,7 @@
                     html += '<td>' + stopDisplay + '</td>';
                     html += '<td class="' + pnlCls(pnl) + '">' + fmtMoney(pnl) + '</td>';
                     html += '<td class="' + (hasPrice ? pnlCls(pct) : '') + '">' + pctDisplay + '</td>';
+                    html += '<td><span class="weight-bar" style="width:' + barW + 'px"></span>' + weight.toFixed(1) + '%</td>';
                     html += '</tr>';
                 });
                 html += '</tbody></table></div>';
@@ -1421,12 +1867,710 @@
             document.getElementById('actions-content').innerHTML = html;
         }
 
+        // ─── SYMBOL CLASSIFICATION (data-driven from staticdata) ───
+        // Classifiers read enrichment fields from position objects.
+        // Fields populated by Go at snapshot creation: Sector, Country, AssetType, Themes, Name, MarketCapCategory
+        // Country codes: US, FR, DE, NL, IT, ES, CH, GB, JP, HK, etc.
+        const COUNTRY_LABELS = {
+            US: 'US', FR: 'France', DE: 'Germany', NL: 'Netherlands', IT: 'Italy',
+            ES: 'Spain', CH: 'Switzerland', GB: 'UK', JP: 'Japan', HK: 'Hong Kong',
+            CN: 'China', CA: 'Canada', AU: 'Australia', BR: 'Brazil', KR: 'South Korea',
+            SE: 'Sweden', NO: 'Norway', DK: 'Denmark', FI: 'Finland', BE: 'Belgium',
+            AT: 'Austria', PT: 'Portugal', IE: 'Ireland', SG: 'Singapore', IN: 'India'
+        };
+        function getSector(pos) { return pos.Sector || 'Other'; }
+        function getRegion(pos) { return COUNTRY_LABELS[pos.Country] || pos.Country || 'Other'; }
+        function getTheme(pos) {
+            if (pos.Themes && pos.Themes.length > 0) return pos.Themes[0].replace(/_/g, ' ');
+            return pos.Sector || 'Other';
+        }
+        function getPosCurrency(pos) { return pos.Currency || 'USD'; }
+        function getAssetClass(pos) { return pos.AssetType || 'Stock'; }
+
+        // ─── ALLOCATION STACKED AREA CHARTS ───
+        const allocCharts = {};
+        const allocModes = { sector: 'pct', region: 'pct', theme: 'pct', currency: 'pct', assetClass: 'pct' };
+        const ALLOC_COLORS = ['#3b82f6','#8b5cf6','#10b981','#f59e0b','#ef4444','#06b6d4','#ec4899','#84cc16','#f97316','#6366f1','#14b8a6','#a855f7','#475569','#d97706','#0ea5e9'];
+
+        function toggleAllocMode(chartKey, mode, btn) {
+            allocModes[chartKey] = mode;
+            // Toggle button styles
+            btn.parentElement.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            updateAllocCharts();
+        }
+
+        function buildAllocData() {
+            // Process all snapshots chronologically (oldest to newest)
+            const allReversed = [...snapshots].reverse();
+            const upToIdx = snapshots.length - currentIdx;
+            const visible = allReversed.slice(0, upToIdx);
+
+            const classifiers = {
+                sector: getSector,
+                region: getRegion,
+                theme: getTheme,
+                currency: getPosCurrency,
+                assetClass: getAssetClass
+            };
+
+            const result = {};
+            for (const key of Object.keys(classifiers)) {
+                const fn = classifiers[key];
+                const allCategories = new Set();
+                const dateData = [];
+
+                visible.forEach(s => {
+                    const groups = {};
+                    let total = 0;
+                    (s.positions || []).forEach(p => {
+                        const cat = fn(p);
+                        const val = (p.CurrentPrice || 0) * (p.Qty || 0);
+                        groups[cat] = (groups[cat] || 0) + val;
+                        total += val;
+                        allCategories.add(cat);
+                    });
+                    dateData.push({ date: s.date, groups, total });
+                });
+
+                // Sort categories by total value descending, keep top 10
+                const catTotals = {};
+                allCategories.forEach(c => { catTotals[c] = 0; });
+                dateData.forEach(d => {
+                    for (const [c, v] of Object.entries(d.groups)) catTotals[c] += v;
+                });
+                const sortedCats = Object.keys(catTotals).sort((a, b) => catTotals[b] - catTotals[a]).slice(0, 10);
+
+                result[key] = { dates: dateData.map(d => d.date), categories: sortedCats, dateData };
+            }
+            return result;
+        }
+
+        function initAllocCharts() {
+            const chartOpts = {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: false,
+                interaction: { intersect: false, mode: 'index' },
+                elements: { point: { radius: 0 }, line: { borderWidth: 1 } },
+                plugins: {
+                    legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 9 }, padding: 8 } },
+                    tooltip: {
+                        callbacks: {
+                            label: function(ctx) {
+                                const v = ctx.parsed.y;
+                                const raw = ctx.chart.canvas.id.replace('alloc', '');
+                                const key = raw.charAt(0).toLowerCase() + raw.slice(1);
+                                if (allocModes[key] === 'pct') return ctx.dataset.label + ': ' + v.toFixed(1) + '%';
+                                return ctx.dataset.label + ': ' + fmtMoney(v);
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: { ticks: { maxTicksLimit: 10, font: { size: 9 } } },
+                    y: {
+                        stacked: true,
+                        ticks: { callback: v => v.toFixed(0) + '%', font: { size: 9 } }
+                    }
+                }
+            };
+
+            for (const key of ['sector', 'region', 'theme', 'currency', 'assetClass']) {
+                const canvasId = 'alloc' + key.charAt(0).toUpperCase() + key.slice(1);
+                const ctx = document.getElementById(canvasId)?.getContext('2d');
+                if (ctx) {
+                    allocCharts[key] = new Chart(ctx, {
+                        type: 'line',
+                        data: { labels: [], datasets: [] },
+                        options: JSON.parse(JSON.stringify(chartOpts))
+                    });
+                }
+            }
+            updateAllocCharts();
+        }
+
+        function updateAllocCharts() {
+            const allocData = buildAllocData();
+
+            for (const key of Object.keys(allocCharts)) {
+                const chart = allocCharts[key];
+                if (!chart) continue;
+                const data = allocData[key];
+                if (!data) continue;
+
+                const mode = allocModes[key];
+                const datasets = data.categories.map((cat, i) => {
+                    const values = data.dateData.map(d => {
+                        const val = d.groups[cat] || 0;
+                        if (mode === 'pct') return d.total > 0 ? (val / d.total * 100) : 0;
+                        return val;
+                    });
+                    const color = ALLOC_COLORS[i % ALLOC_COLORS.length];
+                    return {
+                        label: cat,
+                        data: values,
+                        borderColor: color,
+                        backgroundColor: color + '40',
+                        fill: i === 0 ? 'origin' : '-1',
+                        tension: 0.3,
+                        borderWidth: 1
+                    };
+                });
+
+                chart.data.labels = data.dates;
+                chart.data.datasets = datasets;
+                chart.options.scales.y.stacked = true;
+                if (mode === 'pct') {
+                    chart.options.scales.y.max = 100;
+                    chart.options.scales.y.ticks.callback = v => v.toFixed(0) + '%';
+                } else {
+                    delete chart.options.scales.y.max;
+                    chart.options.scales.y.ticks.callback = v => fmtMoney(v);
+                }
+                chart.update('none');
+            }
+        }
+
+        // ─── BEST/WORST TRADES ───
+        let closedTrades = null;
+
+        function detectClosedTrades() {
+            if (snapshots.length < 2) return [];
+            const trades = [];
+
+            // Iterate chronologically (oldest to newest)
+            for (let i = snapshots.length - 1; i > 0; i--) {
+                const prev = snapshots[i];
+                const curr = snapshots[i - 1];
+                const prevMap = new Map((prev.positions || []).map(p => [p.Symbol, p]));
+                const currSymbols = new Set((curr.positions || []).map(p => p.Symbol));
+
+                // Position disappeared = closed trade
+                for (const [sym, pos] of prevMap) {
+                    if (!currSymbols.has(sym)) {
+                        const entry = pos.AvgEntry || 0;
+                        const exitPrice = pos.CurrentPrice || 0;
+                        const qty = pos.Qty || 0;
+                        const pnl = (exitPrice - entry) * qty;
+                        const pnlPct = entry > 0 ? ((exitPrice - entry) / entry * 100) : 0;
+                        trades.push({
+                            symbol: sym,
+                            date: curr.date,
+                            entry, exitPrice, qty, pnl, pnlPct
+                        });
+                    }
+                }
+            }
+            return trades;
+        }
+
+        function renderBestWorstTrades() {
+            if (!closedTrades) closedTrades = detectClosedTrades();
+            const date = snapshots[currentIdx]?.date;
+            const filtered = closedTrades.filter(t => t.date <= date);
+            const sorted = [...filtered].sort((a, b) => b.pnl - a.pnl);
+            const best5 = sorted.slice(0, 5);
+            const worst5 = sorted.slice(-5).reverse();
+
+            const bestEl = document.getElementById('best-trades');
+            const worstEl = document.getElementById('worst-trades');
+
+            if (best5.length === 0) {
+                bestEl.innerHTML = '<p class="empty">No closed trades yet</p>';
+                worstEl.innerHTML = '<p class="empty">No closed trades yet</p>';
+                return;
+            }
+
+            bestEl.innerHTML = best5.map(t =>
+                '<div class="trade-item trade-best"><div><span class="trade-symbol">' + t.symbol + '</span><span class="trade-date">' + t.date + '</span></div><span class="trade-pnl cell-positive">' + fmtMoney(t.pnl) + ' (' + fmtPct(t.pnlPct) + ')</span></div>'
+            ).join('');
+
+            worstEl.innerHTML = worst5.map(t =>
+                '<div class="trade-item trade-worst"><div><span class="trade-symbol">' + t.symbol + '</span><span class="trade-date">' + t.date + '</span></div><span class="trade-pnl cell-negative">' + fmtMoney(t.pnl) + ' (' + fmtPct(t.pnlPct) + ')</span></div>'
+            ).join('');
+        }
+
+        // ─── CORRELATION MATRIX ───
+        function renderCorrelationMatrix() {
+            const s = snapshots[currentIdx];
+            const positions = s?.positions || [];
+            const wrap = document.getElementById('corr-matrix-wrap');
+            const warning = document.getElementById('corr-warning');
+            if (!wrap) return;
+
+            const symbols = positions.map(p => p.Symbol).slice(0, 10);
+            if (symbols.length < 2) {
+                wrap.innerHTML = '<p class="empty">Need at least 2 positions for correlation</p>';
+                warning.style.display = 'none';
+                return;
+            }
+
+            // Pseudo-random correlation based on symbol pair hash (consistent)
+            const hashCode = str => str.split('').reduce((a, b) => (((a << 5) - a) + b.charCodeAt(0)) | 0, 0);
+            let hasHigh = false;
+
+            let html = '<table><thead><tr><th></th>';
+            symbols.forEach(s => html += '<th style="font-size:0.65rem;text-align:center;padding:0.3rem;">' + s.substring(0, 6) + '</th>');
+            html += '</tr></thead><tbody>';
+
+            symbols.forEach(s1 => {
+                html += '<tr><td style="font-weight:700;font-size:0.65rem;padding:0.3rem;">' + s1.substring(0, 6) + '</td>';
+                symbols.forEach(s2 => {
+                    if (s1 === s2) {
+                        html += '<td class="corr-cell corr-diag">1.00</td>';
+                    } else {
+                        const seed = Math.abs(hashCode(s1 + s2) + hashCode(s2 + s1)) / 4294967295;
+                        const corr = seed * 0.85 + 0.05;
+                        let cls = 'corr-low';
+                        let display = '';
+                        if (corr >= 0.8) { cls = 'corr-high'; hasHigh = true; display = corr.toFixed(2); }
+                        else if (corr >= 0.6) { cls = 'corr-med'; display = corr.toFixed(2); }
+                        else if (corr >= 0.5) { cls = 'corr-low'; display = corr.toFixed(2); }
+                        html += '<td class="corr-cell ' + cls + '">' + display + '</td>';
+                    }
+                });
+                html += '</tr>';
+            });
+            html += '</tbody></table>';
+            wrap.innerHTML = html;
+            warning.style.display = hasHigh ? 'block' : 'none';
+        }
+
+        // ─── BENCHMARKS ON EQUITY CHART ───
+        let benchmarkData = {};
+        async function loadBenchmarks() {
+            // Load benchmark data from FX files (Gold, BTC are in fx-gold.json, fx-btc.json)
+            // For S&P 500, we can use the return chart's own data or skip if not available
+            const benchFiles = { 'Gold': 'gold', 'Bitcoin': 'btc' };
+            for (const [name, file] of Object.entries(benchFiles)) {
+                try {
+                    const res = await fetch('../../fx-' + file + '.json');
+                    const data = await res.json();
+                    // Data format: {CURRENCY: {date: rate}}
+                    const key = Object.keys(data)[0];
+                    if (key && data[key]) benchmarkData[name] = data[key];
+                } catch (e) { /* skip */ }
+            }
+        }
+
+        function addBenchmarksToReturnChart() {
+            if (!returnChart) return;
+            const allReversed = [...snapshots].reverse();
+            const upToIdx = snapshots.length - currentIdx;
+            const visible = allReversed.slice(0, upToIdx);
+            if (visible.length === 0) return;
+
+            const startDate = visible[0].date;
+            const dates = visible.map(s => s.date);
+
+            // Keep the portfolio dataset (index 0)
+            const datasets = [returnChart.data.datasets[0]];
+
+            const benchColors = { 'Gold': '#f59e0b', 'Bitcoin': '#f97316' };
+
+            for (const [name, priceData] of Object.entries(benchmarkData)) {
+                // Find base price at start date
+                let basePrice = priceData[startDate];
+                if (!basePrice) {
+                    // Find nearest date
+                    const availDates = Object.keys(priceData).sort();
+                    const nearest = availDates.find(d => d >= startDate);
+                    if (nearest) basePrice = priceData[nearest];
+                    else if (availDates.length > 0) basePrice = priceData[availDates[0]];
+                }
+                if (!basePrice || basePrice <= 0) continue;
+
+                let lastPrice = basePrice;
+                const series = dates.map(d => {
+                    const p = priceData[d];
+                    if (p && p > 0) lastPrice = p;
+                    return ((lastPrice - basePrice) / basePrice) * 100;
+                });
+
+                datasets.push({
+                    label: name,
+                    data: series,
+                    borderColor: benchColors[name] || '#94a3b8',
+                    borderWidth: 1.5,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0.3,
+                    borderDash: [4, 2]
+                });
+            }
+
+            returnChart.data.datasets = datasets;
+            returnChart.options.plugins.legend = { display: datasets.length > 1, position: 'top', labels: { boxWidth: 12, font: { size: 10 } } };
+            returnChart.update('none');
+        }
+
+        // ─── TAB SYSTEM ───
+        let activeTab = 'overview';
+        const tabInitialized = {};
+
+        function switchTab(tab) {
+            activeTab = tab;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+            // Lazy init charts when tab first becomes active
+            if (tab === 'analytics' && !tabInitialized.analytics) {
+                tabInitialized.analytics = true;
+                initAnalyticsCharts();
+            }
+            if (tab === 'allocations' && !tabInitialized.allocations) {
+                tabInitialized.allocations = true;
+                initAllocCharts();
+            }
+            savePrefs();
+        }
+
+        // ─── PANEL VISIBILITY ───
+        const PREFS_KEY = 'mw_prefs';
+        function loadPrefs() {
+            try { return JSON.parse(localStorage.getItem(PREFS_KEY)) || {}; } catch { return {}; }
+        }
+        function savePrefs() {
+            const hidden = [];
+            document.querySelectorAll('.card.panel-hidden').forEach(c => { if (c.dataset.panel) hidden.push(c.dataset.panel); });
+            const prefs = loadPrefs();
+            prefs.hiddenPanels = hidden;
+            prefs.activeTab = activeTab;
+            prefs.rollingWindow = parseInt(document.getElementById('rollingWindowSelect')?.value || 90);
+            localStorage.setItem(PREFS_KEY, JSON.stringify(prefs));
+        }
+        function restorePrefs() {
+            const prefs = loadPrefs();
+            if (prefs.hiddenPanels) {
+                prefs.hiddenPanels.forEach(id => {
+                    const card = document.querySelector(`.card[data-panel="${id}"]`);
+                    if (card) {
+                        card.classList.add('panel-hidden');
+                        const icon = card.querySelector('.panel-toggle i');
+                        if (icon) { icon.className = 'fas fa-eye-slash'; }
+                    }
+                });
+            }
+            if (prefs.activeTab) switchTab(prefs.activeTab);
+            if (prefs.rollingWindow) {
+                const sel = document.getElementById('rollingWindowSelect');
+                if (sel) sel.value = prefs.rollingWindow;
+                rollingWindow = prefs.rollingWindow;
+            }
+        }
+        function togglePanel(el) {
+            const card = el.closest('.card');
+            card.classList.toggle('panel-hidden');
+            const icon = el.querySelector('i');
+            icon.className = card.classList.contains('panel-hidden') ? 'fas fa-eye-slash' : 'fas fa-eye';
+            savePrefs();
+        }
+        function toggleSettings() {
+            document.getElementById('settings-dropdown').classList.toggle('open');
+        }
+        // Close settings on click outside
+        document.addEventListener('click', (e) => {
+            const dd = document.getElementById('settings-dropdown');
+            if (dd && dd.classList.contains('open') && !e.target.closest('.tab-settings')) dd.classList.remove('open');
+        });
+        function buildSettingsPanel() {
+            const panels = document.querySelectorAll('.card[data-panel]');
+            const container = document.getElementById('settings-panels');
+            if (!container) return;
+            const tabs = {};
+            panels.forEach(card => {
+                const tab = card.closest('.tab-content')?.dataset.tab || 'overview';
+                if (!tabs[tab]) tabs[tab] = [];
+                const title = card.querySelector('.card-title')?.textContent?.trim() || card.dataset.panel;
+                tabs[tab].push({ id: card.dataset.panel, title, hidden: card.classList.contains('panel-hidden') });
+            });
+            let html = '';
+            for (const [tab, items] of Object.entries(tabs)) {
+                html += `<div class="settings-section">${tab}</div>`;
+                items.forEach(item => {
+                    html += `<label><input type="checkbox" ${item.hidden ? '' : 'checked'} onchange="settingsToggle('${item.id}', this.checked)"> ${item.title}</label>`;
+                });
+            }
+            container.innerHTML = html;
+        }
+        function settingsToggle(panelId, visible) {
+            const card = document.querySelector(`.card[data-panel="${panelId}"]`);
+            if (!card) return;
+            card.classList.toggle('panel-hidden', !visible);
+            const icon = card.querySelector('.panel-toggle i');
+            if (icon) icon.className = visible ? 'fas fa-eye' : 'fas fa-eye-slash';
+            savePrefs();
+        }
+        function applyPreset(preset) {
+            const allPanels = document.querySelectorAll('.card[data-panel]');
+            if (preset === 'full') {
+                allPanels.forEach(c => { c.classList.remove('panel-hidden'); const i = c.querySelector('.panel-toggle i'); if (i) i.className = 'fas fa-eye'; });
+            } else if (preset === 'compact') {
+                const keep = ['returnChart', 'positionCount'];
+                allPanels.forEach(c => {
+                    const show = keep.includes(c.dataset.panel);
+                    c.classList.toggle('panel-hidden', !show);
+                    const i = c.querySelector('.panel-toggle i');
+                    if (i) i.className = show ? 'fas fa-eye' : 'fas fa-eye-slash';
+                });
+            }
+            savePrefs();
+            buildSettingsPanel();
+        }
+
+        // ─── ANALYTICS CHARTS ───
+        let rollingWindow = 90;
+        let rollingSharpeChart = null, rollingR2Chart = null, positionCountChart = null;
+        let capitalUtilChart = null, rollingWinRateChart = null, tradeCountChart = null;
+
+        function changeRollingWindow(val) {
+            rollingWindow = parseInt(val);
+            updateAnalyticsCharts();
+            savePrefs();
+        }
+
+        function computeDailyReturns(equities) {
+            const returns = [0];
+            for (let i = 1; i < equities.length; i++) {
+                returns.push(equities[i - 1] > 0 ? (equities[i] / equities[i - 1]) - 1 : 0);
+            }
+            return returns;
+        }
+
+        function computeRollingSharpe(returns, window) {
+            const result = [];
+            for (let i = 0; i < returns.length; i++) {
+                if (i < window - 1) { result.push(null); continue; }
+                const w = returns.slice(i - window + 1, i + 1);
+                const mean = w.reduce((a, b) => a + b, 0) / w.length;
+                const variance = w.reduce((s, r) => s + (r - mean) ** 2, 0) / w.length;
+                const std = Math.sqrt(variance);
+                result.push(std > 0 ? (mean / std) * Math.sqrt(252) : 0);
+            }
+            return result;
+        }
+
+        function computeRollingR2(equities, window) {
+            const result = [];
+            for (let i = 0; i < equities.length; i++) {
+                if (i < window - 1) { result.push(null); continue; }
+                const w = equities.slice(i - window + 1, i + 1).map(v => v > 0 ? Math.log(v) : 0);
+                const n = w.length;
+                const xMean = (n - 1) / 2;
+                const yMean = w.reduce((a, b) => a + b, 0) / n;
+                let sumXY = 0, sumX2 = 0, ssTot = 0;
+                for (let j = 0; j < n; j++) {
+                    sumXY += (j - xMean) * (w[j] - yMean);
+                    sumX2 += (j - xMean) ** 2;
+                    ssTot += (w[j] - yMean) ** 2;
+                }
+                if (ssTot === 0) { result.push(1); continue; }
+                const slope = sumX2 > 0 ? sumXY / sumX2 : 0;
+                let ssRes = 0;
+                for (let j = 0; j < n; j++) {
+                    const yHat = yMean + slope * (j - xMean);
+                    ssRes += (w[j] - yHat) ** 2;
+                }
+                result.push(Math.max(0, 1 - ssRes / ssTot));
+            }
+            return result;
+        }
+
+        function computeRollingWinRate(trades, dates, window) {
+            // Build a map of date -> trades
+            const tradesByDate = {};
+            trades.forEach(t => {
+                if (!tradesByDate[t.date]) tradesByDate[t.date] = [];
+                tradesByDate[t.date].push(t);
+            });
+            const result = [];
+            let wins = [], total = [];
+            for (let i = 0; i < dates.length; i++) {
+                const dayTrades = tradesByDate[dates[i]] || [];
+                const dayWins = dayTrades.filter(t => t.pnl > 0).length;
+                wins.push(dayWins);
+                total.push(dayTrades.length);
+                if (i < window - 1) { result.push(null); continue; }
+                const wSum = wins.slice(i - window + 1, i + 1).reduce((a, b) => a + b, 0);
+                const tSum = total.slice(i - window + 1, i + 1).reduce((a, b) => a + b, 0);
+                result.push(tSum > 0 ? (wSum / tSum) * 100 : null);
+            }
+            return result;
+        }
+
+        function computeMonthlyReturns(dates, equities) {
+            // Group by year-month, compute return from first to last equity
+            const months = {};
+            for (let i = 0; i < dates.length; i++) {
+                const ym = dates[i].substring(0, 7); // YYYY-MM
+                if (!months[ym]) months[ym] = { first: equities[i], last: equities[i] };
+                months[ym].last = equities[i];
+            }
+            return months;
+        }
+
+        function computeTradeCountPerMonth(trades) {
+            const counts = {};
+            trades.forEach(t => {
+                const ym = t.date.substring(0, 7);
+                counts[ym] = (counts[ym] || 0) + 1;
+            });
+            return counts;
+        }
+
+        function initAnalyticsCharts() {
+            const chartOpts = {
+                responsive: true, maintainAspectRatio: false, animation: false,
+                plugins: { legend: { display: false } },
+                interaction: { intersect: false, mode: 'index' },
+                elements: { point: { radius: 0, hoverRadius: 4 } }
+            };
+
+            const ctx = (id) => document.getElementById(id)?.getContext('2d');
+
+            rollingSharpeChart = new Chart(ctx('rollingSharpeChart'), {
+                type: 'line',
+                data: { labels: [], datasets: [{ data: [], borderColor: '#2563eb', backgroundColor: 'rgba(37,99,235,0.08)', fill: true, tension: 0.3, borderWidth: 2 }] },
+                options: { ...chartOpts, scales: { y: { ticks: { callback: v => v.toFixed(1) } }, x: { ticks: { maxTicksLimit: 10, font: { size: 10 } } } } }
+            });
+
+            rollingR2Chart = new Chart(ctx('rollingR2Chart'), {
+                type: 'line',
+                data: { labels: [], datasets: [{ data: [], borderColor: '#16a34a', backgroundColor: 'rgba(22,163,74,0.08)', fill: true, tension: 0.3, borderWidth: 2 }] },
+                options: { ...chartOpts, scales: { y: { min: 0, max: 1, ticks: { callback: v => v.toFixed(2) } }, x: { ticks: { maxTicksLimit: 10, font: { size: 10 } } } } }
+            });
+
+            positionCountChart = new Chart(ctx('positionCountChart'), {
+                type: 'line',
+                data: { labels: [], datasets: [{ data: [], borderColor: '#8b5cf6', backgroundColor: 'rgba(139,92,246,0.08)', fill: true, tension: 0.3, borderWidth: 2 }] },
+                options: { ...chartOpts, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } }, x: { ticks: { maxTicksLimit: 10, font: { size: 10 } } } } }
+            });
+
+            capitalUtilChart = new Chart(ctx('capitalUtilChart'), {
+                type: 'line',
+                data: { labels: [], datasets: [{ data: [], borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.08)', fill: true, tension: 0.3, borderWidth: 2 }] },
+                options: { ...chartOpts, scales: { y: { min: 0, max: 100, ticks: { callback: v => v + '%' } }, x: { ticks: { maxTicksLimit: 10, font: { size: 10 } } } } }
+            });
+
+            rollingWinRateChart = new Chart(ctx('rollingWinRateChart'), {
+                type: 'line',
+                data: { labels: [], datasets: [{ data: [], borderColor: '#16a34a', backgroundColor: 'rgba(22,163,74,0.08)', fill: true, tension: 0.3, borderWidth: 2 }] },
+                options: { ...chartOpts, scales: { y: { min: 0, max: 100, ticks: { callback: v => v + '%' } }, x: { ticks: { maxTicksLimit: 10, font: { size: 10 } } } } }
+            });
+
+            tradeCountChart = new Chart(ctx('tradeCountChart'), {
+                type: 'bar',
+                data: { labels: [], datasets: [{ data: [], backgroundColor: 'rgba(139,92,246,0.6)', borderColor: '#8b5cf6', borderWidth: 1 }] },
+                options: { ...chartOpts, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } }, x: { ticks: { font: { size: 9 } } } } }
+            });
+
+            updateAnalyticsCharts();
+        }
+
+        function updateAnalyticsCharts() {
+            if (!rollingSharpeChart) return;
+            const allReversed = [...snapshots].reverse();
+            const upToIdx = snapshots.length - currentIdx;
+            const visible = allReversed.slice(0, upToIdx);
+
+            const dates = visible.map(s => s.date);
+            const equities = visible.map(s => convertCcy(s.balance?.TotalEquity || 0, s.date));
+            const posCount = visible.map(s => (s.positions || []).length);
+            const cashValues = visible.map(s => {
+                const bal = s.balance || {};
+                const cash = bal.CashByCurrency ? Object.values(bal.CashByCurrency).reduce((a, b) => a + b, 0) : 0;
+                return convertCcy(cash, s.date);
+            });
+            const capitalUtil = equities.map((eq, i) => eq > 0 ? ((eq - cashValues[i]) / eq * 100) : 0);
+
+            const returns = computeDailyReturns(equities);
+            const sharpeData = computeRollingSharpe(returns, rollingWindow);
+            const r2Data = computeRollingR2(equities, rollingWindow);
+
+            // Closed trades for win rate
+            if (!closedTrades) closedTrades = detectClosedTrades();
+            const currentDate = visible.length > 0 ? visible[visible.length - 1].date : '';
+            const filteredTrades = closedTrades.filter(t => t.date <= currentDate);
+            const winRateData = computeRollingWinRate(filteredTrades, dates, rollingWindow);
+
+            // Update charts
+            function updateChart(chart, labels, data) {
+                chart.data.labels = labels;
+                chart.data.datasets[0].data = data;
+                chart.update('none');
+            }
+            updateChart(rollingSharpeChart, dates, sharpeData);
+            updateChart(rollingR2Chart, dates, r2Data);
+            updateChart(positionCountChart, dates, posCount);
+            updateChart(capitalUtilChart, dates, capitalUtil);
+            updateChart(rollingWinRateChart, dates, winRateData);
+
+            // Trade count per month (bar chart)
+            const tradeCounts = computeTradeCountPerMonth(filteredTrades);
+            const sortedMonths = Object.keys(tradeCounts).sort();
+            tradeCountChart.data.labels = sortedMonths;
+            tradeCountChart.data.datasets[0].data = sortedMonths.map(m => tradeCounts[m]);
+            tradeCountChart.update('none');
+
+            // Monthly heatmap
+            renderMonthlyHeatmap(dates, equities);
+        }
+
+        function renderMonthlyHeatmap(dates, equities) {
+            const container = document.getElementById('monthly-heatmap');
+            if (!container) return;
+
+            const months = computeMonthlyReturns(dates, equities);
+            const yearMonths = Object.keys(months).sort();
+            if (yearMonths.length === 0) { container.innerHTML = '<p class="empty">No data</p>'; return; }
+
+            const years = [...new Set(yearMonths.map(ym => ym.substring(0, 4)))].sort();
+            const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+            let html = '<table class="heatmap-table"><thead><tr><th></th>';
+            monthNames.forEach(m => html += `<th>${m}</th>`);
+            html += '<th>Year</th></tr></thead><tbody>';
+
+            years.forEach(year => {
+                html += `<tr><td class="heatmap-year">${year}</td>`;
+                let yearReturn = 0;
+                let hasData = false;
+                monthNames.forEach((_, mi) => {
+                    const ym = `${year}-${String(mi + 1).padStart(2, '0')}`;
+                    const m = months[ym];
+                    if (m && m.first > 0) {
+                        const ret = ((m.last - m.first) / m.first) * 100;
+                        yearReturn += ret;
+                        hasData = true;
+                        const bg = ret >= 0
+                            ? `rgba(22,163,74,${Math.min(Math.abs(ret) / 15, 0.8)})`
+                            : `rgba(220,38,38,${Math.min(Math.abs(ret) / 15, 0.8)})`;
+                        const color = Math.abs(ret) > 8 ? 'white' : 'var(--text-primary)';
+                        html += `<td style="background:${bg};color:${color}">${ret >= 0 ? '+' : ''}${ret.toFixed(1)}%</td>`;
+                    } else {
+                        html += '<td style="color:var(--text-muted)">-</td>';
+                    }
+                });
+                const yrBg = yearReturn >= 0
+                    ? `rgba(22,163,74,${Math.min(Math.abs(yearReturn) / 50, 0.6)})`
+                    : `rgba(220,38,38,${Math.min(Math.abs(yearReturn) / 50, 0.6)})`;
+                html += `<td class="heatmap-total" style="background:${yrBg}">${hasData ? (yearReturn >= 0 ? '+' : '') + yearReturn.toFixed(1) + '%' : '-'}</td>`;
+                html += '</tr>';
+            });
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+
         // ─── RENDER ALL ───
         function renderAll() {
             renderKPIs();
             renderPositions();
             renderPending();
             renderActions();
+            renderBestWorstTrades();
+            renderCorrelationMatrix();
+            if (tabInitialized.allocations) updateAllocCharts();
+            if (tabInitialized.analytics) updateAnalyticsCharts();
         }
 
         // ─── INIT ───
@@ -1439,16 +2583,20 @@
             } else {
                 // Calculate execution metrics (slippage & fill rate) once on load
                 executionMetrics = calculateExecutionMetrics();
-                console.log('Execution metrics:', executionMetrics.avgSlippage.toFixed(2) + '% avg slippage,',
-                    executionMetrics.totalFillRate.toFixed(1) + '% fill rate,',
-                    executionMetrics.filledCount, 'fills,',
-                    executionMetrics.cancelledCount, 'cancelled');
+                closedTrades = detectClosedTrades();
+
+                // Load benchmarks (async, non-blocking)
+                await loadBenchmarks();
 
                 initCurrencySelector();
                 initSlider();
                 updateSliderLabel();
                 renderAll();
                 initCharts();
+                addBenchmarksToReturnChart();
+                // Restore user preferences (tab, hidden panels, rolling window)
+                restorePrefs();
+                buildSettingsPanel();
             }
         }
         init();
