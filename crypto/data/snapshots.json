@@ -1,0 +1,220 @@
+[
+  {
+    "timestamp": "2026-02-16T10:56:35+01:00",
+    "date": "2026-02-13",
+    "portfolio": "crypto",
+    "allocation": "crypto",
+    "currency": "USDC",
+    "git_sha1": "59946830",
+    "git_branch": "main",
+    "config_path": "config/portfolio_crypto.yaml",
+    "config_hash": "5197433562e49846",
+    "actions": null,
+    "positions": [
+      {
+        "Symbol": "BNBUSDC",
+        "Qty": 1,
+        "AvgEntry": 0,
+        "CurrentPrice": 0,
+        "UnrealizedPnL": 0,
+        "ChangeToday": 0,
+        "Currency": "USDC",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": "",
+        "AssetType": "STOCK"
+      },
+      {
+        "Symbol": "BTCUSDC",
+        "Qty": 1,
+        "AvgEntry": 0,
+        "CurrentPrice": 0,
+        "UnrealizedPnL": 0,
+        "ChangeToday": 0,
+        "Currency": "USDC",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": "",
+        "AssetType": "STOCK"
+      },
+      {
+        "Symbol": "ETHUSDC",
+        "Qty": 1,
+        "AvgEntry": 0,
+        "CurrentPrice": 0,
+        "UnrealizedPnL": 0,
+        "ChangeToday": 0,
+        "Currency": "USDC",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": "",
+        "AssetType": "STOCK"
+      },
+      {
+        "Symbol": "LTCUSDC",
+        "Qty": 8,
+        "AvgEntry": 0,
+        "CurrentPrice": 0,
+        "UnrealizedPnL": 0,
+        "ChangeToday": 0,
+        "Currency": "USDC",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": "",
+        "AssetType": "STOCK"
+      },
+      {
+        "Symbol": "XRPUSDC",
+        "Qty": 318,
+        "AvgEntry": 0,
+        "CurrentPrice": 0,
+        "UnrealizedPnL": 0,
+        "ChangeToday": 0,
+        "Currency": "USDC",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": "",
+        "AssetType": "STOCK"
+      },
+      {
+        "Symbol": "LINKUSDC",
+        "Qty": 52,
+        "AvgEntry": 0,
+        "CurrentPrice": 0,
+        "UnrealizedPnL": 0,
+        "ChangeToday": 0,
+        "Currency": "USDC",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": "",
+        "AssetType": "STOCK"
+      },
+      {
+        "Symbol": "ETCUSDC",
+        "Qty": 52,
+        "AvgEntry": 0,
+        "CurrentPrice": 0,
+        "UnrealizedPnL": 0,
+        "ChangeToday": 0,
+        "Currency": "USDC",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": "",
+        "AssetType": "STOCK"
+      },
+      {
+        "Symbol": "ADAUSDC",
+        "Qty": 1710,
+        "AvgEntry": 0,
+        "CurrentPrice": 0,
+        "UnrealizedPnL": 0,
+        "ChangeToday": 0,
+        "Currency": "USDC",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": "",
+        "AssetType": "STOCK"
+      },
+      {
+        "Symbol": "ATOMUSDC",
+        "Qty": 244,
+        "AvgEntry": 0,
+        "CurrentPrice": 0,
+        "UnrealizedPnL": 0,
+        "ChangeToday": 0,
+        "Currency": "USDC",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": "",
+        "AssetType": "STOCK"
+      },
+      {
+        "Symbol": "DOGEUSDC",
+        "Qty": 4713,
+        "AvgEntry": 0,
+        "CurrentPrice": 0,
+        "UnrealizedPnL": 0,
+        "ChangeToday": 0,
+        "Currency": "USDC",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": "",
+        "AssetType": "STOCK"
+      },
+      {
+        "Symbol": "SOLUSDC",
+        "Qty": 5,
+        "AvgEntry": 0,
+        "CurrentPrice": 0,
+        "UnrealizedPnL": 0,
+        "ChangeToday": 0,
+        "Currency": "USDC",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": "",
+        "AssetType": "STOCK"
+      },
+      {
+        "Symbol": "DOTUSDC",
+        "Qty": 337,
+        "AvgEntry": 0,
+        "CurrentPrice": 0,
+        "UnrealizedPnL": 0,
+        "ChangeToday": 0,
+        "Currency": "USDC",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": "",
+        "AssetType": "STOCK"
+      },
+      {
+        "Symbol": "UNIUSDC",
+        "Qty": 131,
+        "AvgEntry": 0,
+        "CurrentPrice": 0,
+        "UnrealizedPnL": 0,
+        "ChangeToday": 0,
+        "Currency": "USDC",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": "",
+        "AssetType": "STOCK"
+      },
+      {
+        "Symbol": "AVAXUSDC",
+        "Qty": 50,
+        "AvgEntry": 0,
+        "CurrentPrice": 0,
+        "UnrealizedPnL": 0,
+        "ChangeToday": 0,
+        "Currency": "USDC",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": "",
+        "AssetType": "STOCK"
+      }
+    ],
+    "pending_orders": [],
+    "balance": {
+      "BaseCurrency": "USDC",
+      "CashByCurrency": {
+        "USDC": 20000
+      },
+      "MarginUsed": 0,
+      "TotalEquity": 20000,
+      "Timestamp": "2026-02-16T10:56:35.910329+01:00",
+      "BrokerSource": "binance"
+    },
+    "state": {
+      "pm_state": {
+        "cautious_restart_start": "0001-01-01T00:00:00Z",
+        "cautious_restart_until": "0001-01-01T00:00:00Z",
+        "equity_curve": [],
+        "equity_curve_dates": null,
+        "global_pause_until": "0001-01-01T00:00:00Z",
+        "is_in_grace_period": false,
+        "last_entry_creation_date": "0001-01-01T00:00:00Z",
+        "last_liquidation_date": "0001-01-01T00:00:00Z",
+        "last_streak_reset_date": "0001-01-01T00:00:00Z",
+        "peak_equity": 0,
+        "position_clusters": null,
+        "position_entries": {},
+        "position_highs": {},
+        "position_last_dca": {},
+        "position_open_dates": {},
+        "position_stops": {},
+        "regime_score_history": null,
+        "stop_history": [],
+        "stop_streak_count": 0,
+        "stopped_symbols": {}
+      },
+      "prev_regime": "RISK_OFF"
+    }
+  }
+]

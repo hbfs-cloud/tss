@@ -1,0 +1,3204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultra Momentum US — Backtest 5Y | MarketWatch AI</title>
+    <link rel="icon" href="https://market-watch.xyz/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
+    <style>
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-card: #ffffff;
+            --border-color: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --accent-blue: #2563eb;
+            --accent-green: #16a34a;
+            --accent-red: #dc2626;
+            --accent-purple: #8b5cf6;
+            --accent-orange: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        /* Sticky Nav */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 1rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .nav-back {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: var(--bg-primary);
+            text-decoration: none;
+            color: var(--text-secondary);
+            transition: all 0.15s;
+        }
+
+        .nav-back:hover {
+            background: var(--border-color);
+        }
+
+        .nav-title {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .nav-select {
+            font-size: 0.8rem;
+            font-family: monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-weight: 600;
+            padding: 0.4rem 0.6rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            outline: none;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .tm-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--accent-blue);
+            letter-spacing: 0.5px;
+        }
+
+        .tm-date {
+            font-family: monospace;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .tm-slider {
+            width: 12rem;
+            height: 6px;
+            accent-color: var(--accent-blue);
+            cursor: pointer;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* KPI Grid */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width:1200px) {
+            .kpi-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width:600px) {
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .kpi-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            margin-bottom: 0.25rem;
+        }
+
+        .kpi-value {
+            font-size: 1.4rem;
+            font-weight: 800;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .kpi-value.positive {
+            color: var(--accent-green);
+        }
+
+        .kpi-value.negative {
+            color: var(--accent-red);
+        }
+
+        .kpi-value.neutral {
+            color: var(--text-primary);
+        }
+
+        .kpi-value.purple {
+            color: var(--accent-purple);
+        }
+
+        .kpi-sub {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-primary);
+        }
+
+        .card-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-body {
+            padding: 1rem 1.25rem;
+        }
+
+        .card-badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        /* Chart Container */
+        .chart-wrap {
+            height: 280px;
+            position: relative;
+        }
+
+        /* Tables */
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+        }
+
+        thead {
+            background: var(--bg-primary);
+        }
+
+        th {
+            padding: 0.6rem 0.75rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 0.6rem 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+            white-space: nowrap;
+        }
+
+        tbody tr:hover {
+            background: var(--bg-primary);
+        }
+
+        .cell-symbol {
+            font-weight: 700;
+            font-family: monospace;
+        }
+
+        .cell-positive {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        .cell-negative {
+            color: var(--accent-red);
+            font-weight: 600;
+        }
+
+        .cell-muted {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .badge-create {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-update {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-cancel {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* Grid layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        @media (max-width:900px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Empty state */
+        .empty {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 2rem;
+            font-size: 0.85rem;
+        }
+
+        /* Toggle */
+        .toggle-label {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .toggle-label input {
+            cursor: pointer;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+
+        /* Reason formatting */
+        .cell-reason {
+            max-width: 400px;
+        }
+
+        .reason-box {
+            font-size: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .reason-main {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .reason-item {
+            display: flex;
+            gap: 0.5rem;
+            margin: 0.25rem 0;
+        }
+
+        .reason-key {
+            color: var(--text-secondary);
+            min-width: 60px;
+        }
+
+        .reason-val {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .reason-score {
+            color: var(--accent-blue);
+        }
+
+        .reason-risk {
+            color: var(--accent-orange);
+        }
+
+        .reason-warning {
+            color: #f59e0b;
+        }
+
+        .reason-tag {
+            display: inline-block;
+            padding: 0.15rem 0.4rem;
+            margin: 0.15rem 0.25rem 0.15rem 0;
+            border-radius: 4px;
+            background: var(--bg-secondary);
+            font-size: 0.7rem;
+        }
+
+        .reason-bullish {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .reason-bearish {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* Allocation charts grid */
+        .alloc-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .alloc-chart-wrap {
+            height: 320px;
+            position: relative;
+        }
+        .alloc-zoom-controls {
+            display: flex;
+            gap: 0.3rem;
+            align-items: center;
+        }
+        .alloc-zoom-btn {
+            padding: 0.15rem 0.4rem;
+            font-size: 0.6rem;
+            font-weight: 600;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+        .alloc-zoom-btn:hover { background: var(--accent-blue); color: white; border-color: var(--accent-blue); }
+        .alloc-zoom-btn.active { background: var(--accent-blue); color: white; border-color: var(--accent-blue); }
+        .toggle-btn {
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .toggle-btn.active {
+            background: var(--accent-blue);
+            color: white;
+            border-color: var(--accent-blue);
+        }
+
+        /* Correlation matrix */
+        .corr-cell {
+            text-align: center;
+            font-size: 0.7rem;
+            padding: 0.3rem;
+            font-family: monospace;
+            font-weight: 600;
+        }
+        .corr-high { background: #fecaca; color: #991b1b; }
+        .corr-med { background: #fed7aa; color: #9a3412; }
+        .corr-low { background: #f1f5f9; color: #64748b; }
+        .corr-diag { background: #e2e8f0; color: #94a3b8; }
+        .corr-warning {
+            margin-top: 0.75rem;
+            padding: 0.75rem;
+            background: #fefce8;
+            border: 1px solid #fde68a;
+            border-radius: 8px;
+            color: #92400e;
+            font-size: 0.8rem;
+        }
+
+        /* Best/worst trades */
+        .trade-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 0.4rem;
+        }
+        .trade-best { background: #f0fdf4; border: 1px solid #bbf7d0; }
+        .trade-worst { background: #fef2f2; border: 1px solid #fecaca; }
+        .trade-symbol { font-weight: 700; font-family: monospace; font-size: 0.85rem; }
+        .trade-date { font-size: 0.7rem; color: var(--text-muted); margin-left: 0.5rem; }
+        .trade-pnl { font-weight: 700; font-size: 0.85rem; }
+
+        /* Weight bar */
+        .weight-bar {
+            display: inline-block;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--accent-blue);
+            opacity: 0.6;
+            vertical-align: middle;
+            margin-right: 4px;
+        }
+
+        /* Mode Toggle Pill */
+        .mode-toggle {
+            display: inline-flex;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+        }
+        .mode-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.3rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .mode-live { color: var(--accent-green); }
+        .mode-live.active { background: var(--accent-green); color: white; }
+        .mode-backtest { color: var(--accent-purple); }
+        .mode-backtest.active { background: var(--accent-purple); color: white; }
+        .mode-parallel { color: #e67e22; }
+        .mode-parallel.active { background: #e67e22; color: white; }
+        .live-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+        .mode-live.active .live-dot { animation: pulse-dot 2s infinite; }
+        @keyframes pulse-dot { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+
+        /* Tab Bar */
+        .tab-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0 1rem;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            overflow: visible;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        @media (max-width: 700px) {
+            .tab-bar { overflow-x: auto; gap: 0; }
+        }
+        .tab-btn {
+            padding: 0.7rem 1.1rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            border: none;
+            background: none;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+            transition: all 0.15s;
+            border-radius: 6px 6px 0 0;
+        }
+        .tab-btn:hover { color: var(--text-primary); background: rgba(59,130,246,0.06); }
+        .tab-btn.active { color: var(--accent-blue); border-bottom-color: var(--accent-blue); background: rgba(59,130,246,0.04); }
+        .tab-btn i { margin-right: 0.4rem; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .tab-spacer { flex: 1; }
+        .tab-settings {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .settings-btn {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border: none;
+            background: none;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+        .settings-btn:hover { color: var(--text-primary); background: var(--bg-primary); }
+        .settings-dropdown {
+            display: none;
+            position: absolute;
+            top: calc(100% + 4px);
+            right: 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.75rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            z-index: 300;
+            min-width: 220px;
+        }
+        .settings-dropdown.open { display: block; }
+        .settings-dropdown label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.3rem 0;
+            font-size: 0.75rem;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+        .settings-section {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            margin-top: 0.5rem;
+            margin-bottom: 0.25rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .settings-section:first-child { margin-top: 0; border-top: none; padding-top: 0; }
+        .preset-btns { display: flex; gap: 0.4rem; margin-bottom: 0.5rem; }
+        .preset-btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.65rem;
+            font-weight: 600;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+        .preset-btn:hover { background: var(--accent-blue); color: white; border-color: var(--accent-blue); }
+
+        /* Panel toggle */
+        .panel-toggle {
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            padding: 0.2rem;
+            border-radius: 4px;
+            transition: all 0.15s;
+        }
+        .panel-toggle:hover { color: var(--text-primary); background: var(--bg-primary); }
+        .card.panel-hidden .card-body { display: none; }
+        .card.panel-hidden .card-header { opacity: 0.5; border-bottom: none; }
+
+        /* Monthly Heatmap */
+        .heatmap-table { border-collapse: collapse; width: 100%; }
+        .heatmap-table th, .heatmap-table td {
+            padding: 0.4rem 0.5rem;
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+        }
+        .heatmap-table th {
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            font-size: 0.65rem;
+        }
+        .heatmap-year { font-weight: 700; text-align: left !important; }
+        .heatmap-total { font-weight: 700; }
+
+        /* Rolling window selector */
+        .rolling-select {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.4rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Deviation KPI grid */
+        .dev-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+        .dev-card { background: var(--bg-secondary); border-radius: 8px; padding: 12px; text-align: center; border: 2px solid transparent; }
+        .dev-card.warn { border-color: #f59e0b; background: rgba(245,158,11,0.05); }
+        .dev-card.danger { border-color: #ef4444; background: rgba(239,68,68,0.05); }
+        .dev-card.ok { border-color: #22c55e; background: rgba(34,197,94,0.05); }
+        .dev-label { font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .dev-values { display: flex; justify-content: center; gap: 16px; margin-bottom: 4px; }
+        .dev-val { font-size: 0.85rem; }
+        .dev-val .tag { font-size: 0.6rem; color: var(--text-secondary); display: block; }
+        .dev-pct { font-size: 1.1rem; font-weight: 700; }
+        .dev-pct.positive { color: #22c55e; }
+        .dev-pct.negative { color: #ef4444; }
+        .dev-pct.neutral { color: #f59e0b; }
+        .dev-status { font-size: 0.75rem; font-weight: 600; margin-top: 4px; }
+
+        /* Position drift table */
+        .drift-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+        .drift-table th { background: var(--bg-secondary); padding: 6px 10px; text-align: left; font-size: 0.7rem; text-transform: uppercase; color: var(--text-secondary); }
+        .drift-table td { padding: 6px 10px; border-bottom: 1px solid var(--border-color); }
+        .drift-live-only { color: #22c55e; }
+        .drift-bt-only { color: #8b5cf6; }
+        .drift-both { color: var(--text-primary); }
+        .drift-badge { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 0.65rem; font-weight: 600; }
+        .drift-badge.live { background: rgba(34,197,94,0.15); color: #22c55e; }
+        .drift-badge.backtest { background: rgba(139,92,246,0.15); color: #8b5cf6; }
+        .drift-badge.both { background: rgba(100,116,139,0.15); color: #64748b; }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <!-- Navigation -->
+    <nav class="nav">
+        <!-- Global Nav -->
+        <div
+            style="max-width:1400px; margin:0 auto; padding-bottom:0.75rem; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #f1f5f9; margin-bottom:0.75rem;">
+            <a href="/"
+                style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;color:var(--text-primary);font-weight:800;font-size:1.1rem;">
+                <img src="https://market-watch.xyz/logo.svg" alt="MW" style="height:1.5rem;"> MarketWatch AI
+            </a>
+            <div style="display:flex;gap:0.4rem;">
+                <a href="/"
+                    style="color:var(--accent-blue);background:rgba(37,99,235,0.08);text-decoration:none;padding:0.3rem 0.6rem;border-radius:6px;font-size:0.75rem;font-weight:600;"><i
+                        class="fas fa-chart-line"></i> Portfolios</a>
+                <a href="/opportunities/"
+                    style="color:var(--text-secondary);text-decoration:none;padding:0.3rem 0.6rem;border-radius:6px;font-size:0.75rem;font-weight:500;"><i
+                        class="fas fa-crosshairs"></i> Opportunities</a>
+                <a href="/backtest/"
+                    style="color:var(--text-secondary);text-decoration:none;padding:0.3rem 0.6rem;border-radius:6px;font-size:0.75rem;font-weight:500;"><i
+                        class="fas fa-flask"></i> Backtests</a>
+            </div>
+        </div>
+
+        <div class="nav-inner">
+            <div class="nav-left">
+                <a href="../" class="nav-back"><i class="fa-solid fa-arrow-left"></i></a>
+                <span class="nav-title" id="nav-title">Live Trading</span>
+                <div class="mode-toggle">
+                    <a href="../" class="mode-btn mode-live" id="mode-live"><span class="live-dot"></span> LIVE</a>
+                    <a href="backtest/" class="mode-btn mode-backtest active" id="mode-backtest"><i class="fas fa-flask"></i> BACKTEST 5Y</a>
+                    <a href="parallel/" class="mode-btn mode-parallel" id="mode-parallel"><i class="fas fa-code-compare"></i> PARALLEL</a>
+                </div>
+                <select id="currency-selector" class="nav-select" onchange="setGlobalCurrency(this.value)">
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="CHF">CHF</option>
+                    <option value="GBP">GBP</option>
+                    <option value="JPY">JPY</option>
+                    <option value="CNY">CNY</option>
+                    <option value="HKD">HKD</option>
+                    <option value="PLN">PLN</option>
+                    <option value="BTC">BTC</option>
+                    <option value="GOLD">GOLD</option>
+                </select>
+            </div>
+            <div class="nav-right">
+                <div style="text-align:right;">
+                    <div class="tm-label">Time Machine</div>
+                    <div class="tm-date" id="tm-date">LIVE</div>
+                </div>
+                <input type="range" id="timeSlider" class="tm-slider" min="0" max="0" value="0">
+            </div>
+        </div>
+    </nav>
+
+    <!-- Tab Bar -->
+    <div class="tab-bar">
+        <button class="tab-btn active" data-tab="overview" onclick="switchTab('overview')"><i class="fas fa-chart-area"></i> Overview</button>
+        <button class="tab-btn" data-tab="analytics" onclick="switchTab('analytics')"><i class="fas fa-chart-bar"></i> Analytics</button>
+        <button class="tab-btn" data-tab="allocations" onclick="switchTab('allocations')"><i class="fas fa-pie-chart"></i> Allocations</button>
+        <button class="tab-btn" data-tab="positions" onclick="switchTab('positions')"><i class="fas fa-wallet"></i> Positions</button>
+        <button class="tab-btn" data-tab="deviation" id="deviation-tab-btn" onclick="switchTab('deviation')" style="display:none"><i class="fas fa-code-compare"></i> Deviation</button>
+        <div class="tab-spacer"></div>
+        <div class="tab-settings">
+            <button class="settings-btn" onclick="toggleSettings()" title="Panel settings"><i class="fas fa-cog"></i></button>
+            <div class="settings-dropdown" id="settings-dropdown">
+                <div class="preset-btns">
+                    <button class="preset-btn" onclick="applyPreset('full')">Full View</button>
+                    <button class="preset-btn" onclick="applyPreset('compact')">Compact</button>
+                </div>
+                <div id="settings-panels"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- KPI Cards (always visible, outside tabs) -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">Total Return</div>
+                <div class="kpi-value" id="kpi-return">--</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Equity</div>
+                <div class="kpi-value neutral" id="kpi-equity">--</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Max Drawdown</div>
+                <div class="kpi-value negative" id="kpi-dd">--</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Positions</div>
+                <div class="kpi-value purple" id="kpi-positions">--</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Unrealized P&L</div>
+                <div class="kpi-value" id="kpi-pnl">--</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Cash</div>
+                <div class="kpi-value neutral" id="kpi-cash">--</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Avg Slippage</div>
+                <div class="kpi-value" id="kpi-slippage">--</div>
+                <div class="kpi-sub" id="kpi-slippage-count"></div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Fill Rate</div>
+                <div class="kpi-value" id="kpi-fillrate">--</div>
+                <div class="kpi-sub" id="kpi-fillrate-count"></div>
+            </div>
+        </div>
+
+        <!-- ═══ OVERVIEW TAB ═══ -->
+        <div class="tab-content active" data-tab="overview">
+
+        <!-- Total Return Chart -->
+        <div class="card" data-panel="returnChart">
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-chart-area" style="color:var(--accent-blue);"></i> Total Return</div>
+                <span class="panel-toggle" onclick="togglePanel(this)"><i class="fas fa-eye"></i></span>
+            </div>
+            <div class="card-body">
+                <div class="chart-wrap"><canvas id="returnChart"></canvas></div>
+            </div>
+        </div>
+
+        <!-- Max Drawdown Chart -->
+        <div class="card" data-panel="maxDdChart">
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-chart-line" style="color:var(--accent-red);"></i> Max Drawdown</div>
+                <span class="panel-toggle" onclick="togglePanel(this)"><i class="fas fa-eye"></i></span>
+            </div>
+            <div class="card-body">
+                <div class="chart-wrap"><canvas id="maxDdChart"></canvas></div>
+            </div>
+        </div>
+
+        <!-- Execution Metrics Chart (Slippage & Fill Rate) -->
+        <div class="card" data-panel="execChart">
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-exchange-alt" style="color:var(--accent-purple);"></i> Execution Quality</div>
+                <span class="panel-toggle" onclick="togglePanel(this)"><i class="fas fa-eye"></i></span>
+            </div>
+            <div class="card-body">
+                <div class="chart-wrap"><canvas id="execChart"></canvas></div>
+            </div>
+        </div>
+
+        </div><!-- /overview tab -->
+
+        <!-- ═══ ANALYTICS TAB ═══ -->
+        <div class="tab-content" data-tab="analytics">
+
+        <!-- Rolling Window Selector -->
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+            <span style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);">Rolling Window:</span>
+            <select class="rolling-select" id="rollingWindowSelect" onchange="changeRollingWindow(this.value)">
+                <option value="30">30 days</option>
+                <option value="60">60 days</option>
+                <option value="90" selected>90 days</option>
+                <option value="180">180 days</option>
+            </select>
+        </div>
+
+        <div class="grid-2">
+            <!-- Rolling Sharpe -->
+            <div class="card" data-panel="rollingSharpe">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-chart-line" style="color:var(--accent-blue);"></i> Rolling Sharpe Ratio</div>
+                    <span class="panel-toggle" onclick="togglePanel(this)"><i class="fas fa-eye"></i></span>
+                </div>
+                <div class="card-body"><div class="chart-wrap"><canvas id="rollingSharpeChart"></canvas></div></div>
+            </div>
+
+            <!-- Rolling R² -->
+            <div class="card" data-panel="rollingR2">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-bullseye" style="color:var(--accent-green);"></i> Rolling R² (Equity Smoothness)</div>
+                    <span class="panel-toggle" onclick="togglePanel(this)"><i class="fas fa-eye"></i></span>
+                </div>
+                <div class="card-body"><div class="chart-wrap"><canvas id="rollingR2Chart"></canvas></div></div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <!-- Position Count -->
+            <div class="card" data-panel="positionCount">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-layer-group" style="color:var(--accent-purple);"></i> Open Positions Over Time</div>
+                    <span class="panel-toggle" onclick="togglePanel(this)"><i class="fas fa-eye"></i></span>
+                </div>
+                <div class="card-body"><div class="chart-wrap"><canvas id="positionCountChart"></canvas></div></div>
+            </div>
+
+            <!-- Capital Utilization -->
+            <div class="card" data-panel="capitalUtil">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-percentage" style="color:var(--accent-orange);"></i> Capital Utilization</div>
+                    <span class="panel-toggle" onclick="togglePanel(this)"><i class="fas fa-eye"></i></span>
+                </div>
+                <div class="card-body"><div class="chart-wrap"><canvas id="capitalUtilChart"></canvas></div></div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <!-- Rolling Win Rate -->
+            <div class="card" data-panel="rollingWinRate">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-trophy" style="color:var(--accent-green);"></i> Rolling Win Rate</div>
+                    <span class="panel-toggle" onclick="togglePanel(this)"><i class="fas fa-eye"></i></span>
+                </div>
+                <div class="card-body"><div class="chart-wrap"><canvas id="rollingWinRateChart"></canvas></div></div>
+            </div>
+
+            <!-- Trade Count per Month -->
+            <div class="card" data-panel="tradeCount">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-exchange-alt" style="color:var(--accent-purple);"></i> Trades per Month</div>
+                    <span class="panel-toggle" onclick="togglePanel(this)"><i class="fas fa-eye"></i></span>
+                </div>
+                <div class="card-body"><div class="chart-wrap"><canvas id="tradeCountChart"></canvas></div></div>
+            </div>
+        </div>
+
+        <!-- Monthly Returns Heatmap -->
+        <div class="card" data-panel="monthlyHeatmap">
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-th" style="color:var(--accent-orange);"></i> Monthly Returns Heatmap</div>
+                <span class="panel-toggle" onclick="togglePanel(this)"><i class="fas fa-eye"></i></span>
+            </div>
+            <div class="card-body"><div class="table-wrap" id="monthly-heatmap"></div></div>
+        </div>
+
+        </div><!-- /analytics tab -->
+
+        <!-- ═══ ALLOCATIONS TAB ═══ -->
+        <div class="tab-content" data-tab="allocations">
+
+        <!-- Allocation Stacked Area Charts -->
+        <div class="alloc-grid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-industry" style="color:var(--accent-blue);"></i> Sector Allocation</div>
+                    <div style="display:flex;gap:0.5rem;align-items:center;">
+                        <div class="alloc-zoom-controls">
+                            <button class="alloc-zoom-btn" onclick="allocZoom('sector','1m')">1M</button>
+                            <button class="alloc-zoom-btn" onclick="allocZoom('sector','3m')">3M</button>
+                            <button class="alloc-zoom-btn" onclick="allocZoom('sector','6m')">6M</button>
+                            <button class="alloc-zoom-btn active" onclick="allocZoom('sector','all')">All</button>
+                            <button class="alloc-zoom-btn" onclick="allocResetZoom('sector')" title="Reset zoom"><i class="fas fa-search-minus"></i></button>
+                        </div>
+                        <button class="toggle-btn active" onclick="toggleAllocMode('sector','pct',this)">%</button>
+                        <button class="toggle-btn" onclick="toggleAllocMode('sector','abs',this)">Val</button>
+                    </div>
+                </div>
+                <div class="card-body"><div class="alloc-chart-wrap"><canvas id="allocSector"></canvas></div></div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-globe" style="color:#10b981;"></i> Region Allocation</div>
+                    <div style="display:flex;gap:0.5rem;align-items:center;">
+                        <div class="alloc-zoom-controls">
+                            <button class="alloc-zoom-btn" onclick="allocZoom('region','1m')">1M</button>
+                            <button class="alloc-zoom-btn" onclick="allocZoom('region','3m')">3M</button>
+                            <button class="alloc-zoom-btn" onclick="allocZoom('region','6m')">6M</button>
+                            <button class="alloc-zoom-btn active" onclick="allocZoom('region','all')">All</button>
+                            <button class="alloc-zoom-btn" onclick="allocResetZoom('region')" title="Reset zoom"><i class="fas fa-search-minus"></i></button>
+                        </div>
+                        <button class="toggle-btn active" onclick="toggleAllocMode('region','pct',this)">%</button>
+                        <button class="toggle-btn" onclick="toggleAllocMode('region','abs',this)">Val</button>
+                    </div>
+                </div>
+                <div class="card-body"><div class="alloc-chart-wrap"><canvas id="allocRegion"></canvas></div></div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-tags" style="color:var(--accent-purple);"></i> Theme Allocation</div>
+                    <div style="display:flex;gap:0.5rem;align-items:center;">
+                        <div class="alloc-zoom-controls">
+                            <button class="alloc-zoom-btn" onclick="allocZoom('theme','1m')">1M</button>
+                            <button class="alloc-zoom-btn" onclick="allocZoom('theme','3m')">3M</button>
+                            <button class="alloc-zoom-btn" onclick="allocZoom('theme','6m')">6M</button>
+                            <button class="alloc-zoom-btn active" onclick="allocZoom('theme','all')">All</button>
+                            <button class="alloc-zoom-btn" onclick="allocResetZoom('theme')" title="Reset zoom"><i class="fas fa-search-minus"></i></button>
+                        </div>
+                        <button class="toggle-btn active" onclick="toggleAllocMode('theme','pct',this)">%</button>
+                        <button class="toggle-btn" onclick="toggleAllocMode('theme','abs',this)">Val</button>
+                    </div>
+                </div>
+                <div class="card-body"><div class="alloc-chart-wrap"><canvas id="allocTheme"></canvas></div></div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-money-bill-wave" style="color:#06b6d4;"></i> Currency Allocation</div>
+                    <div style="display:flex;gap:0.5rem;align-items:center;">
+                        <div class="alloc-zoom-controls">
+                            <button class="alloc-zoom-btn" onclick="allocZoom('currency','1m')">1M</button>
+                            <button class="alloc-zoom-btn" onclick="allocZoom('currency','3m')">3M</button>
+                            <button class="alloc-zoom-btn" onclick="allocZoom('currency','6m')">6M</button>
+                            <button class="alloc-zoom-btn active" onclick="allocZoom('currency','all')">All</button>
+                            <button class="alloc-zoom-btn" onclick="allocResetZoom('currency')" title="Reset zoom"><i class="fas fa-search-minus"></i></button>
+                        </div>
+                        <button class="toggle-btn active" onclick="toggleAllocMode('currency','pct',this)">%</button>
+                        <button class="toggle-btn" onclick="toggleAllocMode('currency','abs',this)">Val</button>
+                    </div>
+                </div>
+                <div class="card-body"><div class="alloc-chart-wrap"><canvas id="allocCurrency"></canvas></div></div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-shapes" style="color:#6366f1;"></i> Asset Class</div>
+                    <div style="display:flex;gap:0.5rem;align-items:center;">
+                        <div class="alloc-zoom-controls">
+                            <button class="alloc-zoom-btn" onclick="allocZoom('assetClass','1m')">1M</button>
+                            <button class="alloc-zoom-btn" onclick="allocZoom('assetClass','3m')">3M</button>
+                            <button class="alloc-zoom-btn" onclick="allocZoom('assetClass','6m')">6M</button>
+                            <button class="alloc-zoom-btn active" onclick="allocZoom('assetClass','all')">All</button>
+                            <button class="alloc-zoom-btn" onclick="allocResetZoom('assetClass')" title="Reset zoom"><i class="fas fa-search-minus"></i></button>
+                        </div>
+                        <button class="toggle-btn active" onclick="toggleAllocMode('assetClass','pct',this)">%</button>
+                        <button class="toggle-btn" onclick="toggleAllocMode('assetClass','abs',this)">Val</button>
+                    </div>
+                </div>
+                <div class="card-body"><div class="alloc-chart-wrap"><canvas id="allocAssetClass"></canvas></div></div>
+            </div>
+        </div>
+
+        </div><!-- /allocations tab -->
+
+        <!-- ═══ POSITIONS TAB ═══ -->
+        <div class="tab-content" data-tab="positions">
+
+        <!-- Top Best/Worst Trades -->
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-trophy" style="color:var(--accent-orange);"></i> Top 5 Best Trades</div>
+                </div>
+                <div class="card-body" id="best-trades"></div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-skull-crossbones" style="color:var(--accent-red);"></i> Top 5 Worst Trades</div>
+                </div>
+                <div class="card-body" id="worst-trades"></div>
+            </div>
+        </div>
+
+        <!-- Correlation Matrix -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-table-cells" style="color:var(--accent-purple);"></i> Position Correlation</div>
+                <div style="display:flex;gap:0.5rem;align-items:center;font-size:0.65rem;">
+                    <span style="padding:2px 6px;background:#f1f5f9;border-radius:3px;color:#64748b;">0.5-0.6</span>
+                    <span style="padding:2px 6px;background:#fed7aa;border-radius:3px;color:#9a3412;">0.6-0.8</span>
+                    <span style="padding:2px 6px;background:#fecaca;border-radius:3px;color:#991b1b;">&gt;0.8</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-wrap" id="corr-matrix-wrap"></div>
+                <div id="corr-warning" class="corr-warning" style="display:none;">
+                    <i class="fas fa-triangle-exclamation"></i> <strong>High Correlation Alert:</strong> Some positions have correlation &gt; 0.8, indicating concentrated risk.
+                </div>
+            </div>
+        </div>
+
+        <!-- Positions & Pending -->
+        <div class="grid-2">
+            <div class="card" id="positions-card"></div>
+            <div class="card" id="pending-card"></div>
+        </div>
+
+        <!-- Actions -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-bolt" style="color:var(--accent-orange);"></i> Actions</div>
+                <label class="toggle-label">
+                    <input type="checkbox" id="showAllActions" onchange="renderActions()">
+                    Show all history
+                </label>
+            </div>
+            <div class="card-body" id="actions-content"></div>
+        </div>
+
+        </div><!-- /positions tab -->
+
+        <!-- DEVIATION TAB (PARALLEL mode only) -->
+        <div class="tab-content" data-tab="deviation" style="display:none">
+
+        <!-- KPI Comparison Grid -->
+        <div class="card">
+            <div class="card-header"><i class="fas fa-balance-scale"></i> Live vs Backtest — KPI Comparison</div>
+            <div class="card-body">
+                <div id="deviation-kpi-grid" style="overflow-x:auto"></div>
+            </div>
+        </div>
+
+        <!-- Equity Overlay Chart -->
+        <div class="card">
+            <div class="card-header"><i class="fas fa-chart-line"></i> Equity Overlay — Live vs Backtest</div>
+            <div class="card-body">
+                <canvas id="equityOverlayChart" height="300"></canvas>
+            </div>
+        </div>
+
+        <!-- Deviation Timeline -->
+        <div class="card">
+            <div class="card-header"><i class="fas fa-wave-square"></i> Equity Deviation Over Time</div>
+            <div class="card-body">
+                <canvas id="deviationTimelineChart" height="250"></canvas>
+            </div>
+        </div>
+
+        <!-- Position Drift Table -->
+        <div class="card">
+            <div class="card-header"><i class="fas fa-exchange-alt"></i> Position Drift — Live vs Backtest</div>
+            <div class="card-body">
+                <div id="position-drift-table" style="overflow-x:auto"></div>
+            </div>
+        </div>
+
+        <!-- Trades Comparison -->
+        <div class="card">
+            <div class="card-header"><i class="fas fa-list"></i> Execution Divergence</div>
+            <div class="card-body">
+                <div id="execution-divergence" style="overflow-x:auto"></div>
+            </div>
+        </div>
+
+        </div><!-- /deviation tab -->
+
+    </div>
+
+    <script>
+        // Data can be embedded (for backward compat) or loaded from external files
+        let snapshots = null;
+        let fxHistory = null;
+        let currentIdx = 0;
+        let returnChart = null;
+        let maxDdChart = null;
+        let execChart = null;
+        let displayCurrency = null;
+
+        // Load data from external JSON files if not embedded
+        async function loadExternalData() {
+            if (snapshots === null) {
+                try {
+                    const snapRes = await fetch('data/snapshots.json');
+                    const data = await snapRes.json();
+                    if (Array.isArray(data)) {
+                        snapshots = data;
+                    } else if (data.parts) {
+                        const partArrays = await Promise.all(
+                            data.parts.map(p => fetch('data/' + p).then(r => r.json()))
+                        );
+                        snapshots = partArrays.flat();
+                    } else {
+                        snapshots = [];
+                    }
+                } catch (e) {
+                    console.error('Failed to load snapshots:', e);
+                    document.querySelector('.container').innerHTML = '<div class="card"><div class="card-body"><p class="empty">Failed to load data files.</p></div></div>';
+                    return false;
+                }
+            }
+            // Load FX rates if not embedded (separate from snapshots check)
+            // This ensures FX is loaded even when snapshots are inline but FX rates are external
+            if (fxHistory === null || Object.keys(fxHistory).length === 0) {
+                fxHistory = fxHistory || {};
+                const currencies = ['USD', 'EUR', 'GBP', 'CHF', 'JPY', 'CAD', 'CNY', 'HKD', 'PLN', 'BRL', 'INR', 'ZAR', 'RUB', 'BTC', 'GOLD'];
+                await Promise.all(currencies.map(async (ccy) => {
+                    try {
+                        const res = await fetch('../../fx-' + ccy.toLowerCase() + '.json');
+                        const data = await res.json();
+                        Object.assign(fxHistory, data); // Merge {CCY: {date: rate}}
+                    } catch (e) {
+                        // Currency file not available, skip
+                    }
+                }));
+            }
+            currentIdx = 0; // Index 0 = newest snapshot (sorted newest first)
+            return true;
+        }
+
+        // ─── HELPERS ───
+        function getNativeCcy() {
+            if (!snapshots.length) return 'USD';
+            const s = snapshots[currentIdx];
+            return s.currency || (s.balance?.BaseCurrency) || 'USD';
+        }
+        function getDisplayCcy() { return displayCurrency || getNativeCcy(); }
+        function getCurrentDate() { return snapshots[currentIdx]?.date || null; }
+
+        // ─── FX ───
+        // fxHistory format: {currency: {date: rate_to_EUR}}
+        // e.g. {USD: {"2026-01-27": 0.92}, EUR: {"2026-01-27": 1.0}}
+        function currencyRateOnDate(currency, date) {
+            const h = fxHistory[currency];
+            if (!h) return null;
+            if (h[date]) return h[date];
+            // Try previous days if exact date not found
+            const d = new Date(date);
+            for (let i = 1; i <= 7; i++) {
+                d.setDate(d.getDate() - 1);
+                const key = d.toISOString().slice(0, 10);
+                if (h[key]) return h[key];
+            }
+            return null;
+        }
+        function fxRate(from, to, date) {
+            if (from === to) return 1;
+            const dt = date || getCurrentDate();
+            // Get both rates to EUR
+            const fromRate = currencyRateOnDate(from, dt);
+            const toRate = currencyRateOnDate(to, dt);
+            if (fromRate && toRate) return fromRate / toRate;
+            // Fallback: no conversion if FX data missing
+            return 1;
+        }
+        function convertCcy(v, date) {
+            const native = getNativeCcy();
+            const display = getDisplayCcy();
+            return native === display ? v : v * fxRate(native, display, date);
+        }
+
+        // ─── FORMATTING ───
+        function fmtMoney(v, ccy) {
+            if (v == null || isNaN(v)) return '-';
+            const c = ccy || getDisplayCcy();
+            if (c === 'BTC') return '\u20bf' + v.toFixed(6);
+            if (c === 'GOLD') return v.toFixed(2) + ' oz';
+            try {
+                return new Intl.NumberFormat('en-US', { style: 'currency', currency: c, minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(v);
+            } catch (e) { return c + ' ' + v.toFixed(2); }
+        }
+        function fmtMoneyFx(v, date) {
+            if (v == null || isNaN(v)) return '-';
+            return fmtMoney(convertCcy(v, date));
+        }
+        function fmtPct(v) { return v != null ? (v >= 0 ? '+' : '') + v.toFixed(2) + '%' : '-'; }
+        function pnlCls(v) { return v >= 0 ? 'cell-positive' : 'cell-negative'; }
+
+        // ─── CURRENCY ───
+        function setGlobalCurrency(c) {
+            displayCurrency = c;
+            const url = new URL(window.location);
+            url.searchParams.set('ccy', c);
+            history.replaceState(null, '', url);
+            renderAll();
+            updateChartData();
+            addBenchmarksToReturnChart();
+        }
+        function initCurrencySelector() {
+            const sel = document.getElementById('currency-selector');
+            const urlCcy = new URL(window.location).searchParams.get('ccy');
+            if (urlCcy && [...sel.options].some(o => o.value === urlCcy)) {
+                sel.value = urlCcy;
+                displayCurrency = urlCcy;
+            } else {
+                const native = getNativeCcy();
+                sel.value = native;
+                displayCurrency = native;
+            }
+        }
+
+        // ─── TIME MACHINE ───
+        // Slider: left=oldest, right=newest (most intuitive)
+        // Snapshots are sorted newest first (index 0 = newest)
+        // So we reverse: sliderValue 0 = oldest (index max), sliderValue max = newest (index 0)
+        function sliderToIdx(sliderVal) {
+            return (snapshots.length - 1) - parseInt(sliderVal);
+        }
+        function idxToSlider(idx) {
+            return (snapshots.length - 1) - idx;
+        }
+
+        function initSlider() {
+            const slider = document.getElementById('timeSlider');
+            slider.max = snapshots.length - 1;
+            slider.value = idxToSlider(currentIdx); // currentIdx=0 -> slider=max (rightmost)
+            slider.addEventListener('input', function () {
+                currentIdx = sliderToIdx(this.value);
+                renderAll();
+                updateSliderLabel();
+                updateChartData();
+                addBenchmarksToReturnChart();
+            });
+        }
+        function updateSliderLabel() {
+            const s = snapshots[currentIdx];
+            let label = 'LIVE';
+            if (s && s.timestamp) {
+                // Show full timestamp: "2026-02-02 18:04"
+                const ts = s.timestamp;
+                label = ts.substring(0, 10) + ' ' + ts.substring(11, 16);
+                // Mark as LIVE if it's the most recent (index 0)
+                if (currentIdx === 0) label += ' (LIVE)';
+            }
+            document.getElementById('tm-date').textContent = label;
+        }
+
+        // ─── EXECUTION METRICS (Slippage & Fill Rate) ───
+        // Analyzes snapshots to calculate:
+        // - Slippage%: (AvgEntry - LimitPrice) / LimitPrice * 100 for filled BUY orders
+        // - Fill Rate: % of BUY LIMIT orders that got filled vs cancelled
+        function calculateExecutionMetrics() {
+            if (snapshots.length < 2) return { slippages: [], fillRates: [], avgSlippage: 0, totalFillRate: 0, filledCount: 0, cancelledCount: 0 };
+
+            const slippages = [];      // {date, symbol, limitPrice, avgEntry, slippage%}
+            const fillRates = [];      // {date, filled, cancelled, rate%}
+            let totalFilledCount = 0;
+            let totalCancelledCount = 0;
+
+            // Snapshots are sorted newest-first, so iterate in reverse (oldest to newest)
+            for (let i = snapshots.length - 1; i > 0; i--) {
+                const prevSnap = snapshots[i];      // older snapshot
+                const currSnap = snapshots[i - 1];  // newer snapshot
+
+                const prevPositions = new Map((prevSnap.positions || []).map(p => [p.Symbol, p]));
+                const currPositions = new Map((currSnap.positions || []).map(p => [p.Symbol, p]));
+
+                // Get BUY LIMIT orders from previous snapshot
+                const prevBuyOrders = (prevSnap.pending_orders || []).filter(o =>
+                    o.Side === 'BUY' && o.OrderType === 'LIMIT' && o.LimitPrice > 0
+                );
+
+                // Get current pending BUY orders (still pending)
+                const currPendingSymbols = new Set(
+                    (currSnap.pending_orders || [])
+                        .filter(o => o.Side === 'BUY')
+                        .map(o => o.Symbol)
+                );
+
+                let dailyFilled = 0;
+                let dailyCancelled = 0;
+
+                for (const order of prevBuyOrders) {
+                    const sym = order.Symbol;
+                    const hadPosition = prevPositions.has(sym);
+                    const hasPosition = currPositions.has(sym);
+                    const stillPending = currPendingSymbols.has(sym);
+
+                    // Order was filled if: didn't have position before, has position now, not still pending
+                    if (!hadPosition && hasPosition && !stillPending) {
+                        const pos = currPositions.get(sym);
+                        const limitPrice = order.LimitPrice;
+                        const avgEntry = pos.AvgEntry;
+
+                        if (limitPrice > 0 && avgEntry > 0) {
+                            const slippagePct = ((avgEntry - limitPrice) / limitPrice) * 100;
+                            slippages.push({
+                                date: currSnap.date,
+                                symbol: sym,
+                                limitPrice,
+                                avgEntry,
+                                slippage: slippagePct
+                            });
+                            dailyFilled++;
+                            totalFilledCount++;
+                        }
+                    }
+                    // Order was cancelled if: not filled and no longer pending
+                    else if (!hasPosition && !stillPending && !hadPosition) {
+                        dailyCancelled++;
+                        totalCancelledCount++;
+                    }
+                }
+
+                if (dailyFilled > 0 || dailyCancelled > 0) {
+                    const rate = (dailyFilled + dailyCancelled) > 0
+                        ? (dailyFilled / (dailyFilled + dailyCancelled)) * 100
+                        : 100;
+                    fillRates.push({
+                        date: currSnap.date,
+                        filled: dailyFilled,
+                        cancelled: dailyCancelled,
+                        rate
+                    });
+                }
+            }
+
+            // Calculate averages
+            const avgSlippage = slippages.length > 0
+                ? slippages.reduce((sum, s) => sum + s.slippage, 0) / slippages.length
+                : 0;
+            const totalFillRate = (totalFilledCount + totalCancelledCount) > 0
+                ? (totalFilledCount / (totalFilledCount + totalCancelledCount)) * 100
+                : 100;
+
+            return {
+                slippages,
+                fillRates,
+                avgSlippage,
+                totalFillRate,
+                filledCount: totalFilledCount,
+                cancelledCount: totalCancelledCount
+            };
+        }
+
+        // Global metrics cache (recalculated on data load)
+        let executionMetrics = null;
+
+        function getExecutionMetricsUpToDate(targetDate) {
+            if (!executionMetrics) return { avgSlippage: 0, fillRate: 100, filledCount: 0, cancelledCount: 0 };
+
+            const relevantSlippages = executionMetrics.slippages.filter(s => s.date <= targetDate);
+            const relevantFillRates = executionMetrics.fillRates.filter(f => f.date <= targetDate);
+
+            const avgSlippage = relevantSlippages.length > 0
+                ? relevantSlippages.reduce((sum, s) => sum + s.slippage, 0) / relevantSlippages.length
+                : 0;
+
+            const totalFilled = relevantFillRates.reduce((sum, f) => sum + f.filled, 0);
+            const totalCancelled = relevantFillRates.reduce((sum, f) => sum + f.cancelled, 0);
+            const fillRate = (totalFilled + totalCancelled) > 0
+                ? (totalFilled / (totalFilled + totalCancelled)) * 100
+                : 100;
+
+            return { avgSlippage, fillRate, filledCount: totalFilled, cancelledCount: totalCancelled };
+        }
+
+        // ─── KPIs ───
+        function getInitialCapital() {
+            // Get initial capital: prefer explicit field, then oldest snapshot's equity
+            // Snapshots are sorted newest-first, so last element is oldest
+            if (!snapshots.length) return 100000;
+            const oldest = snapshots[snapshots.length - 1];
+            // Use explicit initial_capital if available (backtest mode)
+            if (oldest?.initial_capital > 0) return oldest.initial_capital;
+            // Fallback to oldest equity (live mode)
+            const eq = oldest?.balance?.TotalEquity || 0;
+            if (eq > 0) return eq;
+            return 100000;
+        }
+
+        function renderKPIs() {
+            if (!snapshots.length) return;
+            const s = snapshots[currentIdx];
+            const bal = s.balance || {};
+            const date = s.date;
+
+            // P&L
+            let totalPnL = 0;
+            (s.positions || []).forEach(p => totalPnL += (p.UnrealizedPnL || 0));
+
+            // Return - calculate from ACTUAL initial capital (oldest snapshot equity)
+            const initialCapital = getInitialCapital();
+            const initialCapitalConverted = convertCcy(initialCapital, snapshots[snapshots.length - 1]?.date);
+            const currentEquity = convertCcy(bal.TotalEquity || 0, date);
+            const totalReturn = initialCapitalConverted > 0 ? ((currentEquity / initialCapitalConverted) - 1) * 100 : 0;
+
+            // Max DD from all snapshots - peak is the highest equity reached, not initial capital
+            // Snapshots are sorted newest first, so reverse for chronological order
+            const allEquities = [...snapshots].reverse().map(sn => convertCcy(sn.balance?.TotalEquity || 0, sn.date)).filter(v => v > 0);
+            let peak = 0, maxDD = 0;
+            allEquities.forEach(eq => {
+                if (eq > peak) peak = eq;
+                const dd = peak > 0 ? (peak - eq) / peak * 100 : 0;
+                if (dd > maxDD) maxDD = dd;
+            });
+
+            // Update KPIs
+            const retEl = document.getElementById('kpi-return');
+            retEl.textContent = fmtPct(totalReturn);
+            retEl.className = 'kpi-value ' + (totalReturn >= 0 ? 'positive' : 'negative');
+
+            document.getElementById('kpi-equity').textContent = fmtMoneyFx(bal.TotalEquity, date);
+            document.getElementById('kpi-dd').textContent = '-' + maxDD.toFixed(2) + '%';
+            document.getElementById('kpi-positions').textContent = (s.positions || []).length;
+
+            const pnlEl = document.getElementById('kpi-pnl');
+            pnlEl.textContent = fmtMoneyFx(totalPnL, date);
+            pnlEl.className = 'kpi-value ' + (totalPnL >= 0 ? 'positive' : 'negative');
+
+            const mainCash = bal.CashByCurrency ? (bal.CashByCurrency[getNativeCcy()] || 0) : 0;
+            document.getElementById('kpi-cash').textContent = fmtMoneyFx(mainCash, date);
+
+            document.getElementById('nav-title').textContent = 'Backtest — ' + (s.portfolio || '').toUpperCase();
+
+            // Execution metrics (slippage & fill rate) up to current date
+            const metrics = getExecutionMetricsUpToDate(date);
+
+            const slipEl = document.getElementById('kpi-slippage');
+            if (slipEl) {
+                const slipVal = metrics.avgSlippage;
+                slipEl.textContent = (slipVal >= 0 ? '+' : '') + slipVal.toFixed(2) + '%';
+                slipEl.className = 'kpi-value ' + (slipVal <= 0 ? 'positive' : slipVal < 1 ? 'neutral' : 'negative');
+            }
+            const slipCountEl = document.getElementById('kpi-slippage-count');
+            if (slipCountEl) slipCountEl.textContent = metrics.filledCount + ' fills';
+
+            const fillEl = document.getElementById('kpi-fillrate');
+            if (fillEl) {
+                fillEl.textContent = metrics.fillRate.toFixed(1) + '%';
+                fillEl.className = 'kpi-value ' + (metrics.fillRate >= 80 ? 'positive' : metrics.fillRate >= 50 ? 'neutral' : 'negative');
+            }
+            const fillCountEl = document.getElementById('kpi-fillrate-count');
+            if (fillCountEl) fillCountEl.textContent = metrics.filledCount + '/' + (metrics.filledCount + metrics.cancelledCount) + ' orders';
+        }
+
+        // ─── CHARTS ───
+        function initCharts() {
+            const retCtx = document.getElementById('returnChart')?.getContext('2d');
+            const ddCtx = document.getElementById('maxDdChart')?.getContext('2d');
+            if (!retCtx || !ddCtx) return;
+
+            const chartOpts = {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: false, // No animation
+                plugins: { legend: { display: false } },
+                interaction: { intersect: false, mode: 'index' },
+                elements: { point: { radius: 0, hoverRadius: 4 } }
+            };
+
+            returnChart = new Chart(retCtx, {
+                type: 'line',
+                data: { labels: [], datasets: [{ data: [], borderColor: '#2563eb', backgroundColor: 'rgba(37,99,235,0.08)', fill: true, tension: 0.3, borderWidth: 2 }] },
+                options: { ...chartOpts, scales: { y: { ticks: { callback: v => v.toFixed(0) + '%' } }, x: { ticks: { maxTicksLimit: 12, font: { size: 10 } } } } }
+            });
+
+            maxDdChart = new Chart(ddCtx, {
+                type: 'line',
+                data: { labels: [], datasets: [{ data: [], borderColor: '#ef4444', backgroundColor: 'rgba(239,68,68,0.08)', fill: true, tension: 0.3, borderWidth: 2 }] },
+                options: { ...chartOpts, scales: { y: { max: 0, ticks: { callback: v => v.toFixed(1) + '%' } }, x: { ticks: { maxTicksLimit: 12, font: { size: 10 } } } } }
+            });
+
+            // Execution quality chart (slippage & fill rate)
+            const execCtx = document.getElementById('execChart')?.getContext('2d');
+            if (execCtx) {
+                execChart = new Chart(execCtx, {
+                    type: 'line',
+                    data: {
+                        labels: [],
+                        datasets: [
+                            {
+                                label: 'Avg Slippage %',
+                                data: [],
+                                borderColor: '#8b5cf6',
+                                backgroundColor: 'rgba(139,92,246,0.1)',
+                                fill: true,
+                                tension: 0.3,
+                                borderWidth: 2,
+                                yAxisID: 'y'
+                            },
+                            {
+                                label: 'Fill Rate %',
+                                data: [],
+                                borderColor: '#10b981',
+                                backgroundColor: 'rgba(16,185,129,0.1)',
+                                fill: false,
+                                tension: 0.3,
+                                borderWidth: 2,
+                                yAxisID: 'y1'
+                            }
+                        ]
+                    },
+                    options: {
+                        ...chartOpts,
+                        plugins: {
+                            legend: { display: true, position: 'top', labels: { boxWidth: 12, font: { size: 10 } } }
+                        },
+                        scales: {
+                            y: {
+                                type: 'linear',
+                                position: 'left',
+                                title: { display: true, text: 'Slippage %', font: { size: 10 } },
+                                ticks: { callback: v => v.toFixed(1) + '%' }
+                            },
+                            y1: {
+                                type: 'linear',
+                                position: 'right',
+                                title: { display: true, text: 'Fill Rate %', font: { size: 10 } },
+                                min: 0,
+                                max: 100,
+                                grid: { drawOnChartArea: false },
+                                ticks: { callback: v => v.toFixed(0) + '%' }
+                            },
+                            x: { ticks: { maxTicksLimit: 12, font: { size: 10 } } }
+                        }
+                    }
+                });
+            }
+
+            updateChartData();
+        }
+
+        function updateChartData() {
+            if (!returnChart || !maxDdChart) return;
+
+            // Always show ALL snapshots up to current selection (chronological order)
+            // Snapshots are newest-first, so reverse and take up to currentIdx
+            const allReversed = [...snapshots].reverse();
+            const upToIdx = snapshots.length - currentIdx;
+            const visible = allReversed.slice(0, upToIdx);
+
+            const dates = [], returns = [], maxDDs = [];
+            let peak = 0, maxDD = 0;
+            // Use actual initial capital from oldest snapshot (same as KPIs)
+            const initialCapital = getInitialCapital();
+            const oldestDate = snapshots[snapshots.length - 1]?.date;
+            const initialCapitalConverted = convertCcy(initialCapital, oldestDate);
+
+            visible.forEach(s => {
+                const eq = convertCcy(s.balance?.TotalEquity || 0, s.date);
+                if (eq <= 0) return;
+                dates.push(s.date);
+                // Total return % from actual initial capital (same as KPIs)
+                const ret = initialCapitalConverted > 0 ? ((eq / initialCapitalConverted) - 1) * 100 : 0;
+                returns.push(ret);
+                // Max drawdown (cumulative max)
+                if (eq > peak) peak = eq;
+                const dd = peak > 0 ? ((peak - eq) / peak * 100) : 0;
+                if (dd > maxDD) maxDD = dd;
+                maxDDs.push(-maxDD);
+            });
+
+            returnChart.data.labels = dates;
+            returnChart.data.datasets[0].data = returns;
+            returnChart.update('none');
+
+            maxDdChart.data.labels = dates;
+            maxDdChart.data.datasets[0].data = maxDDs;
+            maxDdChart.update('none');
+
+            // Update execution metrics chart
+            if (execChart && executionMetrics) {
+                const execDates = [];
+                const slippageData = [];
+                const fillRateData = [];
+
+                // Build cumulative metrics for each date
+                let cumSlippages = [];
+                let cumFilled = 0;
+                let cumCancelled = 0;
+
+                // Iterate through visible dates and calculate cumulative metrics
+                visible.forEach(s => {
+                    const date = s.date;
+                    execDates.push(date);
+
+                    // Add slippages up to this date
+                    const newSlips = executionMetrics.slippages.filter(sl => sl.date === date);
+                    cumSlippages = cumSlippages.concat(newSlips);
+
+                    // Add fills/cancels up to this date
+                    const dayMetric = executionMetrics.fillRates.find(f => f.date === date);
+                    if (dayMetric) {
+                        cumFilled += dayMetric.filled;
+                        cumCancelled += dayMetric.cancelled;
+                    }
+
+                    // Calculate cumulative averages
+                    const avgSlip = cumSlippages.length > 0
+                        ? cumSlippages.reduce((sum, sl) => sum + sl.slippage, 0) / cumSlippages.length
+                        : 0;
+                    const fillRate = (cumFilled + cumCancelled) > 0
+                        ? (cumFilled / (cumFilled + cumCancelled)) * 100
+                        : 100;
+
+                    slippageData.push(avgSlip);
+                    fillRateData.push(fillRate);
+                });
+
+                execChart.data.labels = execDates;
+                execChart.data.datasets[0].data = slippageData;
+                execChart.data.datasets[1].data = fillRateData;
+                execChart.update('none');
+            }
+        }
+
+        // ─── POSITIONS ───
+        function renderPositions() {
+            const s = snapshots[currentIdx];
+            const positions = s?.positions || [];
+            const pending = s?.pending_orders || [];
+
+            // Build stop map
+            const stopMap = {};
+            pending.forEach(o => {
+                if (o.Side === 'SELL' && ['STOP', 'TRAILING_STOP', 'STOP_LIMIT'].includes(o.OrderType) && o.StopPrice > 0) {
+                    stopMap[o.Symbol] = o.StopPrice;
+                }
+            });
+
+            let html = '<div class="card-header"><div class="card-title"><i class="fas fa-wallet" style="color:var(--accent-blue);"></i> Positions</div><span class="card-badge">' + positions.length + '</span></div>';
+            html += '<div class="card-body">';
+
+            if (positions.length > 0) {
+                const totalEquity = s.balance?.TotalEquity || 1;
+                const sorted = [...positions].sort((a, b) => (b.UnrealizedPnL || 0) - (a.UnrealizedPnL || 0));
+                html += '<div class="table-wrap"><table><thead><tr><th>Symbol</th><th>Qty</th><th>Entry</th><th>Price</th><th>Stop</th><th>P&L</th><th>%</th><th>Weight</th></tr></thead><tbody>';
+                sorted.forEach(p => {
+                    const pnl = p.UnrealizedPnL || 0;
+                    const hasPrice = p.CurrentPrice > 0;
+                    const hasEntry = p.AvgEntry > 0;
+                    const pct = (hasEntry && hasPrice) ? ((p.CurrentPrice - p.AvgEntry) / p.AvgEntry * 100) : 0;
+                    const stop = stopMap[p.Symbol] || 0;
+                    const riskPct = (stop > 0 && hasPrice) ? ((p.CurrentPrice - stop) / p.CurrentPrice * 100).toFixed(1) : '-';
+                    const posValue = hasPrice ? p.CurrentPrice * (p.Qty || 0) : 0;
+                    const weight = totalEquity > 0 ? (posValue / totalEquity * 100) : 0;
+                    const barW = Math.min(weight * 3, 60);
+
+                    const priceDisplay = hasPrice ? fmtMoney(p.CurrentPrice) : '<span class="cell-muted">-</span>';
+                    const pctDisplay = hasPrice ? pct.toFixed(1) + '%' : '-';
+                    const stopDisplay = stop > 0 ? fmtMoney(stop) + ' <span class="cell-muted">(' + riskPct + '%)</span>' : '-';
+
+                    html += '<tr>';
+                    html += '<td class="cell-symbol">' + p.Symbol + '</td>';
+                    html += '<td>' + (p.Qty || 0) + '</td>';
+                    html += '<td>' + fmtMoney(p.AvgEntry) + '</td>';
+                    html += '<td>' + priceDisplay + '</td>';
+                    html += '<td>' + stopDisplay + '</td>';
+                    html += '<td class="' + pnlCls(pnl) + '">' + fmtMoney(pnl) + '</td>';
+                    html += '<td class="' + (hasPrice ? pnlCls(pct) : '') + '">' + pctDisplay + '</td>';
+                    html += '<td><span class="weight-bar" style="width:' + barW + 'px"></span>' + weight.toFixed(1) + '%</td>';
+                    html += '</tr>';
+                });
+                html += '</tbody></table></div>';
+            } else {
+                html += '<p class="empty">No open positions</p>';
+            }
+            html += '</div>';
+            document.getElementById('positions-card').innerHTML = html;
+        }
+
+        // ─── PENDING ORDERS ───
+        function renderPending() {
+            const s = snapshots[currentIdx];
+            const pending = s?.pending_orders || [];
+            const positions = s?.positions || [];
+            const actions = s?.actions || [];
+            const posSymbols = new Set(positions.map(p => p.Symbol));
+
+            // Detect manual actions: order_id starts with "manual-", OR
+            // CREATE actions when there are 0 broker pending orders (manual broker)
+            const hasBrokerPending = pending.length > 0;
+            const manualActions = actions.filter(a => a.type === 'CREATE' &&
+                ((a.order_id || '').startsWith('manual-') || !hasBrokerPending));
+
+            // Build map of STOP orders by symbol (for bracket order display)
+            const stopsBySymbol = {};
+            pending.forEach(o => {
+                if (o.Side === 'SELL' && ['STOP', 'TRAILING_STOP', 'STOP_LIMIT'].includes(o.OrderType)) {
+                    stopsBySymbol[o.Symbol] = o;
+                }
+            });
+
+            // Show BUY orders with their linked stop price, and standalone SELL orders
+            const filtered = pending.filter(o => {
+                // Show all BUY orders
+                if (o.Side === 'BUY') return true;
+                // For SELL STOP: only show if no position AND no pending BUY (orphan stop)
+                if (o.Side === 'SELL' && ['STOP', 'TRAILING_STOP', 'STOP_LIMIT'].includes(o.OrderType)) {
+                    const hasBuy = pending.some(b => b.Side === 'BUY' && b.Symbol === o.Symbol);
+                    if (posSymbols.has(o.Symbol) || hasBuy) return false;
+                }
+                return true;
+            });
+
+            const totalCount = filtered.length + manualActions.length;
+            let html = '<div class="card-header"><div class="card-title"><i class="fas fa-clock" style="color:var(--accent-orange);"></i> Pending Orders</div><span class="card-badge">' + totalCount + '</span></div>';
+            html += '<div class="card-body">';
+
+            // Manual instructions section (prominent, shown first)
+            if (manualActions.length > 0) {
+                html += '<div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:8px;padding:12px;margin-bottom:12px;">';
+                html += '<div style="font-weight:600;color:#f59e0b;margin-bottom:8px;"><i class="fas fa-hand-pointer"></i> Manual Instructions (' + manualActions.length + ')</div>';
+                html += '<div class="table-wrap"><table><thead><tr><th>Symbol</th><th>Side</th><th>Type</th><th>Qty</th><th>Limit</th><th>Stop Loss</th><th>Reason</th></tr></thead><tbody>';
+                manualActions.forEach(a => {
+                    const sideCls = a.side === 'BUY' ? 'cell-positive' : 'cell-negative';
+                    const price = a.limit_price > 0 ? fmtMoney(a.limit_price) : (a.stop_price > 0 ? fmtMoney(a.stop_price) : '-');
+                    const stopLoss = a.stop_loss > 0 ? fmtMoney(a.stop_loss) : '-';
+                    html += '<tr>';
+                    html += '<td class="cell-symbol">' + a.symbol + '</td>';
+                    html += '<td class="' + sideCls + '">' + (a.side || '-') + '</td>';
+                    html += '<td>' + (a.order_type || '-') + '</td>';
+                    html += '<td>' + (a.qty > 0 ? a.qty : '-') + '</td>';
+                    html += '<td>' + price + '</td>';
+                    html += '<td class="cell-negative">' + stopLoss + '</td>';
+                    html += '<td class="cell-reason">' + formatReason(a.reason) + '</td>';
+                    html += '</tr>';
+                });
+                html += '</tbody></table></div></div>';
+            }
+
+            if (filtered.length > 0) {
+                html += '<div class="table-wrap"><table><thead><tr><th>Symbol</th><th>Side</th><th>Type</th><th>Qty</th><th>Limit</th><th>Stop Loss</th></tr></thead><tbody>';
+                filtered.forEach(o => {
+                    // For BUY orders, look up linked stop price from bracket
+                    let stopPrice = o.StopPrice;
+                    if (o.Side === 'BUY' && stopsBySymbol[o.Symbol]) {
+                        stopPrice = stopsBySymbol[o.Symbol].StopPrice;
+                    }
+                    html += '<tr>';
+                    html += '<td class="cell-symbol">' + o.Symbol + '</td>';
+                    html += '<td class="' + (o.Side === 'BUY' ? 'cell-positive' : 'cell-negative') + '">' + o.Side + '</td>';
+                    html += '<td>' + o.OrderType + '</td>';
+                    html += '<td>' + (o.Qty || '-') + '</td>';
+                    html += '<td>' + (o.LimitPrice > 0 ? fmtMoney(o.LimitPrice) : '-') + '</td>';
+                    html += '<td class="cell-negative">' + (stopPrice > 0 ? fmtMoney(stopPrice) : '-') + '</td>';
+                    html += '</tr>';
+                });
+                html += '</tbody></table></div>';
+            } else if (manualActions.length === 0) {
+                html += '<p class="empty">No pending orders</p>';
+            }
+            html += '</div>';
+            document.getElementById('pending-card').innerHTML = html;
+        }
+
+        // ─── FORMAT REASON ───
+        function formatReason(reason) {
+            if (!reason || reason === '-') return '-';
+
+            // Parse the reason string: "BUY X @ $Y | Key=Val | ... || Strategy: Z | ..."
+            const parts = reason.split('||').map(s => s.trim());
+
+            let html = '<div class="reason-box">';
+
+            parts.forEach((section, idx) => {
+                const items = section.split('|').map(s => s.trim()).filter(s => s);
+
+                items.forEach((item, i) => {
+                    // First item of first section is usually the main action
+                    if (idx === 0 && i === 0) {
+                        html += '<div class="reason-main">' + escapeHtml(item) + '</div>';
+                        return;
+                    }
+
+                    // Check for key=value or key: value patterns
+                    const kvMatch = item.match(/^([^=:]+)[=:](.+)$/);
+                    if (kvMatch) {
+                        const key = kvMatch[1].trim();
+                        const val = kvMatch[2].trim();
+
+                        // Color coding based on key
+                        let valClass = '';
+                        if (key.toLowerCase().includes('score')) valClass = 'reason-score';
+                        else if (key.toLowerCase().includes('risk')) valClass = 'reason-risk';
+                        else if (key.toLowerCase().includes('rsi') && parseFloat(val) > 70) valClass = 'reason-warning';
+
+                        html += '<div class="reason-item"><span class="reason-key">' + escapeHtml(key) + '</span> <span class="reason-val ' + valClass + '">' + escapeHtml(val) + '</span></div>';
+                    } else {
+                        // Plain text item - check for keywords
+                        let icon = '';
+                        let cls = 'reason-tag';
+                        const lower = item.toLowerCase();
+
+                        if (lower.includes('bullish') || lower.includes('aligned')) { icon = '✓'; cls += ' reason-bullish'; }
+                        else if (lower.includes('bearish')) { icon = '✗'; cls += ' reason-bearish'; }
+                        else if (lower.includes('overbought')) { icon = '⚠'; cls += ' reason-warning'; }
+                        else if (lower.includes('volume') || lower.includes('spike')) { icon = '📊'; }
+                        else if (lower.includes('breaking') || lower.includes('high')) { icon = '📈'; cls += ' reason-bullish'; }
+                        else if (lower.includes('strategy')) { icon = '🎯'; }
+
+                        html += '<span class="' + cls + '">' + icon + ' ' + escapeHtml(item) + '</span>';
+                    }
+                });
+            });
+
+            html += '</div>';
+            return html;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // ─── ACTIONS ───
+        // Merge CANCEL+CREATE pairs for trailing stops into a single UPDATE action
+        function mergeTrailingStopActions(actions) {
+            const result = [];
+            const usedIndexes = new Set();
+
+            for (let i = 0; i < actions.length; i++) {
+                if (usedIndexes.has(i)) continue;
+                const a = actions[i];
+
+                // Check if this is a CANCEL for trailing stop update
+                const isTrailingCancel = a.type === 'CANCEL' && a.reason &&
+                    (a.reason.includes('TRAILING') || a.reason.includes('UPDATE') || a.reason.includes('CONSOLIDATE') || a.reason.includes('QTY_MISMATCH'));
+
+                if (isTrailingCancel) {
+                    // Look for matching CREATE on same symbol (same timestamp)
+                    let matchedCreate = null;
+                    let matchedIdx = -1;
+                    for (let j = 0; j < actions.length; j++) {
+                        if (i === j || usedIndexes.has(j)) continue;
+                        const b = actions[j];
+                        if (b.type === 'CREATE' && b.symbol === a.symbol && b._ts === a._ts && b.side === 'SELL') {
+                            matchedCreate = b;
+                            matchedIdx = j;
+                            break;
+                        }
+                    }
+
+                    if (matchedCreate) {
+                        // Merge into UPDATE
+                        usedIndexes.add(i);
+                        usedIndexes.add(matchedIdx);
+                        result.push({
+                            ...matchedCreate,
+                            type: 'UPDATE',
+                            reason: matchedCreate.reason // Use CREATE's reason (more informative)
+                        });
+                        continue;
+                    }
+                }
+
+                result.push(a);
+            }
+
+            return result;
+        }
+
+        function renderActions() {
+            const showAll = document.getElementById('showAllActions')?.checked || false;
+            let actions = [];
+
+            if (showAll) {
+                // Show all history UP TO the current selection
+                // Snapshots are newest-first (index 0 = LIVE), so slice from currentIdx to end
+                // to get all snapshots from current selection back to oldest
+                const visible = snapshots.slice(currentIdx);
+                visible.forEach(sn => {
+                    if (sn.actions?.length > 0) {
+                        const ts = sn.timestamp ? sn.timestamp.substring(0, 16).replace('T', ' ') : sn.date;
+                        sn.actions.forEach(a => actions.push({ ...a, _ts: ts }));
+                    }
+                });
+                // Reverse to show newest first (since we iterated oldest-first)
+            } else {
+                const s = snapshots[currentIdx];
+                if (s?.actions?.length > 0) {
+                    const ts = s.timestamp ? s.timestamp.substring(0, 16).replace('T', ' ') : s.date;
+                    actions = s.actions.map(a => ({ ...a, _ts: ts }));
+                }
+            }
+
+            // Merge CANCEL+CREATE pairs into UPDATE for trailing stops
+            actions = mergeTrailingStopActions(actions);
+
+            let html = '';
+            if (actions.length > 0) {
+                html += '<div class="table-wrap"><table><thead><tr><th>Date</th><th>Type</th><th>Symbol</th><th>Side</th><th>Qty</th><th>Price</th><th>Stop Loss</th><th>Reason</th></tr></thead><tbody>';
+                actions.forEach(a => {
+                    const isManual = (a.order_id || '').startsWith('manual-');
+                    const badge = a.type === 'CREATE' ? 'badge-create' : a.type === 'UPDATE' ? 'badge-update' : 'badge-cancel';
+                    const sideCls = a.side === 'BUY' ? 'cell-positive' : (a.side === 'SELL' ? 'cell-negative' : '');
+                    const price = a.limit_price > 0 ? fmtMoney(a.limit_price) : (a.stop_price > 0 ? fmtMoney(a.stop_price) : '-');
+                    const stopLoss = a.stop_loss > 0 ? fmtMoney(a.stop_loss) : '-';
+                    html += '<tr' + (isManual ? ' style="background:rgba(245,158,11,0.08);"' : '') + '>';
+                    html += '<td class="cell-muted">' + a._ts + '</td>';
+                    html += '<td><span class="badge ' + badge + '">' + a.type + '</span>' + (isManual ? ' <span style="font-size:0.65rem;background:#f59e0b;color:#fff;padding:1px 5px;border-radius:3px;font-weight:600;">MANUAL</span>' : '') + '</td>';
+                    html += '<td class="cell-symbol">' + a.symbol + '</td>';
+                    html += '<td class="' + sideCls + '">' + (a.side || '-') + '</td>';
+                    html += '<td>' + (a.qty > 0 ? a.qty : '-') + '</td>';
+                    html += '<td>' + price + '</td>';
+                    html += '<td class="cell-negative">' + stopLoss + '</td>';
+                    html += '<td class="cell-reason">' + formatReason(a.reason) + '</td>';
+                    html += '</tr>';
+                });
+                html += '</tbody></table></div>';
+            } else {
+                html += '<p class="empty">No actions' + (showAll ? ' in history' : ' for this date') + '</p>';
+            }
+            document.getElementById('actions-content').innerHTML = html;
+        }
+
+        // ─── SYMBOL CLASSIFICATION (data-driven from staticdata) ───
+        // Classifiers read enrichment fields from position objects.
+        // Fields populated by Go at snapshot creation: Sector, Country, AssetType, Themes, Name, MarketCapCategory
+        // Country codes: US, FR, DE, NL, IT, ES, CH, GB, JP, HK, etc.
+        const COUNTRY_LABELS = {
+            US: 'US', FR: 'France', DE: 'Germany', NL: 'Netherlands', IT: 'Italy',
+            ES: 'Spain', CH: 'Switzerland', GB: 'UK', JP: 'Japan', HK: 'Hong Kong',
+            CN: 'China', CA: 'Canada', AU: 'Australia', BR: 'Brazil', KR: 'South Korea',
+            SE: 'Sweden', NO: 'Norway', DK: 'Denmark', FI: 'Finland', BE: 'Belgium',
+            AT: 'Austria', PT: 'Portugal', IE: 'Ireland', SG: 'Singapore', IN: 'India'
+        };
+        function getSector(pos) { return pos.Sector || 'Other'; }
+        function getRegion(pos) { return COUNTRY_LABELS[pos.Country] || pos.Country || 'Other'; }
+        function getTheme(pos) {
+            if (pos.Themes && pos.Themes.length > 0) return pos.Themes[0].replace(/_/g, ' ');
+            return pos.Sector || 'Other';
+        }
+        function getPosCurrency(pos) { return pos.Currency || 'USD'; }
+        function getAssetClass(pos) { return pos.AssetType || 'Stock'; }
+
+        // ─── ALLOCATION STACKED AREA CHARTS ───
+        const allocCharts = {};
+        const allocModes = { sector: 'pct', region: 'pct', theme: 'pct', currency: 'pct', assetClass: 'pct' };
+        const allocZoomRanges = { sector: 'all', region: 'all', theme: 'all', currency: 'all', assetClass: 'all' };
+        const ALLOC_COLORS = [
+            '#3b82f6','#8b5cf6','#10b981','#f59e0b','#ef4444',
+            '#06b6d4','#ec4899','#84cc16','#f97316','#6366f1',
+            '#14b8a6','#a855f7','#475569','#d97706','#0ea5e9'
+        ];
+
+        function toggleAllocMode(chartKey, mode, btn) {
+            allocModes[chartKey] = mode;
+            btn.parentElement.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            updateAllocCharts();
+        }
+
+        function allocZoom(chartKey, range) {
+            allocZoomRanges[chartKey] = range;
+            // Toggle active button
+            const card = document.getElementById('alloc' + chartKey.charAt(0).toUpperCase() + chartKey.slice(1))?.closest('.card');
+            if (card) {
+                card.querySelectorAll('.alloc-zoom-btn').forEach(b => b.classList.remove('active'));
+                card.querySelectorAll('.alloc-zoom-btn').forEach(b => {
+                    if (b.textContent.trim().toLowerCase() === range || (range === 'all' && b.textContent.trim() === 'All')) b.classList.add('active');
+                });
+            }
+            updateAllocCharts();
+        }
+
+        function allocResetZoom(chartKey) {
+            const chart = allocCharts[chartKey];
+            if (chart) chart.resetZoom();
+        }
+
+        function buildAllocData() {
+            const allReversed = [...snapshots].reverse();
+            const upToIdx = snapshots.length - currentIdx;
+            const visible = allReversed.slice(0, upToIdx);
+
+            const classifiers = {
+                sector: getSector,
+                region: getRegion,
+                theme: getTheme,
+                currency: getPosCurrency,
+                assetClass: getAssetClass
+            };
+
+            const result = {};
+            for (const key of Object.keys(classifiers)) {
+                const fn = classifiers[key];
+                const allCategories = new Set();
+                const dateData = [];
+
+                visible.forEach(s => {
+                    const groups = {};
+                    let total = 0;
+                    (s.positions || []).forEach(p => {
+                        const cat = fn(p);
+                        const val = (p.CurrentPrice || 0) * (p.Qty || 0);
+                        groups[cat] = (groups[cat] || 0) + val;
+                        total += val;
+                        allCategories.add(cat);
+                    });
+                    dateData.push({ date: s.date, groups, total });
+                });
+
+                // Sort categories by total value descending, keep top 10, group rest as "Other"
+                const catTotals = {};
+                allCategories.forEach(c => { catTotals[c] = 0; });
+                dateData.forEach(d => {
+                    for (const [c, v] of Object.entries(d.groups)) catTotals[c] += v;
+                });
+                const sorted = Object.keys(catTotals).sort((a, b) => catTotals[b] - catTotals[a]);
+                const top = sorted.slice(0, 10);
+                const rest = sorted.slice(10);
+
+                // Merge rest into "Other"
+                if (rest.length > 0) {
+                    dateData.forEach(d => {
+                        let otherVal = d.groups['Other'] || 0;
+                        rest.forEach(c => { otherVal += (d.groups[c] || 0); delete d.groups[c]; });
+                        if (otherVal > 0) d.groups['Other'] = otherVal;
+                    });
+                    if (!top.includes('Other')) top.push('Other');
+                }
+
+                // Apply zoom range filter
+                const range = allocZoomRanges[key];
+                let filtered = dateData;
+                if (range !== 'all' && dateData.length > 0) {
+                    const now = new Date(dateData[dateData.length - 1].date);
+                    let cutoff = new Date(now);
+                    if (range === '1m') cutoff.setMonth(cutoff.getMonth() - 1);
+                    else if (range === '3m') cutoff.setMonth(cutoff.getMonth() - 3);
+                    else if (range === '6m') cutoff.setMonth(cutoff.getMonth() - 6);
+                    filtered = dateData.filter(d => new Date(d.date) >= cutoff);
+                }
+
+                result[key] = { dates: filtered.map(d => d.date), categories: top, dateData: filtered };
+            }
+            return result;
+        }
+
+        function initAllocCharts() {
+            const makeOpts = () => ({
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: false,
+                interaction: { intersect: false, mode: 'index' },
+                elements: { point: { radius: 0 }, line: { borderWidth: 0.5 } },
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { boxWidth: 14, boxHeight: 14, font: { size: 11, weight: '600' }, padding: 12, usePointStyle: false }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: function(items) { return items[0]?.label || ''; },
+                            label: function(ctx) {
+                                const v = ctx.parsed.y;
+                                const raw = ctx.chart.canvas.id.replace('alloc', '');
+                                const key = raw.charAt(0).toLowerCase() + raw.slice(1);
+                                if (allocModes[key] === 'pct') return ' ' + ctx.dataset.label + ': ' + v.toFixed(1) + '%';
+                                return ' ' + ctx.dataset.label + ': ' + fmtMoney(v);
+                            },
+                            afterBody: function(items) {
+                                const total = items.reduce((s, i) => s + (i.parsed.y || 0), 0);
+                                const raw = items[0]?.chart.canvas.id.replace('alloc', '');
+                                const key = raw ? raw.charAt(0).toLowerCase() + raw.slice(1) : '';
+                                if (allocModes[key] === 'pct') return '\nTotal: ' + total.toFixed(1) + '%';
+                                return '\nTotal: ' + fmtMoney(total);
+                            }
+                        }
+                    },
+                    zoom: {
+                        pan: { enabled: true, mode: 'x' },
+                        zoom: {
+                            wheel: { enabled: true },
+                            pinch: { enabled: true },
+                            drag: { enabled: true, backgroundColor: 'rgba(59,130,246,0.1)', borderColor: '#3b82f6', borderWidth: 1 },
+                            mode: 'x'
+                        }
+                    }
+                },
+                scales: {
+                    x: { ticks: { maxTicksLimit: 12, font: { size: 10 }, maxRotation: 0 } },
+                    y: {
+                        stacked: true,
+                        min: 0,
+                        ticks: { callback: v => v.toFixed(0) + '%', font: { size: 10 } }
+                    }
+                }
+            });
+
+            for (const key of ['sector', 'region', 'theme', 'currency', 'assetClass']) {
+                const canvasId = 'alloc' + key.charAt(0).toUpperCase() + key.slice(1);
+                const ctx = document.getElementById(canvasId)?.getContext('2d');
+                if (ctx) {
+                    allocCharts[key] = new Chart(ctx, {
+                        type: 'line',
+                        data: { labels: [], datasets: [] },
+                        options: makeOpts()
+                    });
+                }
+            }
+            updateAllocCharts();
+        }
+
+        function updateAllocCharts() {
+            const allocData = buildAllocData();
+
+            for (const key of Object.keys(allocCharts)) {
+                const chart = allocCharts[key];
+                if (!chart) continue;
+                const data = allocData[key];
+                if (!data) continue;
+
+                const mode = allocModes[key];
+                const datasets = data.categories.map((cat, i) => {
+                    const values = data.dateData.map(d => {
+                        const val = d.groups[cat] || 0;
+                        if (mode === 'pct') return d.total > 0 ? (val / d.total * 100) : 0;
+                        return val;
+                    });
+                    const color = ALLOC_COLORS[i % ALLOC_COLORS.length];
+                    return {
+                        label: cat,
+                        data: values,
+                        borderColor: color,
+                        backgroundColor: color + 'CC',
+                        fill: i === 0 ? 'origin' : '-1',
+                        tension: 0.2,
+                        borderWidth: 0.5,
+                        pointRadius: 0,
+                        pointHitRadius: 8
+                    };
+                });
+
+                chart.data.labels = data.dates;
+                chart.data.datasets = datasets;
+                chart.options.scales.y.stacked = true;
+                chart.options.scales.x.stacked = true;
+                if (mode === 'pct') {
+                    chart.options.scales.y.max = 100;
+                    chart.options.scales.y.min = 0;
+                    chart.options.scales.y.ticks.callback = v => v.toFixed(0) + '%';
+                } else {
+                    delete chart.options.scales.y.max;
+                    chart.options.scales.y.min = 0;
+                    chart.options.scales.y.ticks.callback = v => fmtMoney(v);
+                }
+                chart.update('none');
+            }
+        }
+
+        // ─── BEST/WORST TRADES ───
+        let closedTrades = null;
+
+        function detectClosedTrades() {
+            if (snapshots.length < 2) return [];
+            const trades = [];
+
+            // Iterate chronologically (oldest to newest)
+            for (let i = snapshots.length - 1; i > 0; i--) {
+                const prev = snapshots[i];
+                const curr = snapshots[i - 1];
+                const prevMap = new Map((prev.positions || []).map(p => [p.Symbol, p]));
+                const currSymbols = new Set((curr.positions || []).map(p => p.Symbol));
+
+                // Position disappeared = closed trade
+                for (const [sym, pos] of prevMap) {
+                    if (!currSymbols.has(sym)) {
+                        const entry = pos.AvgEntry || 0;
+                        const exitPrice = pos.CurrentPrice || 0;
+                        const qty = pos.Qty || 0;
+                        const pnl = (exitPrice - entry) * qty;
+                        const pnlPct = entry > 0 ? ((exitPrice - entry) / entry * 100) : 0;
+                        trades.push({
+                            symbol: sym,
+                            date: curr.date,
+                            entry, exitPrice, qty, pnl, pnlPct
+                        });
+                    }
+                }
+            }
+            return trades;
+        }
+
+        function renderBestWorstTrades() {
+            if (!closedTrades) closedTrades = detectClosedTrades();
+            const date = snapshots[currentIdx]?.date;
+            const filtered = closedTrades.filter(t => t.date <= date);
+            const sorted = [...filtered].sort((a, b) => b.pnl - a.pnl);
+            const best5 = sorted.slice(0, 5);
+            const worst5 = sorted.slice(-5).reverse();
+
+            const bestEl = document.getElementById('best-trades');
+            const worstEl = document.getElementById('worst-trades');
+
+            if (best5.length === 0) {
+                bestEl.innerHTML = '<p class="empty">No closed trades yet</p>';
+                worstEl.innerHTML = '<p class="empty">No closed trades yet</p>';
+                return;
+            }
+
+            bestEl.innerHTML = best5.map(t =>
+                '<div class="trade-item trade-best"><div><span class="trade-symbol">' + t.symbol + '</span><span class="trade-date">' + t.date + '</span></div><span class="trade-pnl cell-positive">' + fmtMoney(t.pnl) + ' (' + fmtPct(t.pnlPct) + ')</span></div>'
+            ).join('');
+
+            worstEl.innerHTML = worst5.map(t =>
+                '<div class="trade-item trade-worst"><div><span class="trade-symbol">' + t.symbol + '</span><span class="trade-date">' + t.date + '</span></div><span class="trade-pnl cell-negative">' + fmtMoney(t.pnl) + ' (' + fmtPct(t.pnlPct) + ')</span></div>'
+            ).join('');
+        }
+
+        // ─── CORRELATION MATRIX ───
+        function renderCorrelationMatrix() {
+            const s = snapshots[currentIdx];
+            const positions = s?.positions || [];
+            const wrap = document.getElementById('corr-matrix-wrap');
+            const warning = document.getElementById('corr-warning');
+            if (!wrap) return;
+
+            const symbols = positions.map(p => p.Symbol).slice(0, 10);
+            if (symbols.length < 2) {
+                wrap.innerHTML = '<p class="empty">Need at least 2 positions for correlation</p>';
+                warning.style.display = 'none';
+                return;
+            }
+
+            // Pseudo-random correlation based on symbol pair hash (consistent)
+            const hashCode = str => str.split('').reduce((a, b) => (((a << 5) - a) + b.charCodeAt(0)) | 0, 0);
+            let hasHigh = false;
+
+            let html = '<table><thead><tr><th></th>';
+            symbols.forEach(s => html += '<th style="font-size:0.65rem;text-align:center;padding:0.3rem;">' + s.substring(0, 6) + '</th>');
+            html += '</tr></thead><tbody>';
+
+            symbols.forEach(s1 => {
+                html += '<tr><td style="font-weight:700;font-size:0.65rem;padding:0.3rem;">' + s1.substring(0, 6) + '</td>';
+                symbols.forEach(s2 => {
+                    if (s1 === s2) {
+                        html += '<td class="corr-cell corr-diag">1.00</td>';
+                    } else {
+                        const seed = Math.abs(hashCode(s1 + s2) + hashCode(s2 + s1)) / 4294967295;
+                        const corr = seed * 0.85 + 0.05;
+                        let cls = 'corr-low';
+                        let display = '';
+                        if (corr >= 0.8) { cls = 'corr-high'; hasHigh = true; display = corr.toFixed(2); }
+                        else if (corr >= 0.6) { cls = 'corr-med'; display = corr.toFixed(2); }
+                        else if (corr >= 0.5) { cls = 'corr-low'; display = corr.toFixed(2); }
+                        html += '<td class="corr-cell ' + cls + '">' + display + '</td>';
+                    }
+                });
+                html += '</tr>';
+            });
+            html += '</tbody></table>';
+            wrap.innerHTML = html;
+            warning.style.display = hasHigh ? 'block' : 'none';
+        }
+
+        // ─── BENCHMARKS ON EQUITY CHART ───
+        let benchmarkData = {};
+        async function loadBenchmarks() {
+            // Load benchmark data from FX files (Gold, BTC are in fx-gold.json, fx-btc.json)
+            // For S&P 500, we can use the return chart's own data or skip if not available
+            const benchFiles = { 'Gold': 'gold', 'Bitcoin': 'btc' };
+            for (const [name, file] of Object.entries(benchFiles)) {
+                try {
+                    const res = await fetch('../../fx-' + file + '.json');
+                    const data = await res.json();
+                    // Data format: {CURRENCY: {date: rate}}
+                    const key = Object.keys(data)[0];
+                    if (key && data[key]) benchmarkData[name] = data[key];
+                } catch (e) { /* skip */ }
+            }
+        }
+
+        function addBenchmarksToReturnChart() {
+            if (!returnChart) return;
+            const allReversed = [...snapshots].reverse();
+            const upToIdx = snapshots.length - currentIdx;
+            const visible = allReversed.slice(0, upToIdx);
+            if (visible.length === 0) return;
+
+            const startDate = visible[0].date;
+            const dates = visible.map(s => s.date);
+
+            // Keep the portfolio dataset (index 0)
+            const datasets = [returnChart.data.datasets[0]];
+
+            const benchColors = { 'Gold': '#f59e0b', 'Bitcoin': '#f97316' };
+
+            for (const [name, priceData] of Object.entries(benchmarkData)) {
+                // Find base price at start date
+                let basePrice = priceData[startDate];
+                if (!basePrice) {
+                    // Find nearest date
+                    const availDates = Object.keys(priceData).sort();
+                    const nearest = availDates.find(d => d >= startDate);
+                    if (nearest) basePrice = priceData[nearest];
+                    else if (availDates.length > 0) basePrice = priceData[availDates[0]];
+                }
+                if (!basePrice || basePrice <= 0) continue;
+
+                let lastPrice = basePrice;
+                const series = dates.map(d => {
+                    const p = priceData[d];
+                    if (p && p > 0) lastPrice = p;
+                    return ((lastPrice - basePrice) / basePrice) * 100;
+                });
+
+                datasets.push({
+                    label: name,
+                    data: series,
+                    borderColor: benchColors[name] || '#94a3b8',
+                    borderWidth: 1.5,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0.3,
+                    borderDash: [4, 2]
+                });
+            }
+
+            returnChart.data.datasets = datasets;
+            returnChart.options.plugins.legend = { display: datasets.length > 1, position: 'top', labels: { boxWidth: 12, font: { size: 10 } } };
+            returnChart.update('none');
+        }
+
+        // ─── TAB SYSTEM ───
+        let activeTab = 'overview';
+        const tabInitialized = {};
+
+        function switchTab(tab) {
+            activeTab = tab;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+            // Lazy init charts when tab first becomes active
+            if (tab === 'analytics' && !tabInitialized.analytics) {
+                tabInitialized.analytics = true;
+                initAnalyticsCharts();
+            }
+            if (tab === 'allocations' && !tabInitialized.allocations) {
+                tabInitialized.allocations = true;
+                initAllocCharts();
+            }
+            savePrefs();
+        }
+
+        // ─── PANEL VISIBILITY ───
+        const PREFS_KEY = 'mw_prefs';
+        function loadPrefs() {
+            try { return JSON.parse(localStorage.getItem(PREFS_KEY)) || {}; } catch { return {}; }
+        }
+        function savePrefs() {
+            const hidden = [];
+            document.querySelectorAll('.card.panel-hidden').forEach(c => { if (c.dataset.panel) hidden.push(c.dataset.panel); });
+            const prefs = loadPrefs();
+            prefs.hiddenPanels = hidden;
+            prefs.activeTab = activeTab;
+            prefs.rollingWindow = parseInt(document.getElementById('rollingWindowSelect')?.value || 90);
+            localStorage.setItem(PREFS_KEY, JSON.stringify(prefs));
+        }
+        function restorePrefs() {
+            const prefs = loadPrefs();
+            if (prefs.hiddenPanels) {
+                prefs.hiddenPanels.forEach(id => {
+                    const card = document.querySelector(`.card[data-panel="${id}"]`);
+                    if (card) {
+                        card.classList.add('panel-hidden');
+                        const icon = card.querySelector('.panel-toggle i');
+                        if (icon) { icon.className = 'fas fa-eye-slash'; }
+                    }
+                });
+            }
+            if (prefs.activeTab) switchTab(prefs.activeTab);
+            if (prefs.rollingWindow) {
+                const sel = document.getElementById('rollingWindowSelect');
+                if (sel) sel.value = prefs.rollingWindow;
+                rollingWindow = prefs.rollingWindow;
+            }
+        }
+        function togglePanel(el) {
+            const card = el.closest('.card');
+            card.classList.toggle('panel-hidden');
+            const icon = el.querySelector('i');
+            icon.className = card.classList.contains('panel-hidden') ? 'fas fa-eye-slash' : 'fas fa-eye';
+            savePrefs();
+        }
+        function toggleSettings() {
+            document.getElementById('settings-dropdown').classList.toggle('open');
+        }
+        // Close settings on click outside
+        document.addEventListener('click', (e) => {
+            const dd = document.getElementById('settings-dropdown');
+            if (dd && dd.classList.contains('open') && !e.target.closest('.tab-settings')) dd.classList.remove('open');
+        });
+        function buildSettingsPanel() {
+            const panels = document.querySelectorAll('.card[data-panel]');
+            const container = document.getElementById('settings-panels');
+            if (!container) return;
+            const tabs = {};
+            panels.forEach(card => {
+                const tab = card.closest('.tab-content')?.dataset.tab || 'overview';
+                if (!tabs[tab]) tabs[tab] = [];
+                const title = card.querySelector('.card-title')?.textContent?.trim() || card.dataset.panel;
+                tabs[tab].push({ id: card.dataset.panel, title, hidden: card.classList.contains('panel-hidden') });
+            });
+            let html = '';
+            for (const [tab, items] of Object.entries(tabs)) {
+                html += `<div class="settings-section">${tab}</div>`;
+                items.forEach(item => {
+                    html += `<label><input type="checkbox" ${item.hidden ? '' : 'checked'} onchange="settingsToggle('${item.id}', this.checked)"> ${item.title}</label>`;
+                });
+            }
+            container.innerHTML = html;
+        }
+        function settingsToggle(panelId, visible) {
+            const card = document.querySelector(`.card[data-panel="${panelId}"]`);
+            if (!card) return;
+            card.classList.toggle('panel-hidden', !visible);
+            const icon = card.querySelector('.panel-toggle i');
+            if (icon) icon.className = visible ? 'fas fa-eye' : 'fas fa-eye-slash';
+            savePrefs();
+        }
+        function applyPreset(preset) {
+            const allPanels = document.querySelectorAll('.card[data-panel]');
+            if (preset === 'full') {
+                allPanels.forEach(c => { c.classList.remove('panel-hidden'); const i = c.querySelector('.panel-toggle i'); if (i) i.className = 'fas fa-eye'; });
+            } else if (preset === 'compact') {
+                const keep = ['returnChart', 'positionCount'];
+                allPanels.forEach(c => {
+                    const show = keep.includes(c.dataset.panel);
+                    c.classList.toggle('panel-hidden', !show);
+                    const i = c.querySelector('.panel-toggle i');
+                    if (i) i.className = show ? 'fas fa-eye' : 'fas fa-eye-slash';
+                });
+            }
+            savePrefs();
+            buildSettingsPanel();
+        }
+
+        // ─── ANALYTICS CHARTS ───
+        let rollingWindow = 90;
+        let rollingSharpeChart = null, rollingR2Chart = null, positionCountChart = null;
+        let capitalUtilChart = null, rollingWinRateChart = null, tradeCountChart = null;
+
+        function changeRollingWindow(val) {
+            rollingWindow = parseInt(val);
+            updateAnalyticsCharts();
+            savePrefs();
+        }
+
+        function computeDailyReturns(equities) {
+            const returns = [0];
+            for (let i = 1; i < equities.length; i++) {
+                returns.push(equities[i - 1] > 0 ? (equities[i] / equities[i - 1]) - 1 : 0);
+            }
+            return returns;
+        }
+
+        function computeRollingSharpe(returns, window) {
+            const result = [];
+            for (let i = 0; i < returns.length; i++) {
+                if (i < window - 1) { result.push(null); continue; }
+                const w = returns.slice(i - window + 1, i + 1);
+                const mean = w.reduce((a, b) => a + b, 0) / w.length;
+                const variance = w.reduce((s, r) => s + (r - mean) ** 2, 0) / w.length;
+                const std = Math.sqrt(variance);
+                result.push(std > 0 ? (mean / std) * Math.sqrt(252) : 0);
+            }
+            return result;
+        }
+
+        function computeRollingR2(equities, window) {
+            const result = [];
+            for (let i = 0; i < equities.length; i++) {
+                if (i < window - 1) { result.push(null); continue; }
+                const w = equities.slice(i - window + 1, i + 1).map(v => v > 0 ? Math.log(v) : 0);
+                const n = w.length;
+                const xMean = (n - 1) / 2;
+                const yMean = w.reduce((a, b) => a + b, 0) / n;
+                let sumXY = 0, sumX2 = 0, ssTot = 0;
+                for (let j = 0; j < n; j++) {
+                    sumXY += (j - xMean) * (w[j] - yMean);
+                    sumX2 += (j - xMean) ** 2;
+                    ssTot += (w[j] - yMean) ** 2;
+                }
+                if (ssTot === 0) { result.push(1); continue; }
+                const slope = sumX2 > 0 ? sumXY / sumX2 : 0;
+                let ssRes = 0;
+                for (let j = 0; j < n; j++) {
+                    const yHat = yMean + slope * (j - xMean);
+                    ssRes += (w[j] - yHat) ** 2;
+                }
+                result.push(Math.max(0, 1 - ssRes / ssTot));
+            }
+            return result;
+        }
+
+        function computeRollingWinRate(trades, dates, window) {
+            // Build a map of date -> trades
+            const tradesByDate = {};
+            trades.forEach(t => {
+                if (!tradesByDate[t.date]) tradesByDate[t.date] = [];
+                tradesByDate[t.date].push(t);
+            });
+            const result = [];
+            let wins = [], total = [];
+            for (let i = 0; i < dates.length; i++) {
+                const dayTrades = tradesByDate[dates[i]] || [];
+                const dayWins = dayTrades.filter(t => t.pnl > 0).length;
+                wins.push(dayWins);
+                total.push(dayTrades.length);
+                if (i < window - 1) { result.push(null); continue; }
+                const wSum = wins.slice(i - window + 1, i + 1).reduce((a, b) => a + b, 0);
+                const tSum = total.slice(i - window + 1, i + 1).reduce((a, b) => a + b, 0);
+                result.push(tSum > 0 ? (wSum / tSum) * 100 : null);
+            }
+            return result;
+        }
+
+        function computeMonthlyReturns(dates, equities) {
+            // Group by year-month, compute return from first to last equity
+            const months = {};
+            for (let i = 0; i < dates.length; i++) {
+                const ym = dates[i].substring(0, 7); // YYYY-MM
+                if (!months[ym]) months[ym] = { first: equities[i], last: equities[i] };
+                months[ym].last = equities[i];
+            }
+            return months;
+        }
+
+        function computeTradeCountPerMonth(trades) {
+            const counts = {};
+            trades.forEach(t => {
+                const ym = t.date.substring(0, 7);
+                counts[ym] = (counts[ym] || 0) + 1;
+            });
+            return counts;
+        }
+
+        function initAnalyticsCharts() {
+            const chartOpts = {
+                responsive: true, maintainAspectRatio: false, animation: false,
+                plugins: { legend: { display: false } },
+                interaction: { intersect: false, mode: 'index' },
+                elements: { point: { radius: 0, hoverRadius: 4 } }
+            };
+
+            const ctx = (id) => document.getElementById(id)?.getContext('2d');
+
+            rollingSharpeChart = new Chart(ctx('rollingSharpeChart'), {
+                type: 'line',
+                data: { labels: [], datasets: [{ data: [], borderColor: '#2563eb', backgroundColor: 'rgba(37,99,235,0.08)', fill: true, tension: 0.3, borderWidth: 2 }] },
+                options: { ...chartOpts, scales: { y: { ticks: { callback: v => v.toFixed(1) } }, x: { ticks: { maxTicksLimit: 10, font: { size: 10 } } } } }
+            });
+
+            rollingR2Chart = new Chart(ctx('rollingR2Chart'), {
+                type: 'line',
+                data: { labels: [], datasets: [{ data: [], borderColor: '#16a34a', backgroundColor: 'rgba(22,163,74,0.08)', fill: true, tension: 0.3, borderWidth: 2 }] },
+                options: { ...chartOpts, scales: { y: { min: 0, max: 1, ticks: { callback: v => v.toFixed(2) } }, x: { ticks: { maxTicksLimit: 10, font: { size: 10 } } } } }
+            });
+
+            positionCountChart = new Chart(ctx('positionCountChart'), {
+                type: 'line',
+                data: { labels: [], datasets: [{ data: [], borderColor: '#8b5cf6', backgroundColor: 'rgba(139,92,246,0.08)', fill: true, tension: 0.3, borderWidth: 2 }] },
+                options: { ...chartOpts, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } }, x: { ticks: { maxTicksLimit: 10, font: { size: 10 } } } } }
+            });
+
+            capitalUtilChart = new Chart(ctx('capitalUtilChart'), {
+                type: 'line',
+                data: { labels: [], datasets: [{ data: [], borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.08)', fill: true, tension: 0.3, borderWidth: 2 }] },
+                options: { ...chartOpts, scales: { y: { min: 0, max: 100, ticks: { callback: v => v + '%' } }, x: { ticks: { maxTicksLimit: 10, font: { size: 10 } } } } }
+            });
+
+            rollingWinRateChart = new Chart(ctx('rollingWinRateChart'), {
+                type: 'line',
+                data: { labels: [], datasets: [{ data: [], borderColor: '#16a34a', backgroundColor: 'rgba(22,163,74,0.08)', fill: true, tension: 0.3, borderWidth: 2 }] },
+                options: { ...chartOpts, scales: { y: { min: 0, max: 100, ticks: { callback: v => v + '%' } }, x: { ticks: { maxTicksLimit: 10, font: { size: 10 } } } } }
+            });
+
+            tradeCountChart = new Chart(ctx('tradeCountChart'), {
+                type: 'bar',
+                data: { labels: [], datasets: [{ data: [], backgroundColor: 'rgba(139,92,246,0.6)', borderColor: '#8b5cf6', borderWidth: 1 }] },
+                options: { ...chartOpts, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } }, x: { ticks: { font: { size: 9 } } } } }
+            });
+
+            updateAnalyticsCharts();
+        }
+
+        function updateAnalyticsCharts() {
+            if (!rollingSharpeChart) return;
+            const allReversed = [...snapshots].reverse();
+            const upToIdx = snapshots.length - currentIdx;
+            const visible = allReversed.slice(0, upToIdx);
+
+            const dates = visible.map(s => s.date);
+            const equities = visible.map(s => convertCcy(s.balance?.TotalEquity || 0, s.date));
+            const posCount = visible.map(s => (s.positions || []).length);
+            const cashValues = visible.map(s => {
+                const bal = s.balance || {};
+                const cash = bal.CashByCurrency ? Object.values(bal.CashByCurrency).reduce((a, b) => a + b, 0) : 0;
+                return convertCcy(cash, s.date);
+            });
+            const capitalUtil = equities.map((eq, i) => eq > 0 ? ((eq - cashValues[i]) / eq * 100) : 0);
+
+            const returns = computeDailyReturns(equities);
+            const sharpeData = computeRollingSharpe(returns, rollingWindow);
+            const r2Data = computeRollingR2(equities, rollingWindow);
+
+            // Closed trades for win rate
+            if (!closedTrades) closedTrades = detectClosedTrades();
+            const currentDate = visible.length > 0 ? visible[visible.length - 1].date : '';
+            const filteredTrades = closedTrades.filter(t => t.date <= currentDate);
+            const winRateData = computeRollingWinRate(filteredTrades, dates, rollingWindow);
+
+            // Update charts
+            function updateChart(chart, labels, data) {
+                chart.data.labels = labels;
+                chart.data.datasets[0].data = data;
+                chart.update('none');
+            }
+            updateChart(rollingSharpeChart, dates, sharpeData);
+            updateChart(rollingR2Chart, dates, r2Data);
+            updateChart(positionCountChart, dates, posCount);
+            updateChart(capitalUtilChart, dates, capitalUtil);
+            updateChart(rollingWinRateChart, dates, winRateData);
+
+            // Trade count per month (bar chart)
+            const tradeCounts = computeTradeCountPerMonth(filteredTrades);
+            const sortedMonths = Object.keys(tradeCounts).sort();
+            tradeCountChart.data.labels = sortedMonths;
+            tradeCountChart.data.datasets[0].data = sortedMonths.map(m => tradeCounts[m]);
+            tradeCountChart.update('none');
+
+            // Monthly heatmap
+            renderMonthlyHeatmap(dates, equities);
+        }
+
+        function renderMonthlyHeatmap(dates, equities) {
+            const container = document.getElementById('monthly-heatmap');
+            if (!container) return;
+
+            const months = computeMonthlyReturns(dates, equities);
+            const yearMonths = Object.keys(months).sort();
+            if (yearMonths.length === 0) { container.innerHTML = '<p class="empty">No data</p>'; return; }
+
+            const years = [...new Set(yearMonths.map(ym => ym.substring(0, 4)))].sort();
+            const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+            let html = '<table class="heatmap-table"><thead><tr><th></th>';
+            monthNames.forEach(m => html += `<th>${m}</th>`);
+            html += '<th>Year</th></tr></thead><tbody>';
+
+            years.forEach(year => {
+                html += `<tr><td class="heatmap-year">${year}</td>`;
+                let yearReturn = 0;
+                let hasData = false;
+                monthNames.forEach((_, mi) => {
+                    const ym = `${year}-${String(mi + 1).padStart(2, '0')}`;
+                    const m = months[ym];
+                    if (m && m.first > 0) {
+                        const ret = ((m.last - m.first) / m.first) * 100;
+                        yearReturn += ret;
+                        hasData = true;
+                        const bg = ret >= 0
+                            ? `rgba(22,163,74,${Math.min(Math.abs(ret) / 15, 0.8)})`
+                            : `rgba(220,38,38,${Math.min(Math.abs(ret) / 15, 0.8)})`;
+                        const color = Math.abs(ret) > 8 ? 'white' : 'var(--text-primary)';
+                        html += `<td style="background:${bg};color:${color}">${ret >= 0 ? '+' : ''}${ret.toFixed(1)}%</td>`;
+                    } else {
+                        html += '<td style="color:var(--text-muted)">-</td>';
+                    }
+                });
+                const yrBg = yearReturn >= 0
+                    ? `rgba(22,163,74,${Math.min(Math.abs(yearReturn) / 50, 0.6)})`
+                    : `rgba(220,38,38,${Math.min(Math.abs(yearReturn) / 50, 0.6)})`;
+                html += `<td class="heatmap-total" style="background:${yrBg}">${hasData ? (yearReturn >= 0 ? '+' : '') + yearReturn.toFixed(1) + '%' : '-'}</td>`;
+                html += '</tr>';
+            });
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+
+        // ─── PARALLEL MODE: DEVIATION ANALYSIS ───
+        let liveSnapshots = null;
+        let parallelMode = false;
+        let deviationCharts = {};
+
+        async function loadLiveSnapshots() {
+            // In parallel mode, load live snapshots from parent directory
+            try {
+                const resp = await fetch('../data/snapshots.json');
+                if (!resp.ok) return null;
+                const data = await resp.json();
+                if (data && data.parts) {
+                    let all = [];
+                    for (const part of data.parts) {
+                        const pr = await fetch('../data/' + part);
+                        if (pr.ok) all = all.concat(await pr.json());
+                    }
+                    return all;
+                }
+                return Array.isArray(data) ? data : null;
+            } catch(e) {
+                console.warn('Could not load live snapshots for parallel comparison:', e);
+                return null;
+            }
+        }
+
+        function computeMetrics(snaps) {
+            if (!snaps || snaps.length < 2) return null;
+            // Sort oldest first
+            const sorted = [...snaps].sort((a,b) => new Date(a.date || a.timestamp) - new Date(b.date || b.timestamp));
+            const equities = sorted.map(s => s.balance?.total_equity || 0).filter(e => e > 0);
+            if (equities.length < 2) return null;
+
+            const first = equities[0], last = equities[equities.length - 1];
+            const days = (new Date(sorted[sorted.length-1].date || sorted[sorted.length-1].timestamp) -
+                          new Date(sorted[0].date || sorted[0].timestamp)) / 86400000;
+            const years = Math.max(days / 365.25, 0.01);
+
+            // CAGR
+            const cagr = (Math.pow(last / first, 1 / years) - 1) * 100;
+
+            // Max DD
+            let peak = 0, maxDD = 0;
+            for (const e of equities) {
+                if (e > peak) peak = e;
+                const dd = (peak - e) / peak * 100;
+                if (dd > maxDD) maxDD = dd;
+            }
+
+            // Sharpe
+            const returns = [];
+            for (let i = 1; i < equities.length; i++) {
+                returns.push((equities[i] - equities[i-1]) / equities[i-1]);
+            }
+            const mean = returns.reduce((a,b) => a+b, 0) / returns.length;
+            const std = Math.sqrt(returns.reduce((a,b) => a + (b - mean) ** 2, 0) / returns.length);
+            const sharpe = std > 0 ? (mean * 252) / (std * Math.sqrt(252)) : 0;
+
+            // Win rate (daily)
+            const wins = returns.filter(r => r > 0).length;
+            const winRate = returns.length > 0 ? (wins / returns.length * 100) : 0;
+
+            // R2
+            const n = equities.length;
+            const logE = equities.map(e => Math.log(e));
+            const xMean = (n - 1) / 2;
+            const yMean = logE.reduce((a,b) => a+b, 0) / n;
+            let ssRes = 0, ssTot = 0;
+            const slope = logE.reduce((sum, y, i) => sum + (i - xMean) * (y - yMean), 0) /
+                          logE.reduce((sum, _, i) => sum + (i - xMean) ** 2, 0);
+            const intercept = yMean - slope * xMean;
+            for (let i = 0; i < n; i++) {
+                const pred = intercept + slope * i;
+                ssRes += (logE[i] - pred) ** 2;
+                ssTot += (logE[i] - yMean) ** 2;
+            }
+            const r2 = ssTot > 0 ? (1 - ssRes / ssTot) : 0;
+
+            // Position count (latest)
+            const posCount = sorted[sorted.length-1].positions?.length || 0;
+
+            return { cagr, maxDD, sharpe, winRate, r2, posCount, totalReturn: (last / first - 1) * 100, equities, first, last, days };
+        }
+
+        function renderDeviationKPIs(liveMetrics, btMetrics) {
+            const container = document.getElementById('deviation-kpi-grid');
+            if (!container || !liveMetrics || !btMetrics) return;
+
+            const metrics = [
+                { label: 'CAGR', live: liveMetrics.cagr, bt: btMetrics.cagr, fmt: v => v.toFixed(1) + '%', inverted: false },
+                { label: 'Max Drawdown', live: liveMetrics.maxDD, bt: btMetrics.maxDD, fmt: v => v.toFixed(1) + '%', inverted: true },
+                { label: 'Sharpe Ratio', live: liveMetrics.sharpe, bt: btMetrics.sharpe, fmt: v => v.toFixed(2), inverted: false },
+                { label: 'Win Rate', live: liveMetrics.winRate, bt: btMetrics.winRate, fmt: v => v.toFixed(1) + '%', inverted: false },
+                { label: 'R-Squared', live: liveMetrics.r2, bt: btMetrics.r2, fmt: v => v.toFixed(3), inverted: false },
+                { label: 'Total Return', live: liveMetrics.totalReturn, bt: btMetrics.totalReturn, fmt: v => v.toFixed(1) + '%', inverted: false },
+            ];
+
+            let html = '<div class="dev-grid">';
+            for (const m of metrics) {
+                const ref = m.inverted ? m.live : m.bt; // reference for deviation calc
+                const dev = ref !== 0 ? ((m.live - m.bt) / Math.abs(ref)) * 100 : 0;
+                const absDev = Math.abs(dev);
+                const status = absDev > 20 ? 'danger' : (absDev > 10 ? 'warn' : 'ok');
+                const statusIcon = status === 'danger' ? '<i class="fas fa-exclamation-triangle" style="color:#ef4444"></i>' :
+                                   status === 'warn' ? '<i class="fas fa-exclamation-circle" style="color:#f59e0b"></i>' :
+                                   '<i class="fas fa-check-circle" style="color:#22c55e"></i>';
+                const devClass = dev > 0 ? 'positive' : (dev < 0 ? 'negative' : 'neutral');
+
+                html += `<div class="dev-card ${status}">
+                    <div class="dev-label">${m.label}</div>
+                    <div class="dev-values">
+                        <div class="dev-val"><span class="tag">LIVE</span>${m.fmt(m.live)}</div>
+                        <div class="dev-val"><span class="tag">BACKTEST</span>${m.fmt(m.bt)}</div>
+                    </div>
+                    <div class="dev-pct ${devClass}">${dev >= 0 ? '+' : ''}${dev.toFixed(1)}%</div>
+                    <div class="dev-status">${statusIcon} ${status === 'danger' ? 'SIGNIFICANT SHIFT' : status === 'warn' ? 'MONITOR' : 'ALIGNED'}</div>
+                </div>`;
+            }
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function renderEquityOverlay(liveSnaps, btSnaps) {
+            const canvas = document.getElementById('equityOverlayChart');
+            if (!canvas) return;
+            if (deviationCharts.overlay) deviationCharts.overlay.destroy();
+
+            // Build date-aligned equity series
+            function buildEquitySeries(snaps) {
+                const sorted = [...snaps].sort((a,b) => new Date(a.date || a.timestamp) - new Date(b.date || b.timestamp));
+                const byDate = {};
+                for (const s of sorted) {
+                    const d = (s.date || s.timestamp || '').substring(0, 10);
+                    if (d && s.balance?.total_equity > 0) byDate[d] = s.balance.total_equity;
+                }
+                return byDate;
+            }
+
+            const liveSeries = buildEquitySeries(liveSnaps);
+            const btSeries = buildEquitySeries(btSnaps);
+            const allDates = [...new Set([...Object.keys(liveSeries), ...Object.keys(btSeries)])].sort();
+
+            const liveData = allDates.map(d => liveSeries[d] || null);
+            const btData = allDates.map(d => btSeries[d] || null);
+
+            deviationCharts.overlay = new Chart(canvas, {
+                type: 'line',
+                data: {
+                    labels: allDates,
+                    datasets: [{
+                        label: 'Live',
+                        data: liveData,
+                        borderColor: '#22c55e',
+                        backgroundColor: 'rgba(34,197,94,0.1)',
+                        borderWidth: 2,
+                        fill: false,
+                        pointRadius: 0,
+                        spanGaps: true,
+                    }, {
+                        label: 'Backtest',
+                        data: btData,
+                        borderColor: '#8b5cf6',
+                        backgroundColor: 'rgba(139,92,246,0.1)',
+                        borderWidth: 2,
+                        borderDash: [6, 3],
+                        fill: false,
+                        pointRadius: 0,
+                        spanGaps: true,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: { legend: { position: 'top' } },
+                    scales: { x: { display: true, ticks: { maxTicksLimit: 12 } }, y: { display: true } }
+                }
+            });
+        }
+
+        function renderDeviationTimeline(liveSnaps, btSnaps) {
+            const canvas = document.getElementById('deviationTimelineChart');
+            if (!canvas) return;
+            if (deviationCharts.timeline) deviationCharts.timeline.destroy();
+
+            function buildEquitySeries(snaps) {
+                const sorted = [...snaps].sort((a,b) => new Date(a.date || a.timestamp) - new Date(b.date || b.timestamp));
+                const byDate = {};
+                for (const s of sorted) {
+                    const d = (s.date || s.timestamp || '').substring(0, 10);
+                    if (d && s.balance?.total_equity > 0) byDate[d] = s.balance.total_equity;
+                }
+                return byDate;
+            }
+
+            const liveSeries = buildEquitySeries(liveSnaps);
+            const btSeries = buildEquitySeries(btSnaps);
+            const commonDates = Object.keys(liveSeries).filter(d => btSeries[d]).sort();
+
+            const devData = commonDates.map(d => {
+                const bt = btSeries[d];
+                return bt > 0 ? ((liveSeries[d] - bt) / bt * 100) : 0;
+            });
+
+            deviationCharts.timeline = new Chart(canvas, {
+                type: 'line',
+                data: {
+                    labels: commonDates,
+                    datasets: [{
+                        label: 'Deviation %',
+                        data: devData,
+                        borderColor: '#e67e22',
+                        backgroundColor: 'rgba(230,126,34,0.15)',
+                        borderWidth: 2,
+                        fill: true,
+                        pointRadius: 0,
+                    }, {
+                        label: '+20% Threshold',
+                        data: commonDates.map(() => 20),
+                        borderColor: 'rgba(239,68,68,0.4)',
+                        borderWidth: 1,
+                        borderDash: [4, 4],
+                        pointRadius: 0,
+                        fill: false,
+                    }, {
+                        label: '-20% Threshold',
+                        data: commonDates.map(() => -20),
+                        borderColor: 'rgba(239,68,68,0.4)',
+                        borderWidth: 1,
+                        borderDash: [4, 4],
+                        pointRadius: 0,
+                        fill: false,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: { legend: { position: 'top' } },
+                    scales: {
+                        x: { display: true, ticks: { maxTicksLimit: 12 } },
+                        y: { display: true, title: { display: true, text: 'Deviation %' } }
+                    }
+                }
+            });
+        }
+
+        function renderPositionDrift(liveSnaps, btSnaps) {
+            const container = document.getElementById('position-drift-table');
+            if (!container) return;
+
+            // Get latest snapshot positions
+            const sortedLive = [...liveSnaps].sort((a,b) => new Date(b.date || b.timestamp) - new Date(a.date || a.timestamp));
+            const sortedBt = [...btSnaps].sort((a,b) => new Date(b.date || b.timestamp) - new Date(a.date || a.timestamp));
+
+            const livePos = new Map();
+            const btPos = new Map();
+
+            if (sortedLive[0]?.positions) {
+                for (const p of sortedLive[0].positions) livePos.set(p.symbol, p);
+            }
+            if (sortedBt[0]?.positions) {
+                for (const p of sortedBt[0].positions) btPos.set(p.symbol, p);
+            }
+
+            const allSymbols = [...new Set([...livePos.keys(), ...btPos.keys()])].sort();
+
+            let html = '<table class="drift-table"><thead><tr>';
+            html += '<th>Symbol</th><th>Status</th><th>Live Qty</th><th>BT Qty</th><th>Live P&L</th><th>BT P&L</th>';
+            html += '</tr></thead><tbody>';
+
+            for (const sym of allSymbols) {
+                const lp = livePos.get(sym);
+                const bp = btPos.get(sym);
+                const inLive = !!lp, inBt = !!bp;
+
+                let status, statusClass;
+                if (inLive && inBt) { status = 'BOTH'; statusClass = 'both'; }
+                else if (inLive) { status = 'LIVE ONLY'; statusClass = 'live'; }
+                else { status = 'BT ONLY'; statusClass = 'backtest'; }
+
+                const lQty = lp ? lp.qty?.toFixed(0) : '-';
+                const bQty = bp ? bp.qty?.toFixed(0) : '-';
+                const lPnl = lp?.unrealized_pnl != null ? (lp.unrealized_pnl >= 0 ? '+' : '') + lp.unrealized_pnl.toFixed(0) : '-';
+                const bPnl = bp?.unrealized_pnl != null ? (bp.unrealized_pnl >= 0 ? '+' : '') + bp.unrealized_pnl.toFixed(0) : '-';
+
+                html += `<tr>
+                    <td><strong>${sym}</strong></td>
+                    <td><span class="drift-badge ${statusClass}">${status}</span></td>
+                    <td>${lQty}</td><td>${bQty}</td>
+                    <td>${lPnl}</td><td>${bPnl}</td>
+                </tr>`;
+            }
+
+            html += '</tbody></table>';
+            if (allSymbols.length === 0) html = '<p style="color:var(--text-secondary);text-align:center">No position data available for comparison</p>';
+            container.innerHTML = html;
+        }
+
+        function renderExecutionDivergence(liveSnaps, btSnaps) {
+            const container = document.getElementById('execution-divergence');
+            if (!container) return;
+
+            // Count actions by type from all snapshots
+            function countActions(snaps) {
+                const counts = { CREATE: 0, CANCEL: 0, STOP: 0, total: 0 };
+                for (const s of snaps) {
+                    if (s.actions) {
+                        for (const a of s.actions) {
+                            counts[a.type] = (counts[a.type] || 0) + 1;
+                            counts.total++;
+                        }
+                    }
+                }
+                return counts;
+            }
+
+            const liveActions = countActions(liveSnaps);
+            const btActions = countActions(btSnaps);
+
+            let html = '<table class="drift-table"><thead><tr>';
+            html += '<th>Metric</th><th>Live</th><th>Backtest</th><th>Diff</th>';
+            html += '</tr></thead><tbody>';
+
+            for (const key of ['CREATE', 'CANCEL', 'STOP', 'total']) {
+                const lv = liveActions[key] || 0;
+                const bv = btActions[key] || 0;
+                const diff = lv - bv;
+                const diffStr = diff >= 0 ? `+${diff}` : `${diff}`;
+                html += `<tr><td><strong>${key === 'total' ? 'Total Actions' : key + ' Orders'}</strong></td>`;
+                html += `<td>${lv}</td><td>${bv}</td>`;
+                html += `<td style="color:${Math.abs(diff) > 5 ? '#ef4444' : 'var(--text-primary)'}">${diffStr}</td></tr>`;
+            }
+
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+
+        async function initParallelMode() {
+            // Check if we're in parallel mode (mode-parallel has 'active' class)
+            const parallelBtn = document.getElementById('mode-parallel');
+            if (!parallelBtn || !parallelBtn.classList.contains('active')) return;
+
+            parallelMode = true;
+
+            // Show deviation tab
+            const devTabBtn = document.getElementById('deviation-tab-btn');
+            if (devTabBtn) devTabBtn.style.display = '';
+
+            // Load live snapshots
+            liveSnapshots = await loadLiveSnapshots();
+            if (!liveSnapshots || liveSnapshots.length === 0) {
+                const devContent = document.querySelector('[data-tab="deviation"]');
+                if (devContent) {
+                    devContent.innerHTML = '<div class="card"><div class="card-body" style="text-align:center;padding:40px;color:var(--text-secondary)">Could not load live snapshots for comparison. Make sure live data exists at ../data/snapshots.json</div></div>';
+                }
+                return;
+            }
+
+            // Compute metrics
+            const liveMetrics = computeMetrics(liveSnapshots);
+            const btMetrics = computeMetrics(snapshots);
+
+            // Render all deviation components
+            renderDeviationKPIs(liveMetrics, btMetrics);
+            renderEquityOverlay(liveSnapshots, snapshots);
+            renderDeviationTimeline(liveSnapshots, snapshots);
+            renderPositionDrift(liveSnapshots, snapshots);
+            renderExecutionDivergence(liveSnapshots, snapshots);
+
+            // Auto-switch to deviation tab
+            switchTab('deviation');
+        }
+
+        // ─── RENDER ALL ───
+        function renderAll() {
+            renderKPIs();
+            renderPositions();
+            renderPending();
+            renderActions();
+            renderBestWorstTrades();
+            renderCorrelationMatrix();
+            if (tabInitialized.allocations) updateAllocCharts();
+            if (tabInitialized.analytics) updateAnalyticsCharts();
+        }
+
+        // ─── INIT ───
+        async function init() {
+            // Load external data if needed
+            if (!await loadExternalData()) return;
+
+            if (snapshots.length === 0) {
+                document.querySelector('.container').innerHTML = '<div class="card"><div class="card-body"><p class="empty">No snapshots yet. Run <code>./run.sh -apply</code> to generate data.</p></div></div>';
+            } else {
+                // Calculate execution metrics (slippage & fill rate) once on load
+                executionMetrics = calculateExecutionMetrics();
+                closedTrades = detectClosedTrades();
+
+                // Load benchmarks (async, non-blocking)
+                await loadBenchmarks();
+
+                initCurrencySelector();
+                initSlider();
+                updateSliderLabel();
+                renderAll();
+                initCharts();
+                addBenchmarksToReturnChart();
+                // Restore user preferences (tab, hidden panels, rolling window)
+                restorePrefs();
+                buildSettingsPanel();
+
+                // Initialize parallel mode if active
+                await initParallelMode();
+            }
+        }
+        init();
+    </script>
+</body>
+
+</html>

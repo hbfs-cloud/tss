@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Backtest Report | Market Watch</title>
+    <title>Backtest Report | MarketWatch AI</title>
     <link rel="icon" href="https://market-watch.xyz/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
@@ -14,8 +14,59 @@
             background: #f8fafc;
             color: #0f172a;
             margin: 0;
-            padding: 20px;
+            padding: 0;
         }
+        .bt-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 2rem;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .bt-nav a.bt-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: #0f172a;
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+        .bt-nav-links {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .bt-nav-links a {
+            color: #64748b;
+            text-decoration: none;
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .bt-nav-links a.active {
+            color: #2563eb;
+            background: rgba(37,99,235,0.08);
+            font-weight: 600;
+        }
+        .bt-nav-links a:hover:not(.active) { background: #f1f5f9; }
+        .bt-content { padding: 20px; }
+        .view-live-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #16a34a;
+            background: rgba(22,163,74,0.08);
+            border-radius: 4px;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .view-live-link:hover { background: rgba(22,163,74,0.15); }
         h1 { text-align: center; color: #1e293b; margin-bottom: 10px; }
         .subtitle { text-align: center; color: #64748b; margin-bottom: 30px; }
         .loading { text-align: center; padding: 50px; color: #64748b; }
@@ -118,6 +169,19 @@
     </style>
 </head>
 <body>
+    <nav class="bt-nav">
+        <a href="/" class="bt-brand">
+            <img src="https://market-watch.xyz/logo.svg" alt="MW" style="height:1.5rem;"> MarketWatch AI
+        </a>
+        <div class="bt-nav-links">
+            <a href="/"><i class="fas fa-chart-line"></i> Portfolios</a>
+            <a href="/opportunities/"><i class="fas fa-crosshairs"></i> Opportunities</a>
+            <a href="/backtest/" class="active"><i class="fas fa-flask"></i> Backtests</a>
+        </div>
+    </nav>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <div class="bt-content">
     <h1>Backtest Report</h1>
     <p class="subtitle">All Portfolio Strategies Performance</p>
 
@@ -154,6 +218,7 @@
                     <th data-sort="win_rate">Win % <span class="sort-arrow"></span></th>
                     <th data-sort="trades">Trades <span class="sort-arrow"></span></th>
                     <th class="chart-cell">Equity Curve</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody id="results-body">
@@ -164,6 +229,7 @@
             Generated: <span id="timestamp"></span>
         </div>
     </div>
+    </div><!-- /bt-content -->
 
     <script>
         let allData = [];
@@ -311,6 +377,9 @@
                             <canvas id="chart-${idx}"></canvas>
                         </div>
                     </td>
+                    <td>
+                        <a href="/${portfolio.name}/" class="view-live-link"><i class="fas fa-broadcast-tower"></i> Live</a>
+                    </td>
                 `;
                 tbody.appendChild(tr);
 
@@ -318,7 +387,7 @@
                 const detailsTr = document.createElement('tr');
                 detailsTr.id = `details-${idx}`;
                 detailsTr.className = 'details-row' + (expandedRows.has(idx) ? ' show' : '');
-                detailsTr.innerHTML = `<td colspan="8" class="details-cell">${renderDetailsContent(portfolio, p)}</td>`;
+                detailsTr.innerHTML = `<td colspan="9" class="details-cell">${renderDetailsContent(portfolio, p)}</td>`;
                 tbody.appendChild(detailsTr);
 
                 // Draw mini chart

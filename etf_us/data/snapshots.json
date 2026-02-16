@@ -1,11 +1,290 @@
 [
   {
-    "timestamp": "2026-02-13T09:03:44+01:00",
+    "timestamp": "2026-02-16T10:55:07+01:00",
+    "date": "2026-02-13",
+    "portfolio": "etf_us",
+    "allocation": "etf_us",
+    "currency": "USD",
+    "git_sha1": "59946830",
+    "git_branch": "main",
+    "config_path": "config/portfolio_etf_us.yaml",
+    "config_hash": "64aee443ad10bb41",
+    "actions": [
+      {
+        "type": "CREATE",
+        "symbol": "CBTA",
+        "side": "SELL",
+        "order_type": "MARKET",
+        "qty": 515,
+        "order_id": "a37faa63-afd0-4094-bf06-fb98f6a15022",
+        "reason": "ROTATION_OUT"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "FIAT",
+        "side": "SELL",
+        "order_type": "MARKET",
+        "qty": 333,
+        "order_id": "62e9025c-1e5e-46b7-a539-18f1d589bf4e",
+        "reason": "ROTATION_OUT"
+      }
+    ],
+    "positions": [
+      {
+        "Symbol": "BDRY",
+        "Qty": 252,
+        "AvgEntry": 11.1,
+        "CurrentPrice": 11.49,
+        "UnrealizedPnL": 98.28,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "2026-02-10T14:32:09.03036Z",
+        "BrokerSource": "",
+        "Name": "Breakwave Dry Bulk Shipping ETF",
+        "Sector": "Miscellaneous Sector",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "investment_management",
+          "shipping"
+        ]
+      },
+      {
+        "Symbol": "BTCC",
+        "Qty": 860,
+        "AvgEntry": 16.155279,
+        "CurrentPrice": 16.01,
+        "UnrealizedPnL": -124.93994,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "2026-02-09T14:34:32.707629Z",
+        "BrokerSource": "",
+        "Name": "Grayscale Bitcoin Covered Call ETF",
+        "Sector": "Digital Assets",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "blockchain_finance",
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "CBTA",
+        "Qty": 515,
+        "AvgEntry": 22.43,
+        "CurrentPrice": 22.4974,
+        "UnrealizedPnL": 34.711,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "2026-02-12T14:30:58.337459Z",
+        "BrokerSource": "",
+        "Name": "Calamos Bitcoin 80 Series Structured Alt Protection ETF - April",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "FIAT",
+        "Qty": 333,
+        "AvgEntry": 34.054595,
+        "CurrentPrice": 31.65,
+        "UnrealizedPnL": -800.730135,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "2026-02-12T14:33:04.810757Z",
+        "BrokerSource": "",
+        "Name": "YieldMax Short COIN Option Income Strategy ETF",
+        "Sector": "Derivative Income",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "PYPY",
+        "Qty": 493,
+        "AvgEntry": 28.1,
+        "CurrentPrice": 27.97,
+        "UnrealizedPnL": -64.09,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "2026-02-09T14:30:59.20158Z",
+        "BrokerSource": "",
+        "Name": "YieldMax PYPL Option Income Strategy ETF",
+        "Sector": "Derivative Income",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "REKT",
+        "Qty": 1089,
+        "AvgEntry": 19.39,
+        "CurrentPrice": 19.19,
+        "UnrealizedPnL": -217.8,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "2026-02-13T14:31:23.771108Z",
+        "BrokerSource": "",
+        "Name": "Direxion Daily Crypto Industry Bear 1X Shares",
+        "Sector": "Trading--Inverse Equity",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "ai",
+          "augmented_reality",
+          "blockchain",
+          "gaming"
+        ]
+      },
+      {
+        "Symbol": "YBIT",
+        "Qty": 550,
+        "AvgEntry": 24.991455,
+        "CurrentPrice": 24.77,
+        "UnrealizedPnL": -121.80025,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "2026-02-09T14:33:20.417304Z",
+        "BrokerSource": "",
+        "Name": "YieldMax Bitcoin Option Income Strategy ETF",
+        "Sector": "Digital Assets",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "blockchain_finance",
+          "investment_management"
+        ]
+      }
+    ],
+    "pending_orders": [
+      {
+        "OrderID": "62e9025c-1e5e-46b7-a539-18f1d589bf4e",
+        "Symbol": "FIAT",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 333,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-16T09:55:07.31581452Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "a37faa63-afd0-4094-bf06-fb98f6a15022",
+        "Symbol": "CBTA",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 515,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-16T09:55:07.037426993Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "82568911-19e5-4d02-9870-66de902f1ee0",
+        "Symbol": "HEAL",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 235,
+        "FilledQty": 0,
+        "LimitPrice": 25.97,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-16T09:16:35.148077Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "ecbe29a0-e030-417a-b4ff-0d12ca929c72",
+        "Symbol": "AMZP",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 264,
+        "FilledQty": 0,
+        "LimitPrice": 23.06,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-16T09:16:35.04618Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      }
+    ],
+    "balance": {
+      "BaseCurrency": "USD",
+      "CashByCurrency": {
+        "USD": 12229.88
+      },
+      "MarginUsed": 87100.31,
+      "TotalEquity": 99330.19,
+      "Timestamp": "0001-01-01T00:00:00Z",
+      "BrokerSource": "alpaca"
+    },
+    "state": {
+      "pm_state": {
+        "cautious_restart_start": "0001-01-01T00:00:00Z",
+        "cautious_restart_until": "0001-01-01T00:00:00Z",
+        "equity_curve": [],
+        "equity_curve_dates": [],
+        "global_pause_until": "0001-01-01T00:00:00Z",
+        "is_in_grace_period": false,
+        "last_entry_creation_date": "2026-02-13T15:30:00+01:00",
+        "last_liquidation_date": "0001-01-01T00:00:00Z",
+        "last_streak_reset_date": "0001-01-01T00:00:00Z",
+        "peak_equity": 0,
+        "position_clusters": null,
+        "position_entries": {},
+        "position_highs": null,
+        "position_last_dca": {},
+        "position_open_dates": {
+          "AMZP": "2026-02-13T15:30:00+01:00",
+          "BDRY": "2026-02-09T15:30:00+01:00",
+          "BTCC": "2026-02-06T15:30:00+01:00",
+          "HEAL": "2026-02-13T15:30:00+01:00",
+          "PYPY": "2026-02-06T15:30:00+01:00",
+          "REKT": "2026-02-12T15:30:00+01:00",
+          "YBIT": "2026-02-06T15:30:00+01:00"
+        },
+        "position_stops": {
+          "BDRY": 10.089285400935582,
+          "BTCC": 13.790636209614345,
+          "PYPY": 24.578393418448314,
+          "REKT": 16.94464247294835,
+          "YBIT": 21.206096162327356
+        },
+        "regime_score_history": null,
+        "stop_history": [],
+        "stop_streak_count": 0,
+        "stopped_symbols": {}
+      },
+      "prev_regime": "NEUTRAL"
+    }
+  },
+  {
+    "timestamp": "2026-02-13T10:30:25+01:00",
     "date": "2026-02-12",
     "portfolio": "etf_us",
     "allocation": "etf_us",
     "currency": "USD",
-    "git_sha1": "ebef44b3",
+    "git_sha1": "ab43e315",
     "git_branch": "20260205",
     "config_path": "config/portfolio_etf_us.yaml",
     "config_hash": "024b2494b514ee17",
@@ -16,18 +295,8 @@
         "side": "SELL",
         "order_type": "MARKET",
         "qty": 209,
-        "order_id": "d7b80454-7352-4434-85ee-170d43bc8170",
+        "order_id": "4527ae6f-f3b4-4378-8e40-315db33dc1f2",
         "reason": "ROTATION_OUT"
-      },
-      {
-        "type": "CREATE",
-        "symbol": "REKT",
-        "side": "BUY",
-        "order_type": "LIMIT",
-        "qty": 1089,
-        "limit_price": 20.21220078277588,
-        "order_id": "3c7b325c-609d-45fd-851e-093442a9f399",
-        "reason": "ROTATION_IN"
       }
     ],
     "positions": [
@@ -90,9 +359,9 @@
         "Symbol": "FIAT",
         "Qty": 333,
         "AvgEntry": 34.054595,
-        "CurrentPrice": 35.79,
-        "UnrealizedPnL": 577.889865,
-        "ChangeToday": 0,
+        "CurrentPrice": 34.64,
+        "UnrealizedPnL": 194.939865,
+        "ChangeToday": -0.03213,
         "Currency": "USD",
         "Timestamp": "2026-02-12T14:33:04.810757Z",
         "BrokerSource": "",
@@ -108,9 +377,9 @@
         "Symbol": "PYPY",
         "Qty": 493,
         "AvgEntry": 28.1,
-        "CurrentPrice": 28,
-        "UnrealizedPnL": -49.3,
-        "ChangeToday": 0.02339,
+        "CurrentPrice": 27.36,
+        "UnrealizedPnL": -364.82,
+        "ChangeToday": 0,
         "Currency": "USD",
         "Timestamp": "2026-02-09T14:30:59.20158Z",
         "BrokerSource": "",
@@ -126,9 +395,9 @@
         "Symbol": "XLE",
         "Qty": 209,
         "AvgEntry": 54.920861,
-        "CurrentPrice": 53.76,
-        "UnrealizedPnL": -242.619949,
-        "ChangeToday": -0.00408,
+        "CurrentPrice": 53.95,
+        "UnrealizedPnL": -202.909949,
+        "ChangeToday": -0.00056,
         "Currency": "USD",
         "Timestamp": "2026-02-12T14:33:16.181005Z",
         "BrokerSource": "",
@@ -144,9 +413,9 @@
         "Symbol": "YBIT",
         "Qty": 550,
         "AvgEntry": 24.991455,
-        "CurrentPrice": 23.55,
-        "UnrealizedPnL": -792.80025,
-        "ChangeToday": -0.01423,
+        "CurrentPrice": 23.89,
+        "UnrealizedPnL": -605.80025,
+        "ChangeToday": 0,
         "Currency": "USD",
         "Timestamp": "2026-02-09T14:33:20.417304Z",
         "BrokerSource": "",
@@ -162,6 +431,22 @@
     ],
     "pending_orders": [
       {
+        "OrderID": "4527ae6f-f3b4-4378-8e40-315db33dc1f2",
+        "Symbol": "XLE",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 209,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-13T09:30:25.893597438Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
         "OrderID": "3c7b325c-609d-45fd-851e-093442a9f399",
         "Symbol": "REKT",
         "Side": "BUY",
@@ -173,23 +458,7 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-13T08:03:44.669633022Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": "alpaca"
-      },
-      {
-        "OrderID": "d7b80454-7352-4434-85ee-170d43bc8170",
-        "Symbol": "XLE",
-        "Side": "SELL",
-        "OrderType": "MARKET",
-        "Qty": 209,
-        "FilledQty": 0,
-        "LimitPrice": 0,
-        "StopPrice": 0,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "",
-        "PlacedDate": "2026-02-13T08:03:44.576159213Z",
+        "PlacedDate": "2026-02-13T09:00:16.878996Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       }
@@ -197,10 +466,10 @@
     "balance": {
       "BaseCurrency": "USD",
       "CashByCurrency": {
-        "USD": 22032.87
+        "USD": 22032.71
       },
-      "MarginUsed": 77462.82,
-      "TotalEquity": 99495.69,
+      "MarginUsed": 76991.06,
+      "TotalEquity": 99023.77,
       "Timestamp": "0001-01-01T00:00:00Z",
       "BrokerSource": "alpaca"
     },
