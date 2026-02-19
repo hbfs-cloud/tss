@@ -2,7 +2,7 @@
   {
     "timestamp": "2026-02-19T09:33:42+01:00",
     "date": "2026-02-18",
-    "portfolio": "eu-momentum-rotation",
+    "portfolio": "eu_momentum_rotation",
     "allocation": "momentum",
     "currency": "EUR",
     "git_sha1": "ce62f9e9",
@@ -659,7 +659,7 @@
   {
     "timestamp": "2026-02-18T20:13:10+01:00",
     "date": "2026-02-17",
-    "portfolio": "eu-momentum-rotation",
+    "portfolio": "eu_momentum_rotation",
     "allocation": "momentum",
     "currency": "EUR",
     "git_sha1": "92841d98",
@@ -1324,7 +1324,7 @@
   {
     "timestamp": "2026-02-17T10:28:18+01:00",
     "date": "2026-02-16",
-    "portfolio": "eu-momentum-rotation",
+    "portfolio": "eu_momentum_rotation",
     "allocation": "momentum",
     "currency": "EUR",
     "git_sha1": "816fcc4b",
@@ -2050,7 +2050,7 @@
   {
     "timestamp": "2026-02-16T10:54:57+01:00",
     "date": "2026-02-13",
-    "portfolio": "eu-momentum-rotation",
+    "portfolio": "eu_momentum_rotation",
     "allocation": "momentum",
     "currency": "EUR",
     "git_sha1": "59946830",
@@ -2814,7 +2814,7 @@
   {
     "timestamp": "2026-02-13T10:30:15+01:00",
     "date": "2026-02-12",
-    "portfolio": "eu-momentum-rotation",
+    "portfolio": "eu_momentum_rotation",
     "allocation": "momentum",
     "currency": "EUR",
     "git_sha1": "ab43e315",
@@ -3611,7 +3611,7 @@
   {
     "timestamp": "2026-02-12T09:00:22+01:00",
     "date": "2026-02-11",
-    "portfolio": "eu-momentum-rotation",
+    "portfolio": "eu_momentum_rotation",
     "allocation": "momentum",
     "currency": "EUR",
     "git_sha1": "c603efeb",
@@ -4387,7 +4387,7 @@
   {
     "timestamp": "2026-02-11T13:33:54+01:00",
     "date": "2026-02-10",
-    "portfolio": "eu-momentum-rotation",
+    "portfolio": "eu_momentum_rotation",
     "allocation": "momentum",
     "currency": "EUR",
     "git_sha1": "5f83ba9f",
@@ -5007,7 +5007,7 @@
   {
     "timestamp": "2026-02-10T08:10:12+01:00",
     "date": "2026-02-09",
-    "portfolio": "eu-momentum-rotation",
+    "portfolio": "eu_momentum_rotation",
     "allocation": "momentum",
     "currency": "EUR",
     "git_sha1": "29e4a2e2",
@@ -5682,7 +5682,7 @@
   {
     "timestamp": "2026-02-09T16:42:30+01:00",
     "date": "2026-02-06",
-    "portfolio": "eu-momentum-rotation",
+    "portfolio": "eu_momentum_rotation",
     "allocation": "momentum",
     "currency": "EUR",
     "git_sha1": "aba2dce2",
@@ -6294,7 +6294,7 @@
   {
     "timestamp": "2026-02-05T22:42:49+01:00",
     "date": "2026-02-05",
-    "portfolio": "eu-momentum-rotation",
+    "portfolio": "eu_momentum_rotation",
     "allocation": "momentum",
     "currency": "EUR",
     "git_sha1": "ccbdc575",
@@ -6890,7 +6890,7 @@
   {
     "timestamp": "2026-02-05T10:54:37+01:00",
     "date": "2026-02-04",
-    "portfolio": "eu-momentum-rotation",
+    "portfolio": "eu_momentum_rotation",
     "allocation": "momentum",
     "currency": "EUR",
     "git_sha1": "db82479d",
@@ -7470,7 +7470,7 @@
   {
     "timestamp": "2026-02-04T10:21:11+01:00",
     "date": "2026-02-03",
-    "portfolio": "eu-momentum-rotation",
+    "portfolio": "eu_momentum_rotation",
     "allocation": "momentum",
     "currency": "EUR",
     "git_sha1": "c0179637",
@@ -8028,7 +8028,7 @@
   {
     "timestamp": "2026-02-03T21:45:08+01:00",
     "date": "2026-02-02",
-    "portfolio": "eu-momentum-rotation",
+    "portfolio": "eu_momentum_rotation",
     "allocation": "momentum",
     "currency": "EUR",
     "git_sha1": "f6c9ce55",
