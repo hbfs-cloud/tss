@@ -1,5 +1,305 @@
 [
   {
+    "timestamp": "2026-02-20T08:51:34+01:00",
+    "date": "2026-02-19",
+    "portfolio": "etf_us",
+    "allocation": "etf_us",
+    "currency": "USD",
+    "git_sha1": "b71c64fb",
+    "git_branch": "main",
+    "config_path": "config/portfolio_etf_us.yaml",
+    "config_hash": "29f3369dca69814a",
+    "actions": [
+      {
+        "type": "CREATE",
+        "symbol": "BITY",
+        "side": "SELL",
+        "order_type": "MARKET",
+        "qty": 73,
+        "order_id": "5a297876-af38-46e4-8510-96c4e42984df",
+        "reason": "ROTATION_OUT"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "ONLN",
+        "side": "SELL",
+        "order_type": "MARKET",
+        "qty": 350,
+        "order_id": "e10aee3b-2ef5-4dea-9e30-91170565ae90",
+        "reason": "ROTATION_OUT"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "SOCL",
+        "side": "BUY",
+        "order_type": "LIMIT",
+        "qty": 393,
+        "limit_price": 51.0581731338501,
+        "order_id": "1d071f89-340a-4457-83a7-2880e46fe316",
+        "reason": "ROTATION_IN"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "QBF",
+        "side": "BUY",
+        "order_type": "LIMIT",
+        "qty": 1099,
+        "limit_price": 18.27808683013916,
+        "order_id": "e6ba06e8-17f5-4bc5-9794-463fa85d1658",
+        "reason": "ROTATION_IN"
+      }
+    ],
+    "positions": [
+      {
+        "Symbol": "AMZP",
+        "Qty": 264,
+        "AvgEntry": 22.69,
+        "CurrentPrice": 23.2802,
+        "UnrealizedPnL": 155.8128,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "2026-02-17T14:34:28.629176Z",
+        "BrokerSource": "",
+        "Name": "Kurv Yield Prem Strategy Amazon ETF",
+        "Sector": "Derivative Income",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "BITY",
+        "Qty": 73,
+        "AvgEntry": 29.84,
+        "CurrentPrice": 30.32,
+        "UnrealizedPnL": 35.04,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "2026-02-19T14:30:45.470822Z",
+        "BrokerSource": "",
+        "Name": "Amplify Bitcoin 2% Monthly Option Income ETF",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "BWET",
+        "Qty": 49,
+        "AvgEntry": 45.18,
+        "CurrentPrice": 46.3,
+        "UnrealizedPnL": 54.88,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "2026-02-19T18:39:49.446562Z",
+        "BrokerSource": "",
+        "Name": "Breakwave Tanker Shipping ETF",
+        "Sector": "Commodities Focused",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "copper",
+          "investment_management",
+          "shipping"
+        ]
+      },
+      {
+        "Symbol": "CBTA",
+        "Qty": 100,
+        "AvgEntry": 21.798,
+        "CurrentPrice": 21.992,
+        "UnrealizedPnL": 19.4,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "2026-02-19T14:33:11.697586Z",
+        "BrokerSource": "",
+        "Name": "Calamos Bitcoin 80 Series Structured Alt Protection ETF - April",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "ONLN",
+        "Qty": 350,
+        "AvgEntry": 53.270057,
+        "CurrentPrice": 54.12,
+        "UnrealizedPnL": 297.48005,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "2026-02-18T14:33:43.410483Z",
+        "BrokerSource": "",
+        "Name": "ProShares Online Retail ETF",
+        "Sector": "Consumer Cyclical",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "ai",
+          "augmented_reality",
+          "gaming",
+          "investment_management",
+          "retail"
+        ]
+      },
+      {
+        "Symbol": "PYPY",
+        "Qty": 493,
+        "AvgEntry": 28.1,
+        "CurrentPrice": 28,
+        "UnrealizedPnL": -49.3,
+        "ChangeToday": -0.01512,
+        "Currency": "USD",
+        "Timestamp": "2026-02-09T14:30:59.20158Z",
+        "BrokerSource": "",
+        "Name": "YieldMax PYPL Option Income Strategy ETF",
+        "Sector": "Derivative Income",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "YBIT",
+        "Qty": 550,
+        "AvgEntry": 24.991455,
+        "CurrentPrice": 23.55,
+        "UnrealizedPnL": -792.80025,
+        "ChangeToday": -0.03047,
+        "Currency": "USD",
+        "Timestamp": "2026-02-09T14:33:20.417304Z",
+        "BrokerSource": "",
+        "Name": "YieldMax Bitcoin Option Income Strategy ETF",
+        "Sector": "Digital Assets",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "blockchain_finance",
+          "investment_management"
+        ]
+      }
+    ],
+    "pending_orders": [
+      {
+        "OrderID": "e6ba06e8-17f5-4bc5-9794-463fa85d1658",
+        "Symbol": "QBF",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 1099,
+        "FilledQty": 0,
+        "LimitPrice": 18.28,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-20T07:51:34.080935635Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "1d071f89-340a-4457-83a7-2880e46fe316",
+        "Symbol": "SOCL",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 393,
+        "FilledQty": 0,
+        "LimitPrice": 51.06,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-20T07:51:33.987158086Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "e10aee3b-2ef5-4dea-9e30-91170565ae90",
+        "Symbol": "ONLN",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 350,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-20T07:51:33.892890198Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "5a297876-af38-46e4-8510-96c4e42984df",
+        "Symbol": "BITY",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 73,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-20T07:51:33.70790245Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      }
+    ],
+    "balance": {
+      "BaseCurrency": "USD",
+      "CashByCurrency": {
+        "USD": 40192.89
+      },
+      "MarginUsed": 58525.729999999996,
+      "TotalEquity": 98718.62,
+      "Timestamp": "0001-01-01T00:00:00Z",
+      "BrokerSource": "alpaca"
+    },
+    "state": {
+      "pm_state": {
+        "cautious_restart_start": "0001-01-01T00:00:00Z",
+        "cautious_restart_until": "0001-01-01T00:00:00Z",
+        "crash_inverse_until": "0001-01-01T00:00:00Z",
+        "equity_curve": [],
+        "equity_curve_dates": [],
+        "global_pause_until": "0001-01-01T00:00:00Z",
+        "is_in_grace_period": false,
+        "last_entry_creation_date": "2026-02-19T21:59:54+01:00",
+        "last_liquidation_date": "0001-01-01T00:00:00Z",
+        "last_streak_reset_date": "0001-01-01T00:00:00Z",
+        "peak_equity": 0,
+        "position_clusters": null,
+        "position_entries": {},
+        "position_highs": null,
+        "position_last_dca": {},
+        "position_open_dates": {
+          "AMZP": "2026-02-13T15:30:00+01:00",
+          "BWET": "2026-02-18T15:30:00+01:00",
+          "CBTA": "2026-02-18T15:30:00+01:00",
+          "PYPY": "2026-02-06T15:30:00+01:00",
+          "QBF": "2026-02-19T21:59:54+01:00",
+          "SOCL": "2026-02-19T21:59:54+01:00",
+          "YBIT": "2026-02-06T15:30:00+01:00"
+        },
+        "position_stops": {
+          "AMZP": 20.082143181392127,
+          "BWET": 38.25089124407087,
+          "CBTA": 20.172464171273365,
+          "PYPY": 24.578393418448314,
+          "YBIT": 21.206096162327356
+        },
+        "regime_score_history": null,
+        "stop_history": [],
+        "stop_streak_count": 0,
+        "stopped_symbols": {}
+      },
+      "prev_regime": "NEUTRAL"
+    }
+  },
+  {
     "timestamp": "2026-02-19T09:33:52+01:00",
     "date": "2026-02-18",
     "portfolio": "etf_us",
