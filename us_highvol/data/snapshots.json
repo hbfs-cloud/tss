@@ -1,5 +1,324 @@
 [
   {
+    "timestamp": "2026-02-21T14:45:56+01:00",
+    "date": "2026-02-20",
+    "portfolio": "us_highvol",
+    "allocation": "us_highvol",
+    "currency": "USD",
+    "git_sha1": "8ca68791",
+    "git_branch": "main",
+    "config_path": "config/portfolio_us_highvol.yaml",
+    "config_hash": "8289ab41208dade5",
+    "actions": [
+      {
+        "type": "CREATE",
+        "symbol": "MBX",
+        "side": "SELL",
+        "order_type": "MARKET",
+        "qty": 215,
+        "order_id": "89196def-cc84-4a7b-ac49-0c5bea82642f",
+        "reason": "TIMEOUT: Position held 15 days (max=14) with -11.5% P&L ($-972). Entry $39.31 -> $34.79. Cutting to free capital."
+      },
+      {
+        "type": "CREATE",
+        "symbol": "TNGX",
+        "side": "SELL",
+        "order_type": "MARKET",
+        "qty": 672,
+        "order_id": "fe126a45-f4b1-40c0-bcc6-b20d00fe1774",
+        "reason": "TIMEOUT: Position held 15 days (max=14) with -3.1% P&L ($-262). Entry $12.59 -> $12.20. Cutting to free capital."
+      },
+      {
+        "type": "CREATE",
+        "symbol": "WRN",
+        "side": "SELL",
+        "order_type": "MARKET",
+        "qty": 2279,
+        "order_id": "432fe482-924a-4a46-8911-c8d4a878551a",
+        "reason": "TIMEOUT: Position held 15 days (max=14) with -15.1% P&L ($-1276). Entry $3.71 -> $3.15. Cutting to free capital."
+      },
+      {
+        "type": "CREATE",
+        "symbol": "WULF",
+        "side": "SELL",
+        "order_type": "MARKET",
+        "qty": 569,
+        "order_id": "ceaf3b1f-29b1-4469-8ba6-73684c1cec69",
+        "reason": "TIMEOUT: Position held 15 days (max=14) with 6.1% P&L ($489). Entry $14.15 -> $15.01. Cutting to free capital."
+      }
+    ],
+    "positions": [
+      {
+        "Symbol": "ICHR",
+        "Qty": 116,
+        "AvgEntry": 45.43,
+        "CurrentPrice": 50.35,
+        "UnrealizedPnL": 570.72,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "2026-02-11T15:20:51.274756Z",
+        "BrokerSource": "",
+        "Name": "Ichor Holdings, Ltd.",
+        "Sector": "Technology",
+        "Country": "US",
+        "AssetType": "STOCK",
+        "MarketCapCategory": "Small-Cap"
+      },
+      {
+        "Symbol": "MBX",
+        "Qty": 215,
+        "AvgEntry": 39.31,
+        "CurrentPrice": 34.79,
+        "UnrealizedPnL": -971.8,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "2026-02-04T15:34:48.174996Z",
+        "BrokerSource": "",
+        "Name": "MBX Biosciences, Inc.",
+        "Sector": "Healthcare",
+        "Country": "US",
+        "AssetType": "STOCK",
+        "MarketCapCategory": "Small-Cap",
+        "Themes": [
+          "augmented_reality",
+          "gaming"
+        ]
+      },
+      {
+        "Symbol": "PLSE",
+        "Qty": 219,
+        "AvgEntry": 23.88,
+        "CurrentPrice": 21.42,
+        "UnrealizedPnL": -538.74,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "2026-02-11T14:32:04.933898Z",
+        "BrokerSource": "",
+        "Name": "Pulse Biosciences, Inc.",
+        "Sector": "Healthcare",
+        "Country": "US",
+        "AssetType": "STOCK",
+        "MarketCapCategory": "Small-Cap",
+        "Themes": [
+          "augmented_reality",
+          "gaming"
+        ]
+      },
+      {
+        "Symbol": "TNGX",
+        "Qty": 672,
+        "AvgEntry": 12.59,
+        "CurrentPrice": 12.2,
+        "UnrealizedPnL": -262.08,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "2026-02-04T14:34:54.405493Z",
+        "BrokerSource": "",
+        "Name": "Tango Therapeutics, Inc.",
+        "Sector": "Healthcare",
+        "Country": "US",
+        "AssetType": "STOCK",
+        "MarketCapCategory": "Small-Cap",
+        "Themes": [
+          "augmented_reality",
+          "gaming"
+        ]
+      },
+      {
+        "Symbol": "WRN",
+        "Qty": 2279,
+        "AvgEntry": 3.71,
+        "CurrentPrice": 3.15,
+        "UnrealizedPnL": -1276.24,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "2026-02-04T14:30:48.536667Z",
+        "BrokerSource": "",
+        "AssetType": "STOCK"
+      },
+      {
+        "Symbol": "WULF",
+        "Qty": 569,
+        "AvgEntry": 14.15,
+        "CurrentPrice": 15.01,
+        "UnrealizedPnL": 489.34,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "2026-02-04T14:30:25.176512Z",
+        "BrokerSource": "",
+        "Name": "TeraWulf Inc.",
+        "Sector": "Financials",
+        "Country": "US",
+        "AssetType": "STOCK",
+        "MarketCapCategory": "Mid-Cap"
+      }
+    ],
+    "pending_orders": [
+      {
+        "OrderID": "ceaf3b1f-29b1-4469-8ba6-73684c1cec69",
+        "Symbol": "WULF",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 569,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-21T13:45:56.690460829Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "432fe482-924a-4a46-8911-c8d4a878551a",
+        "Symbol": "WRN",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 2279,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-21T13:45:56.482294409Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "fe126a45-f4b1-40c0-bcc6-b20d00fe1774",
+        "Symbol": "TNGX",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 672,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-21T13:45:56.279658839Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "89196def-cc84-4a7b-ac49-0c5bea82642f",
+        "Symbol": "MBX",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 215,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-21T13:45:56.028758289Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "4cd7280d-6bfb-49cb-b5e1-af343ea6afed",
+        "Symbol": "ICHR",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 116,
+        "FilledQty": 0,
+        "LimitPrice": 35.15,
+        "StopPrice": 35.15,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-11T15:20:51.284259Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "dd67164c-94c1-4604-a2a6-b471692e8fe1",
+        "Symbol": "PLSE",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 219,
+        "FilledQty": 0,
+        "LimitPrice": 18.86,
+        "StopPrice": 18.86,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-11T14:32:05.735963Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      }
+    ],
+    "balance": {
+      "BaseCurrency": "USD",
+      "CashByCurrency": {
+        "USD": 54672.22
+      },
+      "MarginUsed": 41929.369999999995,
+      "TotalEquity": 96601.59,
+      "Timestamp": "0001-01-01T00:00:00Z",
+      "BrokerSource": "alpaca"
+    },
+    "state": {
+      "pm_state": {
+        "cautious_restart_start": "0001-01-01T00:00:00Z",
+        "cautious_restart_until": "0001-01-01T00:00:00Z",
+        "crash_inverse_until": "0001-01-01T00:00:00Z",
+        "equity_curve": [
+          98151.88,
+          96601.59
+        ],
+        "equity_curve_dates": [
+          "2026-02-19T22:00:02+01:00",
+          "2026-02-20T15:30:00+01:00"
+        ],
+        "global_pause_until": "0001-01-01T00:00:00Z",
+        "is_in_grace_period": false,
+        "last_entry_creation_date": "2026-02-10T22:00:02+01:00",
+        "last_liquidation_date": "0001-01-01T00:00:00Z",
+        "last_streak_reset_date": "0001-01-01T00:00:00Z",
+        "peak_equity": 102118.78,
+        "position_clusters": null,
+        "position_entries": {},
+        "position_highs": {
+          "ALAB": 186.827,
+          "ALM": 14.829999923706055,
+          "AMPX": 14.341551,
+          "ICHR": 50.349998474121094,
+          "PLSE": 25.459999084472656,
+          "TGB": 8.829999923706055,
+          "WDC": 290.239990234375
+        },
+        "position_last_dca": {},
+        "position_open_dates": {
+          "ALAB": "2026-02-09T15:30:00+01:00",
+          "ALM": "2026-02-03T15:30:00+01:00",
+          "AMPX": "2026-02-03T15:30:00+01:00",
+          "ICHR": "2026-02-10T22:00:02+01:00",
+          "PLSE": "2026-02-10T22:00:02+01:00",
+          "TGB": "2026-01-25T15:30:00+01:00",
+          "WDC": "2026-01-25T15:30:00+01:00"
+        },
+        "position_stops": {
+          "ALAB": 145.5797892979213,
+          "ALM": 13.02850011416844,
+          "AMPX": 11.099928719656807,
+          "ICHR": 35.151214190891814,
+          "PLSE": 18.857950278690883,
+          "TGB": 7.908571260316031,
+          "WDC": 259.5114184788295
+        },
+        "regime_score_history": null,
+        "stop_history": [],
+        "stop_streak_count": 0,
+        "stopped_symbols": {}
+      },
+      "prev_regime": "NEUTRAL"
+    }
+  },
+  {
     "timestamp": "2026-02-20T08:51:16+01:00",
     "date": "2026-02-19",
     "portfolio": "us_highvol",

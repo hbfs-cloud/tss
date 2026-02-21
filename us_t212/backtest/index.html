@@ -741,6 +741,29 @@
         .drift-badge.live { background: rgba(34,197,94,0.15); color: #22c55e; }
         .drift-badge.backtest { background: rgba(139,92,246,0.15); color: #8b5cf6; }
         .drift-badge.both { background: rgba(100,116,139,0.15); color: #64748b; }
+
+        /* Drift Score Banner */
+        .drift-score-banner { display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap; }
+        .drift-score-circle { width: 110px; height: 110px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 800; color: white; flex-shrink: 0; }
+        .drift-score-circle.excellent { background: linear-gradient(135deg, #22c55e, #16a34a); }
+        .drift-score-circle.good { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        .drift-score-circle.warning { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .drift-score-circle.danger { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .drift-score-info { text-align: left; }
+        .drift-score-label { font-size: 1.2rem; font-weight: 700; }
+        .drift-score-desc { font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px; max-width: 400px; }
+
+        /* Drift Summary Row */
+        .drift-summary-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0; }
+        .drift-summary-item { background: var(--bg-secondary); border-radius: 8px; padding: 16px; text-align: center; }
+        .drift-summary-value { font-size: 1.8rem; font-weight: 800; }
+        .drift-summary-label { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+        .drift-summary-value.green { color: #22c55e; }
+        .drift-summary-value.blue { color: #3b82f6; }
+        .drift-summary-value.amber { color: #f59e0b; }
+        .drift-summary-value.red { color: #ef4444; }
+        .drift-overlap-header { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px; }
+        .qty-diff-warn { color: #f59e0b; font-weight: 600; }
     </style>
 </head>
 
@@ -1136,6 +1159,31 @@
         <!-- DEVIATION TAB (PARALLEL mode only) -->
         <div class="tab-content" data-tab="deviation" style="display:none">
 
+        <!-- Drift Score Banner -->
+        <div class="card">
+            <div class="card-body" style="padding:24px">
+                <div id="drift-score-banner" class="drift-score-banner">
+                    <div style="color:var(--text-secondary);text-align:center">Loading drift analysis...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Drift Summary KPIs -->
+        <div class="drift-summary-row">
+            <div class="drift-summary-item">
+                <div class="drift-summary-value" id="drift-overlap">--</div>
+                <div class="drift-summary-label">Position Overlap</div>
+            </div>
+            <div class="drift-summary-item">
+                <div class="drift-summary-value" id="drift-corr">--</div>
+                <div class="drift-summary-label">Return Correlation</div>
+            </div>
+            <div class="drift-summary-item">
+                <div class="drift-summary-value" id="drift-avg-dev">--</div>
+                <div class="drift-summary-label">Avg Equity Drift</div>
+            </div>
+        </div>
+
         <!-- KPI Comparison Grid -->
         <div class="card">
             <div class="card-header"><i class="fas fa-balance-scale"></i> Live vs Backtest — KPI Comparison</div>
@@ -1157,6 +1205,22 @@
             <div class="card-header"><i class="fas fa-wave-square"></i> Equity Deviation Over Time</div>
             <div class="card-body">
                 <canvas id="deviationTimelineChart" height="250"></canvas>
+            </div>
+        </div>
+
+        <!-- Normalized Returns Chart -->
+        <div class="card">
+            <div class="card-header"><i class="fas fa-chart-area"></i> Normalized Returns (base 100)</div>
+            <div class="card-body">
+                <canvas id="normalizedReturnChart" height="250"></canvas>
+            </div>
+        </div>
+
+        <!-- Rolling 30d Drift -->
+        <div class="card">
+            <div class="card-header"><i class="fas fa-chart-bar"></i> Rolling 30-Day Drift</div>
+            <div class="card-body">
+                <canvas id="rollingDriftChart" height="200"></canvas>
             </div>
         </div>
 
@@ -3029,35 +3093,313 @@
             });
         }
 
+        function buildEquityByDate(snaps) {
+            const sorted = [...snaps].sort((a,b) => new Date(a.date || a.timestamp) - new Date(b.date || b.timestamp));
+            const byDate = {};
+            for (const s of sorted) {
+                const d = (s.date || s.timestamp || '').substring(0, 10);
+                if (d && s.balance?.total_equity > 0) byDate[d] = s.balance.total_equity;
+            }
+            return byDate;
+        }
+
+        function computeDriftScore(liveSnaps, btSnaps, liveMetrics, btMetrics) {
+            const liveSeries = buildEquityByDate(liveSnaps);
+            const btSeries = buildEquityByDate(btSnaps);
+            const commonDates = Object.keys(liveSeries).filter(d => btSeries[d]).sort();
+
+            // 1. Average equity drift
+            let totalDrift = 0;
+            let maxDev = 0;
+            for (const d of commonDates) {
+                const bt = btSeries[d];
+                if (bt > 0) {
+                    const drift = Math.abs((liveSeries[d] - bt) / bt * 100);
+                    totalDrift += drift;
+                    if (drift > maxDev) maxDev = drift;
+                }
+            }
+            const avgEquityDrift = commonDates.length > 0 ? totalDrift / commonDates.length : 0;
+
+            // 2. Position overlap (latest snapshot)
+            const sortedLive = [...liveSnaps].sort((a,b) => new Date(b.date || b.timestamp) - new Date(a.date || a.timestamp));
+            const sortedBt = [...btSnaps].sort((a,b) => new Date(b.date || b.timestamp) - new Date(a.date || a.timestamp));
+            const liveSyms = new Set((sortedLive[0]?.positions || []).map(p => p.symbol));
+            const btSyms = new Set((sortedBt[0]?.positions || []).map(p => p.symbol));
+            const intersection = [...liveSyms].filter(s => btSyms.has(s)).length;
+            const union = new Set([...liveSyms, ...btSyms]).size;
+            const overlap = union > 0 ? intersection / union : 1;
+
+            // 3. Return correlation
+            const liveReturns = [], btReturns = [];
+            for (let i = 1; i < commonDates.length; i++) {
+                const d = commonDates[i], pd = commonDates[i-1];
+                if (liveSeries[pd] > 0 && btSeries[pd] > 0) {
+                    liveReturns.push((liveSeries[d] - liveSeries[pd]) / liveSeries[pd]);
+                    btReturns.push((btSeries[d] - btSeries[pd]) / btSeries[pd]);
+                }
+            }
+            let returnCorr = 1;
+            if (liveReturns.length > 5) {
+                const n = liveReturns.length;
+                const mL = liveReturns.reduce((a,b)=>a+b,0)/n;
+                const mB = btReturns.reduce((a,b)=>a+b,0)/n;
+                let num = 0, dL = 0, dB = 0;
+                for (let i = 0; i < n; i++) {
+                    num += (liveReturns[i]-mL)*(btReturns[i]-mB);
+                    dL += (liveReturns[i]-mL)**2;
+                    dB += (btReturns[i]-mB)**2;
+                }
+                returnCorr = (dL > 0 && dB > 0) ? num / Math.sqrt(dL * dB) : 0;
+            }
+
+            // 4. Execution divergence
+            function countAllActions(snaps) {
+                let total = 0;
+                for (const s of snaps) if (s.actions) total += s.actions.length;
+                return total;
+            }
+            const liveTotal = countAllActions(liveSnaps);
+            const btTotal = countAllActions(btSnaps);
+            const execDivPct = Math.max(liveTotal, btTotal) > 0 ? Math.abs(liveTotal - btTotal) / Math.max(liveTotal, btTotal) * 100 : 0;
+
+            // Scoring (0 = identical, 100 = totally diverged)
+            const equityComp = Math.min(avgEquityDrift * 2, 40);
+            const overlapComp = (1 - overlap) * 25;
+            const corrComp = Math.max(0, (1 - returnCorr) * 20);
+            const maxDevComp = maxDev > 30 ? 10 : maxDev > 20 ? 5 : maxDev > 10 ? 2 : 0;
+            const execComp = Math.min(execDivPct / 2, 5);
+            const score = Math.min(Math.round(equityComp + overlapComp + corrComp + maxDevComp + execComp), 100);
+
+            let label, cssClass, desc;
+            if (score <= 15) { label = 'EXCELLENT'; cssClass = 'excellent'; desc = 'Live trading closely tracks backtest expectations'; }
+            else if (score <= 35) { label = 'GOOD'; cssClass = 'good'; desc = 'Minor drift detected — within acceptable range'; }
+            else if (score <= 60) { label = 'WARNING'; cssClass = 'warning'; desc = 'Significant deviation — review execution and slippage'; }
+            else { label = 'DANGER'; cssClass = 'danger'; desc = 'Major divergence — live results deviate substantially from backtest'; }
+
+            return { score, overlap, returnCorr, avgEquityDrift, maxDeviation: maxDev, label, cssClass, desc, liveSyms: liveSyms.size, btSyms: btSyms.size, intersection };
+        }
+
+        function renderDriftScore(driftResult) {
+            const banner = document.getElementById('drift-score-banner');
+            if (!banner || !driftResult) return;
+
+            banner.innerHTML = `
+                <div class="drift-score-circle ${driftResult.cssClass}">${driftResult.score}</div>
+                <div class="drift-score-info">
+                    <div class="drift-score-label" style="color:${driftResult.cssClass === 'excellent' ? '#22c55e' : driftResult.cssClass === 'good' ? '#3b82f6' : driftResult.cssClass === 'warning' ? '#f59e0b' : '#ef4444'}">${driftResult.label}</div>
+                    <div class="drift-score-desc">${driftResult.desc}</div>
+                </div>`;
+
+            // Summary KPIs
+            const overlapEl = document.getElementById('drift-overlap');
+            const corrEl = document.getElementById('drift-corr');
+            const avgDevEl = document.getElementById('drift-avg-dev');
+
+            if (overlapEl) {
+                const overlapPct = (driftResult.overlap * 100).toFixed(0);
+                overlapEl.textContent = overlapPct + '%';
+                overlapEl.className = 'drift-summary-value ' + (overlapPct >= 75 ? 'green' : overlapPct >= 50 ? 'blue' : overlapPct >= 25 ? 'amber' : 'red');
+            }
+            if (corrEl) {
+                corrEl.textContent = driftResult.returnCorr.toFixed(2);
+                corrEl.className = 'drift-summary-value ' + (driftResult.returnCorr >= 0.8 ? 'green' : driftResult.returnCorr >= 0.5 ? 'blue' : driftResult.returnCorr >= 0.2 ? 'amber' : 'red');
+            }
+            if (avgDevEl) {
+                avgDevEl.textContent = driftResult.avgEquityDrift.toFixed(1) + '%';
+                avgDevEl.className = 'drift-summary-value ' + (driftResult.avgEquityDrift <= 5 ? 'green' : driftResult.avgEquityDrift <= 15 ? 'blue' : driftResult.avgEquityDrift <= 30 ? 'amber' : 'red');
+            }
+        }
+
+        function renderNormalizedReturns(liveSnaps, btSnaps) {
+            const canvas = document.getElementById('normalizedReturnChart');
+            if (!canvas) return;
+            if (deviationCharts.normalized) deviationCharts.normalized.destroy();
+
+            const liveSeries = buildEquityByDate(liveSnaps);
+            const btSeries = buildEquityByDate(btSnaps);
+            const commonDates = Object.keys(liveSeries).filter(d => btSeries[d]).sort();
+            if (commonDates.length < 2) return;
+
+            const liveBase = liveSeries[commonDates[0]];
+            const btBase = btSeries[commonDates[0]];
+
+            const liveNorm = commonDates.map(d => (liveSeries[d] / liveBase) * 100);
+            const btNorm = commonDates.map(d => (btSeries[d] / btBase) * 100);
+            const diffData = commonDates.map((d, i) => liveNorm[i] - btNorm[i]);
+
+            deviationCharts.normalized = new Chart(canvas, {
+                type: 'line',
+                data: {
+                    labels: commonDates,
+                    datasets: [{
+                        label: 'Live (normalized)',
+                        data: liveNorm,
+                        borderColor: '#22c55e',
+                        borderWidth: 2,
+                        fill: false,
+                        pointRadius: 0,
+                    }, {
+                        label: 'Backtest (normalized)',
+                        data: btNorm,
+                        borderColor: '#8b5cf6',
+                        borderWidth: 2,
+                        borderDash: [6, 3],
+                        fill: false,
+                        pointRadius: 0,
+                    }, {
+                        label: 'Spread',
+                        data: diffData,
+                        borderColor: 'rgba(230,126,34,0.6)',
+                        backgroundColor: 'rgba(230,126,34,0.08)',
+                        borderWidth: 1,
+                        fill: true,
+                        pointRadius: 0,
+                        yAxisID: 'y1',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: { legend: { position: 'top' } },
+                    scales: {
+                        x: { display: true, ticks: { maxTicksLimit: 12 } },
+                        y: { display: true, position: 'left', title: { display: true, text: 'Indexed (100)' } },
+                        y1: { display: true, position: 'right', title: { display: true, text: 'Spread' }, grid: { drawOnChartArea: false } }
+                    }
+                }
+            });
+        }
+
+        function renderRollingDrift(liveSnaps, btSnaps) {
+            const canvas = document.getElementById('rollingDriftChart');
+            if (!canvas) return;
+            if (deviationCharts.rolling) deviationCharts.rolling.destroy();
+
+            const liveSeries = buildEquityByDate(liveSnaps);
+            const btSeries = buildEquityByDate(btSnaps);
+            const commonDates = Object.keys(liveSeries).filter(d => btSeries[d]).sort();
+            if (commonDates.length < 10) return;
+
+            const window = 30;
+            const rollingDates = [];
+            const rollingDrift = [];
+            const rollingMax = [];
+            const rollingMin = [];
+
+            for (let i = window; i < commonDates.length; i++) {
+                const windowDates = commonDates.slice(i - window, i);
+                let drifts = windowDates.map(d => {
+                    const bt = btSeries[d];
+                    return bt > 0 ? ((liveSeries[d] - bt) / bt * 100) : 0;
+                });
+                const avg = drifts.reduce((a,b)=>a+b,0) / drifts.length;
+                const max = Math.max(...drifts);
+                const min = Math.min(...drifts);
+                rollingDates.push(commonDates[i]);
+                rollingDrift.push(avg);
+                rollingMax.push(max);
+                rollingMin.push(min);
+            }
+
+            deviationCharts.rolling = new Chart(canvas, {
+                type: 'line',
+                data: {
+                    labels: rollingDates,
+                    datasets: [{
+                        label: 'Avg Drift (30d)',
+                        data: rollingDrift,
+                        borderColor: '#e67e22',
+                        backgroundColor: 'rgba(230,126,34,0.15)',
+                        borderWidth: 2,
+                        fill: false,
+                        pointRadius: 0,
+                    }, {
+                        label: 'Max (30d)',
+                        data: rollingMax,
+                        borderColor: 'rgba(239,68,68,0.4)',
+                        borderWidth: 1,
+                        borderDash: [3, 3],
+                        fill: false,
+                        pointRadius: 0,
+                    }, {
+                        label: 'Min (30d)',
+                        data: rollingMin,
+                        borderColor: 'rgba(59,130,246,0.4)',
+                        borderWidth: 1,
+                        borderDash: [3, 3],
+                        fill: false,
+                        pointRadius: 0,
+                    }, {
+                        label: 'Zero',
+                        data: rollingDates.map(() => 0),
+                        borderColor: 'rgba(100,116,139,0.3)',
+                        borderWidth: 1,
+                        borderDash: [2, 2],
+                        pointRadius: 0,
+                        fill: false,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: { legend: { position: 'top' } },
+                    scales: {
+                        x: { display: true, ticks: { maxTicksLimit: 12 } },
+                        y: { display: true, title: { display: true, text: 'Drift %' } }
+                    }
+                }
+            });
+        }
+
         function renderPositionDrift(liveSnaps, btSnaps) {
             const container = document.getElementById('position-drift-table');
             if (!container) return;
 
-            // Get latest snapshot positions
             const sortedLive = [...liveSnaps].sort((a,b) => new Date(b.date || b.timestamp) - new Date(a.date || a.timestamp));
             const sortedBt = [...btSnaps].sort((a,b) => new Date(b.date || b.timestamp) - new Date(a.date || a.timestamp));
 
             const livePos = new Map();
             const btPos = new Map();
+            let liveTotalValue = 0, btTotalValue = 0;
 
             if (sortedLive[0]?.positions) {
-                for (const p of sortedLive[0].positions) livePos.set(p.symbol, p);
+                for (const p of sortedLive[0].positions) {
+                    livePos.set(p.symbol, p);
+                    liveTotalValue += (p.market_value || (p.qty * (p.current_price || p.avg_price || 0)));
+                }
             }
             if (sortedBt[0]?.positions) {
-                for (const p of sortedBt[0].positions) btPos.set(p.symbol, p);
+                for (const p of sortedBt[0].positions) {
+                    btPos.set(p.symbol, p);
+                    btTotalValue += (p.market_value || (p.qty * (p.current_price || p.avg_price || 0)));
+                }
             }
 
-            const allSymbols = [...new Set([...livePos.keys(), ...btPos.keys()])].sort();
+            const allSymbols = [...new Set([...livePos.keys(), ...btPos.keys()])];
+            const intersection = allSymbols.filter(s => livePos.has(s) && btPos.has(s)).length;
 
-            let html = '<table class="drift-table"><thead><tr>';
-            html += '<th>Symbol</th><th>Status</th><th>Live Qty</th><th>BT Qty</th><th>Live P&L</th><th>BT P&L</th>';
-            html += '</tr></thead><tbody>';
-
-            for (const sym of allSymbols) {
+            // Build rows with sort priority: LIVE ONLY (1) → qty diffs (2) → BOTH (3) → BT ONLY (4)
+            const rows = allSymbols.map(sym => {
                 const lp = livePos.get(sym);
                 const bp = btPos.get(sym);
                 const inLive = !!lp, inBt = !!bp;
+                let sortKey;
+                if (inLive && !inBt) sortKey = 1;
+                else if (!inLive && inBt) sortKey = 4;
+                else {
+                    const qtyDiff = lp && bp && bp.qty > 0 ? Math.abs(lp.qty - bp.qty) / bp.qty : 0;
+                    sortKey = qtyDiff > 0.2 ? 2 : 3;
+                }
+                return { sym, lp, bp, inLive, inBt, sortKey };
+            }).sort((a,b) => a.sortKey - b.sortKey || a.sym.localeCompare(b.sym));
 
+            let html = `<div class="drift-overlap-header"><strong>${intersection}/${allSymbols.length}</strong> positions match (${allSymbols.length > 0 ? (intersection/allSymbols.length*100).toFixed(0) : 0}% overlap) — Live: ${livePos.size} positions, Backtest: ${btPos.size} positions</div>`;
+            html += '<table class="drift-table"><thead><tr>';
+            html += '<th>Symbol</th><th>Status</th><th>Live Qty</th><th>BT Qty</th><th>Qty Diff</th><th>Live Wt%</th><th>BT Wt%</th><th>Live P&L</th><th>BT P&L</th>';
+            html += '</tr></thead><tbody>';
+
+            for (const { sym, lp, bp, inLive, inBt } of rows) {
                 let status, statusClass;
                 if (inLive && inBt) { status = 'BOTH'; statusClass = 'both'; }
                 else if (inLive) { status = 'LIVE ONLY'; statusClass = 'live'; }
@@ -3065,13 +3407,27 @@
 
                 const lQty = lp ? lp.qty?.toFixed(0) : '-';
                 const bQty = bp ? bp.qty?.toFixed(0) : '-';
+
+                let qtyDiffStr = '-';
+                if (lp && bp && bp.qty > 0) {
+                    const diff = ((lp.qty - bp.qty) / bp.qty * 100);
+                    qtyDiffStr = (diff >= 0 ? '+' : '') + diff.toFixed(0) + '%';
+                    if (Math.abs(diff) > 20) qtyDiffStr = `<span class="qty-diff-warn">${qtyDiffStr}</span>`;
+                }
+
+                const lVal = lp ? (lp.market_value || (lp.qty * (lp.current_price || lp.avg_price || 0))) : 0;
+                const bVal = bp ? (bp.market_value || (bp.qty * (bp.current_price || bp.avg_price || 0))) : 0;
+                const lWt = liveTotalValue > 0 ? (lVal / liveTotalValue * 100).toFixed(1) + '%' : '-';
+                const bWt = btTotalValue > 0 ? (bVal / btTotalValue * 100).toFixed(1) + '%' : '-';
+
                 const lPnl = lp?.unrealized_pnl != null ? (lp.unrealized_pnl >= 0 ? '+' : '') + lp.unrealized_pnl.toFixed(0) : '-';
                 const bPnl = bp?.unrealized_pnl != null ? (bp.unrealized_pnl >= 0 ? '+' : '') + bp.unrealized_pnl.toFixed(0) : '-';
 
                 html += `<tr>
                     <td><strong>${sym}</strong></td>
                     <td><span class="drift-badge ${statusClass}">${status}</span></td>
-                    <td>${lQty}</td><td>${bQty}</td>
+                    <td>${lQty}</td><td>${bQty}</td><td>${qtyDiffStr}</td>
+                    <td>${lWt}</td><td>${bWt}</td>
                     <td>${lPnl}</td><td>${bPnl}</td>
                 </tr>`;
             }
@@ -3145,10 +3501,16 @@
             const liveMetrics = computeMetrics(liveSnapshots);
             const btMetrics = computeMetrics(snapshots);
 
+            // Compute and render drift score
+            const driftResult = computeDriftScore(liveSnapshots, snapshots, liveMetrics, btMetrics);
+            renderDriftScore(driftResult);
+
             // Render all deviation components
             renderDeviationKPIs(liveMetrics, btMetrics);
             renderEquityOverlay(liveSnapshots, snapshots);
+            renderNormalizedReturns(liveSnapshots, snapshots);
             renderDeviationTimeline(liveSnapshots, snapshots);
+            renderRollingDrift(liveSnapshots, snapshots);
             renderPositionDrift(liveSnapshots, snapshots);
             renderExecutionDivergence(liveSnapshots, snapshots);
 
