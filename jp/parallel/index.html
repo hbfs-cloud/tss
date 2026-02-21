@@ -5,7 +5,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JP Stocks / IBKR — Backtest 1Y | MarketWatch AI</title>
+    <title>JP Stocks / IBKR — Parallel Run | MarketWatch AI</title>
     <link rel="icon" href="https://market-watch.xyz/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
@@ -797,8 +797,8 @@
                 <span class="nav-title" id="nav-title">Live Trading</span>
                 <div class="mode-toggle">
                     <a href="../" class="mode-btn mode-live" id="mode-live"><span class="live-dot"></span> LIVE</a>
-                    <a href="backtest/" class="mode-btn mode-backtest active" id="mode-backtest"><i class="fas fa-flask"></i> BACKTEST 1Y</a>
-                    <a href="parallel/" class="mode-btn mode-parallel" id="mode-parallel"><i class="fas fa-code-compare"></i> PARALLEL</a>
+                    <a href="../backtest/" class="mode-btn mode-backtest" id="mode-backtest"><i class="fas fa-flask"></i> BACKTEST</a>
+                    <a href="./" class="mode-btn mode-parallel active" id="mode-parallel"><i class="fas fa-code-compare"></i> PARALLEL 1Y</a>
                 </div>
                 <select id="currency-selector" class="nav-select" onchange="setGlobalCurrency(this.value)">
                     <option value="USD">USD</option>
@@ -1588,7 +1588,7 @@
             const mainCash = bal.CashByCurrency ? (bal.CashByCurrency[getNativeCcy()] || 0) : 0;
             document.getElementById('kpi-cash').textContent = fmtMoneyFx(mainCash, date);
 
-            document.getElementById('nav-title').textContent = 'Backtest — ' + (s.portfolio || '').toUpperCase();
+            document.getElementById('nav-title').textContent = 'Parallel — ' + (s.portfolio || '').toUpperCase();
 
             // Execution metrics (slippage & fill rate) up to current date
             const metrics = getExecutionMetricsUpToDate(date);

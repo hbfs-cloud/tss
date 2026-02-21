@@ -1,64 +1,86 @@
 [
   {
-    "timestamp": "2026-02-21T14:45:41+01:00",
+    "timestamp": "2026-02-21T19:42:34+01:00",
     "date": "2026-02-20",
     "portfolio": "us",
     "allocation": "us",
     "currency": "USD",
-    "git_sha1": "8ca68791",
+    "git_sha1": "ccef3887",
     "git_branch": "main",
     "config_path": "config/portfolio_us.yaml",
     "config_hash": "5a9e4ea5813c9230",
     "actions": [
       {
-        "type": "UPDATE",
+        "type": "CANCEL",
         "symbol": "FDX",
         "side": "",
         "order_type": "",
         "qty": 0,
-        "stop_price": 371.06,
-        "order_id": "daf12b13-4457-427e-9a7b-c6705532d197",
-        "reason": "TRAILING_STOP_UPDATE: Replacing stop $367.24 with $371.06"
+        "order_id": "e880cd4c-981b-4706-bba4-78416a3ff071",
+        "reason": "CONSOLIDATE: Canceling stop (36 shares @ $371.06) to merge into single stop"
       },
       {
-        "type": "UPDATE",
+        "type": "CANCEL",
+        "symbol": "FDX",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "order_id": "daf12b13-4457-427e-9a7b-c6705532d197",
+        "reason": "CONSOLIDATE: Canceling stop (36 shares @ $367.24) to merge into single stop"
+      },
+      {
+        "type": "CANCEL",
         "symbol": "SNDK",
         "side": "",
         "order_type": "",
         "qty": 0,
-        "stop_price": 549.32,
-        "order_id": "1859df3f-1b1f-45d2-ab6d-235f5a47ce32",
-        "reason": "TRAILING_STOP_UPDATE: Replacing stop $522.78 with $549.32"
+        "order_id": "56ceda7d-84f1-4dde-aaf8-5959be1d3973",
+        "reason": "CONSOLIDATE: Canceling stop (1 shares @ $549.32) to merge into single stop"
       },
       {
-        "type": "UPDATE",
+        "type": "CANCEL",
+        "symbol": "SNDK",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "order_id": "1859df3f-1b1f-45d2-ab6d-235f5a47ce32",
+        "reason": "CONSOLIDATE: Canceling stop (1 shares @ $522.78) to merge into single stop"
+      },
+      {
+        "type": "CANCEL",
         "symbol": "TRX",
         "side": "",
         "order_type": "",
         "qty": 0,
-        "stop_price": 1.48,
-        "order_id": "63423a46-8882-4ff2-a889-597fc44d9229",
-        "reason": "TRAILING_STOP_UPDATE: Replacing stop $1.42 with $1.48"
+        "order_id": "f34c6315-0342-458b-b361-6474a52ecd4a",
+        "reason": "CONSOLIDATE: Canceling stop (7158 shares @ $1.48) to merge into single stop"
       },
       {
-        "type": "UPDATE",
+        "type": "CANCEL",
+        "symbol": "TRX",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "order_id": "63423a46-8882-4ff2-a889-597fc44d9229",
+        "reason": "CONSOLIDATE: Canceling stop (7158 shares @ $1.42) to merge into single stop"
+      },
+      {
+        "type": "CANCEL",
         "symbol": "TTC",
         "side": "",
         "order_type": "",
         "qty": 0,
-        "stop_price": 98.24,
-        "order_id": "26521fd2-4477-4e38-bc54-3c11b21a21c6",
-        "reason": "TRAILING_STOP_UPDATE: Replacing stop $97.19 with $98.24"
+        "order_id": "2835d995-746c-470c-8eaf-939efb2d3297",
+        "reason": "CONSOLIDATE: Canceling stop (127 shares @ $98.24) to merge into single stop"
       },
       {
-        "type": "CREATE",
-        "symbol": "ARIS",
-        "side": "SELL",
-        "order_type": "STOP",
-        "qty": 1,
-        "stop_price": 18.77,
-        "order_id": "5bd0bcc6-aeab-4597-8f2a-14905b4e5182",
-        "reason": "MISSING_STOP: 1 shares @ $18.77 | P&L: 9.6%, Risk: 10.7%"
+        "type": "CANCEL",
+        "symbol": "TTC",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "order_id": "26521fd2-4477-4e38-bc54-3c11b21a21c6",
+        "reason": "CONSOLIDATE: Canceling stop (127 shares @ $97.19) to merge into single stop"
       },
       {
         "type": "CREATE",
@@ -71,12 +93,48 @@
       },
       {
         "type": "CREATE",
+        "symbol": "FDX",
+        "side": "SELL",
+        "order_type": "STOP",
+        "qty": 36,
+        "stop_price": 371.06,
+        "reason": "CONSOLIDATED_STOP: 36 shares @ $371.06 (from 2 stops) | P&L: 20.0%, Risk: 4.5%"
+      },
+      {
+        "type": "CREATE",
         "symbol": "HI",
         "side": "SELL",
         "order_type": "STOP",
         "qty": 76,
         "stop_price": 31.9,
         "reason": "MISSING_STOP: 76 shares @ $31.90 | P&L: 0.2%, Risk: 0.3%"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "SNDK",
+        "side": "SELL",
+        "order_type": "STOP",
+        "qty": 1,
+        "stop_price": 549.32,
+        "reason": "CONSOLIDATED_STOP: 1 shares @ $549.32 (from 2 stops) | P&L: 15.1%, Risk: 15.5%"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "TRX",
+        "side": "SELL",
+        "order_type": "STOP",
+        "qty": 7158,
+        "stop_price": 1.48,
+        "reason": "CONSOLIDATED_STOP: 7158 shares @ $1.48 (from 2 stops) | P&L: 11.9%, Risk: 17.3%"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "TTC",
+        "side": "SELL",
+        "order_type": "STOP",
+        "qty": 127,
+        "stop_price": 98.24,
+        "reason": "CONSOLIDATED_STOP: 127 shares @ $98.24 (from 2 stops) | P&L: 11.1%, Risk: 3.5%"
       }
     ],
     "positions": [
@@ -777,10 +835,12 @@
         "crash_inverse_until": "0001-01-01T00:00:00Z",
         "equity_curve": [
           106456.23,
+          107934.05,
           107934.05
         ],
         "equity_curve_dates": [
           "2026-02-19T22:00:02+01:00",
+          "2026-02-20T15:30:00+01:00",
           "2026-02-20T15:30:00+01:00"
         ],
         "global_pause_until": "0001-01-01T00:00:00Z",
@@ -920,7 +980,7 @@
           "DVAX": 15.432294093239076,
           "ERAS": 11.50438297581919,
           "ERO": 29.97,
-          "FDX": 371.05819207095993,
+          "FDX": 371.06,
           "FLNC": 21.340178557804652,
           "FOLD": 14.3,
           "HI": 31.900827378066168,
@@ -934,10 +994,10 @@
           "PHIN": 74.12754429477305,
           "RNA": 72.57,
           "SEMR": 11.84,
-          "SNDK": 549.3152857860339,
+          "SNDK": 549.32,
           "TAK": 18.24,
           "TGB": 7.252169695748539,
-          "TRX": 1.478351929161059,
+          "TRX": 1.48,
           "TTC": 98.24400458404044,
           "TTI": 10.38,
           "TYRA": 27.64,
@@ -946,6 +1006,7 @@
         },
         "regime_score_history": [
           0.5098059353927423,
+          0.5476859602362959,
           0.5476859602362959
         ],
         "stop_history": [],

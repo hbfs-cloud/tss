@@ -211,7 +211,7 @@
     "manual_count": 0,
     "manual_actions": [],
     "date": "2026-02-20",
-    "timestamp": "2026-02-21T14:50:18+01:00",
+    "timestamp": "2026-02-21T19:44:30+01:00",
     "currency": "USDC",
     "ret": 0.0,
     "max_dd": 0,
@@ -339,7 +339,7 @@
         "stop_price": 0,
         "order_type": "LIMIT",
         "value": 11001.83,
-        "reason": "ROTATION_IN"
+        "reason": ""
       },
       {
         "symbol": "MKOR",
@@ -348,21 +348,25 @@
         "stop_price": 0,
         "order_type": "LIMIT",
         "value": 10980.05,
-        "reason": "ROTATION_IN"
+        "reason": ""
       }
     ],
     "manual_count": 0,
     "manual_actions": [],
     "date": "2026-02-20",
-    "timestamp": "2026-02-21T14:47:08+01:00",
+    "timestamp": "2026-02-21T19:43:07+01:00",
     "currency": "USD",
     "ret": -0.0022272000000000116,
-    "max_dd": 0,
+    "max_dd": -0.0022272000000000116,
     "sharpe": 0,
     "vol": 0,
-    "peak_equity": 0,
-    "equity_curve": [],
-    "equity_curve_dates": []
+    "peak_equity": 99777.28,
+    "equity_curve": [
+      99777.28
+    ],
+    "equity_curve_dates": [
+      "2026-02-20T15:30:00+01:00"
+    ]
   },
   {
     "id": "eu_momentum_rotation",
@@ -396,8 +400,8 @@
         "pnl": 324.3,
         "pnl_pct": 5.87,
         "mkt_value": 5844.45,
-        "stop": 110.45,
-        "risk_pct": 11.18,
+        "stop": 110.5,
+        "risk_pct": 11.14,
         "change_today": 0,
         "reason": "BUY SII.DE @ $119.43 | Score=24 | Risk=14.3% | Size=$6K (6.4% of equity) || Strategy=momentum-rotation, RSI=50.3, ATR=$6.81, Mom=11.3%",
         "since": "2026-02-04"
@@ -576,21 +580,23 @@
     "manual_count": 0,
     "manual_actions": [],
     "date": "2026-02-20",
-    "timestamp": "2026-02-21T14:46:31+01:00",
+    "timestamp": "2026-02-21T19:42:57+01:00",
     "currency": "EUR",
     "ret": 0.04191986845190668,
     "max_dd": 0,
-    "sharpe": 15.874507866387544,
-    "vol": 0.04630378339952383,
+    "sharpe": 11.224972160321826,
+    "vol": 0.04365562564852852,
     "peak_equity": 93760.42,
     "equity_curve": [
       92503.45,
       92503.45,
+      93043.09,
       93043.09
     ],
     "equity_curve_dates": [
       "2026-02-19T17:28:09+01:00",
       "2026-02-19T17:35:45+01:00",
+      "2026-02-20T09:00:00+01:00",
       "2026-02-20T09:00:00+01:00"
     ]
   },
@@ -612,7 +618,7 @@
         "pnl": 0,
         "pnl_pct": -100.0,
         "mkt_value": 0,
-        "stop": 23985.71,
+        "stop": 23990,
         "risk_pct": 0,
         "change_today": 0,
         "reason": "BUY 6590.T @ $26131.10 | Score=74 | Risk=17.7% | Size=$22917K (12.0% of equity) || Strategy=momentum-rotation, RSI=51.6, ATR=$1936.43, Mom=23.9%",
@@ -626,7 +632,7 @@
         "pnl": 0,
         "pnl_pct": -100.0,
         "mkt_value": 0,
-        "stop": 6476.43,
+        "stop": 6480,
         "risk_pct": 0,
         "change_today": 0,
         "reason": "BUY 7826.T @ $6509.60 | Score=98 | Risk=15.0% | Size=$21293K (12.0% of equity) || Strategy=momentum-rotation, RSI=79.3, ATR=$392.14, Mom=56.6%",
@@ -682,7 +688,7 @@
         "pnl": 0,
         "pnl_pct": -100.0,
         "mkt_value": 0,
-        "stop": 20278.57,
+        "stop": 20280,
         "risk_pct": 0,
         "change_today": 0,
         "reason": "BUY 5801.T @ $21805.10 | Score=138 | Risk=16.7% | Size=$21020K (12.0% of equity) || Strategy=momentum-rotation, RSI=78.6, ATR=$1504.29, Mom=103.9%",
@@ -722,19 +728,21 @@
     "manual_count": 0,
     "manual_actions": [],
     "date": "2026-02-20",
-    "timestamp": "2026-02-21T14:49:15+01:00",
+    "timestamp": "2026-02-21T19:43:29+01:00",
     "currency": "EUR",
     "ret": -0.040004787013569375,
     "max_dd": 0,
-    "sharpe": 0,
-    "vol": 0.0,
+    "sharpe": 15.874507866387544,
+    "vol": 0.0415189779956335,
     "peak_equity": 191073881.9072983,
     "equity_curve": [
       179474002.51253662,
+      180412812.99079832,
       180412812.99079832
     ],
     "equity_curve_dates": [
       "2026-02-19T01:00:00+01:00",
+      "2026-02-20T01:00:00+01:00",
       "2026-02-20T01:00:00+01:00"
     ]
   },
@@ -799,7 +807,7 @@
         "pnl_pct": 11.94,
         "mkt_value": 12812.82,
         "stop": 1.48,
-        "risk_pct": 17.41,
+        "risk_pct": 17.32,
         "change_today": 0,
         "reason": "",
         "since": "2026-02-02"
@@ -1020,19 +1028,21 @@
     "manual_count": 0,
     "manual_actions": [],
     "date": "2026-02-20",
-    "timestamp": "2026-02-21T14:45:41+01:00",
+    "timestamp": "2026-02-21T19:42:34+01:00",
     "currency": "USD",
     "ret": 0.07883053680525215,
     "max_dd": 0,
-    "sharpe": 0,
-    "vol": 0.0,
+    "sharpe": 15.874507866387544,
+    "vol": 0.11018455761163509,
     "peak_equity": 107934.05,
     "equity_curve": [
       106456.23,
+      107934.05,
       107934.05
     ],
     "equity_curve_dates": [
       "2026-02-19T22:00:02+01:00",
+      "2026-02-20T15:30:00+01:00",
       "2026-02-20T15:30:00+01:00"
     ]
   },
@@ -1136,19 +1146,21 @@
     "manual_count": 0,
     "manual_actions": [],
     "date": "2026-02-20",
-    "timestamp": "2026-02-21T14:45:56+01:00",
+    "timestamp": "2026-02-21T19:42:49+01:00",
     "currency": "USD",
     "ret": -0.04386120498031245,
     "max_dd": -0.04386120498031245,
-    "sharpe": 0,
-    "vol": 0.0,
+    "sharpe": -15.874507866387544,
+    "vol": 0.1253673938806983,
     "peak_equity": 102118.78,
     "equity_curve": [
       98151.88,
+      96601.59,
       96601.59
     ],
     "equity_curve_dates": [
       "2026-02-19T22:00:02+01:00",
+      "2026-02-20T15:30:00+01:00",
       "2026-02-20T15:30:00+01:00"
     ]
   },
@@ -1157,7 +1169,7 @@
     "name": "US Stocks / T212",
     "icon": "fa-flag-usa",
     "color": "#3b82f6",
-    "equity": 10169.58,
+    "equity": 10164.5,
     "initial_capital": 9949.06,
     "cash": 0,
     "positions_count": 10,
@@ -1303,85 +1315,72 @@
         "since": "2026-02-06"
       }
     ],
-    "pending_count": 0,
-    "pending_orders": [],
-    "manual_count": 5,
-    "manual_actions": [
-      {
-        "symbol": "CTMX",
-        "side": "BUY",
-        "qty": 272,
-        "limit_price": 5.59,
-        "stop_price": 0,
-        "stop_loss": 4.36,
-        "order_type": "LIMIT",
-        "value": 1521.27,
-        "reason": "BUY CTMX @ $5.59 | Score=68 | Mode=AF | Risk=22.0% | Size=$2K (15.0% of equity) || TREND: Bullish structure - Price > SMA50 > SMA200, -3.0% from SMA20 | MOMENTUM: accelerating explosive - 10d=3.6%, 60d=39.9%, 120d=164.9% | RSI: 44.7 - sweet spot - not overbought | VOLUME: 0.58x avg - low (watch for breakout) | VOLATILITY: 4.5% daily, ATR=7.9% - normal range | REGIME: NEUTRAL - selective entries, normal sizing | SCORE: Quality=85, Reward=100, Timing=60",
-        "manual": true
-      },
+    "pending_count": 5,
+    "pending_orders": [
       {
         "symbol": "TARA",
-        "side": "BUY",
         "qty": 216,
         "limit_price": 7.05,
         "stop_price": 0,
-        "stop_loss": 5.76,
         "order_type": "LIMIT",
-        "value": 1521.76,
-        "reason": "BUY TARA @ $7.05 | Score=67 | Mode=AF | Risk=18.2% | Size=$2K (15.0% of equity) || TREND: Perfect uptrend - Price $6.84 > SMA20 $6.73 > SMA50 $5.95 > SMA200 $4.47 | MOMENTUM: sustained explosive - 10d=5.2%, 60d=-5.8%, 120d=117.8% | RSI: 44.0 - sweet spot - not overbought | VOLUME: 1.37x avg - above average (confirmation) | VOLATILITY: 3.7% daily, ATR=6.3% - normal range | REGIME: NEUTRAL - selective entries, normal sizing | SCORE: Quality=80, Reward=100, Timing=60",
-        "manual": true
+        "value": 1522.8,
+        "reason": ""
+      },
+      {
+        "symbol": "CTMX",
+        "qty": 272,
+        "limit_price": 5.59,
+        "stop_price": 0,
+        "order_type": "LIMIT",
+        "value": 1520.48,
+        "reason": ""
       },
       {
         "symbol": "BW",
-        "side": "BUY",
         "qty": 52,
         "limit_price": 8.98,
         "stop_price": 0,
-        "stop_loss": 6.13,
         "order_type": "LIMIT",
-        "value": 467.04,
-        "reason": "BUY BW @ $8.98 | Score=67 | Mode=AF | Risk=31.7% | Size=$0K (4.6% of equity) || TREND: Bullish structure - Price > SMA50 > SMA200, -10.2% from SMA20 | MOMENTUM: accelerating explosive - 10d=2.3%, 60d=50.3%, 120d=325.4% | RSI: 43.1 - sweet spot - not overbought | VOLUME: 0.75x avg - normal (quiet accumulation) | VOLATILITY: 6.5% daily, ATR=11.9% - elevated - wider stops needed | REGIME: NEUTRAL - selective entries, normal sizing | SCORE: Quality=85, Reward=100, Timing=60",
-        "manual": true
+        "value": 466.96,
+        "reason": ""
       },
       {
         "symbol": "ORKA",
-        "side": "BUY",
         "qty": 1,
         "limit_price": 33.31,
         "stop_price": 0,
-        "stop_loss": 27.56,
         "order_type": "LIMIT",
         "value": 33.31,
-        "reason": "BUY ORKA @ $33.31 | Score=21 | Mode=AF | Risk=17.3% | Size=$0K (0.3% of equity) || TREND: Bullish structure - Price > SMA50 > SMA200, -3.1% from SMA20 | MOMENTUM: accelerating explosive - 10d=2.9%, 60d=10.4%, 120d=111.8% | RSI: 38.6 - oversold zone - potential mean reversion | VOLUME: 1.05x avg - above average (confirmation) | VOLATILITY: 2.3% daily, ATR=5.9% - normal range | COMPRESSION: Low volatility after strong trend - potential expansion setup | REGIME: NEUTRAL - selective entries, normal sizing | SCORE: Quality=90, Reward=98, Timing=60",
-        "manual": true
+        "reason": ""
       },
       {
         "symbol": "MAMA",
-        "side": "BUY",
         "qty": 1,
         "limit_price": 16.37,
         "stop_price": 0,
-        "stop_loss": 14.03,
         "order_type": "LIMIT",
         "value": 16.37,
-        "reason": "BUY MAMA @ $16.37 | Score=21 | Mode=AF | Risk=14.3% | Size=$0K (0.2% of equity) || TREND: Perfect uptrend - Price $15.89 > SMA20 $15.26 > SMA50 $14.27 > SMA200 $10.50 | MOMENTUM: accelerating explosive - 10d=1.5%, 60d=52.8%, 120d=96.7% | RSI: 60.0 - healthy momentum - room to run | VOLUME: 1.38x avg - above average (confirmation) | VOLATILITY: 2.2% daily, ATR=4.7% - normal range | COMPRESSION: Low volatility after strong trend - potential expansion setup | REGIME: NEUTRAL - selective entries, normal sizing | SCORE: Quality=100, Reward=100, Timing=30",
-        "manual": true
+        "reason": ""
       }
     ],
+    "manual_count": 0,
+    "manual_actions": [],
     "date": "2026-02-20",
-    "timestamp": "2026-02-21T14:49:47+01:00",
+    "timestamp": "2026-02-21T19:44:02+01:00",
     "currency": "",
-    "ret": 0.02216490804156377,
-    "max_dd": 0,
-    "sharpe": 0,
-    "vol": 0.0,
+    "ret": 0.02165430704006213,
+    "max_dd": -0.0004995289874311355,
+    "sharpe": 14.987394412008664,
+    "vol": 0.14189989365090067,
     "peak_equity": 10169.58,
     "equity_curve": [
       9995.87,
-      10169.58
+      10169.58,
+      10164.5
     ],
     "equity_curve_dates": [
       "2026-02-19T22:00:02+01:00",
+      "2026-02-20T15:30:00+01:00",
       "2026-02-20T15:30:00+01:00"
     ]
   }

@@ -1,11 +1,11 @@
 [
   {
-    "timestamp": "2026-02-21T14:47:08+01:00",
+    "timestamp": "2026-02-21T19:43:07+01:00",
     "date": "2026-02-20",
     "portfolio": "etf_us",
     "allocation": "etf_us",
     "currency": "USD",
-    "git_sha1": "8ca68791",
+    "git_sha1": "ccef3887",
     "git_branch": "main",
     "config_path": "config/portfolio_etf_us.yaml",
     "config_hash": "29f3369dca69814a",
@@ -16,7 +16,7 @@
         "side": "SELL",
         "order_type": "MARKET",
         "qty": 264,
-        "order_id": "afb6baaa-7f92-4cf5-b694-251eeea8adc7",
+        "order_id": "47940f88-865b-40b6-8f21-e00d09cde128",
         "reason": "ROTATION_OUT"
       },
       {
@@ -25,28 +25,8 @@
         "side": "SELL",
         "order_type": "MARKET",
         "qty": 100,
-        "order_id": "77d03aab-9986-40ca-85bb-1223c90b0b62",
+        "order_id": "31fa1afd-09a6-42f2-92ef-f1e08afbb5aa",
         "reason": "ROTATION_OUT"
-      },
-      {
-        "type": "CREATE",
-        "symbol": "PPEM",
-        "side": "BUY",
-        "order_type": "LIMIT",
-        "qty": 511,
-        "limit_price": 21.527532360076904,
-        "order_id": "3ca58efd-3c4a-4bb7-bd42-97523c05268a",
-        "reason": "ROTATION_IN"
-      },
-      {
-        "type": "CREATE",
-        "symbol": "MKOR",
-        "side": "BUY",
-        "order_type": "LIMIT",
-        "qty": 215,
-        "limit_price": 51.074278747558594,
-        "order_id": "57aada4e-eb9e-4942-bc47-f77443733f0d",
-        "reason": "ROTATION_IN"
       }
     ],
     "positions": [
@@ -186,6 +166,38 @@
     ],
     "pending_orders": [
       {
+        "OrderID": "31fa1afd-09a6-42f2-92ef-f1e08afbb5aa",
+        "Symbol": "CBTA",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 100,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-21T18:43:07.15662677Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "47940f88-865b-40b6-8f21-e00d09cde128",
+        "Symbol": "AMZP",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 264,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-21T18:43:06.7895792Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
         "OrderID": "57aada4e-eb9e-4942-bc47-f77443733f0d",
         "Symbol": "MKOR",
         "Side": "BUY",
@@ -197,7 +209,7 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-21T13:47:08.624505003Z",
+        "PlacedDate": "2026-02-21T13:47:08.624505Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
@@ -213,39 +225,7 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-21T13:47:08.466036355Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": "alpaca"
-      },
-      {
-        "OrderID": "77d03aab-9986-40ca-85bb-1223c90b0b62",
-        "Symbol": "CBTA",
-        "Side": "SELL",
-        "OrderType": "MARKET",
-        "Qty": 100,
-        "FilledQty": 0,
-        "LimitPrice": 0,
-        "StopPrice": 0,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "",
-        "PlacedDate": "2026-02-21T13:47:08.373490116Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": "alpaca"
-      },
-      {
-        "OrderID": "afb6baaa-7f92-4cf5-b694-251eeea8adc7",
-        "Symbol": "AMZP",
-        "Side": "SELL",
-        "OrderType": "MARKET",
-        "Qty": 264,
-        "FilledQty": 0,
-        "LimitPrice": 0,
-        "StopPrice": 0,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "",
-        "PlacedDate": "2026-02-21T13:47:08.190127818Z",
+        "PlacedDate": "2026-02-21T13:47:08.466036Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       }
@@ -265,14 +245,18 @@
         "cautious_restart_start": "0001-01-01T00:00:00Z",
         "cautious_restart_until": "0001-01-01T00:00:00Z",
         "crash_inverse_until": "0001-01-01T00:00:00Z",
-        "equity_curve": [],
-        "equity_curve_dates": [],
+        "equity_curve": [
+          99777.28
+        ],
+        "equity_curve_dates": [
+          "2026-02-20T15:30:00+01:00"
+        ],
         "global_pause_until": "0001-01-01T00:00:00Z",
         "is_in_grace_period": false,
         "last_entry_creation_date": "2026-02-20T15:30:00+01:00",
         "last_liquidation_date": "0001-01-01T00:00:00Z",
         "last_streak_reset_date": "0001-01-01T00:00:00Z",
-        "peak_equity": 0,
+        "peak_equity": 99777.28,
         "position_clusters": null,
         "position_entries": {},
         "position_highs": null,

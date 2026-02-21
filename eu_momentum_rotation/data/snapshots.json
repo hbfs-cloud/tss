@@ -1,46 +1,15 @@
 [
   {
-    "timestamp": "2026-02-21T14:46:31+01:00",
+    "timestamp": "2026-02-21T19:42:57+01:00",
     "date": "2026-02-20",
     "portfolio": "eu_momentum_rotation",
     "allocation": "momentum",
     "currency": "EUR",
-    "git_sha1": "8ca68791",
+    "git_sha1": "ccef3887",
     "git_branch": "main",
     "config_path": "config/portfolio_eu_momentum_rotation.yaml",
     "config_hash": "d2f657a6039649c0",
-    "actions": [
-      {
-        "type": "UPDATE",
-        "symbol": "DBG.PA",
-        "side": "",
-        "order_type": "",
-        "qty": 0,
-        "stop_price": 8.45,
-        "order_id": "5037157814",
-        "reason": "TRAILING_STOP_UPDATE: Replacing stop $8.32 with $8.45"
-      },
-      {
-        "type": "UPDATE",
-        "symbol": "FMV.DE",
-        "side": "",
-        "order_type": "",
-        "qty": 0,
-        "stop_price": 17.7,
-        "order_id": "5037175551",
-        "reason": "TRAILING_STOP_UPDATE: Replacing stop $16.55 with $17.70"
-      },
-      {
-        "type": "UPDATE",
-        "symbol": "SII.DE",
-        "side": "",
-        "order_type": "",
-        "qty": 0,
-        "stop_price": 110.5,
-        "order_id": "5037175552",
-        "reason": "TRAILING_STOP_UPDATE: Replacing stop $107.50 with $110.50"
-      }
-    ],
+    "actions": null,
     "positions": [
       {
         "Symbol": "DBG.PA",
@@ -507,11 +476,13 @@
         "equity_curve": [
           92503.45,
           92503.45,
+          93043.09,
           93043.09
         ],
         "equity_curve_dates": [
           "2026-02-19T17:28:09+01:00",
           "2026-02-19T17:35:45+01:00",
+          "2026-02-20T09:00:00+01:00",
           "2026-02-20T09:00:00+01:00"
         ],
         "global_pause_until": "0001-01-01T00:00:00Z",
@@ -636,7 +607,7 @@
           "OHB.DE": 230,
           "PRY.MI": 96.92856706891742,
           "RIO1.DE": 78,
-          "SII.DE": 110.45000675746373,
+          "SII.DE": 110.5,
           "TKA.DE": 10.840178557804652,
           "VBK.DE": 23.8,
           "VK.PA": 18.08,
@@ -645,6 +616,7 @@
         "regime_score_history": [
           0.6346272977638784,
           0.6346272977638784,
+          0.6480547627445724,
           0.6480547627445724
         ],
         "stop_history": [],

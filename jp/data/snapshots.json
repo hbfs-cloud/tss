@@ -1,35 +1,15 @@
 [
   {
-    "timestamp": "2026-02-21T14:49:15+01:00",
+    "timestamp": "2026-02-21T19:43:29+01:00",
     "date": "2026-02-20",
     "portfolio": "jp",
     "allocation": "jp",
     "currency": "JPY",
-    "git_sha1": "8ca68791",
+    "git_sha1": "ccef3887",
     "git_branch": "main",
     "config_path": "config/portfolio_jp.yaml",
     "config_hash": "73ae5ecbc126d840",
     "actions": [
-      {
-        "type": "UPDATE",
-        "symbol": "6590.T",
-        "side": "",
-        "order_type": "",
-        "qty": 0,
-        "stop_price": 23985.714285714286,
-        "order_id": "299",
-        "reason": "TRAILING_STOP_UPDATE: Replacing stop $23010.00 with $23985.71"
-      },
-      {
-        "type": "UPDATE",
-        "symbol": "7826.T",
-        "side": "",
-        "order_type": "",
-        "qty": 0,
-        "stop_price": 6476.428571428572,
-        "order_id": "300",
-        "reason": "TRAILING_STOP_UPDATE: Replacing stop $6270.00 with $6476.43"
-      },
       {
         "type": "UPDATE",
         "symbol": "6366.T",
@@ -37,18 +17,8 @@
         "order_type": "",
         "qty": 0,
         "stop_price": 1246.1711506200002,
-        "order_id": "301",
+        "order_id": "306",
         "reason": "TRAILING_STOP_UPDATE: Replacing stop $1246.00 with $1246.17"
-      },
-      {
-        "type": "UPDATE",
-        "symbol": "5801.T",
-        "side": "",
-        "order_type": "",
-        "qty": 0,
-        "stop_price": 20278.571428571428,
-        "order_id": "302",
-        "reason": "TRAILING_STOP_UPDATE: Replacing stop $19860.00 with $20278.57"
       },
       {
         "type": "UPDATE",
@@ -57,7 +27,7 @@
         "order_type": "",
         "qty": 0,
         "stop_price": 10844.285714285714,
-        "order_id": "303",
+        "order_id": "308",
         "reason": "TRAILING_STOP_UPDATE: Replacing stop $10840.00 with $10844.29"
       }
     ],
@@ -218,7 +188,7 @@
         "BrokerSource": "ibkr"
       },
       {
-        "OrderID": "306",
+        "OrderID": "309",
         "Symbol": "6366.T",
         "Side": "SELL",
         "OrderType": "STOP",
@@ -234,7 +204,7 @@
         "BrokerSource": "ibkr"
       },
       {
-        "OrderID": "308",
+        "OrderID": "310",
         "Symbol": "1723.T",
         "Side": "SELL",
         "OrderType": "STOP",
@@ -347,10 +317,12 @@
         "crash_inverse_until": "0001-01-01T00:00:00Z",
         "equity_curve": [
           179474002.51253662,
+          180412812.99079832,
           180412812.99079832
         ],
         "equity_curve_dates": [
           "2026-02-19T01:00:00+01:00",
+          "2026-02-20T01:00:00+01:00",
           "2026-02-20T01:00:00+01:00"
         ],
         "global_pause_until": "0001-01-01T00:00:00Z",
@@ -435,15 +407,16 @@
           "186A.T": 1036,
           "285A.T": 19200,
           "3110.T": 18580,
-          "5801.T": 20278.571428571428,
+          "5801.T": 20280,
           "6330.T": 5570,
           "6366.T": 1246.1711506200002,
-          "6590.T": 23985.714285714286,
+          "6590.T": 23990,
           "7184.T": 2602.285714285714,
-          "7826.T": 6476.428571428572
+          "7826.T": 6480
         },
         "regime_score_history": [
           0.6390064332589344,
+          0.6768427539005492,
           0.6768427539005492
         ],
         "stop_history": [],
