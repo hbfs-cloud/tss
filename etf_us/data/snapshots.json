@@ -1,11 +1,11 @@
 [
   {
-    "timestamp": "2026-02-21T19:43:07+01:00",
+    "timestamp": "2026-02-22T12:46:34+01:00",
     "date": "2026-02-20",
     "portfolio": "etf_us",
     "allocation": "etf_us",
     "currency": "USD",
-    "git_sha1": "ccef3887",
+    "git_sha1": "f179b75",
     "git_branch": "main",
     "config_path": "config/portfolio_etf_us.yaml",
     "config_hash": "29f3369dca69814a",
@@ -16,7 +16,7 @@
         "side": "SELL",
         "order_type": "MARKET",
         "qty": 264,
-        "order_id": "47940f88-865b-40b6-8f21-e00d09cde128",
+        "order_id": "ce791742-9994-4d21-8ab8-4afa868546d8",
         "reason": "ROTATION_OUT"
       },
       {
@@ -25,7 +25,7 @@
         "side": "SELL",
         "order_type": "MARKET",
         "qty": 100,
-        "order_id": "31fa1afd-09a6-42f2-92ef-f1e08afbb5aa",
+        "order_id": "1aa388bc-5674-4cad-80ec-a601c407d33f",
         "reason": "ROTATION_OUT"
       }
     ],
@@ -166,7 +166,7 @@
     ],
     "pending_orders": [
       {
-        "OrderID": "31fa1afd-09a6-42f2-92ef-f1e08afbb5aa",
+        "OrderID": "1aa388bc-5674-4cad-80ec-a601c407d33f",
         "Symbol": "CBTA",
         "Side": "SELL",
         "OrderType": "MARKET",
@@ -177,12 +177,12 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-21T18:43:07.15662677Z",
+        "PlacedDate": "2026-02-22T11:46:34.136414164Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
       {
-        "OrderID": "47940f88-865b-40b6-8f21-e00d09cde128",
+        "OrderID": "ce791742-9994-4d21-8ab8-4afa868546d8",
         "Symbol": "AMZP",
         "Side": "SELL",
         "OrderType": "MARKET",
@@ -193,7 +193,23 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-21T18:43:06.7895792Z",
+        "PlacedDate": "2026-02-22T11:46:33.873092017Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "3318baaa-a09f-46b1-b096-d44e07c4617d",
+        "Symbol": "CBTA",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 100,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-22T11:35:27.741749Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },

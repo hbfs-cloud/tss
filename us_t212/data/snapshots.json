@@ -1,11 +1,11 @@
 [
   {
-    "timestamp": "2026-02-21T19:44:02+01:00",
+    "timestamp": "2026-02-22T12:48:43+01:00",
     "date": "2026-02-20",
     "portfolio": "us_t212",
     "allocation": "us_t212",
     "currency": "USD",
-    "git_sha1": "ccef3887",
+    "git_sha1": "f179b75",
     "git_branch": "main",
     "config_path": "config/portfolio_us_t212.yaml",
     "config_hash": "571e41335c2afa9b",
@@ -451,13 +451,9 @@
         "cautious_restart_until": "0001-01-01T00:00:00Z",
         "crash_inverse_until": "0001-01-01T00:00:00Z",
         "equity_curve": [
-          9995.87,
-          10169.58,
           10164.5
         ],
         "equity_curve_dates": [
-          "2026-02-19T22:00:02+01:00",
-          "2026-02-20T15:30:00+01:00",
           "2026-02-20T15:30:00+01:00"
         ],
         "global_pause_until": "0001-01-01T00:00:00Z",
@@ -594,9 +590,7 @@
           "WDC": 254.22
         },
         "regime_score_history": [
-          0.5098059353927423,
-          0.5476859602362959,
-          0.5476859602362959
+          0.5476859602362958
         ],
         "stop_history": [],
         "stop_streak_count": 0,

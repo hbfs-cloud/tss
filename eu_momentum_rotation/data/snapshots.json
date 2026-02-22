@@ -1,11 +1,11 @@
 [
   {
-    "timestamp": "2026-02-21T19:42:57+01:00",
+    "timestamp": "2026-02-22T12:46:08+01:00",
     "date": "2026-02-20",
     "portfolio": "eu_momentum_rotation",
     "allocation": "momentum",
     "currency": "EUR",
-    "git_sha1": "ccef3887",
+    "git_sha1": "f179b75",
     "git_branch": "main",
     "config_path": "config/portfolio_eu_momentum_rotation.yaml",
     "config_hash": "d2f657a6039649c0",
@@ -474,15 +474,9 @@
         "cautious_restart_until": "0001-01-01T00:00:00Z",
         "crash_inverse_until": "0001-01-01T00:00:00Z",
         "equity_curve": [
-          92503.45,
-          92503.45,
-          93043.09,
           93043.09
         ],
         "equity_curve_dates": [
-          "2026-02-19T17:28:09+01:00",
-          "2026-02-19T17:35:45+01:00",
-          "2026-02-20T09:00:00+01:00",
           "2026-02-20T09:00:00+01:00"
         ],
         "global_pause_until": "0001-01-01T00:00:00Z",
@@ -614,10 +608,7 @@
           "WCH.DE": 73.2857175554548
         },
         "regime_score_history": [
-          0.6346272977638784,
-          0.6346272977638784,
-          0.6480547627445724,
-          0.6480547627445724
+          0.6480547627445723
         ],
         "stop_history": [],
         "stop_streak_count": 0,

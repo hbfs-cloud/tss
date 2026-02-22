@@ -1,11 +1,11 @@
 [
   {
-    "timestamp": "2026-02-21T19:43:29+01:00",
+    "timestamp": "2026-02-22T12:47:36+01:00",
     "date": "2026-02-20",
     "portfolio": "jp",
     "allocation": "jp",
     "currency": "JPY",
-    "git_sha1": "ccef3887",
+    "git_sha1": "f179b75",
     "git_branch": "main",
     "config_path": "config/portfolio_jp.yaml",
     "config_hash": "73ae5ecbc126d840",
@@ -17,7 +17,7 @@
         "order_type": "",
         "qty": 0,
         "stop_price": 1246.1711506200002,
-        "order_id": "306",
+        "order_id": "321",
         "reason": "TRAILING_STOP_UPDATE: Replacing stop $1246.00 with $1246.17"
       },
       {
@@ -27,7 +27,7 @@
         "order_type": "",
         "qty": 0,
         "stop_price": 10844.285714285714,
-        "order_id": "308",
+        "order_id": "322",
         "reason": "TRAILING_STOP_UPDATE: Replacing stop $10840.00 with $10844.29"
       }
     ],
@@ -188,14 +188,14 @@
         "BrokerSource": "ibkr"
       },
       {
-        "OrderID": "309",
-        "Symbol": "6366.T",
+        "OrderID": "284",
+        "Symbol": "3110.T",
         "Side": "SELL",
         "OrderType": "STOP",
-        "Qty": 16200,
+        "Qty": 1000,
         "FilledQty": 0,
         "LimitPrice": 0,
-        "StopPrice": 1246,
+        "StopPrice": 18580,
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "JPY",
@@ -204,7 +204,7 @@
         "BrokerSource": "ibkr"
       },
       {
-        "OrderID": "310",
+        "OrderID": "324",
         "Symbol": "1723.T",
         "Side": "SELL",
         "OrderType": "STOP",
@@ -228,6 +228,22 @@
         "FilledQty": 0,
         "LimitPrice": 0,
         "StopPrice": 19200,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "JPY",
+        "PlacedDate": "0001-01-01T00:00:00Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "ibkr"
+      },
+      {
+        "OrderID": "323",
+        "Symbol": "6366.T",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 16200,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 1246,
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "JPY",
@@ -282,22 +298,6 @@
         "PlacedDate": "0001-01-01T00:00:00Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "ibkr"
-      },
-      {
-        "OrderID": "284",
-        "Symbol": "3110.T",
-        "Side": "SELL",
-        "OrderType": "STOP",
-        "Qty": 1000,
-        "FilledQty": 0,
-        "LimitPrice": 0,
-        "StopPrice": 18580,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "JPY",
-        "PlacedDate": "0001-01-01T00:00:00Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": "ibkr"
       }
     ],
     "balance": {
@@ -316,13 +316,9 @@
         "cautious_restart_until": "0001-01-01T00:00:00Z",
         "crash_inverse_until": "0001-01-01T00:00:00Z",
         "equity_curve": [
-          179474002.51253662,
-          180412812.99079832,
           180412812.99079832
         ],
         "equity_curve_dates": [
-          "2026-02-19T01:00:00+01:00",
-          "2026-02-20T01:00:00+01:00",
           "2026-02-20T01:00:00+01:00"
         ],
         "global_pause_until": "0001-01-01T00:00:00Z",
@@ -415,9 +411,7 @@
           "7826.T": 6480
         },
         "regime_score_history": [
-          0.6390064332589344,
-          0.6768427539005492,
-          0.6768427539005492
+          0.676842753900549
         ],
         "stop_history": [],
         "stop_streak_count": 0,

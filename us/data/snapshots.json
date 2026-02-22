@@ -1,11 +1,11 @@
 [
   {
-    "timestamp": "2026-02-21T19:42:34+01:00",
+    "timestamp": "2026-02-22T12:44:50+01:00",
     "date": "2026-02-20",
     "portfolio": "us",
     "allocation": "us",
     "currency": "USD",
-    "git_sha1": "ccef3887",
+    "git_sha1": "f179b75",
     "git_branch": "main",
     "config_path": "config/portfolio_us.yaml",
     "config_hash": "5a9e4ea5813c9230",
@@ -493,7 +493,7 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-21T13:45:41.075715348Z",
+        "PlacedDate": "2026-02-21T13:45:41.075715Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
@@ -509,7 +509,7 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-21T13:45:40.855909072Z",
+        "PlacedDate": "2026-02-21T13:45:40.855909Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
@@ -525,7 +525,7 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-21T13:45:40.765197074Z",
+        "PlacedDate": "2026-02-21T13:45:40.765197Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
@@ -541,7 +541,7 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-21T13:45:40.671496386Z",
+        "PlacedDate": "2026-02-21T13:45:40.671496Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
@@ -557,7 +557,7 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-21T13:45:40.581279288Z",
+        "PlacedDate": "2026-02-21T13:45:40.581279Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
@@ -834,13 +834,9 @@
         "cautious_restart_until": "0001-01-01T00:00:00Z",
         "crash_inverse_until": "0001-01-01T00:00:00Z",
         "equity_curve": [
-          106456.23,
-          107934.05,
           107934.05
         ],
         "equity_curve_dates": [
-          "2026-02-19T22:00:02+01:00",
-          "2026-02-20T15:30:00+01:00",
           "2026-02-20T15:30:00+01:00"
         ],
         "global_pause_until": "0001-01-01T00:00:00Z",
@@ -1005,9 +1001,7 @@
           "WDC": 254.22
         },
         "regime_score_history": [
-          0.5098059353927423,
-          0.5476859602362959,
-          0.5476859602362959
+          0.5476859602362958
         ],
         "stop_history": [],
         "stop_streak_count": 0,

@@ -1,11 +1,11 @@
 [
   {
-    "timestamp": "2026-02-21T19:44:30+01:00",
+    "timestamp": "2026-02-22T12:49:27+01:00",
     "date": "2026-02-20",
     "portfolio": "crypto",
     "allocation": "crypto",
     "currency": "USDC",
-    "git_sha1": "ccef3887",
+    "git_sha1": "f179b75",
     "git_branch": "main",
     "config_path": "config/portfolio_crypto.yaml",
     "config_hash": "5197433562e49846",
@@ -188,7 +188,7 @@
       },
       "MarginUsed": 0,
       "TotalEquity": 20000,
-      "Timestamp": "2026-02-21T19:44:30.791249+01:00",
+      "Timestamp": "2026-02-22T12:49:27.668870968+01:00",
       "BrokerSource": "binance"
     },
     "state": {
@@ -197,7 +197,7 @@
         "cautious_restart_until": "0001-01-01T00:00:00Z",
         "crash_inverse_until": "0001-01-01T00:00:00Z",
         "equity_curve": [],
-        "equity_curve_dates": null,
+        "equity_curve_dates": [],
         "global_pause_until": "0001-01-01T00:00:00Z",
         "is_in_grace_period": false,
         "last_entry_creation_date": "0001-01-01T00:00:00Z",

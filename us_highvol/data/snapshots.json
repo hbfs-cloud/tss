@@ -1,11 +1,11 @@
 [
   {
-    "timestamp": "2026-02-21T19:42:49+01:00",
+    "timestamp": "2026-02-22T12:45:50+01:00",
     "date": "2026-02-20",
     "portfolio": "us_highvol",
     "allocation": "us_highvol",
     "currency": "USD",
-    "git_sha1": "ccef3887",
+    "git_sha1": "f179b75",
     "git_branch": "main",
     "config_path": "config/portfolio_us_highvol.yaml",
     "config_hash": "8289ab41208dade5",
@@ -16,7 +16,7 @@
         "side": "SELL",
         "order_type": "MARKET",
         "qty": 215,
-        "order_id": "11b2e98c-8e6e-4b51-b565-601b7b74a377",
+        "order_id": "9aa17e99-eeff-42dd-921d-c369285d8abc",
         "reason": "TIMEOUT: Position held 15 days (max=14) with -11.5% P&L ($-972). Entry $39.31 -> $34.79. Cutting to free capital."
       },
       {
@@ -25,7 +25,7 @@
         "side": "SELL",
         "order_type": "MARKET",
         "qty": 672,
-        "order_id": "cfa296b5-cf1d-40ca-ad55-ecf091ff3214",
+        "order_id": "78bf8b7e-211a-4e73-b43e-7ecffbe22d55",
         "reason": "TIMEOUT: Position held 15 days (max=14) with -3.1% P&L ($-262). Entry $12.59 -> $12.20. Cutting to free capital."
       },
       {
@@ -34,7 +34,7 @@
         "side": "SELL",
         "order_type": "MARKET",
         "qty": 2279,
-        "order_id": "905e0238-df39-450a-8594-0892d23a2b9b",
+        "order_id": "c1158509-7484-43d5-9437-85d2e3f79f0e",
         "reason": "TIMEOUT: Position held 15 days (max=14) with -15.1% P&L ($-1276). Entry $3.71 -> $3.15. Cutting to free capital."
       },
       {
@@ -43,7 +43,7 @@
         "side": "SELL",
         "order_type": "MARKET",
         "qty": 569,
-        "order_id": "a7fa4fdf-fa71-4c83-ad09-ada995f3af58",
+        "order_id": "18377a08-a16a-40de-a293-a8a2f31852ca",
         "reason": "TIMEOUT: Position held 15 days (max=14) with 6.1% P&L ($489). Entry $14.15 -> $15.01. Cutting to free capital."
       }
     ],
@@ -155,7 +155,7 @@
     ],
     "pending_orders": [
       {
-        "OrderID": "a7fa4fdf-fa71-4c83-ad09-ada995f3af58",
+        "OrderID": "18377a08-a16a-40de-a293-a8a2f31852ca",
         "Symbol": "WULF",
         "Side": "SELL",
         "OrderType": "MARKET",
@@ -166,12 +166,12 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-21T18:42:49.000375372Z",
+        "PlacedDate": "2026-02-22T11:45:50.420530633Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
       {
-        "OrderID": "905e0238-df39-450a-8594-0892d23a2b9b",
+        "OrderID": "c1158509-7484-43d5-9437-85d2e3f79f0e",
         "Symbol": "WRN",
         "Side": "SELL",
         "OrderType": "MARKET",
@@ -182,12 +182,12 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-21T18:42:48.722744313Z",
+        "PlacedDate": "2026-02-22T11:45:50.156567014Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
       {
-        "OrderID": "cfa296b5-cf1d-40ca-ad55-ecf091ff3214",
+        "OrderID": "78bf8b7e-211a-4e73-b43e-7ecffbe22d55",
         "Symbol": "TNGX",
         "Side": "SELL",
         "OrderType": "MARKET",
@@ -198,12 +198,12 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-21T18:42:48.373091813Z",
+        "PlacedDate": "2026-02-22T11:45:49.892839335Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
       {
-        "OrderID": "11b2e98c-8e6e-4b51-b565-601b7b74a377",
+        "OrderID": "9aa17e99-eeff-42dd-921d-c369285d8abc",
         "Symbol": "MBX",
         "Side": "SELL",
         "OrderType": "MARKET",
@@ -214,7 +214,39 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-21T18:42:48.019910803Z",
+        "PlacedDate": "2026-02-22T11:45:49.610750765Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "ddfd26d5-e0f2-4816-b475-159b4227a728",
+        "Symbol": "WULF",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 569,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-22T11:34:15.105928Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "2c98cad0-ec24-42cc-b2e3-e7340a45c0b2",
+        "Symbol": "WRN",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 2279,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-22T11:34:14.84153Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
@@ -267,13 +299,9 @@
         "cautious_restart_until": "0001-01-01T00:00:00Z",
         "crash_inverse_until": "0001-01-01T00:00:00Z",
         "equity_curve": [
-          98151.88,
-          96601.59,
           96601.59
         ],
         "equity_curve_dates": [
-          "2026-02-19T22:00:02+01:00",
-          "2026-02-20T15:30:00+01:00",
           "2026-02-20T15:30:00+01:00"
         ],
         "global_pause_until": "0001-01-01T00:00:00Z",
