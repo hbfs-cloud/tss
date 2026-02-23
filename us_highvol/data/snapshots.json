@@ -1,5 +1,227 @@
 [
   {
+    "timestamp": "2026-02-23T23:09:15+01:00",
+    "date": "2026-02-23",
+    "portfolio": "us_highvol",
+    "allocation": "us_highvol",
+    "currency": "USD",
+    "git_sha1": "67ed26e",
+    "git_branch": "main",
+    "config_path": "config/portfolio_us_highvol.yaml",
+    "config_hash": "8289ab41208dade5",
+    "actions": [
+      {
+        "type": "CREATE",
+        "symbol": "GERN",
+        "side": "BUY",
+        "order_type": "LIMIT",
+        "qty": 43041,
+        "limit_price": 1.778849980831146,
+        "stop_loss": 1.6671867759799577,
+        "order_id": "85badd14-d20b-4a5b-a31c-c385d394af2d",
+        "reason": "BUY GERN @ $1.78 | Score=90 | Risk=6.3% | Size=$77K (79.7% equity) | MaxCorr=0.28 || ATR=7.0%, DistMA20=11.5%, VolRatio=1.5x, RSI=65.3, Mom=26.4% || Stop=$1.67 (6.3% below)"
+      },
+      {
+        "type": "UPDATE",
+        "symbol": "ICHR",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "stop_price": 45.0592496735709,
+        "order_id": "4cd7280d-6bfb-49cb-b5e1-af343ea6afed",
+        "reason": "TRAILING_STOP: Raising stop $35.15->$45.06 | Max loss now: -0.8% | Current P&L: 12.5%, Risk: 31.2%"
+      }
+    ],
+    "positions": [
+      {
+        "Symbol": "ICHR",
+        "Qty": 116,
+        "AvgEntry": 45.43,
+        "CurrentPrice": 50.9,
+        "UnrealizedPnL": 634.52,
+        "ChangeToday": 0.01092,
+        "Currency": "USD",
+        "Timestamp": "2026-02-11T15:20:51.274756Z",
+        "BrokerSource": "",
+        "Name": "Ichor Holdings, Ltd.",
+        "Sector": "Technology",
+        "Country": "US",
+        "AssetType": "STOCK",
+        "MarketCapCategory": "Small-Cap"
+      },
+      {
+        "Symbol": "PLSE",
+        "Qty": 219,
+        "AvgEntry": 23.88,
+        "CurrentPrice": 20.19,
+        "UnrealizedPnL": -808.11,
+        "ChangeToday": -0.05742,
+        "Currency": "USD",
+        "Timestamp": "2026-02-11T14:32:04.933898Z",
+        "BrokerSource": "",
+        "Name": "Pulse Biosciences, Inc.",
+        "Sector": "Healthcare",
+        "Country": "US",
+        "AssetType": "STOCK",
+        "MarketCapCategory": "Small-Cap",
+        "Themes": [
+          "augmented_reality",
+          "gaming"
+        ]
+      }
+    ],
+    "pending_orders": [
+      {
+        "OrderID": "85badd14-d20b-4a5b-a31c-c385d394af2d",
+        "Symbol": "GERN",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 43041,
+        "FilledQty": 0,
+        "LimitPrice": 1.78,
+        "StopPrice": 1.67,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-23T22:09:15.303576802Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "ebdc1f49-5433-4fe9-98b4-b2ba9dd40a02",
+        "Symbol": "GERN",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 43041,
+        "FilledQty": 0,
+        "LimitPrice": 1.67,
+        "StopPrice": 1.67,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-23T22:09:15.303576802Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "da84204c-ec84-4ad3-be0e-effa777c85e1",
+        "Symbol": "ICHR",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 116,
+        "FilledQty": 0,
+        "LimitPrice": 45.06,
+        "StopPrice": 45.06,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-23T22:09:15.216921892Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "4cd7280d-6bfb-49cb-b5e1-af343ea6afed",
+        "Symbol": "ICHR",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 116,
+        "FilledQty": 0,
+        "LimitPrice": 35.15,
+        "StopPrice": 35.15,
+        "ExpectedPrice": 0,
+        "Status": "PENDING_REPLACE",
+        "Currency": "",
+        "PlacedDate": "2026-02-11T15:20:51.284259Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "dd67164c-94c1-4604-a2a6-b471692e8fe1",
+        "Symbol": "PLSE",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 219,
+        "FilledQty": 0,
+        "LimitPrice": 18.86,
+        "StopPrice": 18.86,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-11T14:32:05.735963Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      }
+    ],
+    "balance": {
+      "BaseCurrency": "USD",
+      "CashByCurrency": {
+        "USD": 85795.91
+      },
+      "MarginUsed": 10326.009999999995,
+      "TotalEquity": 96121.92,
+      "Timestamp": "0001-01-01T00:00:00Z",
+      "BrokerSource": "alpaca"
+    },
+    "state": {
+      "pm_state": {
+        "cautious_restart_start": "0001-01-01T00:00:00Z",
+        "cautious_restart_until": "0001-01-01T00:00:00Z",
+        "crash_inverse_until": "0001-01-01T00:00:00Z",
+        "equity_curve": [
+          96601.59,
+          96121.92
+        ],
+        "equity_curve_dates": [
+          "2026-02-20T15:30:00+01:00",
+          "2026-02-23T22:00:01+01:00"
+        ],
+        "global_pause_until": "0001-01-01T00:00:00Z",
+        "is_in_grace_period": false,
+        "last_entry_creation_date": "2026-02-23T22:00:01+01:00",
+        "last_liquidation_date": "0001-01-01T00:00:00Z",
+        "last_streak_reset_date": "0001-01-01T00:00:00Z",
+        "peak_equity": 102118.78,
+        "position_clusters": null,
+        "position_entries": {},
+        "position_highs": {
+          "ALAB": 186.827,
+          "ALM": 14.829999923706055,
+          "AMPX": 14.341551,
+          "ICHR": 51.09000015258789,
+          "PLSE": 25.459999084472656,
+          "TGB": 8.829999923706055,
+          "WDC": 290.239990234375
+        },
+        "position_last_dca": {},
+        "position_open_dates": {
+          "ALAB": "2026-02-09T15:30:00+01:00",
+          "ALM": "2026-02-03T15:30:00+01:00",
+          "AMPX": "2026-02-03T15:30:00+01:00",
+          "GERN": "2026-02-23T22:00:01+01:00",
+          "ICHR": "2026-02-10T22:00:02+01:00",
+          "PLSE": "2026-02-10T22:00:02+01:00",
+          "TGB": "2026-01-25T15:30:00+01:00",
+          "WDC": "2026-01-25T15:30:00+01:00"
+        },
+        "position_stops": {
+          "ALAB": 145.5797892979213,
+          "ALM": 13.02850011416844,
+          "AMPX": 11.099928719656807,
+          "GERN": 1.6671867759799577,
+          "ICHR": 45.0592496735709,
+          "PLSE": 18.857950278690883,
+          "TGB": 7.908571260316031,
+          "WDC": 259.5114184788295
+        },
+        "regime_score_history": null,
+        "stop_history": [],
+        "stop_streak_count": 0,
+        "stopped_symbols": {}
+      },
+      "prev_regime": "EARLY_RISK_OFF"
+    }
+  },
+  {
     "timestamp": "2026-02-22T12:45:50+01:00",
     "date": "2026-02-20",
     "portfolio": "us_highvol",

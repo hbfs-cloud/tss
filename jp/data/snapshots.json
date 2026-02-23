@@ -1,11 +1,11 @@
 [
   {
-    "timestamp": "2026-02-22T12:47:36+01:00",
+    "timestamp": "2026-02-23T23:15:53+01:00",
     "date": "2026-02-20",
     "portfolio": "jp",
     "allocation": "jp",
     "currency": "JPY",
-    "git_sha1": "f179b75",
+    "git_sha1": "67ed26e",
     "git_branch": "main",
     "config_path": "config/portfolio_jp.yaml",
     "config_hash": "73ae5ecbc126d840",
@@ -17,7 +17,7 @@
         "order_type": "",
         "qty": 0,
         "stop_price": 1246.1711506200002,
-        "order_id": "321",
+        "order_id": "323",
         "reason": "TRAILING_STOP_UPDATE: Replacing stop $1246.00 with $1246.17"
       },
       {
@@ -27,7 +27,7 @@
         "order_type": "",
         "qty": 0,
         "stop_price": 10844.285714285714,
-        "order_id": "322",
+        "order_id": "324",
         "reason": "TRAILING_STOP_UPDATE: Replacing stop $10840.00 with $10844.29"
       }
     ],
@@ -188,14 +188,14 @@
         "BrokerSource": "ibkr"
       },
       {
-        "OrderID": "284",
-        "Symbol": "3110.T",
+        "OrderID": "326",
+        "Symbol": "1723.T",
         "Side": "SELL",
         "OrderType": "STOP",
-        "Qty": 1000,
+        "Qty": 1800,
         "FilledQty": 0,
         "LimitPrice": 0,
-        "StopPrice": 18580,
+        "StopPrice": 10840,
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "JPY",
@@ -204,14 +204,14 @@
         "BrokerSource": "ibkr"
       },
       {
-        "OrderID": "324",
-        "Symbol": "1723.T",
+        "OrderID": "284",
+        "Symbol": "3110.T",
         "Side": "SELL",
         "OrderType": "STOP",
-        "Qty": 1800,
+        "Qty": 1000,
         "FilledQty": 0,
         "LimitPrice": 0,
-        "StopPrice": 10840,
+        "StopPrice": 18580,
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "JPY",
@@ -236,7 +236,7 @@
         "BrokerSource": "ibkr"
       },
       {
-        "OrderID": "323",
+        "OrderID": "325",
         "Symbol": "6366.T",
         "Side": "SELL",
         "OrderType": "STOP",
@@ -303,10 +303,10 @@
     "balance": {
       "BaseCurrency": "EUR",
       "CashByCurrency": {
-        "EUR": 49154.7
+        "EUR": 46859.68
       },
       "MarginUsed": 0,
-      "TotalEquity": 987627.12,
+      "TotalEquity": 987529.34,
       "Timestamp": "0001-01-01T00:00:00Z",
       "BrokerSource": "ibkr"
     },
@@ -316,9 +316,11 @@
         "cautious_restart_until": "0001-01-01T00:00:00Z",
         "crash_inverse_until": "0001-01-01T00:00:00Z",
         "equity_curve": [
-          180412812.99079832
+          180412812.99079832,
+          179956149.45606017
         ],
         "equity_curve_dates": [
+          "2026-02-20T01:00:00+01:00",
           "2026-02-20T01:00:00+01:00"
         ],
         "global_pause_until": "0001-01-01T00:00:00Z",
@@ -411,7 +413,8 @@
           "7826.T": 6480
         },
         "regime_score_history": [
-          0.676842753900549
+          0.676842753900549,
+          0.6236888411551387
         ],
         "stop_history": [],
         "stop_streak_count": 0,
