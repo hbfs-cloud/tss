@@ -1,5 +1,206 @@
 [
   {
+    "timestamp": "2026-02-24T23:09:47+01:00",
+    "date": "2026-02-24",
+    "portfolio": "us_highvol",
+    "allocation": "us_highvol",
+    "currency": "USD",
+    "git_sha1": "551b627",
+    "git_branch": "main",
+    "config_path": "config/portfolio_us_highvol.yaml",
+    "config_hash": "8289ab41208dade5",
+    "actions": [
+      {
+        "type": "CREATE",
+        "symbol": "PVLA",
+        "side": "BUY",
+        "order_type": "LIMIT",
+        "qty": 333,
+        "limit_price": 121.01205368041991,
+        "stop_loss": 106.57801013687637,
+        "reason": "BUY PVLA @ $121.01 | Score=125 | Risk=11.9% | Size=$40K (41.9% equity) | MaxCorr=0.33 || ATR=7.2%, DistMA20=45.1%, VolRatio=3.4x, RSI=79.4, Mom=128.4% || Stop=$106.58 (11.9% below)"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "TNDM",
+        "side": "BUY",
+        "order_type": "LIMIT",
+        "qty": 1492,
+        "limit_price": 27.034499616622924,
+        "stop_loss": 23.812960407507642,
+        "reason": "BUY TNDM @ $27.03 | Score=120 | Risk=11.9% | Size=$40K (42.0% equity) | MaxCorr=0.17 || ATR=7.3%, DistMA20=32.1%, VolRatio=2.7x, RSI=75.3, Mom=110.5% || Stop=$23.81 (11.9% below)"
+      },
+      {
+        "type": "UPDATE",
+        "symbol": "ICHR",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "stop_price": 47.33676562990461,
+        "order_id": "da84204c-ec84-4ad3-be0e-effa777c85e1",
+        "reason": "TRAILING_STOP: Raising stop $45.06->$47.34 | Locked profit: +4.2% | Current P&L: 17.9%, Risk: 15.9%"
+      }
+    ],
+    "positions": [
+      {
+        "Symbol": "ICHR",
+        "Qty": 116,
+        "AvgEntry": 45.43,
+        "CurrentPrice": 53.7,
+        "UnrealizedPnL": 959.32,
+        "ChangeToday": 0.05109,
+        "Currency": "USD",
+        "Timestamp": "2026-02-11T15:20:51.274756Z",
+        "BrokerSource": "",
+        "Name": "Ichor Holdings, Ltd.",
+        "Sector": "Technology",
+        "Country": "US",
+        "AssetType": "STOCK",
+        "MarketCapCategory": "Small-Cap"
+      }
+    ],
+    "pending_orders": [
+      {
+        "OrderID": "c1e8f1ec-1e07-4cc2-8f7b-04ed744e4c8e",
+        "Symbol": "ICHR",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 116,
+        "FilledQty": 0,
+        "LimitPrice": 47.34,
+        "StopPrice": 47.34,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-24T22:09:46.907634416Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "85badd14-d20b-4a5b-a31c-c385d394af2d",
+        "Symbol": "GERN",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 43041,
+        "FilledQty": 0,
+        "LimitPrice": 1.78,
+        "StopPrice": 1.67,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-24T09:00:24.320037Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "ebdc1f49-5433-4fe9-98b4-b2ba9dd40a02",
+        "Symbol": "GERN",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 43041,
+        "FilledQty": 0,
+        "LimitPrice": 1.67,
+        "StopPrice": 1.67,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-23T22:09:15.303577Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "da84204c-ec84-4ad3-be0e-effa777c85e1",
+        "Symbol": "ICHR",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 116,
+        "FilledQty": 0,
+        "LimitPrice": 45.06,
+        "StopPrice": 45.06,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-24T09:00:02.313863Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      }
+    ],
+    "balance": {
+      "BaseCurrency": "USD",
+      "CashByCurrency": {
+        "USD": 89901.53
+      },
+      "MarginUsed": 6229.199999999997,
+      "TotalEquity": 96130.73,
+      "Timestamp": "0001-01-01T00:00:00Z",
+      "BrokerSource": "alpaca"
+    },
+    "state": {
+      "pm_state": {
+        "cautious_restart_start": "0001-01-01T00:00:00Z",
+        "cautious_restart_until": "0001-01-01T00:00:00Z",
+        "crash_inverse_until": "0001-01-01T00:00:00Z",
+        "equity_curve": [
+          96601.59,
+          96121.92,
+          96130.73
+        ],
+        "equity_curve_dates": [
+          "2026-02-20T15:30:00+01:00",
+          "2026-02-23T22:00:01+01:00",
+          "2026-02-24T22:00:01+01:00"
+        ],
+        "global_pause_until": "0001-01-01T00:00:00Z",
+        "is_in_grace_period": false,
+        "last_entry_creation_date": "2026-02-24T22:00:01+01:00",
+        "last_liquidation_date": "0001-01-01T00:00:00Z",
+        "last_streak_reset_date": "0001-01-01T00:00:00Z",
+        "peak_equity": 102118.78,
+        "position_clusters": null,
+        "position_entries": {},
+        "position_highs": {
+          "ALAB": 186.827,
+          "ALM": 14.829999923706055,
+          "AMPX": 14.341551,
+          "ICHR": 53.58000183105469,
+          "PLSE": 25.459999084472656,
+          "TGB": 8.829999923706055,
+          "WDC": 290.239990234375
+        },
+        "position_last_dca": {},
+        "position_open_dates": {
+          "ALAB": "2026-02-09T15:30:00+01:00",
+          "ALM": "2026-02-03T15:30:00+01:00",
+          "AMPX": "2026-02-03T15:30:00+01:00",
+          "GERN": "2026-02-23T22:00:01+01:00",
+          "ICHR": "2026-02-10T22:00:02+01:00",
+          "PLSE": "2026-02-10T22:00:02+01:00",
+          "PVLA": "2026-02-24T22:00:01+01:00",
+          "TGB": "2026-01-25T15:30:00+01:00",
+          "TNDM": "2026-02-24T22:00:01+01:00",
+          "WDC": "2026-01-25T15:30:00+01:00"
+        },
+        "position_stops": {
+          "ALAB": 145.5797892979213,
+          "ALM": 13.02850011416844,
+          "AMPX": 11.099928719656807,
+          "GERN": 1.6671867759799577,
+          "ICHR": 47.33676562990461,
+          "PLSE": 18.857950278690883,
+          "PVLA": 106.57801013687637,
+          "TGB": 7.908571260316031,
+          "TNDM": 23.812960407507642,
+          "WDC": 259.5114184788295
+        },
+        "regime_score_history": null,
+        "stop_history": [],
+        "stop_streak_count": 0,
+        "stopped_symbols": {}
+      },
+      "prev_regime": "NEUTRAL"
+    }
+  },
+  {
     "timestamp": "2026-02-23T23:09:15+01:00",
     "date": "2026-02-23",
     "portfolio": "us_highvol",
