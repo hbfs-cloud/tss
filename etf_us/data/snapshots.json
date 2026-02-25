@@ -1,5 +1,234 @@
 [
   {
+    "timestamp": "2026-02-25T23:12:14+01:00",
+    "date": "2026-02-25",
+    "portfolio": "etf_us",
+    "allocation": "etf_us",
+    "currency": "USD",
+    "git_sha1": "b68b7b0",
+    "git_branch": "main",
+    "config_path": "config/portfolio_etf_us.yaml",
+    "config_hash": "29f3369dca69814a",
+    "actions": [
+      {
+        "type": "CREATE",
+        "symbol": "EWY",
+        "side": "BUY",
+        "order_type": "LIMIT",
+        "qty": 230,
+        "limit_price": 152.7611393737793,
+        "order_id": "404e7640-c3bc-45d9-b1f2-e663ee658ae2",
+        "reason": "ROTATION_IN"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "PFIX",
+        "side": "BUY",
+        "order_type": "LIMIT",
+        "qty": 810,
+        "limit_price": 43.3485,
+        "order_id": "4a6ff653-8c09-45b4-9941-6c6717f3c153",
+        "reason": "ROTATION_IN"
+      }
+    ],
+    "positions": [
+      {
+        "Symbol": "MKOR",
+        "Qty": 215,
+        "AvgEntry": 49.278233,
+        "CurrentPrice": 54.8,
+        "UnrealizedPnL": 1187.179905,
+        "ChangeToday": 0.0873,
+        "Currency": "USD",
+        "Timestamp": "2026-02-23T14:33:44.507094Z",
+        "BrokerSource": "",
+        "Name": "Matthews Korea Active ETF",
+        "Sector": "Miscellaneous Region",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "MSFD",
+        "Qty": 155,
+        "AvgEntry": 14.358452,
+        "CurrentPrice": 13.71,
+        "UnrealizedPnL": -100.51006,
+        "ChangeToday": -0.028,
+        "Currency": "USD",
+        "Timestamp": "2026-02-24T14:33:32.037911Z",
+        "BrokerSource": "",
+        "Name": "Direxion Daily MSFT Bear 1X Shares ETF",
+        "Sector": "Trading--Inverse Equity",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "ai",
+          "augmented_reality",
+          "gaming",
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "PALD",
+        "Qty": 74,
+        "AvgEntry": 30.146486,
+        "CurrentPrice": 29.8039,
+        "UnrealizedPnL": -25.351364,
+        "ChangeToday": -0.02188,
+        "Currency": "USD",
+        "Timestamp": "2026-02-24T14:34:09.310116Z",
+        "BrokerSource": "",
+        "Name": "Direxion Daily PANW Bear 1X Shares",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "ai",
+          "augmented_reality",
+          "gaming"
+        ]
+      },
+      {
+        "Symbol": "PPEM",
+        "Qty": 511,
+        "AvgEntry": 20.875166,
+        "CurrentPrice": 21.3238,
+        "UnrealizedPnL": 229.251974,
+        "ChangeToday": 0.00563,
+        "Currency": "USD",
+        "Timestamp": "2026-02-23T14:33:20.991529Z",
+        "BrokerSource": "",
+        "Name": "Putnam PanAgora ESG Emerging Markets Equity ETF",
+        "Sector": "Trading--Leveraged Equity",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "augmented_reality",
+          "automotive",
+          "esg",
+          "gaming",
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "PXJ",
+        "Qty": 54,
+        "AvgEntry": 41.254444,
+        "CurrentPrice": 41.5773,
+        "UnrealizedPnL": 17.434224,
+        "ChangeToday": -0.00723,
+        "Currency": "USD",
+        "Timestamp": "2026-02-24T14:33:22.156653Z",
+        "BrokerSource": "",
+        "Name": "Invesco Oil & Gas Services ETF",
+        "Sector": "Equity Energy",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "investment_management",
+          "oil_gas_exploration",
+          "utilities"
+        ]
+      }
+    ],
+    "pending_orders": [
+      {
+        "OrderID": "4a6ff653-8c09-45b4-9941-6c6717f3c153",
+        "Symbol": "PFIX",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 810,
+        "FilledQty": 0,
+        "LimitPrice": 43.35,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-25T22:12:14.933775152Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "404e7640-c3bc-45d9-b1f2-e663ee658ae2",
+        "Symbol": "EWY",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 230,
+        "FilledQty": 0,
+        "LimitPrice": 152.76,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-25T22:12:14.842634903Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      }
+    ],
+    "balance": {
+      "BaseCurrency": "USD",
+      "CashByCurrency": {
+        "USD": 70296.21
+      },
+      "MarginUsed": 29254.17,
+      "TotalEquity": 99550.38,
+      "Timestamp": "0001-01-01T00:00:00Z",
+      "BrokerSource": "alpaca"
+    },
+    "state": {
+      "pm_state": {
+        "cautious_restart_start": "0001-01-01T00:00:00Z",
+        "cautious_restart_until": "0001-01-01T00:00:00Z",
+        "crash_inverse_until": "0001-01-01T00:00:00Z",
+        "equity_curve": [
+          99777.28,
+          98980.42,
+          98611.73,
+          99550.38
+        ],
+        "equity_curve_dates": [
+          "2026-02-20T15:30:00+01:00",
+          "2026-02-23T22:00:00+01:00",
+          "2026-02-24T21:59:45+01:00",
+          "2026-02-25T22:00:00+01:00"
+        ],
+        "global_pause_until": "0001-01-01T00:00:00Z",
+        "is_in_grace_period": false,
+        "last_entry_creation_date": "2026-02-25T22:00:00+01:00",
+        "last_liquidation_date": "0001-01-01T00:00:00Z",
+        "last_streak_reset_date": "0001-01-01T00:00:00Z",
+        "peak_equity": 99777.28,
+        "position_clusters": null,
+        "position_entries": {},
+        "position_highs": null,
+        "position_last_dca": {},
+        "position_open_dates": {
+          "EWY": "2026-02-25T22:00:00+01:00",
+          "MKOR": "2026-02-20T15:30:00+01:00",
+          "MSFD": "2026-02-23T22:00:00+01:00",
+          "PALD": "2026-02-23T22:00:00+01:00",
+          "PFIX": "2026-02-25T22:00:00+01:00",
+          "PPEM": "2026-02-20T15:30:00+01:00",
+          "PXJ": "2026-02-23T22:00:00+01:00"
+        },
+        "position_stops": {
+          "MKOR": 45.57026892027937,
+          "MSFD": 13.523452064032417,
+          "PALD": 27.79707592113822,
+          "PPEM": 17.948916155312673,
+          "PXJ": 38.599140862357004
+        },
+        "regime_score_history": null,
+        "stop_history": [],
+        "stop_streak_count": 0,
+        "stopped_symbols": {}
+      },
+      "prev_regime": "NEUTRAL"
+    }
+  },
+  {
     "timestamp": "2026-02-24T23:12:26+01:00",
     "date": "2026-02-24",
     "portfolio": "etf_us",
