@@ -1,11 +1,11 @@
 [
   {
-    "timestamp": "2026-02-25T23:15:40+01:00",
+    "timestamp": "2026-02-26T12:13:39+01:00",
     "date": "2026-02-25",
     "portfolio": "jp",
     "allocation": "jp",
     "currency": "JPY",
-    "git_sha1": "b68b7b0",
+    "git_sha1": "bbe3616",
     "git_branch": "main",
     "config_path": "config/portfolio_jp.yaml",
     "config_hash": "73ae5ecbc126d840",
@@ -17,7 +17,7 @@
         "order_type": "",
         "qty": 0,
         "stop_price": 6933.571428571428,
-        "order_id": "327",
+        "order_id": "332",
         "reason": "TRAILING_STOP_UPDATE: Replacing stop $6930.00 with $6933.57"
       },
       {
@@ -27,8 +27,18 @@
         "order_type": "",
         "qty": 0,
         "stop_price": 24643.571428571428,
-        "order_id": "329",
-        "reason": "TRAILING_STOP_UPDATE: Replacing stop $23420.00 with $24643.57"
+        "order_id": "333",
+        "reason": "TRAILING_STOP_UPDATE: Replacing stop $24640.00 with $24643.57"
+      },
+      {
+        "type": "UPDATE",
+        "symbol": "5713.T",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "stop_price": 10563.117515807999,
+        "order_id": "336",
+        "reason": "TRAILING_STOP_UPDATE: Replacing stop $10210.00 with $10563.12"
       },
       {
         "type": "UPDATE",
@@ -37,51 +47,11 @@
         "order_type": "",
         "qty": 0,
         "stop_price": 10844.285714285714,
-        "order_id": "331",
+        "order_id": "334",
         "reason": "TRAILING_STOP_UPDATE: Replacing stop $10840.00 with $10844.29"
-      },
-      {
-        "type": "CREATE",
-        "symbol": "5713.T",
-        "side": "BUY",
-        "order_type": "LIMIT",
-        "qty": 1979,
-        "limit_price": 11999.5,
-        "stop_loss": 10213.42857142857,
-        "order_id": "335",
-        "reason": "BUY 5713.T @ $11999.50 | Score=99 | Mode=UNKNOWN | Risk=14.9% | Size=$23747K (12.0% of equity) || Strategy=momentum-rotation, RSI=70.9, ATR=$718.29, Mom=36.9%"
-      },
-      {
-        "type": "CREATE",
-        "symbol": "6590.T",
-        "side": "SELL",
-        "order_type": "STOP",
-        "qty": 4000,
-        "stop_price": 23990,
-        "order_id": "337",
-        "reason": "MISSING_STOP: 4000 shares @ $23990.00 | P&L: 8.6%, Risk: -322.4%"
       }
     ],
     "positions": [
-      {
-        "Symbol": "6590.T",
-        "Qty": 4000,
-        "AvgEntry": 5230.13075,
-        "CurrentPrice": 0,
-        "UnrealizedPnL": 0,
-        "ChangeToday": 0,
-        "Currency": "JPY",
-        "Timestamp": "0001-01-01T00:00:00Z",
-        "BrokerSource": "ibkr",
-        "Name": "Shibaura Mechatronics Corporation",
-        "Sector": "Technology",
-        "Country": "JP",
-        "AssetType": "STOCK",
-        "Themes": [
-          "nickel",
-          "robotics"
-        ]
-      },
       {
         "Symbol": "7826.T",
         "Qty": 3200,
@@ -148,6 +118,26 @@
         "AssetType": "STOCK"
       },
       {
+        "Symbol": "5713.T",
+        "Qty": 1900,
+        "AvgEntry": 12003.5426316,
+        "CurrentPrice": 0,
+        "UnrealizedPnL": 0,
+        "ChangeToday": 0,
+        "Currency": "JPY",
+        "Timestamp": "2026-02-26T00:00:00Z",
+        "BrokerSource": "ibkr",
+        "Name": "Sumitomo Metal Mining Co., Ltd.",
+        "Sector": "Materials",
+        "Country": "JP",
+        "AssetType": "STOCK",
+        "Themes": [
+          "coal_mining",
+          "mining",
+          "nickel"
+        ]
+      },
+      {
         "Symbol": "3110.T",
         "Qty": 1000,
         "AvgEntry": 20776.608,
@@ -188,54 +178,6 @@
     ],
     "pending_orders": [
       {
-        "OrderID": "337",
-        "Symbol": "6590.T",
-        "Side": "SELL",
-        "OrderType": "STOP",
-        "Qty": 4000,
-        "FilledQty": 0,
-        "LimitPrice": 0,
-        "StopPrice": 23990,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "JPY",
-        "PlacedDate": "0001-01-01T00:00:00Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": "ibkr"
-      },
-      {
-        "OrderID": "336",
-        "Symbol": "5713.T",
-        "Side": "SELL",
-        "OrderType": "STOP",
-        "Qty": 1900,
-        "FilledQty": 0,
-        "LimitPrice": 0,
-        "StopPrice": 10210,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "JPY",
-        "PlacedDate": "0001-01-01T00:00:00Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": "ibkr"
-      },
-      {
-        "OrderID": "335",
-        "Symbol": "5713.T",
-        "Side": "BUY",
-        "OrderType": "LIMIT",
-        "Qty": 1900,
-        "FilledQty": 0,
-        "LimitPrice": 12000,
-        "StopPrice": 0,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "JPY",
-        "PlacedDate": "0001-01-01T00:00:00Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": "ibkr"
-      },
-      {
         "OrderID": "330",
         "Symbol": "3110.T",
         "Side": "SELL",
@@ -244,54 +186,6 @@
         "FilledQty": 0,
         "LimitPrice": 0,
         "StopPrice": 22800,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "JPY",
-        "PlacedDate": "0001-01-01T00:00:00Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": "ibkr"
-      },
-      {
-        "OrderID": "334",
-        "Symbol": "1723.T",
-        "Side": "SELL",
-        "OrderType": "STOP",
-        "Qty": 1800,
-        "FilledQty": 0,
-        "LimitPrice": 0,
-        "StopPrice": 10840,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "JPY",
-        "PlacedDate": "0001-01-01T00:00:00Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": "ibkr"
-      },
-      {
-        "OrderID": "333",
-        "Symbol": "5801.T",
-        "Side": "SELL",
-        "OrderType": "STOP",
-        "Qty": 900,
-        "FilledQty": 0,
-        "LimitPrice": 0,
-        "StopPrice": 24640,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "JPY",
-        "PlacedDate": "0001-01-01T00:00:00Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": "ibkr"
-      },
-      {
-        "OrderID": "332",
-        "Symbol": "7826.T",
-        "Side": "SELL",
-        "OrderType": "STOP",
-        "Qty": 3200,
-        "FilledQty": 0,
-        "LimitPrice": 0,
-        "StopPrice": 6930,
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "JPY",
@@ -316,6 +210,22 @@
         "BrokerSource": "ibkr"
       },
       {
+        "OrderID": "340",
+        "Symbol": "1723.T",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 1800,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 10840,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "JPY",
+        "PlacedDate": "0001-01-01T00:00:00Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "ibkr"
+      },
+      {
         "OrderID": "281",
         "Symbol": "1515.T",
         "Side": "SELL",
@@ -330,15 +240,63 @@
         "PlacedDate": "0001-01-01T00:00:00Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "ibkr"
+      },
+      {
+        "OrderID": "339",
+        "Symbol": "5713.T",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 1900,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 10560,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "JPY",
+        "PlacedDate": "0001-01-01T00:00:00Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "ibkr"
+      },
+      {
+        "OrderID": "338",
+        "Symbol": "5801.T",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 900,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 24640,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "JPY",
+        "PlacedDate": "0001-01-01T00:00:00Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "ibkr"
+      },
+      {
+        "OrderID": "337",
+        "Symbol": "7826.T",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 3200,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 6930,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "JPY",
+        "PlacedDate": "0001-01-01T00:00:00Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "ibkr"
       }
     ],
     "balance": {
       "BaseCurrency": "EUR",
       "CashByCurrency": {
-        "EUR": 168741.14
+        "EUR": 171352.52
       },
       "MarginUsed": 0,
-      "TotalEquity": 1072383.22,
+      "TotalEquity": 1042767.45,
       "Timestamp": "0001-01-01T00:00:00Z",
       "BrokerSource": "ibkr"
     },
@@ -351,12 +309,14 @@
           180412812.99079832,
           179956149.45606017,
           193642667.08293456,
-          197903576.75592652
+          197903576.75592652,
+          191912056.80942917
         ],
         "equity_curve_dates": [
           "2026-02-20T01:00:00+01:00",
           "2026-02-20T01:00:00+01:00",
           "2026-02-24T01:00:00+01:00",
+          "2026-02-25T01:00:00+01:00",
           "2026-02-25T01:00:00+01:00"
         ],
         "global_pause_until": "0001-01-01T00:00:00Z",
@@ -390,6 +350,7 @@
           "186A.T": 1121,
           "285A.T": 22845,
           "3110.T": 27680,
+          "5713.T": 11650,
           "5801.T": 28125,
           "6330.T": 6150,
           "6366.T": 1500,
@@ -444,7 +405,7 @@
           "186A.T": 1036,
           "285A.T": 19200,
           "3110.T": 22800,
-          "5713.T": 10213.42857142857,
+          "5713.T": 10563.117515807999,
           "5801.T": 24643.571428571428,
           "6330.T": 5570,
           "6366.T": 1246.1711506200002,
@@ -456,6 +417,7 @@
           0.676842753900549,
           0.6236888411551387,
           0.6553356389435637,
+          0.7142754661911127,
           0.7142754661911127
         ],
         "stop_history": [],

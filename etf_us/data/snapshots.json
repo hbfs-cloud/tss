@@ -1,44 +1,23 @@
 [
   {
-    "timestamp": "2026-02-25T23:12:14+01:00",
+    "timestamp": "2026-02-26T12:10:18+01:00",
     "date": "2026-02-25",
     "portfolio": "etf_us",
     "allocation": "etf_us",
     "currency": "USD",
-    "git_sha1": "b68b7b0",
+    "git_sha1": "bbe3616",
     "git_branch": "main",
     "config_path": "config/portfolio_etf_us.yaml",
     "config_hash": "29f3369dca69814a",
-    "actions": [
-      {
-        "type": "CREATE",
-        "symbol": "EWY",
-        "side": "BUY",
-        "order_type": "LIMIT",
-        "qty": 230,
-        "limit_price": 152.7611393737793,
-        "order_id": "404e7640-c3bc-45d9-b1f2-e663ee658ae2",
-        "reason": "ROTATION_IN"
-      },
-      {
-        "type": "CREATE",
-        "symbol": "PFIX",
-        "side": "BUY",
-        "order_type": "LIMIT",
-        "qty": 810,
-        "limit_price": 43.3485,
-        "order_id": "4a6ff653-8c09-45b4-9941-6c6717f3c153",
-        "reason": "ROTATION_IN"
-      }
-    ],
+    "actions": null,
     "positions": [
       {
         "Symbol": "MKOR",
         "Qty": 215,
         "AvgEntry": 49.278233,
-        "CurrentPrice": 54.8,
-        "UnrealizedPnL": 1187.179905,
-        "ChangeToday": 0.0873,
+        "CurrentPrice": 51.69,
+        "UnrealizedPnL": 518.529905,
+        "ChangeToday": 0,
         "Currency": "USD",
         "Timestamp": "2026-02-23T14:33:44.507094Z",
         "BrokerSource": "",
@@ -54,9 +33,9 @@
         "Symbol": "MSFD",
         "Qty": 155,
         "AvgEntry": 14.358452,
-        "CurrentPrice": 13.71,
-        "UnrealizedPnL": -100.51006,
-        "ChangeToday": -0.028,
+        "CurrentPrice": 13.75,
+        "UnrealizedPnL": -94.31006,
+        "ChangeToday": 0.00498,
         "Currency": "USD",
         "Timestamp": "2026-02-24T14:33:32.037911Z",
         "BrokerSource": "",
@@ -77,7 +56,7 @@
         "AvgEntry": 30.146486,
         "CurrentPrice": 29.8039,
         "UnrealizedPnL": -25.351364,
-        "ChangeToday": -0.02188,
+        "ChangeToday": 0,
         "Currency": "USD",
         "Timestamp": "2026-02-24T14:34:09.310116Z",
         "BrokerSource": "",
@@ -96,7 +75,7 @@
         "AvgEntry": 20.875166,
         "CurrentPrice": 21.3238,
         "UnrealizedPnL": 229.251974,
-        "ChangeToday": 0.00563,
+        "ChangeToday": 0,
         "Currency": "USD",
         "Timestamp": "2026-02-23T14:33:20.991529Z",
         "BrokerSource": "",
@@ -118,7 +97,7 @@
         "AvgEntry": 41.254444,
         "CurrentPrice": 41.5773,
         "UnrealizedPnL": 17.434224,
-        "ChangeToday": -0.00723,
+        "ChangeToday": 0,
         "Currency": "USD",
         "Timestamp": "2026-02-24T14:33:22.156653Z",
         "BrokerSource": "",
@@ -135,22 +114,6 @@
     ],
     "pending_orders": [
       {
-        "OrderID": "4a6ff653-8c09-45b4-9941-6c6717f3c153",
-        "Symbol": "PFIX",
-        "Side": "BUY",
-        "OrderType": "LIMIT",
-        "Qty": 810,
-        "FilledQty": 0,
-        "LimitPrice": 43.35,
-        "StopPrice": 0,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "",
-        "PlacedDate": "2026-02-25T22:12:14.933775152Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": "alpaca"
-      },
-      {
         "OrderID": "404e7640-c3bc-45d9-b1f2-e663ee658ae2",
         "Symbol": "EWY",
         "Side": "BUY",
@@ -162,7 +125,23 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-02-25T22:12:14.842634903Z",
+        "PlacedDate": "2026-02-26T09:00:19.371691Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "4a6ff653-8c09-45b4-9941-6c6717f3c153",
+        "Symbol": "PFIX",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 810,
+        "FilledQty": 0,
+        "LimitPrice": 43.35,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-26T09:00:18.27016Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       }
@@ -170,10 +149,10 @@
     "balance": {
       "BaseCurrency": "USD",
       "CashByCurrency": {
-        "USD": 70296.21
+        "USD": 70296.18
       },
-      "MarginUsed": 29254.17,
-      "TotalEquity": 99550.38,
+      "MarginUsed": 28591.72,
+      "TotalEquity": 98887.9,
       "Timestamp": "0001-01-01T00:00:00Z",
       "BrokerSource": "alpaca"
     },
@@ -186,13 +165,15 @@
           99777.28,
           98980.42,
           98611.73,
-          99550.38
+          99550.38,
+          98887.9
         ],
         "equity_curve_dates": [
           "2026-02-20T15:30:00+01:00",
           "2026-02-23T22:00:00+01:00",
           "2026-02-24T21:59:45+01:00",
-          "2026-02-25T22:00:00+01:00"
+          "2026-02-25T22:00:00+01:00",
+          "2026-02-25T16:12:41+01:00"
         ],
         "global_pause_until": "0001-01-01T00:00:00Z",
         "is_in_grace_period": false,
