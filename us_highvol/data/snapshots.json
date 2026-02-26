@@ -1,5 +1,274 @@
 [
   {
+    "timestamp": "2026-02-26T22:55:31+01:00",
+    "date": "2026-02-26",
+    "portfolio": "us_highvol",
+    "allocation": "us_highvol",
+    "currency": "USD",
+    "git_sha1": "e66e286",
+    "git_branch": "main",
+    "config_path": "config/portfolio_us_highvol.yaml",
+    "config_hash": "8289ab41208dade5",
+    "actions": [
+      {
+        "type": "CREATE",
+        "symbol": "WRBY",
+        "side": "BUY",
+        "order_type": "LIMIT",
+        "qty": 359,
+        "limit_price": 25.778249616622922,
+        "stop_loss": 20.120356695992605,
+        "order_id": "cd526976-8e34-46af-81c5-ad0e1d2c04e6",
+        "reason": "BUY WRBY @ $25.78 | Score=80 | Risk=21.9% | Size=$9K (9.8% equity) | MaxCorr=0.11 || ATR=7.2%, DistMA20=7.7%, VolRatio=3.8x, RSI=56.1, Mom=1.2% || Stop=$20.12 (21.9% below)"
+      }
+    ],
+    "positions": [
+      {
+        "Symbol": "TNDM",
+        "Qty": 769,
+        "AvgEntry": 26.13,
+        "CurrentPrice": 25.71,
+        "UnrealizedPnL": -322.98,
+        "ChangeToday": -0.01153,
+        "Currency": "USD",
+        "Timestamp": "2026-02-26T15:22:05.24559Z",
+        "BrokerSource": "",
+        "Name": "Tandem Diabetes Care, Inc.",
+        "Sector": "Healthcare",
+        "Country": "US",
+        "AssetType": "STOCK",
+        "MarketCapCategory": "Small-Cap",
+        "Themes": [
+          "augmented_reality",
+          "gaming"
+        ]
+      },
+      {
+        "Symbol": "UCTT",
+        "Qty": 297,
+        "AvgEntry": 64.93,
+        "CurrentPrice": 59.4,
+        "UnrealizedPnL": -1642.41,
+        "ChangeToday": -0.11765,
+        "Currency": "USD",
+        "Timestamp": "2026-02-26T14:32:21.906841Z",
+        "BrokerSource": "",
+        "Name": "Ultra Clean Holdings, Inc.",
+        "Sector": "Technology",
+        "Country": "US",
+        "AssetType": "STOCK",
+        "MarketCapCategory": "Mid-Cap"
+      },
+      {
+        "Symbol": "VIR",
+        "Qty": 2000,
+        "AvgEntry": 8.764335,
+        "CurrentPrice": 9.27,
+        "UnrealizedPnL": 1011.33,
+        "ChangeToday": -0.073,
+        "Currency": "USD",
+        "Timestamp": "2026-02-26T14:31:21.647083Z",
+        "BrokerSource": "",
+        "Name": "Vir Biotechnology, Inc.",
+        "Sector": "Healthcare",
+        "Country": "US",
+        "AssetType": "STOCK",
+        "MarketCapCategory": "Small-Cap",
+        "Themes": [
+          "augmented_reality",
+          "biotech",
+          "gaming"
+        ]
+      },
+      {
+        "Symbol": "ZBIO",
+        "Qty": 768,
+        "AvgEntry": 25.95,
+        "CurrentPrice": 26.36,
+        "UnrealizedPnL": 314.88,
+        "ChangeToday": 0.01268,
+        "Currency": "USD",
+        "Timestamp": "2026-02-26T14:34:38.462903Z",
+        "BrokerSource": "",
+        "Name": "Zenas BioPharma, Inc.",
+        "Sector": "Healthcare",
+        "Country": "US",
+        "AssetType": "STOCK",
+        "MarketCapCategory": "Small-Cap",
+        "Themes": [
+          "augmented_reality",
+          "biopharma",
+          "gaming"
+        ]
+      }
+    ],
+    "pending_orders": [
+      {
+        "OrderID": "cd526976-8e34-46af-81c5-ad0e1d2c04e6",
+        "Symbol": "WRBY",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 359,
+        "FilledQty": 0,
+        "LimitPrice": 25.78,
+        "StopPrice": 20.12,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-26T21:55:31.156571749Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "7024cd2b-78f6-4254-b119-0c61c95d343c",
+        "Symbol": "WRBY",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 359,
+        "FilledQty": 0,
+        "LimitPrice": 20.12,
+        "StopPrice": 20.12,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-26T21:55:31.156571749Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "25a759b3-a15c-408e-ba03-8a95b96ee9d4",
+        "Symbol": "TNDM",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 769,
+        "FilledQty": 0,
+        "LimitPrice": 20.1,
+        "StopPrice": 20.1,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-26T15:22:05.254756Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "affb048a-2d70-4daf-a4ca-4ca8b5990dfa",
+        "Symbol": "ZBIO",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 768,
+        "FilledQty": 0,
+        "LimitPrice": 19.93,
+        "StopPrice": 19.93,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-26T14:34:38.4729Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "8285164e-e0df-4e47-ae69-30156b3869ba",
+        "Symbol": "UCTT",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 297,
+        "FilledQty": 0,
+        "LimitPrice": 52.93,
+        "StopPrice": 52.93,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-26T14:32:21.921611Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "6181430d-756e-4f29-944e-28f0936e171a",
+        "Symbol": "VIR",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 2000,
+        "FilledQty": 0,
+        "LimitPrice": 7.88,
+        "StopPrice": 7.88,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-26T14:31:21.656371Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      }
+    ],
+    "balance": {
+      "BaseCurrency": "USD",
+      "CashByCurrency": {
+        "USD": 18710.27
+      },
+      "MarginUsed": 76197.26999999999,
+      "TotalEquity": 94907.54,
+      "Timestamp": "0001-01-01T00:00:00Z",
+      "BrokerSource": "alpaca"
+    },
+    "state": {
+      "pm_state": {
+        "cautious_restart_start": "0001-01-01T00:00:00Z",
+        "cautious_restart_until": "0001-01-01T00:00:00Z",
+        "crash_inverse_until": "0001-01-01T00:00:00Z",
+        "equity_curve": [
+          96601.59,
+          96121.92,
+          96130.73,
+          95664.54,
+          95571.55,
+          94907.54
+        ],
+        "equity_curve_dates": [
+          "2026-02-20T15:30:00+01:00",
+          "2026-02-23T22:00:01+01:00",
+          "2026-02-24T22:00:01+01:00",
+          "2026-02-25T22:00:02+01:00",
+          "2026-02-25T22:00:02+01:00",
+          "2026-02-26T22:00:03+01:00"
+        ],
+        "global_pause_until": "0001-01-01T00:00:00Z",
+        "is_in_grace_period": false,
+        "last_entry_creation_date": "2026-02-26T22:00:03+01:00",
+        "last_liquidation_date": "0001-01-01T00:00:00Z",
+        "last_streak_reset_date": "0001-01-01T00:00:00Z",
+        "peak_equity": 102118.78,
+        "position_clusters": null,
+        "position_entries": {},
+        "position_highs": {
+          "TNDM": 26.13,
+          "UCTT": 64.93,
+          "VIR": 9.319999694824219,
+          "ZBIO": 26.360000610351562
+        },
+        "position_last_dca": {},
+        "position_open_dates": {
+          "TNDM": "2026-02-25T22:00:02+01:00",
+          "UCTT": "2026-02-25T22:00:02+01:00",
+          "VIR": "2026-02-25T22:00:02+01:00",
+          "WRBY": "2026-02-26T22:00:03+01:00",
+          "ZBIO": "2026-02-25T22:00:02+01:00"
+        },
+        "position_stops": {
+          "TNDM": 20.09914357321603,
+          "UCTT": 52.9328545161656,
+          "VIR": 7.876664229801722,
+          "WRBY": 20.120356695992605,
+          "ZBIO": 19.931990533828735
+        },
+        "regime_score_history": null,
+        "stop_history": [],
+        "stop_streak_count": 0,
+        "stopped_symbols": {}
+      },
+      "prev_regime": "NEUTRAL"
+    }
+  },
+  {
     "timestamp": "2026-02-26T12:08:20+01:00",
     "date": "2026-02-25",
     "portfolio": "us_highvol",
