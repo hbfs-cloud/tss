@@ -1,5 +1,380 @@
 [
   {
+    "timestamp": "2026-02-27T23:12:38+01:00",
+    "date": "2026-02-27",
+    "portfolio": "etf_us",
+    "allocation": "etf_us",
+    "currency": "USD",
+    "git_sha1": "9ede636",
+    "git_branch": "main",
+    "config_path": "config/portfolio_etf_us.yaml",
+    "config_hash": "29f3369dca69814a",
+    "actions": [
+      {
+        "type": "CREATE",
+        "symbol": "BWET",
+        "side": "BUY",
+        "order_type": "LIMIT",
+        "qty": 2,
+        "limit_price": 58.78979921722412,
+        "order_id": "cfc62b7b-6a4d-41a6-92cc-5abc1cae6950",
+        "reason": "ROTATION_IN"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "MKOR",
+        "side": "SELL",
+        "order_type": "MARKET",
+        "qty": 215,
+        "order_id": "214a36bc-3061-48bf-8d6a-639ac8a6fe61",
+        "reason": "ROTATION_OUT"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "MSFD",
+        "side": "SELL",
+        "order_type": "MARKET",
+        "qty": 155,
+        "order_id": "c5bcd5cd-827a-4b23-8a33-16bb3ceb0464",
+        "reason": "ROTATION_OUT"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "NVOH",
+        "side": "BUY",
+        "order_type": "LIMIT",
+        "qty": 8,
+        "limit_price": 20.700576610565186,
+        "order_id": "6d35e824-47b5-4d46-af67-487648bddb3c",
+        "reason": "ROTATION_IN"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "PALD",
+        "side": "SELL",
+        "order_type": "MARKET",
+        "qty": 74,
+        "order_id": "83478fd5-5fc4-4815-b134-9f53e3ed6d0b",
+        "reason": "ROTATION_OUT"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "SETH",
+        "side": "BUY",
+        "order_type": "LIMIT",
+        "qty": 2,
+        "limit_price": 59.16941812133789,
+        "order_id": "3da94d44-34c8-43ee-8b50-97380f6c97ab",
+        "reason": "ROTATION_IN"
+      }
+    ],
+    "positions": [
+      {
+        "Symbol": "EWY",
+        "Qty": 230,
+        "AvgEntry": 152.72,
+        "CurrentPrice": 152.11,
+        "UnrealizedPnL": -140.3,
+        "ChangeToday": 0.0113,
+        "Currency": "USD",
+        "Timestamp": "2026-02-26T14:43:35.604794Z",
+        "BrokerSource": "",
+        "Name": "iShares MSCI South Korea ETF",
+        "Sector": "Miscellaneous Region",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "augmented_reality",
+          "gaming",
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "MKOR",
+        "Qty": 215,
+        "AvgEntry": 49.278233,
+        "CurrentPrice": 52.1,
+        "UnrealizedPnL": 606.679905,
+        "ChangeToday": 0.00269,
+        "Currency": "USD",
+        "Timestamp": "2026-02-23T14:33:44.507094Z",
+        "BrokerSource": "",
+        "Name": "Matthews Korea Active ETF",
+        "Sector": "Miscellaneous Region",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "MSFD",
+        "Qty": 155,
+        "AvgEntry": 14.358452,
+        "CurrentPrice": 13.89,
+        "UnrealizedPnL": -72.61006,
+        "ChangeToday": 0.01758,
+        "Currency": "USD",
+        "Timestamp": "2026-02-24T14:33:32.037911Z",
+        "BrokerSource": "",
+        "Name": "Direxion Daily MSFT Bear 1X Shares ETF",
+        "Sector": "Trading--Inverse Equity",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "ai",
+          "augmented_reality",
+          "gaming",
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "PALD",
+        "Qty": 74,
+        "AvgEntry": 30.146486,
+        "CurrentPrice": 28.9936,
+        "UnrealizedPnL": -85.313564,
+        "ChangeToday": 0.00412,
+        "Currency": "USD",
+        "Timestamp": "2026-02-24T14:34:09.310116Z",
+        "BrokerSource": "",
+        "Name": "Direxion Daily PANW Bear 1X Shares",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "ai",
+          "augmented_reality",
+          "gaming"
+        ]
+      },
+      {
+        "Symbol": "PFIX",
+        "Qty": 810,
+        "AvgEntry": 42.765728,
+        "CurrentPrice": 41.54,
+        "UnrealizedPnL": -992.83968,
+        "ChangeToday": -0.00717,
+        "Currency": "USD",
+        "Timestamp": "2026-02-26T14:34:02.486647Z",
+        "BrokerSource": "",
+        "Name": "Simplify Interest Rate Hedge ETF",
+        "Sector": "Global Large-Stock Value",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "augmented_reality",
+          "gaming",
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "PPEM",
+        "Qty": 511,
+        "AvgEntry": 20.875166,
+        "CurrentPrice": 21.038,
+        "UnrealizedPnL": 83.208174,
+        "ChangeToday": -0.00351,
+        "Currency": "USD",
+        "Timestamp": "2026-02-23T14:33:20.991529Z",
+        "BrokerSource": "",
+        "Name": "Putnam PanAgora ESG Emerging Markets Equity ETF",
+        "Sector": "Trading--Leveraged Equity",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "augmented_reality",
+          "automotive",
+          "esg",
+          "gaming",
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "PXJ",
+        "Qty": 54,
+        "AvgEntry": 41.254444,
+        "CurrentPrice": 41.8345,
+        "UnrealizedPnL": 31.323024,
+        "ChangeToday": 0.00325,
+        "Currency": "USD",
+        "Timestamp": "2026-02-24T14:33:22.156653Z",
+        "BrokerSource": "",
+        "Name": "Invesco Oil & Gas Services ETF",
+        "Sector": "Equity Energy",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "investment_management",
+          "oil_gas_exploration",
+          "utilities"
+        ]
+      }
+    ],
+    "pending_orders": [
+      {
+        "OrderID": "3da94d44-34c8-43ee-8b50-97380f6c97ab",
+        "Symbol": "SETH",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 2,
+        "FilledQty": 0,
+        "LimitPrice": 59.17,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-27T22:12:38.807282529Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "83478fd5-5fc4-4815-b134-9f53e3ed6d0b",
+        "Symbol": "PALD",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 74,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-27T22:12:38.720160831Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "6d35e824-47b5-4d46-af67-487648bddb3c",
+        "Symbol": "NVOH",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 8,
+        "FilledQty": 0,
+        "LimitPrice": 20.7,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-27T22:12:38.545715473Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "c5bcd5cd-827a-4b23-8a33-16bb3ceb0464",
+        "Symbol": "MSFD",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 155,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-27T22:12:38.457354225Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "214a36bc-3061-48bf-8d6a-639ac8a6fe61",
+        "Symbol": "MKOR",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 215,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-27T22:12:38.282412007Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "cfc62b7b-6a4d-41a6-92cc-5abc1cae6950",
+        "Symbol": "BWET",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 2,
+        "FilledQty": 0,
+        "LimitPrice": 58.79,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-02-27T22:12:38.10479933Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      }
+    ],
+    "balance": {
+      "BaseCurrency": "USD",
+      "CashByCurrency": {
+        "USD": 530.34
+      },
+      "MarginUsed": 97142.16,
+      "TotalEquity": 97672.5,
+      "Timestamp": "0001-01-01T00:00:00Z",
+      "BrokerSource": "alpaca"
+    },
+    "state": {
+      "pm_state": {
+        "cautious_restart_start": "0001-01-01T00:00:00Z",
+        "cautious_restart_until": "0001-01-01T00:00:00Z",
+        "crash_inverse_until": "0001-01-01T00:00:00Z",
+        "equity_curve": [
+          99777.28,
+          98980.42,
+          98611.73,
+          99550.38,
+          98887.9,
+          97561.94,
+          97672.5
+        ],
+        "equity_curve_dates": [
+          "2026-02-20T15:30:00+01:00",
+          "2026-02-23T22:00:00+01:00",
+          "2026-02-24T21:59:45+01:00",
+          "2026-02-25T22:00:00+01:00",
+          "2026-02-25T16:12:41+01:00",
+          "2026-02-26T21:59:50+01:00",
+          "2026-02-27T22:00:00+01:00"
+        ],
+        "global_pause_until": "0001-01-01T00:00:00Z",
+        "is_in_grace_period": false,
+        "last_entry_creation_date": "2026-02-27T22:00:00+01:00",
+        "last_liquidation_date": "0001-01-01T00:00:00Z",
+        "last_streak_reset_date": "0001-01-01T00:00:00Z",
+        "peak_equity": 99777.28,
+        "position_clusters": null,
+        "position_entries": {},
+        "position_highs": null,
+        "position_last_dca": {},
+        "position_open_dates": {
+          "BWET": "2026-02-27T22:00:00+01:00",
+          "EWY": "2026-02-25T22:00:00+01:00",
+          "NVOH": "2026-02-27T22:00:00+01:00",
+          "PFIX": "2026-02-25T22:00:00+01:00",
+          "PPEM": "2026-02-20T15:30:00+01:00",
+          "PXJ": "2026-02-23T22:00:00+01:00",
+          "SETH": "2026-02-27T22:00:00+01:00"
+        },
+        "position_stops": {
+          "EWY": 140.95749814714705,
+          "PFIX": 40.5755491751709,
+          "PPEM": 17.948916155312673,
+          "PXJ": 38.599140862357004
+        },
+        "regime_score_history": null,
+        "stop_history": [],
+        "stop_streak_count": 0,
+        "stopped_symbols": {}
+      },
+      "prev_regime": "NEUTRAL"
+    }
+  },
+  {
     "timestamp": "2026-02-26T22:57:38+01:00",
     "date": "2026-02-26",
     "portfolio": "etf_us",
