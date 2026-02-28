@@ -853,7 +853,7 @@
             </div>
             <h2 style="color:#f1f5f9;font-family:Inter,sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:0.5rem;">Portfolio Dashboard</h2>
             <p style="color:#64748b;font-family:Inter,sans-serif;font-size:0.85rem;margin-bottom:1.5rem;">Enter password to access</p>
-            <form id="auth-form" onsubmit="return checkAuth()" autocomplete="off">
+            <form id="auth-form" onsubmit="event.preventDefault(); checkAuth();" autocomplete="off">
                 <input type="password" id="auth-pw" placeholder="Password" autofocus
                     style="width:100%;padding:0.7rem 1rem;border-radius:8px;border:1px solid #334155;background:#1e293b;color:#f1f5f9;font-size:0.95rem;font-family:Inter,sans-serif;outline:none;box-sizing:border-box;margin-bottom:0.75rem;">
                 <button type="submit"
@@ -882,8 +882,7 @@
                 document.getElementById('auth-pw').value = '';
                 document.getElementById('auth-pw').focus();
             }
-            return false;
-        }
+            }
         // Auto-unlock if previously authenticated
         (function() {
             if (localStorage.getItem(AUTH_KEY) === AUTH_HASH) {
