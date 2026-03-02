@@ -1,5 +1,257 @@
 [
   {
+    "timestamp": "2026-03-02T23:08:10+01:00",
+    "date": "2026-03-02",
+    "portfolio": "etf_us",
+    "allocation": "etf_us",
+    "currency": "USD",
+    "git_sha1": "cd38904",
+    "git_branch": "main",
+    "config_path": "config/portfolio_etf_us.yaml",
+    "config_hash": "29f3369dca69814a",
+    "actions": [
+      {
+        "type": "CREATE",
+        "symbol": "PFIX",
+        "side": "SELL",
+        "order_type": "MARKET",
+        "qty": 810,
+        "order_id": "3f319d75-3c43-4939-aaf2-6eecda0d0a00",
+        "reason": "ROTATION_OUT"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "SETH",
+        "side": "SELL",
+        "order_type": "MARKET",
+        "qty": 2,
+        "order_id": "ff41fc2f-2bd5-4ce9-b701-22e8763a3cfe",
+        "reason": "ROTATION_OUT"
+      }
+    ],
+    "positions": [
+      {
+        "Symbol": "EWY",
+        "Qty": 230,
+        "AvgEntry": 152.72,
+        "CurrentPrice": 148.2521,
+        "UnrealizedPnL": -1027.617,
+        "ChangeToday": -0.0206,
+        "Currency": "USD",
+        "Timestamp": "2026-02-26T14:43:35.604794Z",
+        "BrokerSource": "",
+        "Name": "iShares MSCI South Korea ETF",
+        "Sector": "Miscellaneous Region",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "augmented_reality",
+          "gaming",
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "NVOH",
+        "Qty": 8,
+        "AvgEntry": 20.47375,
+        "CurrentPrice": 20.5595,
+        "UnrealizedPnL": 0.686,
+        "ChangeToday": 0.01901,
+        "Currency": "USD",
+        "Timestamp": "2026-03-02T14:34:54.68003Z",
+        "BrokerSource": "",
+        "Name": "Novo Nordisk A/S (B Shares) ADRhedged",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "augmented_reality",
+          "gaming"
+        ]
+      },
+      {
+        "Symbol": "PFIX",
+        "Qty": 810,
+        "AvgEntry": 42.765728,
+        "CurrentPrice": 42.21,
+        "UnrealizedPnL": -450.13968,
+        "ChangeToday": 0.01613,
+        "Currency": "USD",
+        "Timestamp": "2026-02-26T14:34:02.486647Z",
+        "BrokerSource": "",
+        "Name": "Simplify Interest Rate Hedge ETF",
+        "Sector": "Global Large-Stock Value",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "augmented_reality",
+          "gaming",
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "PPEM",
+        "Qty": 511,
+        "AvgEntry": 20.875166,
+        "CurrentPrice": 20.7817,
+        "UnrealizedPnL": -47.761126,
+        "ChangeToday": -0.01218,
+        "Currency": "USD",
+        "Timestamp": "2026-02-23T14:33:20.991529Z",
+        "BrokerSource": "",
+        "Name": "Putnam PanAgora ESG Emerging Markets Equity ETF",
+        "Sector": "Trading--Leveraged Equity",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "augmented_reality",
+          "automotive",
+          "esg",
+          "gaming",
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "PXJ",
+        "Qty": 54,
+        "AvgEntry": 41.254444,
+        "CurrentPrice": 42.46,
+        "UnrealizedPnL": 65.100024,
+        "ChangeToday": 0.01495,
+        "Currency": "USD",
+        "Timestamp": "2026-02-24T14:33:22.156653Z",
+        "BrokerSource": "",
+        "Name": "Invesco Oil & Gas Services ETF",
+        "Sector": "Equity Energy",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "investment_management",
+          "oil_gas_exploration",
+          "utilities"
+        ]
+      },
+      {
+        "Symbol": "SETH",
+        "Qty": 2,
+        "AvgEntry": 54.895,
+        "CurrentPrice": 52.15,
+        "UnrealizedPnL": -5.49,
+        "ChangeToday": -0.09572,
+        "Currency": "USD",
+        "Timestamp": "2026-03-02T14:34:22.122969Z",
+        "BrokerSource": "",
+        "Name": "ProShares Short Ether ETF",
+        "Sector": "Digital Assets",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "augmented_reality",
+          "blockchain_finance",
+          "gaming",
+          "investment_management"
+        ]
+      }
+    ],
+    "pending_orders": [
+      {
+        "OrderID": "ff41fc2f-2bd5-4ce9-b701-22e8763a3cfe",
+        "Symbol": "SETH",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 2,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-03-02T22:08:10.251795559Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "3f319d75-3c43-4939-aaf2-6eecda0d0a00",
+        "Symbol": "PFIX",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 810,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-03-02T22:08:10.080191071Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      }
+    ],
+    "balance": {
+      "BaseCurrency": "USD",
+      "CashByCurrency": {
+        "USD": 15315.72
+      },
+      "MarginUsed": 81469.15,
+      "TotalEquity": 96784.87,
+      "Timestamp": "0001-01-01T00:00:00Z",
+      "BrokerSource": "alpaca"
+    },
+    "state": {
+      "pm_state": {
+        "cautious_restart_start": "0001-01-01T00:00:00Z",
+        "cautious_restart_until": "0001-01-01T00:00:00Z",
+        "crash_inverse_until": "0001-01-01T00:00:00Z",
+        "equity_curve": [
+          99777.28,
+          98980.42,
+          98611.73,
+          99550.38,
+          98887.9,
+          97561.94,
+          97672.5,
+          96784.87
+        ],
+        "equity_curve_dates": [
+          "2026-02-20T15:30:00+01:00",
+          "2026-02-23T22:00:00+01:00",
+          "2026-02-24T21:59:45+01:00",
+          "2026-02-25T22:00:00+01:00",
+          "2026-02-25T16:12:41+01:00",
+          "2026-02-26T21:59:50+01:00",
+          "2026-02-27T22:00:00+01:00",
+          "2026-03-02T21:59:55+01:00"
+        ],
+        "global_pause_until": "0001-01-01T00:00:00Z",
+        "is_in_grace_period": false,
+        "last_entry_creation_date": "2026-02-27T22:00:00+01:00",
+        "last_liquidation_date": "0001-01-01T00:00:00Z",
+        "last_streak_reset_date": "0001-01-01T00:00:00Z",
+        "peak_equity": 99777.28,
+        "position_clusters": null,
+        "position_entries": {},
+        "position_highs": null,
+        "position_last_dca": {},
+        "position_open_dates": {
+          "EWY": "2026-02-25T22:00:00+01:00",
+          "NVOH": "2026-02-27T22:00:00+01:00",
+          "PPEM": "2026-02-20T15:30:00+01:00",
+          "PXJ": "2026-02-23T22:00:00+01:00"
+        },
+        "position_stops": {
+          "EWY": 140.95749814714705,
+          "NVOH": 18.400446368626184,
+          "PPEM": 17.948916155312673,
+          "PXJ": 38.599140862357004
+        },
+        "regime_score_history": null,
+        "stop_history": [],
+        "stop_streak_count": 0,
+        "stopped_symbols": {}
+      },
+      "prev_regime": "EARLY_RISK_OFF"
+    }
+  },
+  {
     "timestamp": "2026-02-27T23:12:38+01:00",
     "date": "2026-02-27",
     "portfolio": "etf_us",
