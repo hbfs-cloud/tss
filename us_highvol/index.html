@@ -3128,6 +3128,20 @@
         let parallelMode = false;
         let deviationCharts = {};
 
+        // normPos normalizes a position object to snake_case field access,
+        // handling both PascalCase (Go JSON default) and snake_case field names.
+        function normPos(p) {
+            const qty = p.Qty != null ? p.Qty : (p.qty || 0);
+            const price = p.CurrentPrice || p.current_price || p.AvgEntry || p.avg_price || 0;
+            const entry = p.AvgEntry || p.avg_price || 0;
+            const pnl = p.UnrealizedPnL != null ? p.UnrealizedPnL : (p.unrealized_pnl != null ? p.unrealized_pnl : null);
+            const mktVal = p.MarketValue || p.market_value || (qty * price);
+            return {
+                symbol: p.Symbol || p.symbol || '',
+                qty, price, entry, pnl, mktVal
+            };
+        }
+
         async function loadLiveSnapshots() {
             // In parallel mode, load live snapshots from parent directory
             try {
@@ -3402,8 +3416,8 @@
             // 2. Position overlap (latest snapshot)
             const sortedLive = [...liveSnaps].sort((a,b) => new Date(b.date || b.timestamp) - new Date(a.date || a.timestamp));
             const sortedBt = [...btSnaps].sort((a,b) => new Date(b.date || b.timestamp) - new Date(a.date || a.timestamp));
-            const liveSyms = new Set((sortedLive[0]?.positions || []).map(p => p.symbol));
-            const btSyms = new Set((sortedBt[0]?.positions || []).map(p => p.symbol));
+            const liveSyms = new Set((sortedLive[0]?.positions || []).map(p => p.Symbol || p.symbol).filter(Boolean));
+            const btSyms = new Set((sortedBt[0]?.positions || []).map(p => p.Symbol || p.symbol).filter(Boolean));
             const intersection = [...liveSyms].filter(s => btSyms.has(s)).length;
             const union = new Set([...liveSyms, ...btSyms]).size;
             const overlap = union > 0 ? intersection / union : 1;
@@ -3643,14 +3657,18 @@
 
             if (sortedLive[0]?.positions) {
                 for (const p of sortedLive[0].positions) {
-                    livePos.set(p.symbol, p);
-                    liveTotalValue += (p.market_value || (p.qty * (p.current_price || p.avg_price || 0)));
+                    const n = normPos(p);
+                    if (!n.symbol) continue;
+                    livePos.set(n.symbol, n);
+                    liveTotalValue += n.mktVal;
                 }
             }
             if (sortedBt[0]?.positions) {
                 for (const p of sortedBt[0].positions) {
-                    btPos.set(p.symbol, p);
-                    btTotalValue += (p.market_value || (p.qty * (p.current_price || p.avg_price || 0)));
+                    const n = normPos(p);
+                    if (!n.symbol) continue;
+                    btPos.set(n.symbol, n);
+                    btTotalValue += n.mktVal;
                 }
             }
 
@@ -3683,8 +3701,8 @@
                 else if (inLive) { status = 'LIVE ONLY'; statusClass = 'live'; }
                 else { status = 'BT ONLY'; statusClass = 'backtest'; }
 
-                const lQty = lp ? lp.qty?.toFixed(0) : '-';
-                const bQty = bp ? bp.qty?.toFixed(0) : '-';
+                const lQty = lp ? lp.qty.toFixed(0) : '-';
+                const bQty = bp ? bp.qty.toFixed(0) : '-';
 
                 let qtyDiffStr = '-';
                 if (lp && bp && bp.qty > 0) {
@@ -3693,13 +3711,13 @@
                     if (Math.abs(diff) > 20) qtyDiffStr = `<span class="qty-diff-warn">${qtyDiffStr}</span>`;
                 }
 
-                const lVal = lp ? (lp.market_value || (lp.qty * (lp.current_price || lp.avg_price || 0))) : 0;
-                const bVal = bp ? (bp.market_value || (bp.qty * (bp.current_price || bp.avg_price || 0))) : 0;
+                const lVal = lp ? lp.mktVal : 0;
+                const bVal = bp ? bp.mktVal : 0;
                 const lWt = liveTotalValue > 0 ? (lVal / liveTotalValue * 100).toFixed(1) + '%' : '-';
                 const bWt = btTotalValue > 0 ? (bVal / btTotalValue * 100).toFixed(1) + '%' : '-';
 
-                const lPnl = lp?.unrealized_pnl != null ? (lp.unrealized_pnl >= 0 ? '+' : '') + lp.unrealized_pnl.toFixed(0) : '-';
-                const bPnl = bp?.unrealized_pnl != null ? (bp.unrealized_pnl >= 0 ? '+' : '') + bp.unrealized_pnl.toFixed(0) : '-';
+                const lPnl = lp?.pnl != null ? (lp.pnl >= 0 ? '+' : '') + lp.pnl.toFixed(0) : '-';
+                const bPnl = bp?.pnl != null ? (bp.pnl >= 0 ? '+' : '') + bp.pnl.toFixed(0) : '-';
 
                 html += `<tr>
                     <td><strong>${sym}</strong></td>

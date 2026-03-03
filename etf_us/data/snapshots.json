@@ -1,5 +1,372 @@
 [
   {
+    "timestamp": "2026-03-03T23:08:46+01:00",
+    "date": "2026-03-03",
+    "portfolio": "etf_us",
+    "allocation": "etf_us",
+    "currency": "USD",
+    "git_sha1": "951df69",
+    "git_branch": "main",
+    "config_path": "config/portfolio_etf_us.yaml",
+    "config_hash": "29f3369dca69814a",
+    "actions": [
+      {
+        "type": "CREATE",
+        "symbol": "BABO",
+        "side": "BUY",
+        "order_type": "LIMIT",
+        "qty": 868,
+        "limit_price": 11.61431968688965,
+        "order_id": "6af55b3d-0a90-46bc-b2e0-fd26d1b8db45",
+        "reason": "ROTATION_IN"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "BNO",
+        "side": "BUY",
+        "order_type": "LIMIT",
+        "qty": 254,
+        "limit_price": 39.613860626220706,
+        "order_id": "180c2d63-712f-451b-94c9-50b08c76d0c2",
+        "reason": "ROTATION_IN"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "EDEN",
+        "side": "BUY",
+        "order_type": "LIMIT",
+        "qty": 94,
+        "limit_price": 106.57062281799317,
+        "order_id": "fe626719-f5a5-40a2-b166-23ef73bd0723",
+        "reason": "ROTATION_IN"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "EWY",
+        "side": "SELL",
+        "order_type": "MARKET",
+        "qty": 230,
+        "order_id": "6dd5e175-8bb5-4304-95f9-2ab988508cd5",
+        "reason": "STOP_LOSS: -13.3% (stop $140.96) after 5d"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "KLIP",
+        "side": "BUY",
+        "order_type": "LIMIT",
+        "qty": 367,
+        "limit_price": 27.424979530334472,
+        "order_id": "c5286894-81d2-4ef5-907e-8aae5ede7401",
+        "reason": "ROTATION_IN"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "KWEB",
+        "side": "BUY",
+        "order_type": "LIMIT",
+        "qty": 329,
+        "limit_price": 30.585059452056885,
+        "order_id": "127ddc51-ed80-47e6-9b7a-b12f0b7375ab",
+        "reason": "ROTATION_IN"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "PPEM",
+        "side": "SELL",
+        "order_type": "MARKET",
+        "qty": 511,
+        "order_id": "445ea2c1-0bc5-473d-83e1-d3464733579f",
+        "reason": "ROTATION_OUT"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "PXJ",
+        "side": "SELL",
+        "order_type": "MARKET",
+        "qty": 54,
+        "order_id": "75797599-aa96-4402-9a92-c84b4542e959",
+        "reason": "ROTATION_OUT"
+      }
+    ],
+    "positions": [
+      {
+        "Symbol": "EWY",
+        "Qty": 230,
+        "AvgEntry": 152.72,
+        "CurrentPrice": 131.68,
+        "UnrealizedPnL": -4839.2,
+        "ChangeToday": -0.1075,
+        "Currency": "USD",
+        "Timestamp": "2026-02-26T14:43:35.604794Z",
+        "BrokerSource": "",
+        "Name": "iShares MSCI South Korea ETF",
+        "Sector": "Miscellaneous Region",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "augmented_reality",
+          "gaming",
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "NVOH",
+        "Qty": 8,
+        "AvgEntry": 20.47375,
+        "CurrentPrice": 20.21,
+        "UnrealizedPnL": -2.11,
+        "ChangeToday": -0.017,
+        "Currency": "USD",
+        "Timestamp": "2026-03-02T14:34:54.68003Z",
+        "BrokerSource": "",
+        "Name": "Novo Nordisk A/S (B Shares) ADRhedged",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "augmented_reality",
+          "gaming"
+        ]
+      },
+      {
+        "Symbol": "PPEM",
+        "Qty": 511,
+        "AvgEntry": 20.875166,
+        "CurrentPrice": 19.6,
+        "UnrealizedPnL": -651.609826,
+        "ChangeToday": -0.05686,
+        "Currency": "USD",
+        "Timestamp": "2026-02-23T14:33:20.991529Z",
+        "BrokerSource": "",
+        "Name": "Putnam PanAgora ESG Emerging Markets Equity ETF",
+        "Sector": "Trading--Leveraged Equity",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "augmented_reality",
+          "automotive",
+          "esg",
+          "gaming",
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "PXJ",
+        "Qty": 54,
+        "AvgEntry": 41.254444,
+        "CurrentPrice": 41.26,
+        "UnrealizedPnL": 0.300024,
+        "ChangeToday": -0.02193,
+        "Currency": "USD",
+        "Timestamp": "2026-02-24T14:33:22.156653Z",
+        "BrokerSource": "",
+        "Name": "Invesco Oil & Gas Services ETF",
+        "Sector": "Equity Energy",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "investment_management",
+          "oil_gas_exploration",
+          "utilities"
+        ]
+      }
+    ],
+    "pending_orders": [
+      {
+        "OrderID": "75797599-aa96-4402-9a92-c84b4542e959",
+        "Symbol": "PXJ",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 54,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-03-03T22:08:46.421220235Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "445ea2c1-0bc5-473d-83e1-d3464733579f",
+        "Symbol": "PPEM",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 511,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-03-03T22:08:46.245741898Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "127ddc51-ed80-47e6-9b7a-b12f0b7375ab",
+        "Symbol": "KWEB",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 329,
+        "FilledQty": 0,
+        "LimitPrice": 30.59,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-03-03T22:08:46.069205322Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "c5286894-81d2-4ef5-907e-8aae5ede7401",
+        "Symbol": "KLIP",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 367,
+        "FilledQty": 0,
+        "LimitPrice": 27.42,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-03-03T22:08:45.979837793Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "6dd5e175-8bb5-4304-95f9-2ab988508cd5",
+        "Symbol": "EWY",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 230,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-03-03T22:08:45.889134025Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "fe626719-f5a5-40a2-b166-23ef73bd0723",
+        "Symbol": "EDEN",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 94,
+        "FilledQty": 0,
+        "LimitPrice": 106.57,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-03-03T22:08:45.708724238Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "180c2d63-712f-451b-94c9-50b08c76d0c2",
+        "Symbol": "BNO",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 254,
+        "FilledQty": 0,
+        "LimitPrice": 39.61,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-03-03T22:08:45.620612979Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "6af55b3d-0a90-46bc-b2e0-fd26d1b8db45",
+        "Symbol": "BABO",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 868,
+        "FilledQty": 0,
+        "LimitPrice": 11.61,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-03-03T22:08:45.533950371Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      }
+    ],
+    "balance": {
+      "BaseCurrency": "USD",
+      "CashByCurrency": {
+        "USD": 50423.7
+      },
+      "MarginUsed": 42691.72,
+      "TotalEquity": 93115.42,
+      "Timestamp": "0001-01-01T00:00:00Z",
+      "BrokerSource": "alpaca"
+    },
+    "state": {
+      "pm_state": {
+        "cautious_restart_start": "0001-01-01T00:00:00Z",
+        "cautious_restart_until": "0001-01-01T00:00:00Z",
+        "crash_inverse_until": "0001-01-01T00:00:00Z",
+        "equity_curve": [
+          99777.28,
+          98980.42,
+          98611.73,
+          99550.38,
+          98887.9,
+          97561.94,
+          97672.5,
+          96784.87,
+          93115.42
+        ],
+        "equity_curve_dates": [
+          "2026-02-20T15:30:00+01:00",
+          "2026-02-23T22:00:00+01:00",
+          "2026-02-24T21:59:45+01:00",
+          "2026-02-25T22:00:00+01:00",
+          "2026-02-25T16:12:41+01:00",
+          "2026-02-26T21:59:50+01:00",
+          "2026-02-27T22:00:00+01:00",
+          "2026-03-02T21:59:55+01:00",
+          "2026-03-03T21:59:43+01:00"
+        ],
+        "global_pause_until": "0001-01-01T00:00:00Z",
+        "is_in_grace_period": false,
+        "last_entry_creation_date": "2026-03-03T21:59:43+01:00",
+        "last_liquidation_date": "0001-01-01T00:00:00Z",
+        "last_streak_reset_date": "0001-01-01T00:00:00Z",
+        "peak_equity": 99777.28,
+        "position_clusters": null,
+        "position_entries": {},
+        "position_highs": null,
+        "position_last_dca": {},
+        "position_open_dates": {
+          "BABO": "2026-03-03T21:59:43+01:00",
+          "BNO": "2026-03-03T21:59:43+01:00",
+          "EDEN": "2026-03-03T21:59:43+01:00",
+          "KLIP": "2026-03-03T21:59:43+01:00",
+          "KWEB": "2026-03-03T21:59:43+01:00",
+          "NVOH": "2026-02-27T22:00:00+01:00"
+        },
+        "position_stops": {
+          "NVOH": 18.400446368626184
+        },
+        "regime_score_history": null,
+        "stop_history": [],
+        "stop_streak_count": 0,
+        "stopped_symbols": {}
+      },
+      "prev_regime": "EARLY_RISK_OFF"
+    }
+  },
+  {
     "timestamp": "2026-03-02T23:08:10+01:00",
     "date": "2026-03-02",
     "portfolio": "etf_us",

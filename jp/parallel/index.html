@@ -573,6 +573,83 @@
         .mode-live.active .live-dot { animation: pulse-dot 2s infinite; }
         @keyframes pulse-dot { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
 
+        /* ─── Go/NoGo Gauge ─── */
+        .gono-container { display: grid; grid-template-columns: 260px 1fr; gap: 1.5rem; align-items: start; }
+        .gauge-wrap { position: relative; width: 220px; height: 130px; margin: 0 auto; }
+        .gauge-wrap canvas { display: block; }
+        .gauge-score { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); font-size: 2.2rem; font-weight: 800; line-height: 1; }
+        .gauge-verdict { text-align: center; font-size: 0.9rem; font-weight: 700; margin-top: 4px; letter-spacing: 1px; }
+        .gono-breakdown { display: grid; grid-template-columns: 1fr 1fr; gap: 0.3rem 1rem; font-size: 0.78rem; }
+        .gono-breakdown-item { display: flex; justify-content: space-between; padding: 0.25rem 0.4rem; border-radius: 4px; background: var(--bg-primary); }
+        .gono-breakdown-item .pts { font-weight: 700; min-width: 40px; text-align: right; }
+        .pts.pos { color: var(--accent-green); }
+        .pts.neg { color: var(--accent-red); }
+        .pts.zero { color: var(--text-muted); }
+
+        /* Timeline Strip */
+        .timeline-strip { display: flex; gap: 1px; margin-top: 0.75rem; height: 22px; border-radius: 4px; overflow: hidden; }
+        .timeline-day { flex: 1; min-width: 3px; cursor: pointer; position: relative; transition: opacity 0.15s; }
+        .timeline-day:hover { opacity: 0.7; }
+        .timeline-tooltip { display: none; position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); background: #1e293b; color: white; padding: 0.35rem 0.5rem; border-radius: 6px; font-size: 0.68rem; white-space: nowrap; z-index: 10; pointer-events: none; }
+        .timeline-day:hover .timeline-tooltip { display: block; }
+
+        /* ─── Risk Tab ─── */
+        /* ─── Risk Tab ─── */
+        .risk-banner { display: grid; grid-template-columns: 200px 1fr; gap: 1.5rem; padding: 1.25rem 1.5rem; align-items: center; }
+        .risk-banner-score { text-align: center; }
+        .risk-gauge-wrap { position: relative; width: 160px; height: 95px; margin: 0 auto; }
+        .risk-gauge-wrap canvas { display: block; }
+        .risk-gauge-value { position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); font-size: 1.8rem; font-weight: 900; }
+        .risk-gauge-label { font-size: 0.85rem; font-weight: 700; margin-top: 4px; letter-spacing: 0.5px; }
+        .risk-banner-breakdown { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.4rem; }
+        .risk-bd-item { display: flex; justify-content: space-between; align-items: center; padding: 0.35rem 0.6rem; border-radius: 6px; font-size: 0.75rem; background: var(--bg-primary); }
+        .risk-bd-item .risk-bd-label { color: var(--text-secondary); }
+        .risk-bd-pts { font-weight: 700; font-size: 0.8rem; }
+        .risk-bd-pts.good { color: var(--accent-green); }
+        .risk-bd-pts.warn { color: var(--accent-orange); }
+        .risk-bd-pts.bad { color: var(--accent-red); }
+
+        .risk-kpi-strip { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.5rem; margin-bottom: 0.75rem; }
+        .risk-kpi { display: flex; align-items: center; gap: 0.6rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 0.7rem 0.8rem; }
+        .risk-kpi-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; background: rgba(37,99,235,0.1); color: #2563eb; flex-shrink: 0; }
+        .risk-kpi-icon.red { background: rgba(220,38,38,0.1); color: #dc2626; }
+        .risk-kpi-icon.orange { background: rgba(245,158,11,0.1); color: #f59e0b; }
+        .risk-kpi-icon.blue { background: rgba(37,99,235,0.1); color: #2563eb; }
+        .risk-kpi-icon.purple { background: rgba(139,92,246,0.1); color: #8b5cf6; }
+        .risk-kpi-val { font-size: 1.05rem; font-weight: 800; line-height: 1.1; }
+        .risk-kpi-lbl { font-size: 0.62rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.3px; }
+
+        .risk-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem; }
+        .risk-metric-inline { display: flex; gap: 0.75rem; align-items: center; font-size: 0.72rem; }
+        .risk-metric-inline .rmi { display: flex; align-items: center; gap: 0.3rem; }
+        .risk-metric-inline .rmi-val { font-weight: 700; }
+        .risk-metric-inline .rmi-lbl { color: var(--text-secondary); }
+
+        .risk-alert { padding: 0.5rem 0.75rem; border-radius: 6px; font-size: 0.75rem; margin-top: 0.5rem; display: flex; align-items: center; gap: 0.4rem; }
+        .risk-alert-red { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+        .risk-alert-orange { background: #fffbeb; color: #92400e; border: 1px solid #fed7aa; }
+        .risk-alert-green { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+        .risk-concentration-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        .risk-concentration-cell { text-align: center; }
+        .risk-concentration-cell canvas { max-height: 180px; margin: 0 auto; }
+        .risk-concentration-table { font-size: 0.72rem; margin-top: 0.5rem; width: 100%; }
+        .risk-concentration-table td { padding: 0.2rem 0.4rem; }
+        .risk-concentration-warn { font-weight: 700; color: var(--accent-red); }
+        .risk-sizing-bar { height: 18px; border-radius: 3px; margin-bottom: 2px; display: flex; align-items: center; padding-left: 6px; font-size: 0.65rem; font-weight: 600; color: white; min-width: 30px; }
+        @media (max-width: 900px) {
+            .risk-kpi-strip { grid-template-columns: repeat(3, 1fr); }
+            .risk-grid-2 { grid-template-columns: 1fr; }
+            .risk-banner { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .risk-kpi-strip { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 900px) {
+            .gono-container { grid-template-columns: 1fr; }
+            .risk-concentration-grid { grid-template-columns: 1fr; }
+            .gono-breakdown { grid-template-columns: 1fr; }
+        }
+
         /* Tab Bar */
         .tab-bar {
             display: flex;
@@ -768,7 +845,52 @@
 </head>
 
 <body>
-    <!-- Navigation -->
+    <!-- Auth Gate -->
+    <div id="auth-gate" style="position:fixed;inset:0;z-index:9999;background:#0f172a;display:flex;align-items:center;justify-content:center;">
+        <div style="text-align:center;max-width:340px;padding:2rem;">
+            <div style="margin-bottom:1.5rem;">
+                <i class="fas fa-lock" style="font-size:2.5rem;color:#3b82f6;"></i>
+            </div>
+            <h2 style="color:#f1f5f9;font-family:Inter,sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:0.5rem;">Portfolio Dashboard</h2>
+            <p style="color:#64748b;font-family:Inter,sans-serif;font-size:0.85rem;margin-bottom:1.5rem;">Enter password to access</p>
+            <form id="auth-form" onsubmit="event.preventDefault(); checkAuth();" autocomplete="off">
+                <input type="password" id="auth-pw" placeholder="Password" autofocus
+                    style="width:100%;padding:0.7rem 1rem;border-radius:8px;border:1px solid #334155;background:#1e293b;color:#f1f5f9;font-size:0.95rem;font-family:Inter,sans-serif;outline:none;box-sizing:border-box;margin-bottom:0.75rem;">
+                <button type="submit"
+                    style="width:100%;padding:0.65rem;border-radius:8px;border:none;background:#3b82f6;color:white;font-weight:600;font-size:0.9rem;cursor:pointer;font-family:Inter,sans-serif;">
+                    Unlock
+                </button>
+            </form>
+            <p id="auth-error" style="color:#ef4444;font-size:0.8rem;margin-top:0.75rem;display:none;font-family:Inter,sans-serif;">Wrong password</p>
+        </div>
+    </div>
+    <script>
+        const AUTH_HASH = '73fd60042452076433ad589937161a84991db047a0d7f14295c2b3ad9c0837bd';
+        const AUTH_KEY = 'mw_auth_token';
+        async function sha256(msg) {
+            const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
+            return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+        async function checkAuth() {
+            const pw = document.getElementById('auth-pw').value;
+            const hash = await sha256(pw);
+            if (hash === AUTH_HASH) {
+                localStorage.setItem(AUTH_KEY, hash);
+                document.getElementById('auth-gate').style.display = 'none';
+            } else {
+                document.getElementById('auth-error').style.display = 'block';
+                document.getElementById('auth-pw').value = '';
+                document.getElementById('auth-pw').focus();
+            }
+        }
+        // Auto-unlock if previously authenticated
+        (function() {
+            if (localStorage.getItem(AUTH_KEY) === AUTH_HASH) {
+                document.getElementById('auth-gate').style.display = 'none';
+            }
+        })();
+    </script>
+
     <!-- Navigation -->
     <nav class="nav">
         <!-- Global Nav -->
@@ -782,12 +904,6 @@
                 <a href="/"
                     style="color:var(--accent-blue);background:rgba(37,99,235,0.08);text-decoration:none;padding:0.3rem 0.6rem;border-radius:6px;font-size:0.75rem;font-weight:600;"><i
                         class="fas fa-chart-line"></i> Portfolios</a>
-                <a href="/opportunities/"
-                    style="color:var(--text-secondary);text-decoration:none;padding:0.3rem 0.6rem;border-radius:6px;font-size:0.75rem;font-weight:500;"><i
-                        class="fas fa-crosshairs"></i> Opportunities</a>
-                <a href="/backtest/"
-                    style="color:var(--text-secondary);text-decoration:none;padding:0.3rem 0.6rem;border-radius:6px;font-size:0.75rem;font-weight:500;"><i
-                        class="fas fa-flask"></i> Backtests</a>
             </div>
         </div>
 
@@ -829,6 +945,7 @@
         <button class="tab-btn" data-tab="analytics" onclick="switchTab('analytics')"><i class="fas fa-chart-bar"></i> Analytics</button>
         <button class="tab-btn" data-tab="allocations" onclick="switchTab('allocations')"><i class="fas fa-pie-chart"></i> Allocations</button>
         <button class="tab-btn" data-tab="positions" onclick="switchTab('positions')"><i class="fas fa-wallet"></i> Positions</button>
+        <button class="tab-btn" data-tab="risk" onclick="switchTab('risk')"><i class="fas fa-shield-halved"></i> Risk</button>
         <button class="tab-btn" data-tab="deviation" id="deviation-tab-btn" onclick="switchTab('deviation')" style="display:none"><i class="fas fa-code-compare"></i> Deviation</button>
         <div class="tab-spacer"></div>
         <div class="tab-settings">
@@ -884,6 +1001,26 @@
 
         <!-- ═══ OVERVIEW TAB ═══ -->
         <div class="tab-content active" data-tab="overview">
+
+        <!-- Go/NoGo Production Readiness -->
+        <div class="card" data-panel="gonoGo">
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-gauge-high" style="color:var(--accent-blue);"></i> Production Readiness</div>
+                <span class="panel-toggle" onclick="togglePanel(this)"><i class="fas fa-eye"></i></span>
+            </div>
+            <div class="card-body">
+                <div class="gono-container">
+                    <div>
+                        <div class="gauge-wrap"><canvas id="gonoGauge"></canvas><div class="gauge-score" id="gonoScore">--</div></div>
+                        <div class="gauge-verdict" id="gonoVerdict">--</div>
+                    </div>
+                    <div>
+                        <div class="gono-breakdown" id="gonoBreakdown"></div>
+                        <div class="timeline-strip" id="gonoTimeline"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Total Return Chart -->
         <div class="card" data-panel="returnChart">
@@ -1156,8 +1293,142 @@
 
         </div><!-- /positions tab -->
 
+        <!-- ═══ RISK TAB ═══ -->
+        <div class="tab-content" data-tab="risk">
+
+        <!-- Risk Score Banner -->
+        <div class="card" data-panel="riskScore">
+            <div class="card-body" style="padding:0">
+                <div id="risk-score-banner" class="risk-banner">
+                    <div class="risk-banner-score">
+                        <div class="risk-gauge-wrap"><canvas id="riskGauge"></canvas><div class="risk-gauge-value" id="riskGaugeValue">--</div></div>
+                        <div class="risk-gauge-label" id="riskGaugeLabel">CALCULATING...</div>
+                    </div>
+                    <div class="risk-banner-breakdown" id="riskBreakdown"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Risk KPI Strip -->
+        <div class="risk-kpi-strip">
+            <div class="risk-kpi" id="riskKpiVaR">
+                <div class="risk-kpi-icon"><i class="fas fa-chart-bar"></i></div>
+                <div class="risk-kpi-data"><div class="risk-kpi-val">--</div><div class="risk-kpi-lbl">VaR 95%</div></div>
+            </div>
+            <div class="risk-kpi" id="riskKpiCVaR">
+                <div class="risk-kpi-icon red"><i class="fas fa-chart-bar"></i></div>
+                <div class="risk-kpi-data"><div class="risk-kpi-val">--</div><div class="risk-kpi-lbl">CVaR / ES</div></div>
+            </div>
+            <div class="risk-kpi" id="riskKpiDD30">
+                <div class="risk-kpi-icon orange"><i class="fas fa-arrow-trend-down"></i></div>
+                <div class="risk-kpi-data"><div class="risk-kpi-val">--</div><div class="risk-kpi-lbl">Max DD 30d</div></div>
+            </div>
+            <div class="risk-kpi" id="riskKpiExposure">
+                <div class="risk-kpi-icon blue"><i class="fas fa-gauge-high"></i></div>
+                <div class="risk-kpi-data"><div class="risk-kpi-val">--</div><div class="risk-kpi-lbl">Exposure</div></div>
+            </div>
+            <div class="risk-kpi" id="riskKpiHHI">
+                <div class="risk-kpi-icon purple"><i class="fas fa-scale-unbalanced"></i></div>
+                <div class="risk-kpi-data"><div class="risk-kpi-val">--</div><div class="risk-kpi-lbl">HHI</div></div>
+            </div>
+            <div class="risk-kpi" id="riskKpiNoStop">
+                <div class="risk-kpi-icon"><i class="fas fa-shield-halved"></i></div>
+                <div class="risk-kpi-data"><div class="risk-kpi-val">--</div><div class="risk-kpi-lbl">No Stop</div></div>
+            </div>
+        </div>
+
+        <!-- Row: Drawdown Timeline + VaR Distribution -->
+        <div class="risk-grid-2">
+            <div class="card" data-panel="riskDrawdown">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-arrow-trend-down" style="color:var(--accent-red);"></i> Drawdown Over Time</div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-wrap" style="height:220px;"><canvas id="riskDrawdownChart"></canvas></div>
+                </div>
+            </div>
+            <div class="card" data-panel="riskVaR">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-chart-bar" style="color:var(--accent-purple);"></i> Return Distribution & VaR</div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-wrap" style="height:220px;"><canvas id="riskVaRChart"></canvas></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row: Stop Stress + Position Sizing -->
+        <div class="risk-grid-2">
+            <div class="card" data-panel="riskStopStress">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-bolt" style="color:var(--accent-red);"></i> Stop Loss Stress Test</div>
+                    <div class="risk-metric-inline" id="riskStopMetrics"></div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-wrap" style="height:240px;"><canvas id="riskStopChart"></canvas></div>
+                </div>
+            </div>
+            <div class="card" data-panel="riskSizing">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-scale-unbalanced" style="color:var(--accent-blue);"></i> Position Sizing</div>
+                    <div class="risk-metric-inline" id="riskSizingMetrics"></div>
+                </div>
+                <div class="card-body">
+                    <div id="riskSizingBars"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Concentration Risk (compact) -->
+        <div class="card" data-panel="riskConcentration">
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-pie-chart" style="color:var(--accent-orange);"></i> Concentration Risk</div>
+            </div>
+            <div class="card-body">
+                <div class="risk-concentration-grid">
+                    <div class="risk-concentration-cell">
+                        <h4 style="font-size:0.8rem;margin-bottom:0.5rem;">Sector</h4>
+                        <canvas id="riskDonutSector" height="160"></canvas>
+                        <table class="risk-concentration-table" id="riskTableSector"></table>
+                    </div>
+                    <div class="risk-concentration-cell">
+                        <h4 style="font-size:0.8rem;margin-bottom:0.5rem;">Currency</h4>
+                        <canvas id="riskDonutCurrency" height="160"></canvas>
+                        <table class="risk-concentration-table" id="riskTableCurrency"></table>
+                    </div>
+                    <div class="risk-concentration-cell">
+                        <h4 style="font-size:0.8rem;margin-bottom:0.5rem;">Region</h4>
+                        <canvas id="riskDonutRegion" height="160"></canvas>
+                        <table class="risk-concentration-table" id="riskTableRegion"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row: Rolling VaR + Exposure Over Time -->
+        <div class="risk-grid-2">
+            <div class="card" data-panel="riskRollingVaR">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-chart-line" style="color:var(--accent-purple);"></i> Rolling 30d VaR</div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-wrap" style="height:200px;"><canvas id="riskRollingVaRChart"></canvas></div>
+                </div>
+            </div>
+            <div class="card" data-panel="riskExposure">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-layer-group" style="color:var(--accent-blue);"></i> Exposure Over Time</div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-wrap" style="height:200px;"><canvas id="riskExposureChart"></canvas></div>
+                </div>
+            </div>
+        </div>
+
+        </div><!-- /risk tab -->
+
         <!-- DEVIATION TAB (PARALLEL mode only) -->
-        <div class="tab-content" data-tab="deviation" style="display:none">
+        <div class="tab-content" data-tab="deviation">
 
         <!-- Drift Score Banner -->
         <div class="card">
@@ -2509,6 +2780,10 @@
                 tabInitialized.allocations = true;
                 initAllocCharts();
             }
+            if (tab === 'risk' && !tabInitialized.risk) {
+                tabInitialized.risk = true;
+                renderRiskTab();
+            }
             savePrefs();
         }
 
@@ -2853,6 +3128,20 @@
         let parallelMode = false;
         let deviationCharts = {};
 
+        // normPos normalizes a position object to snake_case field access,
+        // handling both PascalCase (Go JSON default) and snake_case field names.
+        function normPos(p) {
+            const qty = p.Qty != null ? p.Qty : (p.qty || 0);
+            const price = p.CurrentPrice || p.current_price || p.AvgEntry || p.avg_price || 0;
+            const entry = p.AvgEntry || p.avg_price || 0;
+            const pnl = p.UnrealizedPnL != null ? p.UnrealizedPnL : (p.unrealized_pnl != null ? p.unrealized_pnl : null);
+            const mktVal = p.MarketValue || p.market_value || (qty * price);
+            return {
+                symbol: p.Symbol || p.symbol || '',
+                qty, price, entry, pnl, mktVal
+            };
+        }
+
         async function loadLiveSnapshots() {
             // In parallel mode, load live snapshots from parent directory
             try {
@@ -2878,7 +3167,7 @@
             if (!snaps || snaps.length < 2) return null;
             // Sort oldest first
             const sorted = [...snaps].sort((a,b) => new Date(a.date || a.timestamp) - new Date(b.date || b.timestamp));
-            const equities = sorted.map(s => s.balance?.total_equity || 0).filter(e => e > 0);
+            const equities = sorted.map(s => s.balance?.TotalEquity || s.balance?.total_equity || 0).filter(e => e > 0);
             if (equities.length < 2) return null;
 
             const first = equities[0], last = equities[equities.length - 1];
@@ -2981,7 +3270,8 @@
                 const byDate = {};
                 for (const s of sorted) {
                     const d = (s.date || s.timestamp || '').substring(0, 10);
-                    if (d && s.balance?.total_equity > 0) byDate[d] = s.balance.total_equity;
+                    const eq = s.balance?.TotalEquity || s.balance?.total_equity || 0;
+                    if (d && eq > 0) byDate[d] = eq;
                 }
                 return byDate;
             }
@@ -3037,7 +3327,8 @@
                 const byDate = {};
                 for (const s of sorted) {
                     const d = (s.date || s.timestamp || '').substring(0, 10);
-                    if (d && s.balance?.total_equity > 0) byDate[d] = s.balance.total_equity;
+                    const eq = s.balance?.TotalEquity || s.balance?.total_equity || 0;
+                    if (d && eq > 0) byDate[d] = eq;
                 }
                 return byDate;
             }
@@ -3098,7 +3389,8 @@
             const byDate = {};
             for (const s of sorted) {
                 const d = (s.date || s.timestamp || '').substring(0, 10);
-                if (d && s.balance?.total_equity > 0) byDate[d] = s.balance.total_equity;
+                const eq = s.balance?.TotalEquity || s.balance?.total_equity || 0;
+                if (d && eq > 0) byDate[d] = eq;
             }
             return byDate;
         }
@@ -3124,8 +3416,8 @@
             // 2. Position overlap (latest snapshot)
             const sortedLive = [...liveSnaps].sort((a,b) => new Date(b.date || b.timestamp) - new Date(a.date || a.timestamp));
             const sortedBt = [...btSnaps].sort((a,b) => new Date(b.date || b.timestamp) - new Date(a.date || a.timestamp));
-            const liveSyms = new Set((sortedLive[0]?.positions || []).map(p => p.symbol));
-            const btSyms = new Set((sortedBt[0]?.positions || []).map(p => p.symbol));
+            const liveSyms = new Set((sortedLive[0]?.positions || []).map(p => p.Symbol || p.symbol).filter(Boolean));
+            const btSyms = new Set((sortedBt[0]?.positions || []).map(p => p.Symbol || p.symbol).filter(Boolean));
             const intersection = [...liveSyms].filter(s => btSyms.has(s)).length;
             const union = new Set([...liveSyms, ...btSyms]).size;
             const overlap = union > 0 ? intersection / union : 1;
@@ -3365,14 +3657,18 @@
 
             if (sortedLive[0]?.positions) {
                 for (const p of sortedLive[0].positions) {
-                    livePos.set(p.symbol, p);
-                    liveTotalValue += (p.market_value || (p.qty * (p.current_price || p.avg_price || 0)));
+                    const n = normPos(p);
+                    if (!n.symbol) continue;
+                    livePos.set(n.symbol, n);
+                    liveTotalValue += n.mktVal;
                 }
             }
             if (sortedBt[0]?.positions) {
                 for (const p of sortedBt[0].positions) {
-                    btPos.set(p.symbol, p);
-                    btTotalValue += (p.market_value || (p.qty * (p.current_price || p.avg_price || 0)));
+                    const n = normPos(p);
+                    if (!n.symbol) continue;
+                    btPos.set(n.symbol, n);
+                    btTotalValue += n.mktVal;
                 }
             }
 
@@ -3405,8 +3701,8 @@
                 else if (inLive) { status = 'LIVE ONLY'; statusClass = 'live'; }
                 else { status = 'BT ONLY'; statusClass = 'backtest'; }
 
-                const lQty = lp ? lp.qty?.toFixed(0) : '-';
-                const bQty = bp ? bp.qty?.toFixed(0) : '-';
+                const lQty = lp ? lp.qty.toFixed(0) : '-';
+                const bQty = bp ? bp.qty.toFixed(0) : '-';
 
                 let qtyDiffStr = '-';
                 if (lp && bp && bp.qty > 0) {
@@ -3415,13 +3711,13 @@
                     if (Math.abs(diff) > 20) qtyDiffStr = `<span class="qty-diff-warn">${qtyDiffStr}</span>`;
                 }
 
-                const lVal = lp ? (lp.market_value || (lp.qty * (lp.current_price || lp.avg_price || 0))) : 0;
-                const bVal = bp ? (bp.market_value || (bp.qty * (bp.current_price || bp.avg_price || 0))) : 0;
+                const lVal = lp ? lp.mktVal : 0;
+                const bVal = bp ? bp.mktVal : 0;
                 const lWt = liveTotalValue > 0 ? (lVal / liveTotalValue * 100).toFixed(1) + '%' : '-';
                 const bWt = btTotalValue > 0 ? (bVal / btTotalValue * 100).toFixed(1) + '%' : '-';
 
-                const lPnl = lp?.unrealized_pnl != null ? (lp.unrealized_pnl >= 0 ? '+' : '') + lp.unrealized_pnl.toFixed(0) : '-';
-                const bPnl = bp?.unrealized_pnl != null ? (bp.unrealized_pnl >= 0 ? '+' : '') + bp.unrealized_pnl.toFixed(0) : '-';
+                const lPnl = lp?.pnl != null ? (lp.pnl >= 0 ? '+' : '') + lp.pnl.toFixed(0) : '-';
+                const bPnl = bp?.pnl != null ? (bp.pnl >= 0 ? '+' : '') + bp.pnl.toFixed(0) : '-';
 
                 html += `<tr>
                     <td><strong>${sym}</strong></td>
@@ -3518,6 +3814,666 @@
             switchTab('deviation');
         }
 
+        // ─── GO/NOGO GAUGE ───
+        const riskCharts = {};
+
+        function renderGoNoGo() {
+            if (!snapshots.length) return;
+            const s = snapshots[currentIdx];
+            const allReversed = [...snapshots].reverse();
+            const upToIdx = snapshots.length - currentIdx;
+            const visible = allReversed.slice(0, upToIdx);
+
+            let score = 50;
+            const breakdown = [];
+
+            // 1. Return 5 jours
+            if (visible.length >= 6) {
+                const eq5ago = visible[visible.length - 6]?.balance?.TotalEquity || 0;
+                const eqNow = s.balance?.TotalEquity || 0;
+                const ret5d = eq5ago > 0 ? ((eqNow / eq5ago) - 1) * 100 : 0;
+                const pts = ret5d > 0 ? 20 : -20;
+                score += pts;
+                breakdown.push({ label: 'Return 5d (' + ret5d.toFixed(1) + '%)', pts });
+            }
+
+            // 2. Regime
+            const regime = s.state?.prev_regime || 'NEUTRAL';
+            const regimePts = { RISK_ON: 25, RECOVERY: 25, NEUTRAL: 15, EARLY_RISK_OFF: -5, RISK_OFF: -25 };
+            const rPts = regimePts[regime] || 0;
+            score += rPts;
+            breakdown.push({ label: 'Regime (' + regime.replace(/_/g, ' ') + ')', pts: rPts });
+
+            // 3. MaxDD 30 jours
+            const last30 = visible.slice(-30);
+            if (last30.length > 1) {
+                let peak30 = 0, maxDD30 = 0;
+                last30.forEach(sn => {
+                    const eq = sn.balance?.TotalEquity || 0;
+                    if (eq > peak30) peak30 = eq;
+                    const dd = peak30 > 0 ? (peak30 - eq) / peak30 * 100 : 0;
+                    if (dd > maxDD30) maxDD30 = dd;
+                });
+                let ddPts = 0;
+                if (maxDD30 < 5) ddPts = 20;
+                else if (maxDD30 < 10) ddPts = 10;
+                else if (maxDD30 >= 20) ddPts = -20;
+                score += ddPts;
+                breakdown.push({ label: 'MaxDD 30d (-' + maxDD30.toFixed(1) + '%)', pts: ddPts });
+            }
+
+            // 4. Win rate 20 derniers trades
+            const trades = closedTrades || [];
+            const recentTrades = trades.slice(-20);
+            if (recentTrades.length >= 5) {
+                const wins = recentTrades.filter(t => t.pnl > 0).length;
+                const wr = wins / recentTrades.length * 100;
+                let wrPts = wr > 40 ? 20 : wr >= 30 ? 10 : -10;
+                score += wrPts;
+                breakdown.push({ label: 'Win Rate (' + wr.toFixed(0) + '%)', pts: wrPts });
+            }
+
+            // 5. Utilisation positions
+            const posCount = (s.positions || []).length;
+            const maxPos = s.state?.pm_state ? 22 : 35; // rough estimate
+            const util = maxPos > 0 ? posCount / maxPos * 100 : 0;
+            let utilPts = (util >= 50 && util <= 80) ? 15 : util < 30 ? -10 : util > 90 ? -5 : 0;
+            score += utilPts;
+            breakdown.push({ label: 'Utilization (' + util.toFixed(0) + '%)', pts: utilPts });
+
+            score = Math.max(0, Math.min(100, score));
+
+            // Render gauge
+            const canvas = document.getElementById('gonoGauge');
+            if (!canvas) return;
+            if (riskCharts.gonoGauge) riskCharts.gonoGauge.destroy();
+
+            const gaugeColor = score >= 70 ? '#16a34a' : score >= 40 ? '#f59e0b' : '#dc2626';
+            const verdict = score >= 70 ? 'GO' : score >= 40 ? 'CAUTION' : 'NO GO';
+
+            riskCharts.gonoGauge = new Chart(canvas, {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [score, 100 - score],
+                        backgroundColor: [gaugeColor, '#e2e8f0'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    rotation: -90, circumference: 180,
+                    cutout: '75%',
+                    plugins: { legend: { display: false }, tooltip: { enabled: false } }
+                }
+            });
+
+            document.getElementById('gonoScore').textContent = Math.round(score);
+            document.getElementById('gonoScore').style.color = gaugeColor;
+            const verdictEl = document.getElementById('gonoVerdict');
+            verdictEl.textContent = verdict;
+            verdictEl.style.color = gaugeColor;
+
+            // Breakdown
+            let bhtml = '';
+            breakdown.forEach(b => {
+                const cls = b.pts > 0 ? 'pos' : b.pts < 0 ? 'neg' : 'zero';
+                bhtml += '<div class="gono-breakdown-item"><span>' + b.label + '</span><span class="pts ' + cls + '">' + (b.pts > 0 ? '+' : '') + b.pts + '</span></div>';
+            });
+            document.getElementById('gonoBreakdown').innerHTML = bhtml;
+
+            // Timeline 30 jours
+            renderDailyTimeline();
+        }
+
+        function renderDailyTimeline() {
+            const el = document.getElementById('gonoTimeline');
+            if (!el) return;
+            const allReversed = [...snapshots].reverse();
+            const upToIdx = snapshots.length - currentIdx;
+            const visible = allReversed.slice(0, upToIdx);
+            const last30 = visible.slice(-30);
+
+            let html = '';
+            for (let i = 1; i < last30.length; i++) {
+                const prev = last30[i - 1];
+                const curr = last30[i];
+                const prevEq = prev.balance?.TotalEquity || 0;
+                const currEq = curr.balance?.TotalEquity || 0;
+                const ret = prevEq > 0 ? ((currEq / prevEq) - 1) * 100 : 0;
+                const posN = (curr.positions || []).length;
+                const regime = curr.state?.prev_regime || '-';
+
+                let bg = '#16a34a'; // green
+                if (ret < -1) bg = '#dc2626'; // red
+                else if (ret < 0) bg = '#f59e0b'; // orange
+
+                html += '<div class="timeline-day" style="background:' + bg + '">';
+                html += '<div class="timeline-tooltip">' + curr.date + '<br>' + ret.toFixed(2) + '% | ' + posN + ' pos | ' + regime.replace(/_/g, ' ') + '</div>';
+                html += '</div>';
+            }
+            el.innerHTML = html;
+        }
+
+        // ─── RISK TAB FUNCTIONS ───
+
+        function renderRiskTab() {
+            const riskData = computeRiskData();
+            renderRiskScore(riskData);
+            renderRiskKPIStrip(riskData);
+            renderDrawdownChart(riskData);
+            renderVaR(riskData);
+            renderStopStressTest(riskData);
+            renderSectorRisk();
+            renderCurrencyRisk();
+            renderRegionRisk();
+            renderPositionSizingRisk(riskData);
+            renderRollingVaRChart(riskData);
+            renderExposureChart();
+        }
+
+        function computeRiskData() {
+            const s = snapshots[currentIdx];
+            if (!s) return {};
+            const allReversed = [...snapshots].reverse();
+            const upToIdx = snapshots.length - currentIdx;
+            const visible = allReversed.slice(0, upToIdx);
+            const equities = visible.map(sn => sn.balance?.TotalEquity || 0).filter(v => v > 0);
+            const returns = computeDailyReturns(equities).slice(1);
+            const positions = s.positions || [];
+            const pending = s.pending_orders || [];
+            const pmStops = s.state?.pm_state?.position_stops || {};
+            const equity = s.balance?.TotalEquity || 1;
+
+            // VaR
+            let var95 = 0, var99 = 0, cvar = 0, var95dollar = 0;
+            if (returns.length >= 10) {
+                const sorted = [...returns].sort((a, b) => a - b);
+                const idx95 = Math.floor(returns.length * 0.05);
+                const idx99 = Math.floor(returns.length * 0.01);
+                var95 = sorted[idx95] * 100;
+                var99 = sorted[Math.max(idx99, 0)] * 100;
+                const tail = sorted.slice(0, idx95 + 1);
+                cvar = tail.length > 0 ? (tail.reduce((a, b) => a + b, 0) / tail.length) * 100 : var95;
+                var95dollar = Math.abs(var95 / 100 * equity);
+            }
+
+            // Max DD 30d
+            const last30 = visible.slice(-30);
+            let peak30 = 0, maxDD30 = 0;
+            if (last30.length > 1) {
+                last30.forEach(sn => {
+                    const eq = sn.balance?.TotalEquity || 0;
+                    if (eq > peak30) peak30 = eq;
+                    const dd = peak30 > 0 ? (peak30 - eq) / peak30 * 100 : 0;
+                    if (dd > maxDD30) maxDD30 = dd;
+                });
+            }
+
+            // Stop map
+            const stopMap = {};
+            pending.forEach(o => {
+                if (o.Side === 'SELL' && ['STOP', 'TRAILING_STOP', 'STOP_LIMIT'].includes(o.OrderType) && o.StopPrice > 0) {
+                    stopMap[o.Symbol] = o.StopPrice;
+                }
+            });
+            for (const [sym, price] of Object.entries(pmStops)) {
+                if (!stopMap[sym] && price > 0) stopMap[sym] = price;
+            }
+
+            let totalMarket = 0, totalAtStop = 0, noStopCount = 0;
+            const barData = [];
+            positions.forEach(p => {
+                const mktVal = (p.CurrentPrice || 0) * (p.Qty || 0);
+                const stop = stopMap[p.Symbol] || 0;
+                const stopVal = stop > 0 ? stop * (p.Qty || 0) : mktVal;
+                totalMarket += mktVal;
+                totalAtStop += stopVal;
+                if (!stop) noStopCount++;
+                barData.push({ symbol: p.Symbol, mktVal, stopVal, hasStop: stop > 0 });
+            });
+            barData.sort((a, b) => b.mktVal - a.mktVal);
+            const totalLoss = totalMarket - totalAtStop;
+
+            // Exposure
+            const exposure = equity > 0 ? totalMarket / equity * 100 : 0;
+
+            // HHI
+            const weights = positions.map(p => {
+                const val = (p.CurrentPrice || 0) * (p.Qty || 0);
+                return { symbol: p.Symbol, weight: equity > 0 ? val / equity * 100 : 0, val };
+            }).sort((a, b) => b.weight - a.weight);
+            const hhi = weights.reduce((s, w) => s + (w.weight / 100) ** 2, 0);
+
+            return {
+                returns, equities, equity, positions, visible,
+                var95, var99, cvar, var95dollar,
+                maxDD30, exposure, hhi,
+                totalLoss, totalMarket, noStopCount, barData, stopMap, weights
+            };
+        }
+
+        function computeRiskScore(d) {
+            let score = 0;
+            const breakdown = [];
+
+            // 1. VaR component (0-25 pts) — lower VaR is better
+            const absVaR = Math.abs(d.var95);
+            const varPts = absVaR < 1 ? 0 : absVaR < 2 ? 5 : absVaR < 3.5 ? 12 : absVaR < 5 ? 18 : 25;
+            score += varPts;
+            breakdown.push({ label: 'VaR 95% (' + d.var95.toFixed(1) + '%)', pts: varPts, max: 25 });
+
+            // 2. Drawdown 30d (0-25 pts) — lower DD is better
+            const ddPts = d.maxDD30 < 3 ? 0 : d.maxDD30 < 8 ? 5 : d.maxDD30 < 15 ? 12 : d.maxDD30 < 25 ? 18 : 25;
+            score += ddPts;
+            breakdown.push({ label: 'Max DD 30d (-' + d.maxDD30.toFixed(1) + '%)', pts: ddPts, max: 25 });
+
+            // 3. Concentration (0-20 pts) — lower HHI is better
+            const hhiNorm = d.hhi * 10000;
+            const hhiPts = hhiNorm < 400 ? 0 : hhiNorm < 800 ? 5 : hhiNorm < 1500 ? 10 : hhiNorm < 2500 ? 15 : 20;
+            score += hhiPts;
+            breakdown.push({ label: 'Concentration (HHI ' + hhiNorm.toFixed(0) + ')', pts: hhiPts, max: 20 });
+
+            // 4. Exposure (0-15 pts)
+            const expPts = d.exposure < 70 ? 0 : d.exposure < 90 ? 3 : d.exposure < 100 ? 7 : d.exposure < 120 ? 10 : 15;
+            score += expPts;
+            breakdown.push({ label: 'Exposure (' + d.exposure.toFixed(0) + '%)', pts: expPts, max: 15 });
+
+            // 5. Stops coverage (0-15 pts)
+            const nPos = d.positions.length;
+            const stopPct = nPos > 0 ? ((nPos - d.noStopCount) / nPos * 100) : 100;
+            const stopPts = stopPct >= 100 ? 0 : stopPct >= 80 ? 3 : stopPct >= 50 ? 8 : 15;
+            score += stopPts;
+            breakdown.push({ label: 'Stops (' + stopPct.toFixed(0) + '% covered)', pts: stopPts, max: 15 });
+
+            score = Math.min(score, 100);
+
+            let label, color;
+            if (score <= 15) { label = 'LOW RISK'; color = '#16a34a'; }
+            else if (score <= 35) { label = 'MODERATE'; color = '#2563eb'; }
+            else if (score <= 60) { label = 'ELEVATED'; color = '#f59e0b'; }
+            else { label = 'HIGH RISK'; color = '#dc2626'; }
+
+            return { score, label, color, breakdown };
+        }
+
+        function renderRiskScore(d) {
+            if (!d.equity) return;
+            const rs = computeRiskScore(d);
+
+            // Gauge
+            if (riskCharts.riskGauge) riskCharts.riskGauge.destroy();
+            const canvas = document.getElementById('riskGauge');
+            if (!canvas) return;
+
+            riskCharts.riskGauge = new Chart(canvas, {
+                type: 'doughnut',
+                data: { datasets: [{ data: [rs.score, 100 - rs.score], backgroundColor: [rs.color, '#e2e8f0'], borderWidth: 0 }] },
+                options: { responsive: true, maintainAspectRatio: false, rotation: -90, circumference: 180, cutout: '75%', plugins: { legend: { display: false }, tooltip: { enabled: false } } }
+            });
+
+            document.getElementById('riskGaugeValue').textContent = rs.score;
+            document.getElementById('riskGaugeValue').style.color = rs.color;
+            const lbl = document.getElementById('riskGaugeLabel');
+            lbl.textContent = rs.label;
+            lbl.style.color = rs.color;
+
+            // Breakdown
+            const el = document.getElementById('riskBreakdown');
+            if (el) {
+                let html = '';
+                rs.breakdown.forEach(b => {
+                    const pct = b.max > 0 ? b.pts / b.max : 0;
+                    const cls = pct <= 0.2 ? 'good' : pct <= 0.5 ? 'warn' : 'bad';
+                    html += '<div class="risk-bd-item"><span class="risk-bd-label">' + b.label + '</span><span class="risk-bd-pts ' + cls + '">' + b.pts + '/' + b.max + '</span></div>';
+                });
+                el.innerHTML = html;
+            }
+        }
+
+        function renderRiskKPIStrip(d) {
+            if (!d.equity) return;
+            function setKPI(id, val, color) {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.querySelector('.risk-kpi-val').textContent = val;
+                    if (color) el.querySelector('.risk-kpi-val').style.color = color;
+                }
+            }
+            const varColor = Math.abs(d.var95) > 3.5 ? '#dc2626' : Math.abs(d.var95) > 2 ? '#f59e0b' : '#16a34a';
+            const cvarColor = Math.abs(d.cvar) > 5 ? '#dc2626' : Math.abs(d.cvar) > 3 ? '#f59e0b' : '#16a34a';
+            const ddColor = d.maxDD30 > 15 ? '#dc2626' : d.maxDD30 > 8 ? '#f59e0b' : '#16a34a';
+            const expColor = d.exposure > 110 ? '#dc2626' : d.exposure > 95 ? '#f59e0b' : '#2563eb';
+            const hhiNorm = (d.hhi * 10000).toFixed(0);
+            const hhiColor = hhiNorm > 2500 ? '#dc2626' : hhiNorm > 1000 ? '#f59e0b' : '#16a34a';
+            const stopColor = d.noStopCount > 3 ? '#dc2626' : d.noStopCount > 0 ? '#f59e0b' : '#16a34a';
+
+            setKPI('riskKpiVaR', d.var95.toFixed(2) + '%', varColor);
+            setKPI('riskKpiCVaR', d.cvar.toFixed(2) + '%', cvarColor);
+            setKPI('riskKpiDD30', '-' + d.maxDD30.toFixed(1) + '%', ddColor);
+            setKPI('riskKpiExposure', d.exposure.toFixed(0) + '%', expColor);
+            setKPI('riskKpiHHI', hhiNorm, hhiColor);
+            setKPI('riskKpiNoStop', d.noStopCount + '/' + d.positions.length, stopColor);
+        }
+
+        function renderDrawdownChart(d) {
+            if (!d.visible || d.visible.length < 2) return;
+            if (riskCharts.drawdownChart) riskCharts.drawdownChart.destroy();
+            const ctx = document.getElementById('riskDrawdownChart')?.getContext('2d');
+            if (!ctx) return;
+
+            const dates = [];
+            const ddValues = [];
+            let peak = 0;
+            for (const sn of d.visible) {
+                const eq = sn.balance?.TotalEquity || 0;
+                if (eq > peak) peak = eq;
+                const dd = peak > 0 ? -((peak - eq) / peak * 100) : 0;
+                dates.push((sn.date || sn.timestamp || '').substring(0, 10));
+                ddValues.push(dd);
+            }
+
+            riskCharts.drawdownChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Drawdown',
+                        data: ddValues,
+                        borderColor: '#dc2626',
+                        backgroundColor: 'rgba(220,38,38,0.12)',
+                        borderWidth: 1.5,
+                        fill: true,
+                        pointRadius: 0,
+                    }, {
+                        label: '-10%',
+                        data: dates.map(() => -10),
+                        borderColor: 'rgba(245,158,11,0.4)',
+                        borderWidth: 1, borderDash: [4, 4], pointRadius: 0, fill: false,
+                    }, {
+                        label: '-20%',
+                        data: dates.map(() => -20),
+                        borderColor: 'rgba(220,38,38,0.4)',
+                        borderWidth: 1, borderDash: [4, 4], pointRadius: 0, fill: false,
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false, animation: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: { legend: { display: true, position: 'top', labels: { boxWidth: 10, font: { size: 9 } } } },
+                    scales: { x: { ticks: { maxTicksLimit: 10, font: { size: 9 } } }, y: { title: { display: true, text: '%', font: { size: 10 } } } }
+                }
+            });
+        }
+
+        function renderVaR(d) {
+            if (!d.returns || d.returns.length < 10) return;
+            if (riskCharts.varChart) riskCharts.varChart.destroy();
+            const ctx = document.getElementById('riskVaRChart')?.getContext('2d');
+            if (!ctx) return;
+
+            const returns = d.returns;
+            const minR = Math.min(...returns) * 100, maxR = Math.max(...returns) * 100;
+            const nbBins = 30;
+            const binW = (maxR - minR) / nbBins || 1;
+            const bins = Array(nbBins).fill(0);
+            const binLabels = [];
+            for (let i = 0; i < nbBins; i++) {
+                const lo = minR + i * binW;
+                binLabels.push(lo.toFixed(1) + '%');
+                returns.forEach(r => {
+                    const rv = r * 100;
+                    if (rv >= lo && rv < lo + binW) bins[i]++;
+                });
+            }
+
+            riskCharts.varChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: binLabels,
+                    datasets: [{
+                        data: bins,
+                        backgroundColor: binLabels.map(l => parseFloat(l) <= d.var95 ? 'rgba(220,38,38,0.6)' : 'rgba(37,99,235,0.35)'),
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false, animation: false,
+                    plugins: {
+                        legend: { display: false },
+                        annotation: d.var95 ? { annotations: { varLine: { type: 'line', xMin: d.var95.toFixed(1) + '%', xMax: d.var95.toFixed(1) + '%', borderColor: '#dc2626', borderWidth: 2, label: { display: true, content: 'VaR 95%', position: 'start', font: { size: 9 } } } } } : undefined,
+                    },
+                    scales: { y: { ticks: { stepSize: 1 } }, x: { ticks: { maxTicksLimit: 10, font: { size: 9 } } } }
+                }
+            });
+        }
+
+        function renderStopStressTest(d) {
+            if (!d.barData || d.barData.length === 0) return;
+            const equity = d.equity || 1;
+            const totalLoss = d.totalLoss;
+            const pctLoss = equity > 0 ? (totalLoss / equity * 100) : 0;
+
+            // Inline metrics in header
+            const metricsEl = document.getElementById('riskStopMetrics');
+            if (metricsEl) {
+                const lossColor = pctLoss > 15 ? '#dc2626' : pctLoss > 8 ? '#f59e0b' : '#16a34a';
+                metricsEl.innerHTML =
+                    '<span class="rmi"><span class="rmi-val" style="color:' + lossColor + '">-' + fmtMoney(totalLoss) + '</span><span class="rmi-lbl">(' + pctLoss.toFixed(1) + '%)</span></span>' +
+                    '<span class="rmi"><span class="rmi-val" style="color:' + (d.noStopCount > 0 ? '#dc2626' : '#16a34a') + '">' + d.noStopCount + '</span><span class="rmi-lbl">no stop</span></span>';
+            }
+
+            // Chart
+            if (riskCharts.stopChart) riskCharts.stopChart.destroy();
+            const ctx = document.getElementById('riskStopChart')?.getContext('2d');
+            if (!ctx) return;
+            const top15 = d.barData.slice(0, 15);
+            riskCharts.stopChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: top15.map(d => d.symbol),
+                    datasets: [
+                        { label: 'Market Value', data: top15.map(d => d.mktVal), backgroundColor: 'rgba(37,99,235,0.6)', borderColor: '#2563eb', borderWidth: 1 },
+                        { label: 'Value at Stop', data: top15.map(d => d.stopVal), backgroundColor: top15.map(d => d.hasStop ? 'rgba(220,38,38,0.4)' : 'rgba(148,163,184,0.3)'), borderColor: top15.map(d => d.hasStop ? '#dc2626' : '#94a3b8'), borderWidth: 1 }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false, animation: false,
+                    plugins: { legend: { display: true, position: 'top', labels: { boxWidth: 10, font: { size: 9 } } } },
+                    scales: { y: { ticks: { callback: v => '$' + (v / 1000).toFixed(0) + 'k' } }, x: { ticks: { font: { size: 8 } } } }
+                }
+            });
+        }
+
+        function renderConcentrationDonut(groupFn, canvasId, tableId, label, warnThreshold) {
+            const s = snapshots[currentIdx];
+            const positions = s?.positions || [];
+            const equity = s?.balance?.TotalEquity || 1;
+
+            const groups = {};
+            positions.forEach(p => {
+                const key = groupFn(p);
+                const val = (p.CurrentPrice || 0) * (p.Qty || 0);
+                groups[key] = (groups[key] || 0) + val;
+            });
+
+            const sorted = Object.entries(groups).sort((a, b) => b[1] - a[1]);
+            const total = sorted.reduce((s, e) => s + e[1], 0) || 1;
+
+            const cid = canvasId;
+            if (riskCharts[cid]) riskCharts[cid].destroy();
+            const ctx = document.getElementById(cid)?.getContext('2d');
+            if (!ctx) return;
+
+            const colors = ['#2563eb', '#16a34a', '#f59e0b', '#dc2626', '#8b5cf6', '#06b6d4', '#ec4899', '#84cc16', '#f97316', '#6366f1', '#14b8a6', '#a855f7'];
+            riskCharts[cid] = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: sorted.map(e => e[0]),
+                    datasets: [{ data: sorted.map(e => e[1]), backgroundColor: sorted.map((_, i) => colors[i % colors.length]), borderWidth: 1 }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: true, cutout: '55%',
+                    plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.label + ': ' + (ctx.parsed / total * 100).toFixed(1) + '%' } } }
+                }
+            });
+
+            const tbl = document.getElementById(tableId);
+            if (tbl) {
+                let html = '<tbody>';
+                sorted.forEach(([key, val]) => {
+                    const pct = val / total * 100;
+                    const warn = pct > warnThreshold;
+                    html += '<tr><td' + (warn ? ' class="risk-concentration-warn"' : '') + '>' + key + '</td><td style="text-align:right;font-weight:600;' + (warn ? 'color:var(--accent-red)' : '') + '">' + pct.toFixed(1) + '%</td></tr>';
+                });
+                html += '</tbody>';
+                tbl.innerHTML = html;
+            }
+        }
+
+        function renderSectorRisk() { renderConcentrationDonut(getSector, 'riskDonutSector', 'riskTableSector', 'Sector', 25); }
+        function renderCurrencyRisk() { renderConcentrationDonut(getPosCurrency, 'riskDonutCurrency', 'riskTableCurrency', 'Currency', 50); }
+        function renderRegionRisk() { renderConcentrationDonut(getRegion, 'riskDonutRegion', 'riskTableRegion', 'Region', 50); }
+
+        function renderPositionSizingRisk(d) {
+            if (!d.weights) return;
+            const weights = d.weights;
+            const hhi = d.hhi;
+            const bigPos = weights.filter(w => w.weight > 10).length;
+            const biggest = weights.length > 0 ? weights[0] : { symbol: '-', weight: 0 };
+
+            const m = document.getElementById('riskSizingMetrics');
+            if (m) {
+                m.innerHTML =
+                    '<span class="rmi"><span class="rmi-val">HHI ' + (hhi * 10000).toFixed(0) + '</span></span>' +
+                    '<span class="rmi"><span class="rmi-val" style="color:' + (bigPos > 0 ? '#dc2626' : '#16a34a') + '">' + bigPos + '</span><span class="rmi-lbl">&gt;10%</span></span>' +
+                    '<span class="rmi"><span class="rmi-val">' + biggest.weight.toFixed(1) + '%</span><span class="rmi-lbl">' + biggest.symbol + '</span></span>';
+            }
+
+            const barsEl = document.getElementById('riskSizingBars');
+            if (barsEl) {
+                let html = '';
+                weights.slice(0, 20).forEach(w => {
+                    const color = w.weight > 10 ? '#dc2626' : w.weight > 7 ? '#f59e0b' : '#2563eb';
+                    const width = Math.max(w.weight * 3, 3);
+                    html += '<div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:2px;">';
+                    html += '<span style="font-size:0.7rem;width:50px;text-align:right;color:var(--text-secondary)">' + w.symbol + '</span>';
+                    html += '<div class="risk-sizing-bar" style="width:' + width + '%;background:' + color + '">' + w.weight.toFixed(1) + '%</div>';
+                    html += '</div>';
+                });
+                barsEl.innerHTML = html;
+            }
+        }
+
+        function renderRollingVaRChart(d) {
+            if (!d.returns || d.returns.length < 35) return;
+            if (riskCharts.rollingVaR) riskCharts.rollingVaR.destroy();
+            const ctx = document.getElementById('riskRollingVaRChart')?.getContext('2d');
+            if (!ctx) return;
+
+            const window = 30;
+            const dates = [];
+            const var95s = [];
+            const var99s = [];
+
+            for (let i = window; i < d.returns.length; i++) {
+                const slice = d.returns.slice(i - window, i);
+                const sorted = [...slice].sort((a, b) => a - b);
+                const idx95 = Math.floor(slice.length * 0.05);
+                const idx99 = Math.max(Math.floor(slice.length * 0.01), 0);
+                var95s.push(sorted[idx95] * 100);
+                var99s.push(sorted[idx99] * 100);
+                // approximate date from visible array
+                const visIdx = i + 1; // returns are offset by 1
+                const sn = d.visible[visIdx];
+                dates.push(sn ? (sn.date || sn.timestamp || '').substring(0, 10) : '');
+            }
+
+            riskCharts.rollingVaR = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'VaR 95% (30d rolling)',
+                        data: var95s,
+                        borderColor: '#f59e0b',
+                        backgroundColor: 'rgba(245,158,11,0.1)',
+                        borderWidth: 1.5, fill: true, pointRadius: 0,
+                    }, {
+                        label: 'VaR 99% (30d rolling)',
+                        data: var99s,
+                        borderColor: '#dc2626',
+                        borderWidth: 1.5, borderDash: [4, 3], fill: false, pointRadius: 0,
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false, animation: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: { legend: { position: 'top', labels: { boxWidth: 10, font: { size: 9 } } } },
+                    scales: { x: { ticks: { maxTicksLimit: 10, font: { size: 9 } } }, y: { title: { display: true, text: '%', font: { size: 10 } } } }
+                }
+            });
+        }
+
+        function renderExposureChart() {
+            if (riskCharts.exposureChart) riskCharts.exposureChart.destroy();
+            const ctx = document.getElementById('riskExposureChart')?.getContext('2d');
+            if (!ctx) return;
+
+            const allReversed = [...snapshots].reverse();
+            const upToIdx = snapshots.length - currentIdx;
+            const visible = allReversed.slice(0, upToIdx);
+            if (visible.length < 2) return;
+
+            const dates = [];
+            const exposures = [];
+            const posCounts = [];
+
+            for (const sn of visible) {
+                const eq = sn.balance?.TotalEquity || 0;
+                const positions = sn.positions || [];
+                let totalMkt = 0;
+                positions.forEach(p => { totalMkt += (p.CurrentPrice || 0) * (p.Qty || 0); });
+                dates.push((sn.date || sn.timestamp || '').substring(0, 10));
+                exposures.push(eq > 0 ? totalMkt / eq * 100 : 0);
+                posCounts.push(positions.length);
+            }
+
+            riskCharts.exposureChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Exposure %',
+                        data: exposures,
+                        borderColor: '#2563eb',
+                        backgroundColor: 'rgba(37,99,235,0.1)',
+                        borderWidth: 1.5, fill: true, pointRadius: 0, yAxisID: 'y',
+                    }, {
+                        label: 'Positions',
+                        data: posCounts,
+                        borderColor: '#8b5cf6',
+                        borderWidth: 1.5, borderDash: [4, 3], fill: false, pointRadius: 0, yAxisID: 'y1',
+                    }, {
+                        label: '100%',
+                        data: dates.map(() => 100),
+                        borderColor: 'rgba(100,116,139,0.3)',
+                        borderWidth: 1, borderDash: [2, 2], pointRadius: 0, fill: false, yAxisID: 'y',
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false, animation: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: { legend: { position: 'top', labels: { boxWidth: 10, font: { size: 9 } } } },
+                    scales: {
+                        x: { ticks: { maxTicksLimit: 10, font: { size: 9 } } },
+                        y: { position: 'left', title: { display: true, text: 'Exposure %', font: { size: 10 } } },
+                        y1: { position: 'right', title: { display: true, text: '# Positions', font: { size: 10 } }, grid: { drawOnChartArea: false } }
+                    }
+                }
+            });
+        }
+
         // ─── RENDER ALL ───
         function renderAll() {
             renderKPIs();
@@ -3526,6 +4482,8 @@
             renderActions();
             renderBestWorstTrades();
             renderCorrelationMatrix();
+            renderGoNoGo();
+            if (tabInitialized.risk) renderRiskTab();
             if (tabInitialized.allocations) updateAllocCharts();
             if (tabInitialized.analytics) updateAnalyticsCharts();
         }
