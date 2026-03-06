@@ -1,5 +1,259 @@
 [
   {
+    "timestamp": "2026-03-06T23:09:49+01:00",
+    "date": "2026-03-06",
+    "portfolio": "etf_us",
+    "allocation": "etf_us",
+    "currency": "USD",
+    "git_sha1": "2b9ae47",
+    "git_branch": "main",
+    "config_path": "config/portfolio_etf_us.yaml",
+    "config_hash": "29f3369dca69814a",
+    "actions": [
+      {
+        "type": "CREATE",
+        "symbol": "BNO",
+        "side": "SELL",
+        "order_type": "MARKET",
+        "qty": 254,
+        "order_id": "d89293b4-d63c-47c7-b59d-4915b552614e",
+        "reason": "ROTATION_OUT"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "NFLP",
+        "side": "SELL",
+        "order_type": "MARKET",
+        "qty": 506,
+        "order_id": "56348fe4-43fd-4b25-b494-1c4d6500959d",
+        "reason": "ROTATION_OUT"
+      }
+    ],
+    "positions": [
+      {
+        "Symbol": "BABO",
+        "Qty": 868,
+        "AvgEntry": 11.325876,
+        "CurrentPrice": 10.87,
+        "UnrealizedPnL": -395.700368,
+        "ChangeToday": 0.00555,
+        "Currency": "USD",
+        "Timestamp": "2026-03-04T14:33:18.163583Z",
+        "BrokerSource": "",
+        "Name": "YieldMax BABA Option Income Strategy ETF",
+        "Sector": "Derivative Income",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "BNO",
+        "Qty": 254,
+        "AvgEntry": 38.757283,
+        "CurrentPrice": 44.38,
+        "UnrealizedPnL": 1428.170118,
+        "ChangeToday": 0.10288,
+        "Currency": "USD",
+        "Timestamp": "2026-03-04T14:32:45.893542Z",
+        "BrokerSource": "",
+        "Name": "United States Brent Oil Fund LP",
+        "Sector": "Commodities Focused",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "copper",
+          "nickel",
+          "oil_gas_exploration"
+        ]
+      },
+      {
+        "Symbol": "KWEB",
+        "Qty": 329,
+        "AvgEntry": 29.97997,
+        "CurrentPrice": 29.8,
+        "UnrealizedPnL": -59.21013,
+        "ChangeToday": 0.01361,
+        "Currency": "USD",
+        "Timestamp": "2026-03-04T14:32:05.094293Z",
+        "BrokerSource": "",
+        "Name": "KraneShares CSI China Internet ETF",
+        "Sector": "China Region",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "augmented_reality",
+          "fiber_optics",
+          "gaming",
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "NFLP",
+        "Qty": 506,
+        "AvgEntry": 28.11,
+        "CurrentPrice": 27.87,
+        "UnrealizedPnL": -121.44,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "2026-03-05T14:30:45.456452Z",
+        "BrokerSource": "",
+        "Name": "Kurv Yield Prem Stratgey Netflix ETF",
+        "Sector": "Derivative Income",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "NFXS",
+        "Qty": 1232,
+        "AvgEntry": 15.9,
+        "CurrentPrice": 15.9907,
+        "UnrealizedPnL": 111.7424,
+        "ChangeToday": 0.00265,
+        "Currency": "USD",
+        "Timestamp": "2026-03-06T14:30:40.009059Z",
+        "BrokerSource": "",
+        "Name": "Direxion Daily NFLX Bear 1X Shares",
+        "Sector": "Trading--Inverse Equity",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "ai",
+          "augmented_reality",
+          "gaming"
+        ]
+      },
+      {
+        "Symbol": "NVOH",
+        "Qty": 8,
+        "AvgEntry": 20.47375,
+        "CurrentPrice": 21.1254,
+        "UnrealizedPnL": 5.2132,
+        "ChangeToday": 0.01078,
+        "Currency": "USD",
+        "Timestamp": "2026-03-02T14:34:54.68003Z",
+        "BrokerSource": "",
+        "Name": "Novo Nordisk A/S (B Shares) ADRhedged",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "augmented_reality",
+          "gaming"
+        ]
+      }
+    ],
+    "pending_orders": [
+      {
+        "OrderID": "56348fe4-43fd-4b25-b494-1c4d6500959d",
+        "Symbol": "NFLP",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 506,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-03-06T22:09:49.64660564Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "d89293b4-d63c-47c7-b59d-4915b552614e",
+        "Symbol": "BNO",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 254,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-03-06T22:09:49.465869362Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      }
+    ],
+    "balance": {
+      "BaseCurrency": "USD",
+      "CashByCurrency": {
+        "USD": 29200.24
+      },
+      "MarginUsed": 64483.649999999994,
+      "TotalEquity": 93683.89,
+      "Timestamp": "0001-01-01T00:00:00Z",
+      "BrokerSource": "alpaca"
+    },
+    "state": {
+      "pm_state": {
+        "cautious_restart_start": "0001-01-01T00:00:00Z",
+        "cautious_restart_until": "0001-01-01T00:00:00Z",
+        "crash_inverse_until": "0001-01-01T00:00:00Z",
+        "equity_curve": [
+          99777.28,
+          98980.42,
+          98611.73,
+          99550.38,
+          98887.9,
+          97561.94,
+          97672.5,
+          96784.87,
+          93115.42,
+          92851.06,
+          91636.38,
+          93683.89
+        ],
+        "equity_curve_dates": [
+          "2026-02-20T15:30:00+01:00",
+          "2026-02-23T22:00:00+01:00",
+          "2026-02-24T21:59:45+01:00",
+          "2026-02-25T22:00:00+01:00",
+          "2026-02-25T16:12:41+01:00",
+          "2026-02-26T21:59:50+01:00",
+          "2026-02-27T22:00:00+01:00",
+          "2026-03-02T21:59:55+01:00",
+          "2026-03-03T21:59:43+01:00",
+          "2026-03-04T22:00:00+01:00",
+          "2026-03-05T22:00:00+01:00",
+          "2026-03-06T15:35:51+01:00"
+        ],
+        "global_pause_until": "0001-01-01T00:00:00Z",
+        "is_in_grace_period": false,
+        "last_entry_creation_date": "2026-03-05T22:00:00+01:00",
+        "last_liquidation_date": "0001-01-01T00:00:00Z",
+        "last_streak_reset_date": "0001-01-01T00:00:00Z",
+        "peak_equity": 99777.28,
+        "position_clusters": null,
+        "position_entries": {},
+        "position_highs": null,
+        "position_last_dca": {},
+        "position_open_dates": {
+          "BABO": "2026-03-03T21:59:43+01:00",
+          "KWEB": "2026-03-03T21:59:43+01:00",
+          "NFXS": "2026-03-05T22:00:00+01:00",
+          "NVOH": "2026-02-27T22:00:00+01:00"
+        },
+        "position_stops": {
+          "BABO": 10.450874068119594,
+          "KWEB": 28.117113339429583,
+          "NFXS": 14.000553069795881,
+          "NVOH": 18.400446368626184
+        },
+        "regime_score_history": null,
+        "stop_history": [],
+        "stop_streak_count": 0,
+        "stopped_symbols": {}
+      },
+      "prev_regime": "EARLY_RISK_OFF"
+    }
+  },
+  {
     "timestamp": "2026-03-05T23:09:55+01:00",
     "date": "2026-03-05",
     "portfolio": "etf_us",
