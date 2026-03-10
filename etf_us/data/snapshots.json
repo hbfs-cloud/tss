@@ -1,5 +1,268 @@
 [
   {
+    "timestamp": "2026-03-10T23:10:41+01:00",
+    "date": "2026-03-10",
+    "portfolio": "etf_us",
+    "allocation": "etf_us",
+    "currency": "USD",
+    "git_sha1": "b5522a7",
+    "git_branch": "main",
+    "config_path": "config/portfolio_etf_us.yaml",
+    "config_hash": "29f3369dca69814a",
+    "actions": [
+      {
+        "type": "CREATE",
+        "symbol": "DBE",
+        "side": "SELL",
+        "order_type": "MARKET",
+        "qty": 541,
+        "order_id": "5d03498e-e8b7-4711-879a-ef7e2fdd4e32",
+        "reason": "ROTATION_OUT"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "UGA",
+        "side": "BUY",
+        "order_type": "LIMIT",
+        "qty": 128,
+        "limit_price": 88.36937718200684,
+        "order_id": "28483b9f-7da3-470e-94b1-bcd5e8a43fbe",
+        "reason": "ROTATION_IN"
+      }
+    ],
+    "positions": [
+      {
+        "Symbol": "BABO",
+        "Qty": 868,
+        "AvgEntry": 11.325876,
+        "CurrentPrice": 11.26,
+        "UnrealizedPnL": -57.180368,
+        "ChangeToday": 0.02364,
+        "Currency": "USD",
+        "Timestamp": "2026-03-04T14:33:18.163583Z",
+        "BrokerSource": "",
+        "Name": "YieldMax BABA Option Income Strategy ETF",
+        "Sector": "Derivative Income",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "DBE",
+        "Qty": 541,
+        "AvgEntry": 25.525213,
+        "CurrentPrice": 25.69,
+        "UnrealizedPnL": 89.149767,
+        "ChangeToday": 0.03007,
+        "Currency": "USD",
+        "Timestamp": "2026-03-10T13:38:10.924575Z",
+        "BrokerSource": "",
+        "Name": "Invesco DB Energy Fund",
+        "Sector": "Commodities Focused",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "copper"
+        ]
+      },
+      {
+        "Symbol": "ITB",
+        "Qty": 137,
+        "AvgEntry": 97.500584,
+        "CurrentPrice": 96.99,
+        "UnrealizedPnL": -69.950008,
+        "ChangeToday": -0.00879,
+        "Currency": "USD",
+        "Timestamp": "2026-03-10T13:31:41.791322Z",
+        "BrokerSource": "",
+        "Name": "iShares U.S. Home Construction ETF",
+        "Sector": "Consumer Cyclical",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "augmented_reality",
+          "construction",
+          "furniture_home",
+          "gaming",
+          "infrastructure",
+          "investment_management"
+        ]
+      },
+      {
+        "Symbol": "NFXS",
+        "Qty": 1232,
+        "AvgEntry": 15.9,
+        "CurrentPrice": 16.43,
+        "UnrealizedPnL": 652.96,
+        "ChangeToday": 0.01923,
+        "Currency": "USD",
+        "Timestamp": "2026-03-06T14:30:40.009059Z",
+        "BrokerSource": "",
+        "Name": "Direxion Daily NFLX Bear 1X Shares",
+        "Sector": "Trading--Inverse Equity",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "ai",
+          "augmented_reality",
+          "gaming"
+        ]
+      },
+      {
+        "Symbol": "USE",
+        "Qty": 495,
+        "AvgEntry": 27.899939,
+        "CurrentPrice": 27.8775,
+        "UnrealizedPnL": -11.107305,
+        "ChangeToday": 0.02378,
+        "Currency": "USD",
+        "Timestamp": "2026-03-10T13:35:04.699419Z",
+        "BrokerSource": "",
+        "Name": "USCF Energy Commodity Strategy Absolute Return Fund",
+        "Sector": "Commodities Focused",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "copper"
+        ]
+      },
+      {
+        "Symbol": "XHB",
+        "Qty": 128,
+        "AvgEntry": 104.630938,
+        "CurrentPrice": 104.36,
+        "UnrealizedPnL": -34.680064,
+        "ChangeToday": -0.00798,
+        "Currency": "USD",
+        "Timestamp": "2026-03-10T13:35:28.646912Z",
+        "BrokerSource": "",
+        "Name": "State Street SPDR S&P Homebuilders ETF",
+        "Sector": "Consumer Cyclical",
+        "Country": "US",
+        "AssetType": "ETF",
+        "Themes": [
+          "furniture_home",
+          "investment_management"
+        ]
+      }
+    ],
+    "pending_orders": [
+      {
+        "OrderID": "28483b9f-7da3-470e-94b1-bcd5e8a43fbe",
+        "Symbol": "UGA",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 128,
+        "FilledQty": 0,
+        "LimitPrice": 88.37,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-03-10T22:10:41.136732817Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "5d03498e-e8b7-4711-879a-ef7e2fdd4e32",
+        "Symbol": "DBE",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 541,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-03-10T22:10:41.049036028Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      }
+    ],
+    "balance": {
+      "BaseCurrency": "USD",
+      "CashByCurrency": {
+        "USD": 11347.1
+      },
+      "MarginUsed": 84358.79999999999,
+      "TotalEquity": 95705.9,
+      "Timestamp": "0001-01-01T00:00:00Z",
+      "BrokerSource": "alpaca"
+    },
+    "state": {
+      "pm_state": {
+        "cautious_restart_start": "0001-01-01T00:00:00Z",
+        "cautious_restart_until": "0001-01-01T00:00:00Z",
+        "crash_inverse_until": "0001-01-01T00:00:00Z",
+        "equity_curve": [
+          99777.28,
+          98980.42,
+          98611.73,
+          99550.38,
+          98887.9,
+          97561.94,
+          97672.5,
+          96784.87,
+          93115.42,
+          92851.06,
+          91636.38,
+          93683.89,
+          95065.57,
+          95705.9
+        ],
+        "equity_curve_dates": [
+          "2026-02-20T15:30:00+01:00",
+          "2026-02-23T22:00:00+01:00",
+          "2026-02-24T21:59:45+01:00",
+          "2026-02-25T22:00:00+01:00",
+          "2026-02-25T16:12:41+01:00",
+          "2026-02-26T21:59:50+01:00",
+          "2026-02-27T22:00:00+01:00",
+          "2026-03-02T21:59:55+01:00",
+          "2026-03-03T21:59:43+01:00",
+          "2026-03-04T22:00:00+01:00",
+          "2026-03-05T22:00:00+01:00",
+          "2026-03-06T15:35:51+01:00",
+          "2026-03-09T20:54:20+01:00",
+          "2026-03-10T20:59:48+01:00"
+        ],
+        "global_pause_until": "0001-01-01T00:00:00Z",
+        "is_in_grace_period": false,
+        "last_entry_creation_date": "2026-03-10T20:59:48+01:00",
+        "last_liquidation_date": "0001-01-01T00:00:00Z",
+        "last_streak_reset_date": "0001-01-01T00:00:00Z",
+        "peak_equity": 99777.28,
+        "position_clusters": null,
+        "position_entries": {},
+        "position_highs": null,
+        "position_last_dca": {},
+        "position_open_dates": {
+          "BABO": "2026-03-03T21:59:43+01:00",
+          "ITB": "2026-03-09T20:54:20+01:00",
+          "NFXS": "2026-03-05T22:00:00+01:00",
+          "UGA": "2026-03-10T20:59:48+01:00",
+          "USE": "2026-03-09T20:54:20+01:00",
+          "XHB": "2026-03-09T20:54:20+01:00"
+        },
+        "position_stops": {
+          "BABO": 10.450874068119594,
+          "ITB": 90.15951110004535,
+          "NFXS": 14.000553069795881,
+          "USE": 26.110920573377335,
+          "XHB": 96.91487082209125
+        },
+        "regime_score_history": null,
+        "stop_history": [],
+        "stop_streak_count": 0,
+        "stopped_symbols": {}
+      },
+      "prev_regime": "EARLY_RISK_OFF"
+    }
+  },
+  {
     "timestamp": "2026-03-09T23:10:40+01:00",
     "date": "2026-03-09",
     "portfolio": "etf_us",
