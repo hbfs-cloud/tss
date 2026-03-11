@@ -1,5 +1,229 @@
 [
   {
+    "timestamp": "2026-03-11T23:23:29+01:00",
+    "date": "2026-03-11",
+    "portfolio": "us_t212",
+    "allocation": "us_t212",
+    "currency": "USD",
+    "git_sha1": "b885e1d",
+    "git_branch": "main",
+    "config_path": "config/portfolio_us_t212.yaml",
+    "config_hash": "571e41335c2afa9b",
+    "actions": [
+      {
+        "type": "UPDATE",
+        "symbol": "BW",
+        "side": "",
+        "order_type": "",
+        "qty": 0,
+        "stop_price": 10.49,
+        "order_id": "45751071946",
+        "reason": "TRAILING_STOP_UPDATE: Replacing stop $9.90 with $10.49"
+      }
+    ],
+    "positions": [
+      {
+        "Symbol": "ERAS",
+        "Qty": 94,
+        "AvgEntry": 12.28,
+        "CurrentPrice": 15.2,
+        "UnrealizedPnL": 264.71,
+        "ChangeToday": 0,
+        "Currency": "EUR",
+        "Timestamp": "2026-02-09T18:31:51+02:00",
+        "BrokerSource": "",
+        "Name": "Erasca, Inc.",
+        "Sector": "Healthcare",
+        "Country": "US",
+        "AssetType": "STOCK",
+        "MarketCapCategory": "Mid-Cap",
+        "Themes": [
+          "augmented_reality",
+          "gaming"
+        ]
+      },
+      {
+        "Symbol": "BW",
+        "Qty": 52,
+        "AvgEntry": 8.66,
+        "CurrentPrice": 14.82,
+        "UnrealizedPnL": 284.42,
+        "ChangeToday": 0,
+        "Currency": "EUR",
+        "Timestamp": "2026-02-23T16:30:01+02:00",
+        "BrokerSource": "",
+        "Name": "Babcock & Wilcox Enterprises, Inc.",
+        "Sector": "Industrials",
+        "Country": "US",
+        "AssetType": "STOCK",
+        "MarketCapCategory": "Small-Cap",
+        "Themes": [
+          "software"
+        ]
+      },
+      {
+        "Symbol": "AXTI",
+        "Qty": 48,
+        "AvgEntry": 24.77,
+        "CurrentPrice": 47.3,
+        "UnrealizedPnL": 964.85,
+        "ChangeToday": 0,
+        "Currency": "EUR",
+        "Timestamp": "2026-02-10T16:45:43+02:00",
+        "BrokerSource": "",
+        "Name": "AXT, Inc.",
+        "Sector": "Technology",
+        "Country": "US",
+        "AssetType": "STOCK",
+        "MarketCapCategory": "Mid-Cap"
+      }
+    ],
+    "pending_orders": [
+      {
+        "OrderID": "45750330805",
+        "Symbol": "ERAS",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 94,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 14.47,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "0001-01-01T00:00:00Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "45751071946",
+        "Symbol": "BW",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 52,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 9.9,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "0001-01-01T00:00:00Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      },
+      {
+        "OrderID": "45400750780",
+        "Symbol": "AXTI",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 48,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 30.78,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "0001-01-01T00:00:00Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": ""
+      }
+    ],
+    "balance": {
+      "BaseCurrency": "",
+      "CashByCurrency": {
+        "": 7166.04
+      },
+      "MarginUsed": 0,
+      "TotalEquity": 11030.17,
+      "Timestamp": "0001-01-01T00:00:00Z",
+      "BrokerSource": "trading212"
+    },
+    "state": {
+      "pm_state": {
+        "cautious_restart_start": "0001-01-01T00:00:00Z",
+        "cautious_restart_until": "0001-01-01T00:00:00Z",
+        "crash_inverse_until": "0001-01-01T00:00:00Z",
+        "equity_curve": [
+          10164.5,
+          10073.26,
+          10477.93,
+          10821.31,
+          10767.66,
+          10630.61,
+          10597.46,
+          11027.88,
+          10398.52,
+          10592.19,
+          10598.99,
+          10277.69,
+          10582.29,
+          10912.78,
+          11031.83
+        ],
+        "equity_curve_dates": [
+          "2026-02-20T15:30:00+01:00",
+          "2026-02-23T22:00:02+01:00",
+          "2026-02-24T22:00:02+01:00",
+          "2026-02-25T22:00:02+01:00",
+          "2026-02-25T22:00:02+01:00",
+          "2026-02-26T22:00:02+01:00",
+          "2026-02-27T22:00:00+01:00",
+          "2026-03-02T22:00:00+01:00",
+          "2026-03-03T22:00:02+01:00",
+          "2026-03-04T22:00:02+01:00",
+          "2026-03-05T22:00:02+01:00",
+          "2026-03-06T22:00:03+01:00",
+          "2026-03-09T21:00:00+01:00",
+          "2026-03-10T21:00:02+01:00",
+          "2026-03-11T21:00:02+01:00"
+        ],
+        "global_pause_until": "0001-01-01T00:00:00Z",
+        "is_in_grace_period": false,
+        "last_entry_creation_date": "2026-02-26T22:00:02+01:00",
+        "last_liquidation_date": "0001-01-01T00:00:00Z",
+        "last_streak_reset_date": "0001-01-01T00:00:00Z",
+        "peak_equity": 11031.83,
+        "position_clusters": null,
+        "position_entries": {
+          "AXTI": 1,
+          "BW": 1,
+          "ERAS": 1
+        },
+        "position_highs": {
+          "AXTI": 47.36000061035156,
+          "BW": 14.760000228881836,
+          "ERAS": 15.760000228881836
+        },
+        "position_last_dca": {
+          "AXTI": "2026-02-06T15:30:00+01:00",
+          "BW": "2026-02-20T15:30:00+01:00",
+          "ERAS": "2026-02-06T15:30:00+01:00"
+        },
+        "position_open_dates": {
+          "AXTI": "2026-02-06T15:30:00+01:00",
+          "BW": "2026-02-20T15:30:00+01:00",
+          "ERAS": "2026-02-06T15:30:00+01:00"
+        },
+        "position_stops": {
+          "AXTI": 30.782599925994873,
+          "BW": 10.48875093460083,
+          "ERAS": 14.47
+        },
+        "regime_score_history": [
+          0.398246453428901,
+          0.38779486184171097,
+          0.39556981380721284,
+          0.41036946985276446,
+          0.42041592361092733
+        ],
+        "stop_history": [],
+        "stop_streak_count": 0,
+        "stopped_symbols": {}
+      },
+      "prev_regime": "EARLY_RISK_OFF"
+    }
+  },
+  {
     "timestamp": "2026-03-10T23:16:38+01:00",
     "date": "2026-03-10",
     "portfolio": "us_t212",

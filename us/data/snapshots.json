@@ -1,5 +1,266 @@
 [
   {
+    "timestamp": "2026-03-11T23:06:42+01:00",
+    "date": "2026-03-11",
+    "portfolio": "us",
+    "allocation": "us",
+    "currency": "USD",
+    "git_sha1": "b885e1d",
+    "git_branch": "main",
+    "config_path": "config/portfolio_us.yaml",
+    "config_hash": "5a9e4ea5813c9230",
+    "actions": [
+      {
+        "type": "CREATE",
+        "symbol": "DVAX",
+        "side": "SELL",
+        "order_type": "STOP",
+        "qty": 752,
+        "stop_price": 15.44,
+        "reason": "MISSING_STOP: 752 shares @ $15.44 | P&L: 0.1%, Risk: 0.4%"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "HI",
+        "side": "SELL",
+        "order_type": "STOP",
+        "qty": 76,
+        "stop_price": 31.91,
+        "reason": "MISSING_STOP: 76 shares @ $31.91 | P&L: 0.2%, Risk: 0.2%"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "RNAM",
+        "side": "SELL",
+        "order_type": "STOP",
+        "qty": 1,
+        "stop_price": 71.72,
+        "reason": "MISSING_STOP: 1 shares @ $71.72 | P&L: 0.1%, Risk: -0.5%"
+      }
+    ],
+    "positions": [
+      {
+        "Symbol": "DVAX",
+        "Qty": 752,
+        "AvgEntry": 15.49,
+        "CurrentPrice": 15.5,
+        "UnrealizedPnL": 7.52,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "2026-02-02T14:30:11.879387Z",
+        "BrokerSource": "",
+        "AssetType": "STOCK"
+      },
+      {
+        "Symbol": "ERAS",
+        "Qty": 1113,
+        "AvgEntry": 10.64858,
+        "CurrentPrice": 15.5,
+        "UnrealizedPnL": 5399.63046,
+        "ChangeToday": -0.00513,
+        "Currency": "USD",
+        "Timestamp": "2026-02-04T14:32:54.309097Z",
+        "BrokerSource": "",
+        "Name": "Erasca, Inc.",
+        "Sector": "Healthcare",
+        "Country": "US",
+        "AssetType": "STOCK",
+        "MarketCapCategory": "Mid-Cap",
+        "Themes": [
+          "augmented_reality",
+          "gaming"
+        ]
+      },
+      {
+        "Symbol": "FOLD",
+        "Qty": 815,
+        "AvgEntry": 14.3,
+        "CurrentPrice": 14.37,
+        "UnrealizedPnL": 57.05,
+        "ChangeToday": 0.0007,
+        "Currency": "USD",
+        "Timestamp": "2026-02-02T17:01:15.852147Z",
+        "BrokerSource": "",
+        "Name": "Amicus Therapeutics, Inc.",
+        "Sector": "Healthcare",
+        "Country": "US",
+        "AssetType": "STOCK",
+        "MarketCapCategory": "Mid-Cap",
+        "Themes": [
+          "augmented_reality",
+          "copper",
+          "gaming"
+        ]
+      },
+      {
+        "Symbol": "HI",
+        "Qty": 76,
+        "AvgEntry": 31.91,
+        "CurrentPrice": 31.98,
+        "UnrealizedPnL": 5.32,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "2026-02-02T15:45:12.491057Z",
+        "BrokerSource": "",
+        "AssetType": "STOCK"
+      },
+      {
+        "Symbol": "RNA",
+        "Qty": 0.1,
+        "AvgEntry": 14.27,
+        "CurrentPrice": 14.8,
+        "UnrealizedPnL": 0.053,
+        "ChangeToday": 0.00886,
+        "Currency": "USD",
+        "Timestamp": "2026-02-02T16:22:22.418633Z",
+        "BrokerSource": "",
+        "AssetType": "STOCK"
+      },
+      {
+        "Symbol": "RNAM",
+        "Qty": 1,
+        "AvgEntry": 71.27,
+        "CurrentPrice": 72.82,
+        "UnrealizedPnL": 1.55,
+        "ChangeToday": 0,
+        "Currency": "USD",
+        "Timestamp": "0001-01-01T00:00:00Z",
+        "BrokerSource": "",
+        "AssetType": "STOCK"
+      }
+    ],
+    "pending_orders": [
+      {
+        "OrderID": "4dc71064-1385-4838-98cd-4f80fce498f6",
+        "Symbol": "FOLD",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 815,
+        "FilledQty": 0,
+        "LimitPrice": 14.33,
+        "StopPrice": 14.33,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-03-10T08:00:04.215497Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "25309ae2-d829-4548-8bbc-461826848fd2",
+        "Symbol": "ERAS",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 1113,
+        "FilledQty": 0,
+        "LimitPrice": 12.45,
+        "StopPrice": 12.45,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-03-02T09:00:05.977432Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      }
+    ],
+    "balance": {
+      "BaseCurrency": "USD",
+      "CashByCurrency": {
+        "USD": 66132.13
+      },
+      "MarginUsed": 43123.83,
+      "TotalEquity": 109255.96,
+      "Timestamp": "0001-01-01T00:00:00Z",
+      "BrokerSource": "alpaca"
+    },
+    "state": {
+      "pm_state": {
+        "cautious_restart_start": "0001-01-01T00:00:00Z",
+        "cautious_restart_until": "0001-01-01T00:00:00Z",
+        "crash_inverse_until": "0001-01-01T00:00:00Z",
+        "equity_curve": [
+          107934.05,
+          108880.67,
+          109549.15,
+          108685.11,
+          108760.21,
+          108466.79,
+          110605.56,
+          108580.45,
+          109505.6,
+          109469.67,
+          108778.88,
+          109678.53,
+          109335.37,
+          109255.96
+        ],
+        "equity_curve_dates": [
+          "2026-02-20T15:30:00+01:00",
+          "2026-02-23T22:00:02+01:00",
+          "2026-02-24T22:00:03+01:00",
+          "2026-02-25T22:00:02+01:00",
+          "2026-02-26T22:00:00+01:00",
+          "2026-02-27T22:00:02+01:00",
+          "2026-03-02T22:00:03+01:00",
+          "2026-03-03T22:00:03+01:00",
+          "2026-03-04T22:00:02+01:00",
+          "2026-03-05T22:00:02+01:00",
+          "2026-03-06T22:00:01+01:00",
+          "2026-03-09T21:00:02+01:00",
+          "2026-03-10T21:00:01+01:00",
+          "2026-03-11T21:00:02+01:00"
+        ],
+        "global_pause_until": "0001-01-01T00:00:00Z",
+        "is_in_grace_period": false,
+        "last_entry_creation_date": "2026-02-04T15:30:00+01:00",
+        "last_liquidation_date": "0001-01-01T00:00:00Z",
+        "last_streak_reset_date": "0001-01-01T00:00:00Z",
+        "peak_equity": 110605.56,
+        "position_clusters": null,
+        "position_entries": {
+          "ERAS": 1
+        },
+        "position_highs": {
+          "DVAX": 15.5,
+          "ERAS": 15.760000228881836,
+          "FOLD": 14.369999885559082,
+          "HI": 31.979999542236328,
+          "RNA": 72.91999816894531,
+          "RNAM": 71.34197998046875
+        },
+        "position_last_dca": {
+          "ERAS": "2026-02-03T15:30:00+01:00"
+        },
+        "position_open_dates": {
+          "DVAX": "2026-02-02T14:30:11.879387Z",
+          "ERAS": "2026-02-03T15:30:00+01:00",
+          "FOLD": "2026-02-02T17:01:15.852147Z",
+          "HI": "2026-02-02T15:45:12.491057Z",
+          "RNA": "2026-02-02T16:22:22.418633Z"
+        },
+        "position_stops": {
+          "DVAX": 15.43754661178639,
+          "ERAS": 12.453900066652198,
+          "FOLD": 14.33,
+          "HI": 31.90696943096272,
+          "RNA": 72.60133092277742,
+          "RNAM": 71.72311706542969
+        },
+        "regime_score_history": [
+          0.398246453428901,
+          0.38779486184171097,
+          0.39556981380721284,
+          0.41036946985276446,
+          0.42041592361092733
+        ],
+        "stop_history": [],
+        "stop_streak_count": 0,
+        "stopped_symbols": {}
+      },
+      "prev_regime": "EARLY_RISK_OFF"
+    }
+  },
+  {
     "timestamp": "2026-03-10T23:06:48+01:00",
     "date": "2026-03-10",
     "portfolio": "us",
