@@ -1,5 +1,275 @@
 [
   {
+    "timestamp": "2026-03-12T23:08:44+01:00",
+    "date": "2026-03-12",
+    "portfolio": "us_highvol",
+    "allocation": "us_highvol",
+    "currency": "USD",
+    "git_sha1": "7a46d4d",
+    "git_branch": "main",
+    "config_path": "config/portfolio_us_highvol.yaml",
+    "config_hash": "3d076fa45270a0b4",
+    "actions": [
+      {
+        "type": "CREATE",
+        "symbol": "TNDM",
+        "side": "SELL",
+        "order_type": "MARKET",
+        "qty": 769,
+        "order_id": "2caf2b20-0578-431b-844d-cd2c7df519a1",
+        "reason": "STOP_LOSS: -20.1% loss ($-4041). Entry $26.13 -> $20.88. Stop triggered at $21.78 after 14 days."
+      },
+      {
+        "type": "CREATE",
+        "symbol": "VIR",
+        "side": "SELL",
+        "order_type": "MARKET",
+        "qty": 2000,
+        "order_id": "ccd366e0-6918-4bef-af6b-85b069810c76",
+        "reason": "TIMEOUT: Position held 14 days (max=14) with 8.2% P&L ($1431). Entry $8.76 -> $9.48. Cutting to free capital."
+      },
+      {
+        "type": "CREATE",
+        "symbol": "ZBIO",
+        "side": "SELL",
+        "order_type": "MARKET",
+        "qty": 768,
+        "order_id": "fc1ab8d1-fb4b-4b76-8f4b-b7089113d49a",
+        "reason": "TIMEOUT: Position held 14 days (max=14) with -5.6% P&L ($-1114). Entry $25.95 -> $24.50. Cutting to free capital."
+      }
+    ],
+    "positions": [
+      {
+        "Symbol": "TNDM",
+        "Qty": 769,
+        "AvgEntry": 26.13,
+        "CurrentPrice": 20.89,
+        "UnrealizedPnL": -4029.56,
+        "ChangeToday": -0.05731,
+        "Currency": "USD",
+        "Timestamp": "2026-02-26T15:22:05.24559Z",
+        "BrokerSource": "",
+        "Name": "Tandem Diabetes Care, Inc.",
+        "Sector": "Healthcare",
+        "Country": "US",
+        "AssetType": "STOCK",
+        "MarketCapCategory": "Small-Cap",
+        "Themes": [
+          "augmented_reality",
+          "gaming"
+        ]
+      },
+      {
+        "Symbol": "VIR",
+        "Qty": 2000,
+        "AvgEntry": 8.764335,
+        "CurrentPrice": 9.48,
+        "UnrealizedPnL": 1431.33,
+        "ChangeToday": -0.03462,
+        "Currency": "USD",
+        "Timestamp": "2026-02-26T14:31:21.647083Z",
+        "BrokerSource": "",
+        "Name": "Vir Biotechnology, Inc.",
+        "Sector": "Healthcare",
+        "Country": "US",
+        "AssetType": "STOCK",
+        "MarketCapCategory": "Small-Cap",
+        "Themes": [
+          "augmented_reality",
+          "biotech",
+          "gaming"
+        ]
+      },
+      {
+        "Symbol": "WRBY",
+        "Qty": 359,
+        "AvgEntry": 25.5,
+        "CurrentPrice": 23.51,
+        "UnrealizedPnL": -714.41,
+        "ChangeToday": -0.07477,
+        "Currency": "USD",
+        "Timestamp": "2026-02-27T14:31:20.95822Z",
+        "BrokerSource": "",
+        "Name": "Warby Parker Inc.",
+        "Sector": "Healthcare",
+        "Country": "US",
+        "AssetType": "STOCK",
+        "MarketCapCategory": "Mid-Cap",
+        "Themes": [
+          "augmented_reality",
+          "gaming"
+        ]
+      },
+      {
+        "Symbol": "ZBIO",
+        "Qty": 768,
+        "AvgEntry": 25.95,
+        "CurrentPrice": 24.5,
+        "UnrealizedPnL": -1113.6,
+        "ChangeToday": -0.03315,
+        "Currency": "USD",
+        "Timestamp": "2026-02-26T14:34:38.462903Z",
+        "BrokerSource": "",
+        "Name": "Zenas BioPharma, Inc.",
+        "Sector": "Healthcare",
+        "Country": "US",
+        "AssetType": "STOCK",
+        "MarketCapCategory": "Small-Cap",
+        "Themes": [
+          "augmented_reality",
+          "biopharma",
+          "gaming"
+        ]
+      }
+    ],
+    "pending_orders": [
+      {
+        "OrderID": "fc1ab8d1-fb4b-4b76-8f4b-b7089113d49a",
+        "Symbol": "ZBIO",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 768,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-03-12T22:08:44.903199145Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "ccd366e0-6918-4bef-af6b-85b069810c76",
+        "Symbol": "VIR",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 2000,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-03-12T22:08:44.624546175Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "2caf2b20-0578-431b-844d-cd2c7df519a1",
+        "Symbol": "TNDM",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 769,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-03-12T22:08:44.344437534Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "f2098783-a477-4a84-be1f-d7c2fb5f457e",
+        "Symbol": "ZBIO",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 768,
+        "FilledQty": 0,
+        "LimitPrice": 21.75,
+        "StopPrice": 21.75,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-03-12T08:00:05.784142Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "7073bd94-4b16-4886-abf2-fca1958bc802",
+        "Symbol": "WRBY",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 359,
+        "FilledQty": 0,
+        "LimitPrice": 20.79,
+        "StopPrice": 20.79,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-03-12T08:00:05.766249Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "813e5aa1-87ab-48f9-b607-fcb91505bc2d",
+        "Symbol": "VIR",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 2000,
+        "FilledQty": 0,
+        "LimitPrice": 8.52,
+        "StopPrice": 8.52,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-03-11T08:00:08.873588Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      }
+    ],
+    "balance": {
+      "BaseCurrency": "USD",
+      "CashByCurrency": {
+        "USD": 25234.33
+      },
+      "MarginUsed": 62280.5,
+      "TotalEquity": 87514.83,
+      "Timestamp": "0001-01-01T00:00:00Z",
+      "BrokerSource": "alpaca"
+    },
+    "state": {
+      "pm_state": {
+        "cautious_restart_start": "0001-01-01T00:00:00Z",
+        "cautious_restart_until": "0001-01-01T00:00:00Z",
+        "crash_inverse_until": "0001-01-01T00:00:00Z",
+        "equity_curve": [
+          90275.09,
+          87514.83
+        ],
+        "equity_curve_dates": [
+          "2026-03-11T21:00:02+01:00",
+          "2026-03-12T21:00:02+01:00"
+        ],
+        "global_pause_until": "0001-01-01T00:00:00Z",
+        "is_in_grace_period": false,
+        "last_entry_creation_date": "2026-02-26T22:00:03+01:00",
+        "last_liquidation_date": "0001-01-01T00:00:00Z",
+        "last_streak_reset_date": "0001-01-01T00:00:00Z",
+        "peak_equity": 102118.78,
+        "position_clusters": null,
+        "position_entries": {},
+        "position_highs": {
+          "WRBY": 27.479999542236328
+        },
+        "position_last_dca": {},
+        "position_open_dates": {
+          "WRBY": "2026-02-26T22:00:03+01:00"
+        },
+        "position_stops": {
+          "WRBY": 20.78803621019636
+        },
+        "regime_score_history": null,
+        "stop_history": [],
+        "stop_streak_count": 0,
+        "stopped_symbols": {}
+      },
+      "prev_regime": "EARLY_RISK_OFF"
+    }
+  },
+  {
     "timestamp": "2026-03-11T23:08:27+01:00",
     "date": "2026-03-11",
     "portfolio": "us_highvol",
