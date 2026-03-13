@@ -1,11 +1,11 @@
 [
   {
-    "timestamp": "2026-03-14T00:19:31+01:00",
+    "timestamp": "2026-03-14T00:31:43+01:00",
     "date": "2026-03-12",
     "portfolio": "us_live_alpaca",
     "allocation": "us_live_alpaca",
     "currency": "USD",
-    "git_sha1": "325cb81",
+    "git_sha1": "fc29946",
     "git_branch": "main",
     "config_path": "config/portfolio_us_live_alpaca.yaml",
     "config_hash": "04900600063edea1",
@@ -15,9 +15,9 @@
         "Symbol": "MRVL",
         "Qty": 1.75,
         "AvgEntry": 91.99,
-        "CurrentPrice": 87.62,
-        "UnrealizedPnL": -7.6475,
-        "ChangeToday": -0.00057,
+        "CurrentPrice": 87.7,
+        "UnrealizedPnL": -7.5075,
+        "ChangeToday": 0.00034,
         "Currency": "USD",
         "Timestamp": "2026-03-09T22:37:46.494Z",
         "BrokerSource": "",
@@ -55,8 +55,8 @@
       "CashByCurrency": {
         "USD": 3.79
       },
-      "MarginUsed": 153.34,
-      "TotalEquity": 157.13,
+      "MarginUsed": 153.48000000000002,
+      "TotalEquity": 157.27,
       "Timestamp": "0001-01-01T00:00:00Z",
       "BrokerSource": "alpaca"
     },
@@ -67,9 +67,11 @@
         "crash_inverse_until": "0001-01-01T00:00:00Z",
         "equity_curve": [
           157.16,
-          157.13
+          157.13,
+          157.27
         ],
         "equity_curve_dates": [
+          "2026-03-12T14:30:00+01:00",
           "2026-03-12T14:30:00+01:00",
           "2026-03-12T14:30:00+01:00"
         ],
@@ -78,7 +80,7 @@
         "last_entry_creation_date": "2026-03-12T14:30:00+01:00",
         "last_liquidation_date": "0001-01-01T00:00:00Z",
         "last_streak_reset_date": "0001-01-01T00:00:00Z",
-        "peak_equity": 157.16,
+        "peak_equity": 157.27,
         "position_clusters": null,
         "position_entries": {},
         "position_highs": {
@@ -92,6 +94,7 @@
           "MRVL": 83.45
         },
         "regime_score_history": [
+          0.3945736764124319,
           0.3945736764124319,
           0.3945736764124319
         ],

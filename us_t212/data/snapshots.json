@@ -1,11 +1,11 @@
 [
   {
-    "timestamp": "2026-03-12T23:27:10+01:00",
+    "timestamp": "2026-03-14T00:30:57+01:00",
     "date": "2026-03-12",
     "portfolio": "us_t212",
     "allocation": "us_t212",
     "currency": "USD",
-    "git_sha1": "7a46d4d",
+    "git_sha1": "fc29946",
     "git_branch": "main",
     "config_path": "config/portfolio_us_t212.yaml",
     "config_hash": "571e41335c2afa9b",
@@ -15,8 +15,8 @@
         "Symbol": "AXTI",
         "Qty": 48,
         "AvgEntry": 24.77,
-        "CurrentPrice": 46.56,
-        "UnrealizedPnL": 942.53,
+        "CurrentPrice": 48.98,
+        "UnrealizedPnL": 1060.62,
         "ChangeToday": 0,
         "Currency": "EUR",
         "Timestamp": "2026-02-10T16:45:43+02:00",
@@ -49,10 +49,10 @@
     "balance": {
       "BaseCurrency": "",
       "CashByCurrency": {
-        "": 9029.66
+        "": 9101.25
       },
       "MarginUsed": 0,
-      "TotalEquity": 10970.08,
+      "TotalEquity": 11159.76,
       "Timestamp": "0001-01-01T00:00:00Z",
       "BrokerSource": "trading212"
     },
@@ -77,7 +77,8 @@
           10582.29,
           10912.78,
           11031.83,
-          10969.99
+          10969.99,
+          11159.76
         ],
         "equity_curve_dates": [
           "2026-02-20T15:30:00+01:00",
@@ -95,14 +96,15 @@
           "2026-03-09T21:00:00+01:00",
           "2026-03-10T21:00:02+01:00",
           "2026-03-11T21:00:02+01:00",
-          "2026-03-12T21:00:02+01:00"
+          "2026-03-12T21:00:02+01:00",
+          "2026-03-12T14:30:00+01:00"
         ],
         "global_pause_until": "0001-01-01T00:00:00Z",
         "is_in_grace_period": false,
         "last_entry_creation_date": "2026-02-26T22:00:02+01:00",
         "last_liquidation_date": "0001-01-01T00:00:00Z",
         "last_streak_reset_date": "0001-01-01T00:00:00Z",
-        "peak_equity": 11031.83,
+        "peak_equity": 11159.76,
         "position_clusters": null,
         "position_entries": {
           "AXTI": 1
@@ -120,11 +122,11 @@
           "AXTI": 30.782599925994873
         },
         "regime_score_history": [
-          0.38779486184171097,
           0.39556981380721284,
           0.41036946985276446,
           0.42041592361092733,
-          0.3944284975173645
+          0.3944284975173645,
+          0.3945736764124319
         ],
         "stop_history": [],
         "stop_streak_count": 0,
