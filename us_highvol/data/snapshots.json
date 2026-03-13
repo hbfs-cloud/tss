@@ -1,92 +1,67 @@
 [
   {
-    "timestamp": "2026-03-12T23:08:44+01:00",
+    "timestamp": "2026-03-13T16:20:15+01:00",
     "date": "2026-03-12",
     "portfolio": "us_highvol",
     "allocation": "us_highvol",
     "currency": "USD",
-    "git_sha1": "7a46d4d",
+    "git_sha1": "3d8cd16",
     "git_branch": "main",
     "config_path": "config/portfolio_us_highvol.yaml",
     "config_hash": "3d076fa45270a0b4",
     "actions": [
       {
         "type": "CREATE",
-        "symbol": "TNDM",
-        "side": "SELL",
-        "order_type": "MARKET",
-        "qty": 769,
-        "order_id": "2caf2b20-0578-431b-844d-cd2c7df519a1",
-        "reason": "STOP_LOSS: -20.1% loss ($-4041). Entry $26.13 -> $20.88. Stop triggered at $21.78 after 14 days."
+        "symbol": "AAOI",
+        "side": "BUY",
+        "order_type": "LIMIT",
+        "qty": 331,
+        "limit_price": 108.8447525024414,
+        "stop_loss": 95.6051951006287,
+        "order_id": "6d99b2b3-46e4-4c8c-acca-c669a9c5cfeb",
+        "reason": "BUY AAOI @ $108.84 | Score=117 | Risk=12.2% | Size=$36K (41.1% equity) | MaxCorr=0.01 || ATR=13.7%, DistMA20=38.0%, VolRatio=1.5x, RSI=70.9, Mom=265.7% || Stop=$95.61 (12.2% below)"
       },
       {
         "type": "CREATE",
-        "symbol": "VIR",
-        "side": "SELL",
-        "order_type": "MARKET",
-        "qty": 2000,
-        "order_id": "ccd366e0-6918-4bef-af6b-85b069810c76",
-        "reason": "TIMEOUT: Position held 14 days (max=14) with 8.2% P&L ($1431). Entry $8.76 -> $9.48. Cutting to free capital."
-      },
-      {
-        "type": "CREATE",
-        "symbol": "ZBIO",
-        "side": "SELL",
-        "order_type": "MARKET",
-        "qty": 768,
-        "order_id": "fc1ab8d1-fb4b-4b76-8f4b-b7089113d49a",
-        "reason": "TIMEOUT: Position held 14 days (max=14) with -5.6% P&L ($-1114). Entry $25.95 -> $24.50. Cutting to free capital."
+        "symbol": "BW",
+        "side": "BUY",
+        "order_type": "LIMIT",
+        "qty": 2700,
+        "limit_price": 13.376250195503234,
+        "stop_loss": 11.753178528836568,
+        "order_id": "505cfad6-cb37-43c3-826d-445e5d23bd6b",
+        "reason": "BUY BW @ $13.38 | Score=117 | Risk=12.1% | Size=$36K (41.2% equity) | MaxCorr=0.12 || ATR=10.0%, DistMA20=23.1%, VolRatio=1.7x, RSI=70.1, Mom=270.7% || Stop=$11.75 (12.1% below)"
       }
     ],
     "positions": [
       {
-        "Symbol": "TNDM",
-        "Qty": 769,
-        "AvgEntry": 26.13,
-        "CurrentPrice": 20.89,
-        "UnrealizedPnL": -4029.56,
-        "ChangeToday": -0.05731,
+        "Symbol": "AAOI",
+        "Qty": 176,
+        "AvgEntry": 100.15,
+        "CurrentPrice": 100.05,
+        "UnrealizedPnL": -17.6,
+        "ChangeToday": -0.05782,
         "Currency": "USD",
-        "Timestamp": "2026-02-26T15:22:05.24559Z",
+        "Timestamp": "2026-02-02T20:35:42.459218Z",
         "BrokerSource": "",
-        "Name": "Tandem Diabetes Care, Inc.",
-        "Sector": "Healthcare",
+        "Name": "Applied Optoelectronics, Inc.",
+        "Sector": "Technology",
         "Country": "US",
         "AssetType": "STOCK",
-        "MarketCapCategory": "Small-Cap",
+        "MarketCapCategory": "Mid-Cap",
         "Themes": [
-          "augmented_reality",
-          "gaming"
-        ]
-      },
-      {
-        "Symbol": "VIR",
-        "Qty": 2000,
-        "AvgEntry": 8.764335,
-        "CurrentPrice": 9.48,
-        "UnrealizedPnL": 1431.33,
-        "ChangeToday": -0.03462,
-        "Currency": "USD",
-        "Timestamp": "2026-02-26T14:31:21.647083Z",
-        "BrokerSource": "",
-        "Name": "Vir Biotechnology, Inc.",
-        "Sector": "Healthcare",
-        "Country": "US",
-        "AssetType": "STOCK",
-        "MarketCapCategory": "Small-Cap",
-        "Themes": [
-          "augmented_reality",
-          "biotech",
-          "gaming"
+          "consumer_electronics",
+          "hardware",
+          "nickel"
         ]
       },
       {
         "Symbol": "WRBY",
         "Qty": 359,
         "AvgEntry": 25.5,
-        "CurrentPrice": 23.51,
-        "UnrealizedPnL": -714.41,
-        "ChangeToday": -0.07477,
+        "CurrentPrice": 23.39,
+        "UnrealizedPnL": -757.49,
+        "ChangeToday": -0.0051,
         "Currency": "USD",
         "Timestamp": "2026-02-27T14:31:20.95822Z",
         "BrokerSource": "",
@@ -99,91 +74,70 @@
           "augmented_reality",
           "gaming"
         ]
-      },
-      {
-        "Symbol": "ZBIO",
-        "Qty": 768,
-        "AvgEntry": 25.95,
-        "CurrentPrice": 24.5,
-        "UnrealizedPnL": -1113.6,
-        "ChangeToday": -0.03315,
-        "Currency": "USD",
-        "Timestamp": "2026-02-26T14:34:38.462903Z",
-        "BrokerSource": "",
-        "Name": "Zenas BioPharma, Inc.",
-        "Sector": "Healthcare",
-        "Country": "US",
-        "AssetType": "STOCK",
-        "MarketCapCategory": "Small-Cap",
-        "Themes": [
-          "augmented_reality",
-          "biopharma",
-          "gaming"
-        ]
       }
     ],
     "pending_orders": [
       {
-        "OrderID": "fc1ab8d1-fb4b-4b76-8f4b-b7089113d49a",
-        "Symbol": "ZBIO",
-        "Side": "SELL",
-        "OrderType": "MARKET",
-        "Qty": 768,
+        "OrderID": "505cfad6-cb37-43c3-826d-445e5d23bd6b",
+        "Symbol": "BW",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 2700,
         "FilledQty": 0,
-        "LimitPrice": 0,
-        "StopPrice": 0,
+        "LimitPrice": 13.38,
+        "StopPrice": 11.75,
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-03-12T22:08:44.903199145Z",
+        "PlacedDate": "2026-03-13T15:20:14.997528702Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
       {
-        "OrderID": "ccd366e0-6918-4bef-af6b-85b069810c76",
-        "Symbol": "VIR",
-        "Side": "SELL",
-        "OrderType": "MARKET",
-        "Qty": 2000,
-        "FilledQty": 0,
-        "LimitPrice": 0,
-        "StopPrice": 0,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "",
-        "PlacedDate": "2026-03-12T22:08:44.624546175Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": "alpaca"
-      },
-      {
-        "OrderID": "2caf2b20-0578-431b-844d-cd2c7df519a1",
-        "Symbol": "TNDM",
-        "Side": "SELL",
-        "OrderType": "MARKET",
-        "Qty": 769,
-        "FilledQty": 0,
-        "LimitPrice": 0,
-        "StopPrice": 0,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "",
-        "PlacedDate": "2026-03-12T22:08:44.344437534Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": "alpaca"
-      },
-      {
-        "OrderID": "f2098783-a477-4a84-be1f-d7c2fb5f457e",
-        "Symbol": "ZBIO",
+        "OrderID": "8a55b2b2-63dc-49ac-89c5-5a50f43b3561",
+        "Symbol": "BW",
         "Side": "SELL",
         "OrderType": "STOP",
-        "Qty": 768,
+        "Qty": 2700,
         "FilledQty": 0,
-        "LimitPrice": 21.75,
-        "StopPrice": 21.75,
+        "LimitPrice": 11.75,
+        "StopPrice": 11.75,
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-03-12T08:00:05.784142Z",
+        "PlacedDate": "2026-03-13T15:20:14.989634117Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "6d99b2b3-46e4-4c8c-acca-c669a9c5cfeb",
+        "Symbol": "AAOI",
+        "Side": "BUY",
+        "OrderType": "LIMIT",
+        "Qty": 331,
+        "FilledQty": 176,
+        "LimitPrice": 108.84,
+        "StopPrice": 95.61,
+        "ExpectedPrice": 0,
+        "Status": "PARTIALLY_FILLED",
+        "Currency": "",
+        "PlacedDate": "2026-03-13T15:20:14.908359904Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
+        "OrderID": "130b1354-d1d1-4170-805e-0edd8fc4cbc8",
+        "Symbol": "AAOI",
+        "Side": "SELL",
+        "OrderType": "STOP",
+        "Qty": 331,
+        "FilledQty": 0,
+        "LimitPrice": 95.61,
+        "StopPrice": 95.61,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-03-13T15:20:14.901979097Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
@@ -202,31 +156,15 @@
         "PlacedDate": "2026-03-12T08:00:05.766249Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
-      },
-      {
-        "OrderID": "813e5aa1-87ab-48f9-b607-fcb91505bc2d",
-        "Symbol": "VIR",
-        "Side": "SELL",
-        "OrderType": "STOP",
-        "Qty": 2000,
-        "FilledQty": 0,
-        "LimitPrice": 8.52,
-        "StopPrice": 8.52,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "",
-        "PlacedDate": "2026-03-11T08:00:08.873588Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": "alpaca"
       }
     ],
     "balance": {
       "BaseCurrency": "USD",
       "CashByCurrency": {
-        "USD": 25234.33
+        "USD": 79250.65
       },
-      "MarginUsed": 62280.5,
-      "TotalEquity": 87514.83,
+      "MarginUsed": 8397.01000000001,
+      "TotalEquity": 87647.66,
       "Timestamp": "0001-01-01T00:00:00Z",
       "BrokerSource": "alpaca"
     },
@@ -237,15 +175,17 @@
         "crash_inverse_until": "0001-01-01T00:00:00Z",
         "equity_curve": [
           90275.09,
-          87514.83
+          87514.83,
+          87645.87
         ],
         "equity_curve_dates": [
           "2026-03-11T21:00:02+01:00",
-          "2026-03-12T21:00:02+01:00"
+          "2026-03-12T21:00:02+01:00",
+          "2026-03-12T14:30:00+01:00"
         ],
         "global_pause_until": "0001-01-01T00:00:00Z",
         "is_in_grace_period": false,
-        "last_entry_creation_date": "2026-02-26T22:00:03+01:00",
+        "last_entry_creation_date": "2026-03-12T14:30:00+01:00",
         "last_liquidation_date": "0001-01-01T00:00:00Z",
         "last_streak_reset_date": "0001-01-01T00:00:00Z",
         "peak_equity": 102118.78,
@@ -256,9 +196,13 @@
         },
         "position_last_dca": {},
         "position_open_dates": {
+          "AAOI": "2026-03-12T14:30:00+01:00",
+          "BW": "2026-03-12T14:30:00+01:00",
           "WRBY": "2026-02-26T22:00:03+01:00"
         },
         "position_stops": {
+          "AAOI": 95.6051951006287,
+          "BW": 11.753178528836568,
           "WRBY": 20.78803621019636
         },
         "regime_score_history": null,
