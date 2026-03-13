@@ -1,34 +1,23 @@
 [
   {
-    "timestamp": "2026-03-14T00:15:58+01:00",
+    "timestamp": "2026-03-14T00:19:31+01:00",
     "date": "2026-03-12",
     "portfolio": "us_live_alpaca",
     "allocation": "us_live_alpaca",
     "currency": "USD",
-    "git_sha1": "08a521e",
+    "git_sha1": "325cb81",
     "git_branch": "main",
     "config_path": "config/portfolio_us_live_alpaca.yaml",
     "config_hash": "04900600063edea1",
-    "actions": [
-      {
-        "type": "CREATE",
-        "symbol": "MRVL",
-        "side": "SELL",
-        "order_type": "STOP",
-        "qty": 1.75,
-        "stop_price": 83.45,
-        "order_id": "f3b22466-b30f-454b-8a2c-30162f407357",
-        "reason": "MISSING_STOP: 1.75 shares @ $83.45 | P&L: -4.7%, Risk: 4.8%"
-      }
-    ],
+    "actions": null,
     "positions": [
       {
         "Symbol": "MRVL",
         "Qty": 1.75,
         "AvgEntry": 91.99,
-        "CurrentPrice": 87.6401,
-        "UnrealizedPnL": -7.612325,
-        "ChangeToday": -0.00034,
+        "CurrentPrice": 87.62,
+        "UnrealizedPnL": -7.6475,
+        "ChangeToday": -0.00057,
         "Currency": "USD",
         "Timestamp": "2026-03-09T22:37:46.494Z",
         "BrokerSource": "",
@@ -66,8 +55,8 @@
       "CashByCurrency": {
         "USD": 3.79
       },
-      "MarginUsed": 153.37,
-      "TotalEquity": 157.16,
+      "MarginUsed": 153.34,
+      "TotalEquity": 157.13,
       "Timestamp": "0001-01-01T00:00:00Z",
       "BrokerSource": "alpaca"
     },
@@ -77,9 +66,11 @@
         "cautious_restart_until": "0001-01-01T00:00:00Z",
         "crash_inverse_until": "0001-01-01T00:00:00Z",
         "equity_curve": [
-          157.16
+          157.16,
+          157.13
         ],
         "equity_curve_dates": [
+          "2026-03-12T14:30:00+01:00",
           "2026-03-12T14:30:00+01:00"
         ],
         "global_pause_until": "0001-01-01T00:00:00Z",
@@ -101,6 +92,7 @@
           "MRVL": 83.45
         },
         "regime_score_history": [
+          0.3945736764124319,
           0.3945736764124319
         ],
         "stop_history": [],
