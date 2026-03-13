@@ -1,67 +1,23 @@
 [
   {
-    "timestamp": "2026-03-13T16:20:15+01:00",
+    "timestamp": "2026-03-13T17:33:51+01:00",
     "date": "2026-03-12",
     "portfolio": "us_highvol",
     "allocation": "us_highvol",
     "currency": "USD",
-    "git_sha1": "3d8cd16",
+    "git_sha1": "f43201f",
     "git_branch": "main",
     "config_path": "config/portfolio_us_highvol.yaml",
     "config_hash": "3d076fa45270a0b4",
-    "actions": [
-      {
-        "type": "CREATE",
-        "symbol": "AAOI",
-        "side": "BUY",
-        "order_type": "LIMIT",
-        "qty": 331,
-        "limit_price": 108.8447525024414,
-        "stop_loss": 95.6051951006287,
-        "order_id": "6d99b2b3-46e4-4c8c-acca-c669a9c5cfeb",
-        "reason": "BUY AAOI @ $108.84 | Score=117 | Risk=12.2% | Size=$36K (41.1% equity) | MaxCorr=0.01 || ATR=13.7%, DistMA20=38.0%, VolRatio=1.5x, RSI=70.9, Mom=265.7% || Stop=$95.61 (12.2% below)"
-      },
-      {
-        "type": "CREATE",
-        "symbol": "BW",
-        "side": "BUY",
-        "order_type": "LIMIT",
-        "qty": 2700,
-        "limit_price": 13.376250195503234,
-        "stop_loss": 11.753178528836568,
-        "order_id": "505cfad6-cb37-43c3-826d-445e5d23bd6b",
-        "reason": "BUY BW @ $13.38 | Score=117 | Risk=12.1% | Size=$36K (41.2% equity) | MaxCorr=0.12 || ATR=10.0%, DistMA20=23.1%, VolRatio=1.7x, RSI=70.1, Mom=270.7% || Stop=$11.75 (12.1% below)"
-      }
-    ],
+    "actions": null,
     "positions": [
-      {
-        "Symbol": "AAOI",
-        "Qty": 176,
-        "AvgEntry": 100.15,
-        "CurrentPrice": 100.05,
-        "UnrealizedPnL": -17.6,
-        "ChangeToday": -0.05782,
-        "Currency": "USD",
-        "Timestamp": "2026-02-02T20:35:42.459218Z",
-        "BrokerSource": "",
-        "Name": "Applied Optoelectronics, Inc.",
-        "Sector": "Technology",
-        "Country": "US",
-        "AssetType": "STOCK",
-        "MarketCapCategory": "Mid-Cap",
-        "Themes": [
-          "consumer_electronics",
-          "hardware",
-          "nickel"
-        ]
-      },
       {
         "Symbol": "WRBY",
         "Qty": 359,
         "AvgEntry": 25.5,
-        "CurrentPrice": 23.39,
-        "UnrealizedPnL": -757.49,
-        "ChangeToday": -0.0051,
+        "CurrentPrice": 23.15,
+        "UnrealizedPnL": -843.65,
+        "ChangeToday": -0.01531,
         "Currency": "USD",
         "Timestamp": "2026-02-27T14:31:20.95822Z",
         "BrokerSource": "",
@@ -77,70 +33,6 @@
       }
     ],
     "pending_orders": [
-      {
-        "OrderID": "505cfad6-cb37-43c3-826d-445e5d23bd6b",
-        "Symbol": "BW",
-        "Side": "BUY",
-        "OrderType": "LIMIT",
-        "Qty": 2700,
-        "FilledQty": 0,
-        "LimitPrice": 13.38,
-        "StopPrice": 11.75,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "",
-        "PlacedDate": "2026-03-13T15:20:14.997528702Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": "alpaca"
-      },
-      {
-        "OrderID": "8a55b2b2-63dc-49ac-89c5-5a50f43b3561",
-        "Symbol": "BW",
-        "Side": "SELL",
-        "OrderType": "STOP",
-        "Qty": 2700,
-        "FilledQty": 0,
-        "LimitPrice": 11.75,
-        "StopPrice": 11.75,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "",
-        "PlacedDate": "2026-03-13T15:20:14.989634117Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": "alpaca"
-      },
-      {
-        "OrderID": "6d99b2b3-46e4-4c8c-acca-c669a9c5cfeb",
-        "Symbol": "AAOI",
-        "Side": "BUY",
-        "OrderType": "LIMIT",
-        "Qty": 331,
-        "FilledQty": 176,
-        "LimitPrice": 108.84,
-        "StopPrice": 95.61,
-        "ExpectedPrice": 0,
-        "Status": "PARTIALLY_FILLED",
-        "Currency": "",
-        "PlacedDate": "2026-03-13T15:20:14.908359904Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": "alpaca"
-      },
-      {
-        "OrderID": "130b1354-d1d1-4170-805e-0edd8fc4cbc8",
-        "Symbol": "AAOI",
-        "Side": "SELL",
-        "OrderType": "STOP",
-        "Qty": 331,
-        "FilledQty": 0,
-        "LimitPrice": 95.61,
-        "StopPrice": 95.61,
-        "ExpectedPrice": 0,
-        "Status": "PENDING",
-        "Currency": "",
-        "PlacedDate": "2026-03-13T15:20:14.901979097Z",
-        "ExpirationDate": "0001-01-01T00:00:00Z",
-        "BrokerSource": "alpaca"
-      },
       {
         "OrderID": "7073bd94-4b16-4886-abf2-fca1958bc802",
         "Symbol": "WRBY",
@@ -161,10 +53,10 @@
     "balance": {
       "BaseCurrency": "USD",
       "CashByCurrency": {
-        "USD": 79250.65
+        "USD": 77623.38
       },
-      "MarginUsed": 8397.01000000001,
-      "TotalEquity": 87647.66,
+      "MarginUsed": 8310.849999999991,
+      "TotalEquity": 85934.23,
       "Timestamp": "0001-01-01T00:00:00Z",
       "BrokerSource": "alpaca"
     },
@@ -176,11 +68,13 @@
         "equity_curve": [
           90275.09,
           87514.83,
-          87645.87
+          87645.87,
+          85934.23
         ],
         "equity_curve_dates": [
           "2026-03-11T21:00:02+01:00",
           "2026-03-12T21:00:02+01:00",
+          "2026-03-12T14:30:00+01:00",
           "2026-03-12T14:30:00+01:00"
         ],
         "global_pause_until": "0001-01-01T00:00:00Z",
@@ -196,13 +90,9 @@
         },
         "position_last_dca": {},
         "position_open_dates": {
-          "AAOI": "2026-03-12T14:30:00+01:00",
-          "BW": "2026-03-12T14:30:00+01:00",
           "WRBY": "2026-02-26T22:00:03+01:00"
         },
         "position_stops": {
-          "AAOI": 95.6051951006287,
-          "BW": 11.753178528836568,
           "WRBY": 20.78803621019636
         },
         "regime_score_history": null,
