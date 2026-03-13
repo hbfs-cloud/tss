@@ -1,11 +1,11 @@
 [
   {
-    "timestamp": "2026-03-13T17:33:51+01:00",
+    "timestamp": "2026-03-14T00:06:16+01:00",
     "date": "2026-03-12",
     "portfolio": "us_highvol",
     "allocation": "us_highvol",
     "currency": "USD",
-    "git_sha1": "f43201f",
+    "git_sha1": "919ee95",
     "git_branch": "main",
     "config_path": "config/portfolio_us_highvol.yaml",
     "config_hash": "3d076fa45270a0b4",
@@ -15,9 +15,9 @@
         "Symbol": "WRBY",
         "Qty": 359,
         "AvgEntry": 25.5,
-        "CurrentPrice": 23.15,
-        "UnrealizedPnL": -843.65,
-        "ChangeToday": -0.01531,
+        "CurrentPrice": 24.06,
+        "UnrealizedPnL": -516.96,
+        "ChangeToday": 0.02339,
         "Currency": "USD",
         "Timestamp": "2026-02-27T14:31:20.95822Z",
         "BrokerSource": "",
@@ -55,8 +55,8 @@
       "CashByCurrency": {
         "USD": 77623.38
       },
-      "MarginUsed": 8310.849999999991,
-      "TotalEquity": 85934.23,
+      "MarginUsed": 8637.539999999994,
+      "TotalEquity": 86260.92,
       "Timestamp": "0001-01-01T00:00:00Z",
       "BrokerSource": "alpaca"
     },
@@ -69,11 +69,13 @@
           90275.09,
           87514.83,
           87645.87,
-          85934.23
+          85934.23,
+          86260.92
         ],
         "equity_curve_dates": [
           "2026-03-11T21:00:02+01:00",
           "2026-03-12T21:00:02+01:00",
+          "2026-03-12T14:30:00+01:00",
           "2026-03-12T14:30:00+01:00",
           "2026-03-12T14:30:00+01:00"
         ],
