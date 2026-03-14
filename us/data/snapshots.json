@@ -1,11 +1,11 @@
 [
   {
-    "timestamp": "2026-03-12T23:07:09+01:00",
+    "timestamp": "2026-03-14T01:12:31+01:00",
     "date": "2026-03-12",
     "portfolio": "us",
     "allocation": "us",
     "currency": "USD",
-    "git_sha1": "7a46d4d",
+    "git_sha1": "579dac9",
     "git_branch": "main",
     "config_path": "config/portfolio_us.yaml",
     "config_hash": "5a9e4ea5813c9230",
@@ -27,6 +27,15 @@
         "qty": 76,
         "stop_price": 31.91,
         "reason": "MISSING_STOP: 76 shares @ $31.91 | P&L: 0.2%, Risk: 0.2%"
+      },
+      {
+        "type": "CREATE",
+        "symbol": "RNA",
+        "side": "SELL",
+        "order_type": "MARKET",
+        "qty": 0.1,
+        "order_id": "843749f3-77a9-4dcc-ab78-e807c564c501",
+        "reason": "TIMEOUT: Position held 37 days (max=16) with -3.6% loss ($-0). Entry $14.27 -> $13.75. Cutting dead money to free capital for fresh opportunities."
       },
       {
         "type": "CREATE",
@@ -55,9 +64,9 @@
         "Symbol": "ERAS",
         "Qty": 1113,
         "AvgEntry": 10.64858,
-        "CurrentPrice": 14.6511,
-        "UnrealizedPnL": 4454.80476,
-        "ChangeToday": -0.05477,
+        "CurrentPrice": 13.62,
+        "UnrealizedPnL": 3307.19046,
+        "ChangeToday": -0.07031,
         "Currency": "USD",
         "Timestamp": "2026-02-04T14:32:54.309097Z",
         "BrokerSource": "",
@@ -108,9 +117,9 @@
         "Symbol": "RNA",
         "Qty": 0.1,
         "AvgEntry": 14.27,
-        "CurrentPrice": 14.45,
-        "UnrealizedPnL": 0.018,
-        "ChangeToday": -0.02365,
+        "CurrentPrice": 13.75,
+        "UnrealizedPnL": -0.052,
+        "ChangeToday": -0.05433,
         "Currency": "USD",
         "Timestamp": "2026-02-02T16:22:22.418633Z",
         "BrokerSource": "",
@@ -130,6 +139,22 @@
       }
     ],
     "pending_orders": [
+      {
+        "OrderID": "843749f3-77a9-4dcc-ab78-e807c564c501",
+        "Symbol": "RNA",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 0.1,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-03-14T00:12:31.515058929Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
       {
         "OrderID": "4dc71064-1385-4838-98cd-4f80fce498f6",
         "Symbol": "FOLD",
@@ -168,8 +193,8 @@
       "CashByCurrency": {
         "USD": 66132.13
       },
-      "MarginUsed": 42178.97,
-      "TotalEquity": 108311.1,
+      "MarginUsed": 41031.28999999999,
+      "TotalEquity": 107163.42,
       "Timestamp": "0001-01-01T00:00:00Z",
       "BrokerSource": "alpaca"
     },
@@ -193,7 +218,8 @@
           109678.53,
           109335.37,
           109255.96,
-          108311.1
+          108311.1,
+          107163.42
         ],
         "equity_curve_dates": [
           "2026-02-20T15:30:00+01:00",
@@ -210,7 +236,8 @@
           "2026-03-09T21:00:02+01:00",
           "2026-03-10T21:00:01+01:00",
           "2026-03-11T21:00:02+01:00",
-          "2026-03-12T21:00:03+01:00"
+          "2026-03-12T21:00:03+01:00",
+          "2026-03-12T14:30:00+01:00"
         ],
         "global_pause_until": "0001-01-01T00:00:00Z",
         "is_in_grace_period": false,
@@ -237,23 +264,21 @@
           "DVAX": "2026-02-02T14:30:11.879387Z",
           "ERAS": "2026-02-03T15:30:00+01:00",
           "FOLD": "2026-02-02T17:01:15.852147Z",
-          "HI": "2026-02-02T15:45:12.491057Z",
-          "RNA": "2026-02-02T16:22:22.418633Z"
+          "HI": "2026-02-02T15:45:12.491057Z"
         },
         "position_stops": {
           "DVAX": 15.43754661178639,
           "ERAS": 12.453900066652198,
           "FOLD": 14.33,
           "HI": 31.90696943096272,
-          "RNA": 72.60133092277742,
           "RNAM": 71.72311706542969
         },
         "regime_score_history": [
-          0.38779486184171097,
           0.39556981380721284,
           0.41036946985276446,
           0.42041592361092733,
-          0.3944284975173645
+          0.3944284975173645,
+          0.3945736764124319
         ],
         "stop_history": [],
         "stop_streak_count": 0,

@@ -1,11 +1,11 @@
 [
   {
-    "timestamp": "2026-03-14T01:07:53+01:00",
+    "timestamp": "2026-03-14T01:13:44+01:00",
     "date": "2026-03-12",
     "portfolio": "us_live_alpaca",
     "allocation": "us_live_alpaca",
     "currency": "USD",
-    "git_sha1": "b58b1b1",
+    "git_sha1": "579dac9",
     "git_branch": "main",
     "config_path": "config/portfolio_us_live_alpaca.yaml",
     "config_hash": "04900600063edea1",
@@ -69,9 +69,11 @@
           157.16,
           157.13,
           157.27,
+          157.35,
           157.35
         ],
         "equity_curve_dates": [
+          "2026-03-12T14:30:00+01:00",
           "2026-03-12T14:30:00+01:00",
           "2026-03-12T14:30:00+01:00",
           "2026-03-12T14:30:00+01:00",
@@ -96,6 +98,7 @@
           "MRVL": 83.45
         },
         "regime_score_history": [
+          0.3945736764124319,
           0.3945736764124319,
           0.3945736764124319,
           0.3945736764124319,

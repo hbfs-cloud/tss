@@ -1,11 +1,11 @@
 [
   {
-    "timestamp": "2026-03-14T00:30:39+01:00",
+    "timestamp": "2026-03-14T01:13:22+01:00",
     "date": "2026-03-12",
     "portfolio": "ultra_v4_saxo",
     "allocation": "ultra-v5-saxo",
     "currency": "USD",
-    "git_sha1": "fc29946",
+    "git_sha1": "579dac9",
     "git_branch": "main",
     "config_path": "config/portfolio_ultra_v4_saxo.yaml",
     "config_hash": "e5a4628b45ea1103",
@@ -153,11 +153,13 @@
         "equity_curve": [
           99215.6657160163,
           105491.12340330005,
+          103795.168418169,
           103795.168418169
         ],
         "equity_curve_dates": [
           "2026-03-11T21:00:03+01:00",
           "2026-03-12T21:00:02+01:00",
+          "2026-03-12T14:30:00+01:00",
           "2026-03-12T14:30:00+01:00"
         ],
         "global_pause_until": "0001-01-01T00:00:00Z",
@@ -193,6 +195,7 @@
         "regime_score_history": [
           0.42041592361092733,
           0.3944284975173645,
+          0.3945736764124319,
           0.3945736764124319
         ],
         "stop_history": [],
