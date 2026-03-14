@@ -1,11 +1,11 @@
 [
   {
-    "timestamp": "2026-03-14T01:12:31+01:00",
+    "timestamp": "2026-03-14T01:18:08+01:00",
     "date": "2026-03-12",
     "portfolio": "us",
     "allocation": "us",
     "currency": "USD",
-    "git_sha1": "579dac9",
+    "git_sha1": "11442be",
     "git_branch": "main",
     "config_path": "config/portfolio_us.yaml",
     "config_hash": "5a9e4ea5813c9230",
@@ -34,7 +34,7 @@
         "side": "SELL",
         "order_type": "MARKET",
         "qty": 0.1,
-        "order_id": "843749f3-77a9-4dcc-ab78-e807c564c501",
+        "order_id": "7c2ffe6d-5cf0-46b2-9910-6eaa3b0596e5",
         "reason": "TIMEOUT: Position held 37 days (max=16) with -3.6% loss ($-0). Entry $14.27 -> $13.75. Cutting dead money to free capital for fresh opportunities."
       },
       {
@@ -140,6 +140,22 @@
     ],
     "pending_orders": [
       {
+        "OrderID": "7c2ffe6d-5cf0-46b2-9910-6eaa3b0596e5",
+        "Symbol": "RNA",
+        "Side": "SELL",
+        "OrderType": "MARKET",
+        "Qty": 0.1,
+        "FilledQty": 0,
+        "LimitPrice": 0,
+        "StopPrice": 0,
+        "ExpectedPrice": 0,
+        "Status": "PENDING",
+        "Currency": "",
+        "PlacedDate": "2026-03-14T00:18:07.93076319Z",
+        "ExpirationDate": "0001-01-01T00:00:00Z",
+        "BrokerSource": "alpaca"
+      },
+      {
         "OrderID": "843749f3-77a9-4dcc-ab78-e807c564c501",
         "Symbol": "RNA",
         "Side": "SELL",
@@ -151,7 +167,7 @@
         "ExpectedPrice": 0,
         "Status": "PENDING",
         "Currency": "",
-        "PlacedDate": "2026-03-14T00:12:31.515058929Z",
+        "PlacedDate": "2026-03-14T00:12:31.515059Z",
         "ExpirationDate": "0001-01-01T00:00:00Z",
         "BrokerSource": "alpaca"
       },
